@@ -13,8 +13,6 @@
 		388DBEB71B064DBB009BC774 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 388DBEB61B064DBB009BC774 /* Images.xcassets */; };
 		388DBEBA1B064DBB009BC774 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 388DBEB81B064DBB009BC774 /* LaunchScreen.xib */; };
 		388DBEC61B064DBB009BC774 /* Steer_ClearTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388DBEC51B064DBB009BC774 /* Steer_ClearTests.swift */; };
-		38C0084E1B08E9D900607468 /* backgroundWithMask.png in Resources */ = {isa = PBXBuildFile; fileRef = 38C0084D1B08E9D900607468 /* backgroundWithMask.png */; };
-		38C008501B08EBCB00607468 /* hail_a_ride_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 38C0084F1B08EBCB00607468 /* hail_a_ride_button.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,8 +36,6 @@
 		388DBEBF1B064DBB009BC774 /* Steer ClearTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Steer ClearTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		388DBEC41B064DBB009BC774 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		388DBEC51B064DBB009BC774 /* Steer_ClearTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Steer_ClearTests.swift; sourceTree = "<group>"; };
-		38C0084D1B08E9D900607468 /* backgroundWithMask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = backgroundWithMask.png; path = ../../../../Downloads/SteerClear/backgroundWithMask.png; sourceTree = "<group>"; };
-		38C0084F1B08EBCB00607468 /* hail_a_ride_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hail_a_ride_button.png; path = ../../../../Downloads/SteerClear/hail_a_ride_button.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,9 +80,7 @@
 				388DBEAF1B064DBB009BC774 /* AppDelegate.swift */,
 				388DBEB11B064DBB009BC774 /* ViewController.swift */,
 				388DBEB31B064DBB009BC774 /* Main.storyboard */,
-				38C0084D1B08E9D900607468 /* backgroundWithMask.png */,
 				388DBEB61B064DBB009BC774 /* Images.xcassets */,
-				38C0084F1B08EBCB00607468 /* hail_a_ride_button.png */,
 				388DBEB81B064DBB009BC774 /* LaunchScreen.xib */,
 				388DBEAD1B064DBB009BC774 /* Supporting Files */,
 			);
@@ -200,8 +194,6 @@
 			files = (
 				388DBEB51B064DBB009BC774 /* Main.storyboard in Resources */,
 				388DBEBA1B064DBB009BC774 /* LaunchScreen.xib in Resources */,
-				38C0084E1B08E9D900607468 /* backgroundWithMask.png in Resources */,
-				38C008501B08EBCB00607468 /* hail_a_ride_button.png in Resources */,
 				388DBEB71B064DBB009BC774 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

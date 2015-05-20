@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundWithMask.png" translatesAutoresizingMaskIntoConstraints="NO" id="beB-59-v0E">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundWithMask" translatesAutoresizingMaskIntoConstraints="NO" id="beB-59-v0E">
                                 <rect key="frame" x="0.0" y="28" width="329" height="572"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="329" id="7ng-su-FBR"/>
@@ -30,7 +30,7 @@
                                     <constraint firstAttribute="width" constant="249" id="CFG-Cb-fZ2"/>
                                     <constraint firstAttribute="height" constant="60" id="G7J-LY-Ena"/>
                                 </constraints>
-                                <state key="normal" image="hail_a_ride_button.png">
+                                <state key="normal" image="hail_a_ride_button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -56,7 +56,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="backgroundWithMask.png" width="440" height="720"/>
-        <image name="hail_a_ride_button.png" width="323" height="82"/>
+        <image name="backgroundWithMask" width="440" height="720"/>
+        <image name="hail_a_ride_button" width="323" height="82"/>
     </resources>
 </document>
