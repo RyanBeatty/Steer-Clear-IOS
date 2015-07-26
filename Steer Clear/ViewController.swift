@@ -23,6 +23,32 @@ class ViewController: UIViewController {
     }
     
     @IBAction func hailARideButton(sender: AnyObject) {
+        var postData = NSMutableData(data: "num_passengers=3".dataUsingEncoding(NSUTF8StringEncoding)!)
+        postData.appendData("&start_latitude=37.273485".dataUsingEncoding(NSUTF8StringEncoding)!)
+        postData.appendData("&start_longitude=-76.719628".dataUsingEncoding(NSUTF8StringEncoding)!)
+        postData.appendData("&end_latitude=37.280893".dataUsingEncoding(NSUTF8StringEncoding)!)
+        postData.appendData("&end_longitude=-76.719691".dataUsingEncoding(NSUTF8StringEncoding)!)
+        postData.appendData("&pickup_time=Sun, 07 Jun 2015 02:21:58 GMT".dataUsingEncoding(NSUTF8StringEncoding)!)
+        postData.appendData("&travel_time=171".dataUsingEncoding(NSUTF8StringEncoding)!)
+        postData.appendData("&dropoff_time=Sun, 07 Jun 2015 02:24:49 GMT".dataUsingEncoding(NSUTF8StringEncoding)!)
+        
+        var request = NSMutableURLRequest(URL: NSURL(string: "http://127.0.0.1:5000/api/rides")!,
+            cachePolicy: .UseProtocolCachePolicy,
+            timeoutInterval: 10.0)
+        request.HTTPMethod = "POST"
+        request.HTTPBody = postData
+        
+        let session = NSURLSession.sharedSession()
+        let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
+            if (error != nil) {
+                println(error)
+            } else {
+                let httpResponse = response as? NSHTTPURLResponse
+                println(httpResponse)
+            }
+        })
+        
+        dataTask.resume()
         
     }
 
