@@ -11,7 +11,7 @@ import Foundation
 
 
 class Register {
-    func sendRequest() {
+    func register(username: String, password: String) {
         /* Configure session, choose between:
         * defaultSessionConfiguration
         * ephemeralSessionConfiguration
@@ -35,8 +35,8 @@ class Register {
         // Form URL-Encoded Body
         
         let bodyParameters = [
-            "username": "smurf",
-            "password": "dog",
+            "username": username,
+            "password": password,
         ]
         let bodyString = self.stringFromQueryParameters(bodyParameters)
         request.HTTPBody = bodyString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
@@ -87,7 +87,7 @@ class Register {
 }
 
 class Login {
-    func sendRequest() {
+    func login(username: String, password: String) {
         /* Configure session, choose between:
         * defaultSessionConfiguration
         * ephemeralSessionConfiguration
@@ -111,8 +111,8 @@ class Login {
         // Form URL-Encoded Body
         
         let bodyParameters = [
-            "username": "smurfs",
-            "password": "dog",
+            "username": username,
+            "password": password,
         ]
         let bodyString = self.stringFromQueryParameters(bodyParameters)
         request.HTTPBody = bodyString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
