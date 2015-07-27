@@ -12,7 +12,7 @@ import Foundation
 class ViewController: UIViewController, UITextFieldDelegate {
     
     func displayAlert(title: String, message: String) {
-        var alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
         
@@ -22,45 +22,55 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var passwordTextbox: UITextField!
     
+    
     @IBAction func loginButton(sender: AnyObject) {
         var username = usernameTextbox.text
-        var password = passwordTextbox.text
+        let password = passwordTextbox.text
         
-        if (username.isEmpty) || (username.isEmpty) {
+        if (username!.isEmpty) || (username!.isEmpty) {
             displayAlert("Missing Fields(s)", message: "Username and Password Required")
         } else {
             let loginController = Login()
-            loginController.login(username, password: password)
+            loginController.login(username!, password: password!)
+//            TODO: insert if 404, display alert that login was no successfull
+            self.performSegueWithIdentifier("loginRider", sender: self)
         }
     }
     
     
     @IBAction func registerButton(sender: AnyObject) {
         var username = usernameTextbox.text
-        var password = passwordTextbox.text
+        let password = passwordTextbox.text
         
-        if (username.isEmpty) || (username.isEmpty) {
+        if (username!.isEmpty) || (username!.isEmpty) {
             displayAlert("Missing Fields(s)", message: "Username and Password Required")
         } else {
-            let loginController = Register()
-            loginController.register(username, password: password)
+            //TODO: Add logic for if 404 on registration
+            // Register the user and then log in
+            let registerController = Register()
+            registerController.register(username!, password: password!)
+            let loginController = Login()
+            loginController.login(username!, password: password!)
+            //            TODO: insert if 404, display alert that login was no successfull
+            self.performSegueWithIdentifier("loginRider", sender: self)
         }
-    }
-    
-    @IBAction func addRide(sender: AnyObject) {
-        let addRideController = AddRide()
-        addRideController.sendRequest()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        var tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
         view.addGestureRecognizer(tap)
         self.usernameTextbox.delegate = self;
         self.passwordTextbox.delegate = self;
     }
+    
+//    override func viewDidAppear(animated: Bool) {
+//        // TODO: check if user if logged in, if so, performSegue
+//         self.performSegueWithIdentifier("loginRider", sender: self)
+//    }
+    
     //Calls this function when the tap is recognized.
     func DismissKeyboard(){
         //Causes the view (or one of its embedded text fields) to resign the first responder status.

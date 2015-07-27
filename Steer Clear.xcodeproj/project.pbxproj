@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3837072E1B64FDB100B7979D /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3837072D1B64FDB100B7979D /* Network.swift */; };
+		387126CD1B65C15600AE4CFE /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387126CC1B65C15600AE4CFE /* MapViewController.swift */; };
 		388DBEB01B064DBB009BC774 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388DBEAF1B064DBB009BC774 /* AppDelegate.swift */; };
 		388DBEB21B064DBB009BC774 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388DBEB11B064DBB009BC774 /* ViewController.swift */; };
 		388DBEB51B064DBB009BC774 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 388DBEB31B064DBB009BC774 /* Main.storyboard */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		3837072D1B64FDB100B7979D /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		387126CC1B65C15600AE4CFE /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		388DBEAA1B064DBB009BC774 /* Steer Clear.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Steer Clear.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		388DBEAE1B064DBB009BC774 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		388DBEAF1B064DBB009BC774 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				388DBEAF1B064DBB009BC774 /* AppDelegate.swift */,
+				387126CC1B65C15600AE4CFE /* MapViewController.swift */,
 				388DBEB11B064DBB009BC774 /* ViewController.swift */,
 				388DBEB31B064DBB009BC774 /* Main.storyboard */,
 				388DBEB61B064DBB009BC774 /* Images.xcassets */,
@@ -159,7 +162,9 @@
 		388DBEA21B064DBB009BC774 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Paradoxium;
 				TargetAttributes = {
 					388DBEA91B064DBB009BC774 = {
@@ -218,6 +223,7 @@
 				388DBEB21B064DBB009BC774 /* ViewController.swift in Sources */,
 				388DBEB01B064DBB009BC774 /* AppDelegate.swift in Sources */,
 				3837072E1B64FDB100B7979D /* Network.swift in Sources */,
+				387126CD1B65C15600AE4CFE /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,6 +286,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -346,6 +353,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Steer Clear/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Paradoxium.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -356,6 +364,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Steer Clear/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Paradoxium.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -374,6 +383,7 @@
 				);
 				INFOPLIST_FILE = "Steer ClearTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Paradoxium.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Steer Clear.app/Steer Clear";
 			};
@@ -389,6 +399,7 @@
 				);
 				INFOPLIST_FILE = "Steer ClearTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Paradoxium.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Steer Clear.app/Steer Clear";
 			};

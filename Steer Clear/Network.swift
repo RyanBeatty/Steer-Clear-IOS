@@ -8,8 +8,6 @@
 
 import Foundation
 
-
-
 class Register {
     func register(username: String, password: String) {
         /* Configure session, choose between:
@@ -28,7 +26,7 @@ class Register {
         My API (POST http://127.0.0.1:5000/register)
         */
         
-        var URL = NSURL(string: "http://127.0.0.1:5000/register")
+        let URL = NSURL(string: "http://127.0.0.1:5000/register")
         let request = NSMutableURLRequest(URL: URL!)
         request.HTTPMethod = "POST"
         
@@ -42,15 +40,15 @@ class Register {
         request.HTTPBody = bodyString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
         
         /* Start a new Task */
-        let task = session.dataTaskWithRequest(request, completionHandler: { (data : NSData!, response : NSURLResponse!, error : NSError!) -> Void in
+        let task = session.dataTaskWithRequest(request, completionHandler: { (data : NSData?, response : NSURLResponse?, error : NSError?) -> Void in
             if (error == nil) {
                 // Success
                 let statusCode = (response as! NSHTTPURLResponse).statusCode
-                println("URL Session Task Succeeded: HTTP \(statusCode)")
+                print("URL Session Task Succeeded: HTTP \(statusCode)")
             }
             else {
                 // Failure
-                println("URL Session Task Failed: %@", error.localizedDescription);
+                print("URL Session Task Failed: %@", error!.localizedDescription);
             }
         })
         task.resume()
@@ -66,7 +64,7 @@ class Register {
     func stringFromQueryParameters(queryParameters : Dictionary<String, String>) -> String {
         var parts: [String] = []
         for (name, value) in queryParameters {
-            var part = NSString(format: "%@=%@",
+            let part = NSString(format: "%@=%@",
                 name.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!,
                 value.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)
             parts.append(part as String)
@@ -81,7 +79,7 @@ class Register {
     @return A new NSURL.
     */
     func NSURLByAppendingQueryParameters(URL : NSURL!, queryParameters : Dictionary<String, String>) -> NSURL {
-        let URLString : NSString = NSString(format: "%@?%@", URL.absoluteString!, self.stringFromQueryParameters(queryParameters))
+        let URLString : NSString = NSString(format: "%@?%@", URL.absoluteString, self.stringFromQueryParameters(queryParameters))
         return NSURL(string: URLString as String)!
     }
 }
@@ -104,7 +102,7 @@ class Login {
         My API (2) (POST http://127.0.0.1:5000/login)
         */
         
-        var URL = NSURL(string: "http://127.0.0.1:5000/login")
+        let URL = NSURL(string: "http://127.0.0.1:5000/login")
         let request = NSMutableURLRequest(URL: URL!)
         request.HTTPMethod = "POST"
         
@@ -118,15 +116,15 @@ class Login {
         request.HTTPBody = bodyString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
         
         /* Start a new Task */
-        let task = session.dataTaskWithRequest(request, completionHandler: { (data : NSData!, response : NSURLResponse!, error : NSError!) -> Void in
+        let task = session.dataTaskWithRequest(request, completionHandler: { (data : NSData?, response : NSURLResponse?, error : NSError?) -> Void in
             if (error == nil) {
                 // Success
                 let statusCode = (response as! NSHTTPURLResponse).statusCode
-                println("URL Session Task Succeeded: HTTP \(statusCode)")
+                print("URL Session Task Succeeded: HTTP \(statusCode)")
             }
             else {
                 // Failure
-                println("URL Session Task Failed: %@", error.localizedDescription);
+                print("URL Session Task Failed: %@", error!.localizedDescription);
             }
         })
         task.resume()
@@ -142,7 +140,7 @@ class Login {
     func stringFromQueryParameters(queryParameters : Dictionary<String, String>) -> String {
         var parts: [String] = []
         for (name, value) in queryParameters {
-            var part = NSString(format: "%@=%@",
+            let part = NSString(format: "%@=%@",
                 name.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!,
                 value.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)
             parts.append(part as String)
@@ -157,24 +155,24 @@ class Login {
     @return A new NSURL.
     */
     func NSURLByAppendingQueryParameters(URL : NSURL!, queryParameters : Dictionary<String, String>) -> NSURL {
-        let URLString : NSString = NSString(format: "%@?%@", URL.absoluteString!, self.stringFromQueryParameters(queryParameters))
+        let URLString : NSString = NSString(format: "%@?%@", URL.absoluteString, self.stringFromQueryParameters(queryParameters))
         return NSURL(string: URLString as String)!
     }
 }
 
 
 class AddRide {
-    func sendRequest() {
-        var postData = NSMutableData(data: "num_passengers=3".dataUsingEncoding(NSUTF8StringEncoding)!)
-        postData.appendData("&start_latitude=37.273485".dataUsingEncoding(NSUTF8StringEncoding)!)
-        postData.appendData("&start_longitude=-76.719628".dataUsingEncoding(NSUTF8StringEncoding)!)
+    func add(start_lat: String, start_long: String) {
+        let postData = NSMutableData(data: "num_passengers=3".dataUsingEncoding(NSUTF8StringEncoding)!)
+        postData.appendData("&start_latitude=\(start_lat)".dataUsingEncoding(NSUTF8StringEncoding)!)
+        postData.appendData("&start_longitude=\(start_long)".dataUsingEncoding(NSUTF8StringEncoding)!)
         postData.appendData("&end_latitude=37.280893".dataUsingEncoding(NSUTF8StringEncoding)!)
         postData.appendData("&end_longitude=-76.719691".dataUsingEncoding(NSUTF8StringEncoding)!)
         postData.appendData("&pickup_time=Sun, 07 Jun 2015 02:21:58 GMT".dataUsingEncoding(NSUTF8StringEncoding)!)
         postData.appendData("&travel_time=171".dataUsingEncoding(NSUTF8StringEncoding)!)
         postData.appendData("&dropoff_time=Sun, 07 Jun 2015 02:24:49 GMT".dataUsingEncoding(NSUTF8StringEncoding)!)
         
-        var request = NSMutableURLRequest(URL: NSURL(string: "http://127.0.0.1:5000/api/rides")!,
+        let request = NSMutableURLRequest(URL: NSURL(string: "http://127.0.0.1:5000/api/rides")!,
             cachePolicy: .UseProtocolCachePolicy,
             timeoutInterval: 10.0)
         request.HTTPMethod = "POST"
@@ -183,10 +181,10 @@ class AddRide {
         let session = NSURLSession.sharedSession()
         let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {
-                println(error)
+                print(error)
             } else {
                 let httpResponse = response as? NSHTTPURLResponse
-                println(httpResponse)
+                print(httpResponse)
             }
         })
         
@@ -196,7 +194,7 @@ class AddRide {
 
 class ClearQueue {
     func sendRequest(){
-        var request = NSMutableURLRequest(URL: NSURL(string: "http://127.0.0.1:5000/api/clear")!,
+        let request = NSMutableURLRequest(URL: NSURL(string: "http://127.0.0.1:5000/api/clear")!,
             cachePolicy: .UseProtocolCachePolicy,
             timeoutInterval: 10.0)
         request.HTTPMethod = "GET"
@@ -204,10 +202,10 @@ class ClearQueue {
         let session = NSURLSession.sharedSession()
         let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {
-                println(error)
+                print(error)
             } else {
                 let httpResponse = response as? NSHTTPURLResponse
-                println(httpResponse)
+                print(httpResponse)
             }
         })
         
@@ -217,8 +215,8 @@ class ClearQueue {
 }
 
 class Logout {
-    func sendRequest(){
-        var request = NSMutableURLRequest(URL: NSURL(string: "http://127.0.0.1:5000/logout")!,
+    func logout(){
+        let request = NSMutableURLRequest(URL: NSURL(string: "http://127.0.0.1:5000/logout")!,
             cachePolicy: .UseProtocolCachePolicy,
             timeoutInterval: 10.0)
         request.HTTPMethod = "GET"
@@ -226,10 +224,10 @@ class Logout {
         let session = NSURLSession.sharedSession()
         let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {
-                println(error)
+                print(error)
             } else {
                 let httpResponse = response as? NSHTTPURLResponse
-                println(httpResponse)
+                print(httpResponse)
             }
         })
         
