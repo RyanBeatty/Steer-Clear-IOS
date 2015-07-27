@@ -32,7 +32,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         } else {
             let loginController = Login()
             loginController.login(username!, password: password!)
-//            TODO: insert if 404, display alert that login was no successfull
+            //            TODO: insert if 404, display alert that login was no successfull
             self.performSegueWithIdentifier("loginRider", sender: self)
         }
     }
@@ -66,10 +66,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.passwordTextbox.delegate = self;
     }
     
-//    override func viewDidAppear(animated: Bool) {
-//        // TODO: check if user if logged in, if so, performSegue
-//         self.performSegueWithIdentifier("loginRider", sender: self)
-//    }
+    //    override func viewDidAppear(animated: Bool) {
+    //        // TODO: check if user if logged in, if so, performSegue
+    //         self.performSegueWithIdentifier("loginRider", sender: self)
+    //    }
     
     //Calls this function when the tap is recognized.
     func DismissKeyboard(){

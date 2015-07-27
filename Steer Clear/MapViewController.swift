@@ -50,8 +50,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         self.map.removeAnnotations(map.annotations)
         
-        var pinLocation : CLLocationCoordinate2D = CLLocationCoordinate2DMake(location.latitude, location.longitude)
-        var objectAnnotation = MKPointAnnotation()
+        let pinLocation : CLLocationCoordinate2D = CLLocationCoordinate2DMake(location.latitude, location.longitude)
+        let objectAnnotation = MKPointAnnotation()
         objectAnnotation.coordinate = pinLocation
         objectAnnotation.title = "Current Location"
         self.map.addAnnotation(objectAnnotation)
