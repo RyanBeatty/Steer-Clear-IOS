@@ -1,7 +1,7 @@
 # Steer-Clear-IOS
 IOS repo for Steer Clear app
 
-## Documentation
+## How to Launch
 
 ***1.*** Run Backend
 * Server needs to be running locally to be able to send requests. (PUSH & GET)
@@ -9,8 +9,6 @@ IOS repo for Steer Clear app
 * Note: runserver.py can run without the virtual environment running, however the database must already have been created.
 * To test if server is running locally visit localhost:5000
 * If server is running, you will receive a "Pulse".
-
-## How to Launch
 
 ***2.*** Launch "Steer Clear.xcworkspace" in Xcode
 * In Apple's Navigation Bar, go to Product -> Clean
