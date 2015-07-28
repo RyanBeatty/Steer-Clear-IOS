@@ -130,7 +130,7 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <color key="backgroundColor" red="0.73952321348193428" green="1" blue="0.69531639267970669" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N7E-lc-qXy">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N7E-lc-qXy">
                                 <rect key="frame" x="29" y="489" width="183" height="55"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -141,18 +141,6 @@
                                 <connections>
                                     <action selector="hailRide:" destination="nsC-P0-xcL" eventType="touchUpInside" id="d5t-pY-JyW"/>
                                 </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u2G-rm-MTw">
-                                <rect key="frame" x="29" y="94" width="262" height="54"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="54" id="bZb-c2-R3i"/>
-                                    <constraint firstAttribute="width" constant="262" id="jx8-Tx-M5d"/>
-                                </constraints>
-                                <state key="normal" title="  Enter Destination">
-                                    <color key="titleColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mec-dU-MNu">
                                 <rect key="frame" x="29" y="29" width="261" height="54"/>
@@ -175,17 +163,12 @@
                             <constraint firstItem="N7E-lc-qXy" firstAttribute="leading" secondItem="9Bf-8m-mF0" secondAttribute="leadingMargin" constant="13" id="61p-XT-j3j"/>
                             <constraint firstItem="Mec-dU-MNu" firstAttribute="leading" secondItem="9Bf-8m-mF0" secondAttribute="leadingMargin" constant="13" id="FPI-lU-K6I"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Mec-dU-MNu" secondAttribute="trailing" constant="14" id="LS7-Al-Okj"/>
-                            <constraint firstItem="u2G-rm-MTw" firstAttribute="top" secondItem="Mec-dU-MNu" secondAttribute="bottom" constant="11" id="VL6-jq-hpb"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="u2G-rm-MTw" secondAttribute="trailing" constant="13" id="cTo-vk-Ev3"/>
-                            <constraint firstItem="N7E-lc-qXy" firstAttribute="top" secondItem="u2G-rm-MTw" secondAttribute="bottom" constant="341" id="kQA-L9-G3A"/>
                             <constraint firstItem="Mec-dU-MNu" firstAttribute="top" secondItem="7Ox-ol-eTQ" secondAttribute="bottom" constant="30" id="n4e-ul-FxI"/>
-                            <constraint firstItem="u2G-rm-MTw" firstAttribute="leading" secondItem="9Bf-8m-mF0" secondAttribute="leadingMargin" constant="13" id="slR-bz-CZ9"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="button" destination="Mec-dU-MNu" id="gCs-Hh-GBT"/>
-                        <outlet property="destinationButton" destination="u2G-rm-MTw" id="KUZ-B9-eX4"/>
                         <outlet property="mapV" destination="4ZR-N1-MpA" id="nT6-9Q-XGq"/>
                         <outlet property="rideButton" destination="N7E-lc-qXy" id="2ix-Jw-mpG"/>
                     </connections>

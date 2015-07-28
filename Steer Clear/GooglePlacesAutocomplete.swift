@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CoreLocation
+import GoogleMaps
 
 public struct LocationBias {
   public let latitude: Double
@@ -29,17 +31,17 @@ public enum PlaceType: Printable {
   case Geocode
   case Address
   case Establishment
-  case Regions
-  case Cities
+  //case Regions
+//  case Cities
 
   public var description : String {
     switch self {
       case .All: return ""
       case .Geocode: return "geocode"
-      case .Address: return "address"
       case .Establishment: return "establishment"
-      case .Regions: return "(regions)"
-      case .Cities: return "(cities)"
+      case .Address: return "address"
+//      case .Regions: return "(regions)"
+  //    case .Cities: return "(cities)"
     }
   }
 }
@@ -253,7 +255,8 @@ extension GooglePlacesAutocompleteContainer: UISearchBarDelegate {
   private func getPlaces(searchString: String) {
     var params = [
       "input": searchString,
-      "types": placeType.description,
+     // "types": placeType.description,
+       //"types": "establishment",
       "key": apiKey ?? ""
     ]
     

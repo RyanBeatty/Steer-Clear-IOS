@@ -236,4 +236,9 @@ class Logout {
     }
 }
 
+class addCustomPlaces {
+    
+
+}
+
 

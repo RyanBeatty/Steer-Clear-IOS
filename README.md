@@ -10,9 +10,8 @@ IOS repo for Steer Clear app
 * To test if server is running locally visit localhost:5000
 * If server is running, you will receive a "Pulse".
 
-***2.*** Launch "Steer Clear.xcodeproj" in Xcode
+## How to Launch
+
+***2.*** Launch "Steer Clear.xcworkspace" in Xcode
+* In Apple's Navigation Bar, go to Product -> Clean
 * Press Play and it will run in IOS simulator. 
-
-
-##TODO
-* Create separate class for handling requests. 
