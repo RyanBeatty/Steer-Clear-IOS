@@ -44,6 +44,6 @@
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>So that the rider can track your location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>So that the driver can find you</string>
+	<string></string>
 </dict>
 </plist>

@@ -18,6 +18,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     @IBOutlet var button: UIButton!
     @IBOutlet var destinationButton: UIButton!
     @IBOutlet var rideButton: UIButton!
+    @IBOutlet var myLocationButtonOutlet: UIButton!
     
     @IBOutlet var mapV: GMSMapView!
     var latitude = CLLocationDegrees()
@@ -26,6 +27,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     var didFindMyLocation = false
     var locationMarker: GMSMarker!
     
+    @IBAction func myLocationButton(sender: AnyObject) {
+        let myLocation = locationManager.location
+        mapV.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 17.0)
+        self.setupLocationMarker(myLocation.coordinate)
+    }
     
     @IBAction func searchButton(sender: AnyObject) {
         let gpaViewController = GooglePlacesAutocomplete(
@@ -64,8 +70,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         if !didFindMyLocation {
             let myLocation: CLLocation = change[NSKeyValueChangeNewKey] as! CLLocation
             mapV.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 17.0)
-            mapV.settings.myLocationButton = true
-            
+            //mapV.settings.myLocationButton = true
+            self.setupLocationMarker(myLocation.coordinate)
             didFindMyLocation = true
         }
     }
@@ -95,10 +101,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         button.layer.shadowRadius = 1
         button.layer.shadowOpacity = 1.0
         
-        rideButton.layer.shadowColor = UIColor.blackColor().CGColor
-        rideButton.layer.shadowOffset = CGSizeMake(1, 1)
-        rideButton.layer.shadowRadius = 1
-        rideButton.layer.shadowOpacity = 1.0
+        myLocationButtonOutlet.frame = CGRectMake(160, 100, 50, 50)
+        myLocationButtonOutlet.layer.cornerRadius = 0.5 * myLocationButtonOutlet.bounds.size.width
         
     }
     
