@@ -96,13 +96,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     }
         
     func setupButtons() {
-        button.layer.shadowColor = UIColor.blackColor().CGColor
-        button.layer.shadowOffset = CGSizeMake(1, 1)
-        button.layer.shadowRadius = 1
-        button.layer.shadowOpacity = 1.0
+        button.layer.shadowOpacity = 0.5
         
-        myLocationButtonOutlet.frame = CGRectMake(160, 100, 50, 50)
         myLocationButtonOutlet.layer.cornerRadius = 0.5 * myLocationButtonOutlet.bounds.size.width
+        myLocationButtonOutlet.layer.shadowOpacity = 0.5
         
     }
     

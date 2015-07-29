@@ -145,14 +145,16 @@
                                     <action selector="searchButton:" destination="nsC-P0-xcL" eventType="touchUpInside" id="VOl-bZ-Man"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xt9-eA-P5A">
-                                <rect key="frame" x="260" y="511" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xt9-eA-P5A">
+                                <rect key="frame" x="241" y="488" width="58" height="58"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="JiU-aT-cxl"/>
-                                    <constraint firstAttribute="height" constant="30" id="T2B-5A-8gG"/>
+                                    <constraint firstAttribute="width" constant="58" id="JiU-aT-cxl"/>
+                                    <constraint firstAttribute="height" constant="58" id="T2B-5A-8gG"/>
                                 </constraints>
-                                <state key="normal" title="&amp;">
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Loc">
+                                    <color key="titleColor" red="0.52549019607843139" green="0.52549019607843139" blue="0.52549019607843139" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -162,11 +164,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ULf-gl-SJ4" firstAttribute="top" secondItem="Xt9-eA-P5A" secondAttribute="bottom" constant="27" id="6Q0-EW-KOh"/>
                             <constraint firstItem="Mec-dU-MNu" firstAttribute="leading" secondItem="9Bf-8m-mF0" secondAttribute="leadingMargin" constant="13" id="FPI-lU-K6I"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Mec-dU-MNu" secondAttribute="trailing" constant="14" id="LS7-Al-Okj"/>
                             <constraint firstItem="Mec-dU-MNu" firstAttribute="top" secondItem="7Ox-ol-eTQ" secondAttribute="bottom" constant="30" id="n4e-ul-FxI"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Xt9-eA-P5A" secondAttribute="trailing" constant="14" id="qv3-mE-XQZ"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
