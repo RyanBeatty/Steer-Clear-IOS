@@ -12,7 +12,7 @@ import CoreLocation
 import GoogleMaps
 import QuartzCore
 
-class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, GMSMapViewDelegate {
+class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
     
     
     @IBOutlet var button: UIButton!
@@ -51,6 +51,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         mapV.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
+        mapV.delegate = self
     }
     
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
@@ -68,20 +69,25 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             didFindMyLocation = true
         }
     }
+    //This function detects a long press on the map and places a marker at the coordinates of the long press.
+    func mapView(mapView: GMSMapView!, didLongPressAtCoordinate coordinate: CLLocationCoordinate2D) {
+        println(1)
+        //Set variable to latitude of didLongPressAtCoordinate
+        var lat = coordinate.latitude
+        
+        //Set variable to longitude of didLongPressAtCoordinate
+        var long = coordinate.longitude
+        println(2)
+        //Feed position to mapMarker
+        let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        self.setupLocationMarker(coordinate)
+        
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if segue.identifier == "logoutRider" {
-//            let logoutController = Logout()
-//            logoutController.logout()
-//            print(2)
-//        }
-//    }
         
     func setupButtons() {
         button.layer.shadowColor = UIColor.blackColor().CGColor
