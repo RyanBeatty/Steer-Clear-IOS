@@ -137,7 +137,8 @@
                                     <constraint firstAttribute="width" constant="261" id="0w1-Sc-Akf"/>
                                     <constraint firstAttribute="height" constant="54" id="9ti-bB-tvm"/>
                                 </constraints>
-                                <state key="normal" title="  Enter Pickup">
+                                <inset key="contentEdgeInsets" minX="12" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Current Location">
                                     <color key="titleColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -161,11 +162,25 @@
                                     <action selector="myLocationButton:" destination="nsC-P0-xcL" eventType="touchUpInside" id="bPt-Iv-RJ5"/>
                                 </connections>
                             </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="VY1-qt-Xx7">
+                                <rect key="frame" x="29" y="503" width="143" height="29"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="143" id="JTr-hX-j6V"/>
+                                    <constraint firstAttribute="height" constant="28" id="S76-0k-omX"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Pick Up"/>
+                                    <segment title="Drop Off"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="ULf-gl-SJ4" firstAttribute="top" secondItem="VY1-qt-Xx7" secondAttribute="bottom" constant="37" id="Dsu-qD-Odl"/>
                             <constraint firstItem="Mec-dU-MNu" firstAttribute="leading" secondItem="9Bf-8m-mF0" secondAttribute="leadingMargin" constant="13" id="FPI-lU-K6I"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Mec-dU-MNu" secondAttribute="trailing" constant="14" id="LS7-Al-Okj"/>
+                            <constraint firstItem="VY1-qt-Xx7" firstAttribute="leading" secondItem="9Bf-8m-mF0" secondAttribute="leadingMargin" constant="13" id="Ttz-V1-UfT"/>
                             <constraint firstItem="Mec-dU-MNu" firstAttribute="top" secondItem="7Ox-ol-eTQ" secondAttribute="bottom" constant="30" id="n4e-ul-FxI"/>
                         </constraints>
                     </view>

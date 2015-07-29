@@ -126,6 +126,7 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
             self.longitude = details.longitude
             self.mapV.camera = GMSCameraPosition.cameraWithLatitude(details.latitude, longitude: details.longitude, zoom: 15.0)
             let coordinate = CLLocationCoordinate2D(latitude: details.latitude, longitude: details.longitude)
+            self.button.setTitle("\(place.description)", forState: UIControlState.Normal)
             self.setupLocationMarker(coordinate)
             println(details)
         }
