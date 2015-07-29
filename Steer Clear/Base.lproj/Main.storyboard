@@ -189,6 +189,7 @@
                         <outlet property="button" destination="Mec-dU-MNu" id="gCs-Hh-GBT"/>
                         <outlet property="mapV" destination="4ZR-N1-MpA" id="nT6-9Q-XGq"/>
                         <outlet property="myLocationButtonOutlet" destination="Xt9-eA-P5A" id="JIS-fN-QmF"/>
+                        <outlet property="segmentOutlet" destination="VY1-qt-Xx7" id="ubs-qQ-vqQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vBg-rF-pfC" userLabel="First Responder" sceneMemberID="firstResponder"/>

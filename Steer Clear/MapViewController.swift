@@ -15,6 +15,7 @@ import QuartzCore
 class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
     
     
+    @IBOutlet var segmentOutlet: UISegmentedControl!
     @IBOutlet var button: UIButton!
     @IBOutlet var destinationButton: UIButton!
     @IBOutlet var rideButton: UIButton!
@@ -26,6 +27,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     var locationManager = CLLocationManager()
     var didFindMyLocation = false
     var locationMarker: GMSMarker!
+    var endLocationMarker: GMSMarker!
     
     @IBAction func myLocationButton(sender: AnyObject) {
         let myLocation = locationManager.location
@@ -104,16 +106,32 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     }
     
     func setupLocationMarker(coordinate: CLLocationCoordinate2D) {
-        
-        if locationMarker != nil {
-            locationMarker.map = nil
+
+        if segmentOutlet.selectedSegmentIndex == 0 {
+            
+            if endLocationMarker != nil {
+                endLocationMarker.map = nil
+            }
+            endLocationMarker = GMSMarker(position: coordinate)
+            endLocationMarker.appearAnimation = kGMSMarkerAnimationPop
+            endLocationMarker.icon = GMSMarker.markerImageWithColor(UIColor.redColor())
+            endLocationMarker.opacity = 0.75
+            
+            endLocationMarker.map = mapV
+            
+            
+        } else{
+            if locationMarker != nil {
+                locationMarker.map = nil
+            }
+            locationMarker = GMSMarker(position: coordinate)
+            locationMarker.appearAnimation = kGMSMarkerAnimationPop
+            locationMarker.icon = GMSMarker.markerImageWithColor(UIColor.blueColor())
+            locationMarker.opacity = 0.75
+            
+            locationMarker.map = mapV
+            
         }
-        locationMarker = GMSMarker(position: coordinate)
-        locationMarker.appearAnimation = kGMSMarkerAnimationPop
-        locationMarker.icon = GMSMarker.markerImageWithColor(UIColor.blueColor())
-        locationMarker.opacity = 0.75
-        
-        locationMarker.map = mapV
         
     }
     
