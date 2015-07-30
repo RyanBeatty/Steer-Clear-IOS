@@ -162,12 +162,26 @@ class Login {
 
 
 class AddRide {
-    func add(start_lat: String, start_long: String) {
-        let postData = NSMutableData(data: "num_passengers=3".dataUsingEncoding(NSUTF8StringEncoding)!)
-        postData.appendData("&start_latitude=\(start_lat)".dataUsingEncoding(NSUTF8StringEncoding)!)
-        postData.appendData("&start_longitude=\(start_long)".dataUsingEncoding(NSUTF8StringEncoding)!)
-        postData.appendData("&end_latitude=37.280893".dataUsingEncoding(NSUTF8StringEncoding)!)
-        postData.appendData("&end_longitude=-76.719691".dataUsingEncoding(NSUTF8StringEncoding)!)
+    
+    var startLatitude = String()
+    var startLongitude = String()
+    var endLatitude = String()
+    var endLongitude = String()
+    
+    
+    func collectCoordinates(startLat: String, startLong: String, endLat: String, endLong: String) {
+        startLatitude = startLat
+        startLongitude = startLong
+        endLatitude = endLat
+        endLongitude = endLong
+    }
+    
+    func add(start_lat: String, start_long: String, end_lat: String, end_long: String, numOfPassengers :String) {
+        let postData = NSMutableData(data: "num_passengers=\(numOfPassengers)".dataUsingEncoding(NSUTF8StringEncoding)!)
+        postData.appendData("&start_latitude=\(startLatitude)".dataUsingEncoding(NSUTF8StringEncoding)!)
+        postData.appendData("&start_longitude=\(startLongitude)".dataUsingEncoding(NSUTF8StringEncoding)!)
+        postData.appendData("&end_latitude=\(endLatitude)".dataUsingEncoding(NSUTF8StringEncoding)!)
+        postData.appendData("&end_longitude=\(endLongitude)".dataUsingEncoding(NSUTF8StringEncoding)!)
         postData.appendData("&pickup_time=Sun, 07 Jun 2015 02:21:58 GMT".dataUsingEncoding(NSUTF8StringEncoding)!)
         postData.appendData("&travel_time=171".dataUsingEncoding(NSUTF8StringEncoding)!)
         postData.appendData("&dropoff_time=Sun, 07 Jun 2015 02:24:49 GMT".dataUsingEncoding(NSUTF8StringEncoding)!)

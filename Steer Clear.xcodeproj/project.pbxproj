@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3837072E1B64FDB100B7979D /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3837072D1B64FDB100B7979D /* Network.swift */; };
+		383EC5EB1B69BD2E00D78F36 /* TripConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383EC5EA1B69BD2E00D78F36 /* TripConfirmation.swift */; };
 		387126CD1B65C15600AE4CFE /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387126CC1B65C15600AE4CFE /* MapViewController.swift */; };
 		388DBEB01B064DBB009BC774 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388DBEAF1B064DBB009BC774 /* AppDelegate.swift */; };
 		388DBEB21B064DBB009BC774 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388DBEB11B064DBB009BC774 /* ViewController.swift */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		3837072D1B64FDB100B7979D /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		383EC5EA1B69BD2E00D78F36 /* TripConfirmation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripConfirmation.swift; sourceTree = "<group>"; };
 		387126CC1B65C15600AE4CFE /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		388DBEAA1B064DBB009BC774 /* Steer Clear.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Steer Clear.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		388DBEAE1B064DBB009BC774 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				387126CC1B65C15600AE4CFE /* MapViewController.swift */,
 				388DBEB11B064DBB009BC774 /* ViewController.swift */,
 				388DBEB31B064DBB009BC774 /* Main.storyboard */,
+				383EC5EA1B69BD2E00D78F36 /* TripConfirmation.swift */,
 				388DBEB61B064DBB009BC774 /* Images.xcassets */,
 				388DBEB81B064DBB009BC774 /* LaunchScreen.xib */,
 				388DBEAD1B064DBB009BC774 /* Supporting Files */,
@@ -289,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				38DE57F71B67257F004A37FA /* GooglePlacesAutocomplete.swift in Sources */,
+				383EC5EB1B69BD2E00D78F36 /* TripConfirmation.swift in Sources */,
 				388DBEB21B064DBB009BC774 /* ViewController.swift in Sources */,
 				388DBEB01B064DBB009BC774 /* AppDelegate.swift in Sources */,
 				3837072E1B64FDB100B7979D /* Network.swift in Sources */,

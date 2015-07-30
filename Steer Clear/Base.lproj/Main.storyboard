@@ -127,7 +127,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4ZR-N1-MpA" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="525"/>
                                 <color key="backgroundColor" red="0.73952321348193428" green="1" blue="0.69531639267970669" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mec-dU-MNu">
@@ -148,7 +148,7 @@
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="VY1-qt-Xx7">
-                                <rect key="frame" x="88" y="532" width="143" height="29"/>
+                                <rect key="frame" x="88" y="477" width="143" height="29"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="143" id="JTr-hX-j6V"/>
@@ -163,25 +163,12 @@
                                     <action selector="segmentControlSwitch:" destination="nsC-P0-xcL" eventType="valueChanged" id="7ID-rT-9kA"/>
                                 </connections>
                             </segmentedControl>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gIH-pK-yEA">
-                                <rect key="frame" x="246" y="425" width="58" height="58"/>
-                                <color key="backgroundColor" red="0.29019607843137257" green="0.67450980392156867" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="58" id="CKw-BZ-2dl"/>
-                                    <constraint firstAttribute="width" constant="58" id="Irb-h9-2WW"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
-                                <state key="normal" title="➾">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xt9-eA-P5A">
-                                <rect key="frame" x="246" y="502" width="58" height="58"/>
+                                <rect key="frame" x="246" y="469" width="49" height="44"/>
                                 <color key="backgroundColor" red="0.29019607843137257" green="0.67450980392156867" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="58" id="JiU-aT-cxl"/>
-                                    <constraint firstAttribute="height" constant="58" id="T2B-5A-8gG"/>
+                                    <constraint firstAttribute="width" constant="49" id="JiU-aT-cxl"/>
+                                    <constraint firstAttribute="height" constant="44" id="T2B-5A-8gG"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
                                 <inset key="contentEdgeInsets" minX="0.0" minY="-8" maxX="0.0" maxY="0.0"/>
@@ -193,13 +180,32 @@
                                     <action selector="myLocationButton:" destination="nsC-P0-xcL" eventType="touchUpInside" id="bPt-Iv-RJ5"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gIH-pK-yEA">
+                                <rect key="frame" x="0.0" y="525" width="320" height="43"/>
+                                <color key="backgroundColor" red="0.29019607843137257" green="0.67450980392156867" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="43" id="WX0-zz-JYs"/>
+                                    <constraint firstAttribute="width" constant="320" id="Y8s-Ee-TYJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Confirm Ride">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="collectCoordinates:" destination="nsC-P0-xcL" eventType="touchUpInside" id="miS-LK-NRm"/>
+                                    <segue destination="Xq3-zb-LVU" kind="show" id="kPd-30-U7e"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Mec-dU-MNu" firstAttribute="leading" secondItem="9Bf-8m-mF0" secondAttribute="leadingMargin" constant="13" id="FPI-lU-K6I"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Mec-dU-MNu" secondAttribute="trailing" constant="14" id="LS7-Al-Okj"/>
-                            <constraint firstItem="Xt9-eA-P5A" firstAttribute="top" secondItem="gIH-pK-yEA" secondAttribute="bottom" constant="19" id="bkx-xw-nFQ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gIH-pK-yEA" secondAttribute="trailing" constant="-16" id="Nys-XD-NFq"/>
+                            <constraint firstItem="gIH-pK-yEA" firstAttribute="leading" secondItem="9Bf-8m-mF0" secondAttribute="leadingMargin" constant="-16" id="XIs-AT-HbY"/>
                             <constraint firstItem="Mec-dU-MNu" firstAttribute="top" secondItem="7Ox-ol-eTQ" secondAttribute="bottom" constant="8" id="n4e-ul-FxI"/>
+                            <constraint firstItem="ULf-gl-SJ4" firstAttribute="top" secondItem="gIH-pK-yEA" secondAttribute="bottom" id="ntE-MR-E9L"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -214,6 +220,72 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vBg-rF-pfC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="829" y="98"/>
+        </scene>
+        <!--Trip Confirmation-->
+        <scene sceneID="KKQ-Wo-SHx">
+            <objects>
+                <viewController id="Xq3-zb-LVU" customClass="TripConfirmation" customModule="Steer_Clear" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="V5L-bh-NRR"/>
+                        <viewControllerLayoutGuide type="bottom" id="WiM-I8-QaS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="LDT-Pz-K4F">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AQq-N6-28P">
+                                <rect key="frame" x="0.0" y="223" width="320" height="162"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="162" id="YTS-4t-r8X"/>
+                                    <constraint firstAttribute="width" constant="320" id="iEJ-22-bva"/>
+                                </constraints>
+                            </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Trip Confirmation" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmG-PF-7fs">
+                                <rect key="frame" x="67" y="28" width="187" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="187" id="T22-IS-uj4"/>
+                                    <constraint firstAttribute="height" constant="21" id="xSe-mt-wLO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pick Up: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yc8-jg-7tH">
+                                <rect key="frame" x="16" y="102" width="70" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Drop Off:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s4A-ml-2uY">
+                                <rect key="frame" x="16" y="144" width="70" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Number of Passengers:" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3PF-CK-fI6">
+                                <rect key="frame" x="16" y="173" width="187" height="42"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KJ8-c3-i6x">
+                                <rect key="frame" x="216" y="183" width="38" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="myPicker" destination="AQq-N6-28P" id="S0p-YA-XCD"/>
+                        <outlet property="numberOfPassengers" destination="KJ8-c3-i6x" id="ucx-SF-BUZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BLy-qm-jQG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1229" y="12"/>
         </scene>
     </scenes>
     <resources>

@@ -23,13 +23,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     @IBOutlet var sendCoordinateButton: UIButton!
     
     @IBOutlet var mapV: GMSMapView!
-    var latitude = CLLocationDegrees()
-    var longitude = CLLocationDegrees()
+    var startLatitude = CLLocationDegrees()
+    var startLongitude = CLLocationDegrees()
+    var endLatitude = CLLocationDegrees()
+    var endLongitude = CLLocationDegrees()
     var locationManager = CLLocationManager()
     var didFindMyLocation = false
     var locationMarker: GMSMarker!
     var endLocationMarker: GMSMarker!
     var locationDetails = ""
+    var destinationInput = false
     
     
     
@@ -73,11 +76,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         presentViewController(gpaViewController, animated: true, completion: nil)
     }
     
-    
-    @IBAction func hailRide(sender: AnyObject) {
+    @IBAction func collectCoordinates(sender: AnyObject) {
         let addRideController = AddRide()
-        addRideController.add(String(format:"%.6f", latitude),start_long: String(format:"%.6f", longitude))
+        
+        if destinationInput == false {
+            let alert = UIAlertController(title: "Trip Details Error", message: "Please enter destination.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+            
+        } else {
+            addRideController.collectCoordinates(String(format:"%.6f", startLatitude), startLong: String(format:"%.6f", startLongitude), endLat: String(format:"%.6f", endLatitude), endLong: String(format:"%.6f", endLatitude))
+        }
     }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,6 +130,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         
     }
     
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -130,9 +142,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         myLocationButtonOutlet.layer.cornerRadius = 0.5 * myLocationButtonOutlet.bounds.size.width
         myLocationButtonOutlet.layer.shadowOpacity = 0.5
         
-        sendCoordinateButton.layer.cornerRadius = 0.5 * sendCoordinateButton.bounds.size.width
-        sendCoordinateButton.layer.shadowOpacity = 0.5
-        
         
     }
     
@@ -140,30 +149,36 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
         if segmentOutlet.selectedSegmentIndex == 0 {
             
+            if locationMarker != nil {
+                locationMarker.map = nil
+            }
+            
+            locationMarker = GMSMarker(position: coordinate)
+            locationMarker.appearAnimation = kGMSMarkerAnimationPop
+            locationMarker.icon = GMSMarker.markerImageWithColor(pickupColor)
+            locationMarker.title = "Pick Up"
+            locationMarker.opacity = 0.75
+            locationMarker.map = mapV
+            startLatitude = coordinate.latitude
+            startLongitude = coordinate.longitude
+
+            
+        } else{
             if endLocationMarker != nil {
                 endLocationMarker.map = nil
             }
             endLocationMarker = GMSMarker(position: coordinate)
             endLocationMarker.appearAnimation = kGMSMarkerAnimationPop
-            endLocationMarker.icon = GMSMarker.markerImageWithColor(pickupColor)
-            endLocationMarker.title = "Pick Up"
-           // endLocationMarker.snippet = "\(locationDetails)"
+            endLocationMarker.icon = GMSMarker.markerImageWithColor(dropoffColor)
+            endLocationMarker.title = "Drop Off"
+            // endLocationMarker.snippet = "\(locationDetails)"
             print(locationDetails)
             endLocationMarker.opacity = 0.75
             endLocationMarker.map = mapV
+            endLatitude = coordinate.latitude
+            endLongitude = coordinate.longitude
+            destinationInput = true
             
-            
-        } else{
-            if locationMarker != nil {
-                locationMarker.map = nil
-            }
-            locationMarker = GMSMarker(position: coordinate)
-            locationMarker.appearAnimation = kGMSMarkerAnimationPop
-            locationMarker.icon = GMSMarker.markerImageWithColor(dropoffColor)
-            endLocationMarker.title = "Drop Off"
-            locationMarker.opacity = 0.75
-            
-            locationMarker.map = mapV
 
         }
         
@@ -174,8 +189,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 extension MapViewController: GooglePlacesAutocompleteDelegate {
     func placeSelected(place: Place) {
         place.getDetails { details in
-            self.latitude = details.latitude
-            self.longitude = details.longitude
             self.mapV.camera = GMSCameraPosition.cameraWithLatitude(details.latitude, longitude: details.longitude, zoom: 15.0)
             let coordinate = CLLocationCoordinate2D(latitude: details.latitude, longitude: details.longitude)
             self.button.setTitle("\(place.description)", forState: UIControlState.Normal)
