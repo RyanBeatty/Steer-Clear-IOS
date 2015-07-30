@@ -30,28 +30,6 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         myPicker.selectRow(1, inComponent: 0, animated: true)
         
         
-        
-        var placesClient: GMSPlacesClient?
-        placesClient = GMSPlacesClient()
-        //TODO  unhardcode this, add post request to google maps geocode
-        let placeID = "ChIJ_4diWnWJsIkRHAhoo7u5QwQ"
-        
-        placesClient!.lookUpPlaceID(placeID, callback: { (place, error) -> Void in
-            if error != nil {
-                println("lookup place id query error: \(error!.localizedDescription)")
-                return
-            }
-            
-            if place != nil {
-                println("Place name \(place!.name)")
-                println("Place address \(place!.formattedAddress)")
-                println("Place placeID \(place!.placeID)")
-                println("Place attributions \(place!.attributions)")
-            } else {
-                println("No place details for \(placeID)")
-            }
-        })
-        
     }
     
     @IBAction func submitRequest(sender: AnyObject) {

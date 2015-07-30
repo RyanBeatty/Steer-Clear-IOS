@@ -240,6 +240,7 @@ class GoooglePlaces {
     var lookupAddressResults: Dictionary<NSObject, AnyObject>!
     
     var fetchedFormattedAddress: String!
+    var fetchedID: String!
     
     var fetchedAddressLongitude: Double!
     
@@ -254,7 +255,7 @@ class GoooglePlaces {
             
             let geocodeURL = NSURL(string: geocodeURLString)
             
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+          
                 let geocodingResultsData = NSData(contentsOfURL: geocodeURL!)
                 
                 var error: NSError?
@@ -275,12 +276,12 @@ class GoooglePlaces {
                         // Keep the most important values.
                         self.fetchedFormattedAddress = self.lookupAddressResults["place_id"]as! String
                         print(self.fetchedFormattedAddress)
+                        self.fetchedID = self.fetchedFormattedAddress
                     }
                 }
-            })
+            }
         }
-        }
-    }
+}
 
 
 

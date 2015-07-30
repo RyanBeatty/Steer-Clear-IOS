@@ -33,7 +33,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     var endLocationMarker: GMSMarker!
     var locationDetails = ""
     var destinationInput = false
-    
+    var cameFromSearch = false
     
     
     let dropoffColor = UIColor(hue: 0, saturation: 0.47, brightness: 0.84, alpha: 1.0) /* #d67171 */
@@ -168,8 +168,30 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
         }
         
+        
+        var placesClient: GMSPlacesClient?
+        placesClient = GMSPlacesClient()
+        //TODO  unhardcode this, add post request to google maps geocode
+        
+        placesClient!.lookUpPlaceID(googleController.fetchedID, callback: { (place, error) -> Void in
+            if error != nil {
+                println("lookup place id query error: \(error!.localizedDescription)")
+                return
+            }
+            
+            if place != nil && self.cameFromSearch == false {
+                self.button.setTitle("\(place!.name)", forState: UIControlState.Normal)
+                println("Place name \(place!.name)")
+//                println("Place address \(place!.formattedAddress)")
+//                println("Place placeID \(place!.placeID)")
+//                println("Place attributions \(place!.attributions)")
+            } else {
+                println("No place details for \(googleController.fetchedID)")
+            }
+                            self.cameFromSearch = false
+        })
     }
-    
+
 }
 
 extension MapViewController: GooglePlacesAutocompleteDelegate {
@@ -178,7 +200,9 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
             self.mapV.camera = GMSCameraPosition.cameraWithLatitude(details.latitude, longitude: details.longitude, zoom: 15.0)
             let coordinate = CLLocationCoordinate2D(latitude: details.latitude, longitude: details.longitude)
             self.button.setTitle("\(place.description)", forState: UIControlState.Normal)
+            self.cameFromSearch = true
             self.setupLocationMarker(coordinate)
+
             println(details)
 
         }
