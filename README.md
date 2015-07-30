@@ -14,6 +14,7 @@ IOS repo for Steer Clear app
 * Go to your terminal and navigate to the Steer-Clear-IOS folder
 * type in ``` $ sudo gem install cocoapods ``` to install Cocoapods on your computer
 * type in ``` $ pod install ``` to have the pods intall in your build
+
 ***3.*** Launch "Steer Clear.xcworkspace" in Xcode
 * In Apple's Navigation Bar, go to Product -> Clean
 * Press Play and it will run in IOS simulator. 
