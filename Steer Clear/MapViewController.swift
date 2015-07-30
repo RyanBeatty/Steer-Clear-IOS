@@ -20,6 +20,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     @IBOutlet var destinationButton: UIButton!
     @IBOutlet var rideButton: UIButton!
     @IBOutlet var myLocationButtonOutlet: UIButton!
+    @IBOutlet var sendCoordinateButton: UIButton!
     
     @IBOutlet var mapV: GMSMapView!
     var latitude = CLLocationDegrees()
@@ -29,6 +30,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     var locationMarker: GMSMarker!
     var endLocationMarker: GMSMarker!
     var locationDetails = ""
+    
+    
     
     let dropoffColor = UIColor(hue: 0, saturation: 0.47, brightness: 0.84, alpha: 1.0) /* #d67171 */
     let pickupColor = UIColor(hue: 0.4806, saturation: 0.47, brightness: 0.76, alpha: 1.0) /* #66c1b7 */
@@ -41,10 +44,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             button.backgroundColor = pickupColor
             segmentOutlet.tintColor = pickupColor
             myLocationButtonOutlet.backgroundColor = pickupColor
+            sendCoordinateButton.backgroundColor = pickupColor
         case 1:
             button.backgroundColor = dropoffColor
             segmentOutlet.tintColor = dropoffColor
             myLocationButtonOutlet.backgroundColor = dropoffColor
+            sendCoordinateButton.backgroundColor = dropoffColor
         default:
             break; 
         }
@@ -124,6 +129,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         
         myLocationButtonOutlet.layer.cornerRadius = 0.5 * myLocationButtonOutlet.bounds.size.width
         myLocationButtonOutlet.layer.shadowOpacity = 0.5
+        
+        sendCoordinateButton.layer.cornerRadius = 0.5 * sendCoordinateButton.bounds.size.width
+        sendCoordinateButton.layer.shadowOpacity = 0.5
         
         
     }
