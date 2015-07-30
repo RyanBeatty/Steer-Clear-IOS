@@ -34,13 +34,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     var locationDetails = ""
     var destinationInput = false
     var cameFromSearch = false
+    var globalStartName = ""
+    var globalEndName = ""
     
     
     let dropoffColor = UIColor(hue: 0, saturation: 0.47, brightness: 0.84, alpha: 1.0) /* #d67171 */
     let pickupColor = UIColor(hue: 0.4806, saturation: 0.47, brightness: 0.76, alpha: 1.0) /* #66c1b7 */
     
     @IBAction func segmentControlSwitch(sender: AnyObject) {
-        
         switch segmentOutlet.selectedSegmentIndex
         {
         case 0:
@@ -48,11 +49,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             segmentOutlet.tintColor = pickupColor
             myLocationButtonOutlet.backgroundColor = pickupColor
             sendCoordinateButton.backgroundColor = pickupColor
+            self.button.setTitle("\(globalStartName)", forState: UIControlState.Normal)
+
         case 1:
             button.backgroundColor = dropoffColor
             segmentOutlet.tintColor = dropoffColor
             myLocationButtonOutlet.backgroundColor = dropoffColor
             sendCoordinateButton.backgroundColor = dropoffColor
+            self.button.setTitle("\(globalEndName)", forState: UIControlState.Normal)
         default:
             break; 
         }
@@ -68,7 +72,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     @IBAction func searchButton(sender: AnyObject) {
         let gpaViewController = GooglePlacesAutocomplete(apiKey: "AIzaSyDd_lRDKvpH6ao8KmLTDmQPB4wdhxfuEys",placeType: .Address)
         print("hello")
-       // let detalio = Place()
         gpaViewController.placeDelegate = self
         gpaViewController.locationBias = LocationBias(latitude: 37.270821, longitude: -76.709025, radius: 1000)
         presentViewController(gpaViewController, animated: true, completion: nil)
@@ -132,6 +135,35 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     func setupLocationMarker(coordinate: CLLocationCoordinate2D) {
         let googleController = GoooglePlaces()
         googleController.geocodeAddress(coordinate.latitude, long: coordinate.longitude)
+        
+        var placesClient: GMSPlacesClient?
+        placesClient = GMSPlacesClient()
+        //TODO  unhardcode this, add post request to google maps geocode
+        
+        placesClient!.lookUpPlaceID(googleController.fetchedID, callback: { (place, error) -> Void in
+            if error != nil {
+                println("lookup place id query error: \(error!.localizedDescription)")
+                return
+            }
+            
+            if place != nil && self.cameFromSearch == false {
+                self.button.setTitle("\(place!.name)", forState: UIControlState.Normal)
+                if self.segmentOutlet.selectedSegmentIndex == 0 {
+                    self.globalStartName = place!.name
+                } else {
+                    self.globalEndName = place!.name
+                }
+
+                println("Place name \(place!.name)")
+                //                println("Place address \(place!.formattedAddress)")
+                //                println("Place placeID \(place!.placeID)")
+                //                println("Place attributions \(place!.attributions)")
+            } else {
+                println("No place details for \(googleController.fetchedID)")
+            }
+            self.cameFromSearch = false
+        })
+        
         if segmentOutlet.selectedSegmentIndex == 0 {
             
             if locationMarker != nil {
@@ -168,29 +200,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
         }
         
-        
-        var placesClient: GMSPlacesClient?
-        placesClient = GMSPlacesClient()
-        //TODO  unhardcode this, add post request to google maps geocode
-        
-        placesClient!.lookUpPlaceID(googleController.fetchedID, callback: { (place, error) -> Void in
-            if error != nil {
-                println("lookup place id query error: \(error!.localizedDescription)")
-                return
-            }
-            
-            if place != nil && self.cameFromSearch == false {
-                self.button.setTitle("\(place!.name)", forState: UIControlState.Normal)
-                println("Place name \(place!.name)")
-//                println("Place address \(place!.formattedAddress)")
-//                println("Place placeID \(place!.placeID)")
-//                println("Place attributions \(place!.attributions)")
-            } else {
-                println("No place details for \(googleController.fetchedID)")
-            }
-                            self.cameFromSearch = false
-        })
     }
+
 
 }
 
@@ -206,8 +217,12 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
             println(details)
 
         }
-        println(place.description)
-        println(place.id)
+        if self.segmentOutlet.selectedSegmentIndex == 0 {
+            self.globalStartName = place.description
+        } else {
+            self.globalEndName = place.description
+        }
+        
         self.locationDetails = place.description
         dismissViewControllerAnimated(true, completion: nil)
     }
