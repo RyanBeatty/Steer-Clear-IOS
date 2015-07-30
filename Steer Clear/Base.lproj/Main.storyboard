@@ -234,7 +234,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AQq-N6-28P">
-                                <rect key="frame" x="0.0" y="223" width="320" height="162"/>
+                                <rect key="frame" x="0.0" y="406" width="320" height="162"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="162" id="YTS-4t-r8X"/>
                                     <constraint firstAttribute="width" constant="320" id="iEJ-22-bva"/>
@@ -269,18 +269,63 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KJ8-c3-i6x">
-                                <rect key="frame" x="216" y="183" width="38" height="21"/>
+                                <rect key="frame" x="211" y="185" width="38" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="End Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vY8-JM-hP0">
+                                <rect key="frame" x="94" y="144" width="102" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Start Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9NZ-MG-NB5">
+                                <rect key="frame" x="94" y="102" width="109" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MR5-gr-9aN">
+                                <rect key="frame" x="109" y="223" width="102" height="41"/>
+                                <color key="backgroundColor" red="0.44935903401908095" green="0.72851599883950324" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Change Trip">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="nsC-P0-xcL" kind="show" id="wsX-g9-NaP"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SUH-9T-Ih9">
+                                <rect key="frame" x="0.0" y="332" width="326" height="67"/>
+                                <color key="backgroundColor" red="0.96862745098039216" green="0.41568627450980394" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="326" id="pQX-S1-iLR"/>
+                                    <constraint firstAttribute="height" constant="67" id="ys9-jy-bBc"/>
+                                </constraints>
+                                <state key="normal" title="Submit Request">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="submitRequest:" destination="Xq3-zb-LVU" eventType="touchUpInside" id="E4t-yy-I2m"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="SUH-9T-Ih9" firstAttribute="leading" secondItem="LDT-Pz-K4F" secondAttribute="leadingMargin" constant="-16" id="ZyL-ek-ZP0"/>
+                            <constraint firstItem="AQq-N6-28P" firstAttribute="top" secondItem="SUH-9T-Ih9" secondAttribute="bottom" constant="7" id="lIX-cd-80i"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="SUH-9T-Ih9" secondAttribute="trailing" constant="-22" id="qq3-Ne-VoY"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="endLocation" destination="vY8-JM-hP0" id="lrL-3O-qxJ"/>
                         <outlet property="myPicker" destination="AQq-N6-28P" id="S0p-YA-XCD"/>
                         <outlet property="numberOfPassengers" destination="KJ8-c3-i6x" id="ucx-SF-BUZ"/>
+                        <outlet property="startLocation" destination="9NZ-MG-NB5" id="ntw-6q-uUV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BLy-qm-jQG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -291,4 +336,7 @@
     <resources>
         <image name="backgroundWithMask" width="440" height="720"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="wsX-g9-NaP"/>
+    </inferredMetricsTieBreakers>
 </document>

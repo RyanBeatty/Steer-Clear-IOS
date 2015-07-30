@@ -66,29 +66,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     }
     
     @IBAction func searchButton(sender: AnyObject) {
-        let gpaViewController = GooglePlacesAutocomplete(
-            apiKey: "AIzaSyDd_lRDKvpH6ao8KmLTDmQPB4wdhxfuEys",
-            placeType: .Address
-        )
-        
+        let gpaViewController = GooglePlacesAutocomplete(apiKey: "AIzaSyDd_lRDKvpH6ao8KmLTDmQPB4wdhxfuEys",placeType: .Address)
+        print("hello")
+       // let detalio = Place()
         gpaViewController.placeDelegate = self
         gpaViewController.locationBias = LocationBias(latitude: 37.270821, longitude: -76.709025, radius: 1000)
         presentViewController(gpaViewController, animated: true, completion: nil)
     }
-    
-    @IBAction func collectCoordinates(sender: AnyObject) {
-        let addRideController = AddRide()
-        
-        if destinationInput == false {
-            let alert = UIAlertController(title: "Trip Details Error", message: "Please enter destination.", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
-            
-        } else {
-            addRideController.collectCoordinates(String(format:"%.6f", startLatitude), startLong: String(format:"%.6f", startLongitude), endLat: String(format:"%.6f", endLatitude), endLong: String(format:"%.6f", endLatitude))
-        }
-    }
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -146,7 +130,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     }
     
     func setupLocationMarker(coordinate: CLLocationCoordinate2D) {
-
+        let googleController = GoooglePlaces()
+        googleController.geocodeAddress(coordinate.latitude, long: coordinate.longitude)
         if segmentOutlet.selectedSegmentIndex == 0 {
             
             if locationMarker != nil {
@@ -161,6 +146,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             locationMarker.map = mapV
             startLatitude = coordinate.latitude
             startLongitude = coordinate.longitude
+            
 
             
         } else{
@@ -194,8 +180,10 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
             self.button.setTitle("\(place.description)", forState: UIControlState.Normal)
             self.setupLocationMarker(coordinate)
             println(details)
+
         }
         println(place.description)
+        println(place.id)
         self.locationDetails = place.description
         dismissViewControllerAnimated(true, completion: nil)
     }

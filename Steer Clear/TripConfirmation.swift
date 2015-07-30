@@ -7,14 +7,21 @@
 //
 
 import UIKit
+import CoreLocation
+import GoogleMaps
 
 class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate  {
 
+    @IBOutlet var startLocation: UILabel!
     
+    @IBOutlet var endLocation: UILabel!
     @IBOutlet var myPicker: UIPickerView!
     @IBOutlet var numberOfPassengers: UILabel!
 
     let pickerData = ["1","2","3","4","5", "6","7","8"]
+    var startLatitude = ""
+    var startLongitude = ""
+    var endLatitude = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,8 +29,33 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         myPicker.dataSource = self
         myPicker.selectRow(1, inComponent: 0, animated: true)
         
+        
+        
+        var placesClient: GMSPlacesClient?
+        placesClient = GMSPlacesClient()
+        //TODO  unhardcode this, add post request to google maps geocode
+        let placeID = "ChIJ_4diWnWJsIkRHAhoo7u5QwQ"
+        
+        placesClient!.lookUpPlaceID(placeID, callback: { (place, error) -> Void in
+            if error != nil {
+                println("lookup place id query error: \(error!.localizedDescription)")
+                return
+            }
+            
+            if place != nil {
+                println("Place name \(place!.name)")
+                println("Place address \(place!.formattedAddress)")
+                println("Place placeID \(place!.placeID)")
+                println("Place attributions \(place!.attributions)")
+            } else {
+                println("No place details for \(placeID)")
+            }
+        })
+        
     }
     
+    @IBAction func submitRequest(sender: AnyObject) {
+    }
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -73,6 +105,30 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
     func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
         return 200
     }
+    
+    func sendDetails(start_lat: Double, start_long: Double, end_lat: Double, end_long: Double) {
+
+        let startLocation = CLLocation(latitude: start_lat, longitude: start_long)
+        
+        CLGeocoder().reverseGeocodeLocation(startLocation, completionHandler: {(placemarks, error) -> Void in
+            
+            if error != nil {
+                println("Reverse geocoder failed with error" + error.localizedDescription)
+                return
+            }
+            
+            if placemarks.count > 0 {
+                let pm = placemarks[0] as! CLPlacemark
+                println("Name: \(pm.name)")
+
+            }
+            else {
+                println("Problem with the data received from geocoder")
+            }
+        })
+        
+        
+    }
     /*
     // MARK: - Navigation
 
@@ -82,5 +138,6 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         // Pass the selected object to the new view controller.
     }
     */
+    
 
 }

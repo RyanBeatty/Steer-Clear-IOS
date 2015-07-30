@@ -163,28 +163,12 @@ class Login {
 
 class AddRide {
     
-    var startLatitude = String()
-    var startLongitude = String()
-    var endLatitude = String()
-    var endLongitude = String()
-    
-    
-    func collectCoordinates(startLat: String, startLong: String, endLat: String, endLong: String) {
-        startLatitude = startLat
-        startLongitude = startLong
-        endLatitude = endLat
-        endLongitude = endLong
-    }
-    
     func add(start_lat: String, start_long: String, end_lat: String, end_long: String, numOfPassengers :String) {
         let postData = NSMutableData(data: "num_passengers=\(numOfPassengers)".dataUsingEncoding(NSUTF8StringEncoding)!)
-        postData.appendData("&start_latitude=\(startLatitude)".dataUsingEncoding(NSUTF8StringEncoding)!)
-        postData.appendData("&start_longitude=\(startLongitude)".dataUsingEncoding(NSUTF8StringEncoding)!)
-        postData.appendData("&end_latitude=\(endLatitude)".dataUsingEncoding(NSUTF8StringEncoding)!)
-        postData.appendData("&end_longitude=\(endLongitude)".dataUsingEncoding(NSUTF8StringEncoding)!)
-        postData.appendData("&pickup_time=Sun, 07 Jun 2015 02:21:58 GMT".dataUsingEncoding(NSUTF8StringEncoding)!)
-        postData.appendData("&travel_time=171".dataUsingEncoding(NSUTF8StringEncoding)!)
-        postData.appendData("&dropoff_time=Sun, 07 Jun 2015 02:24:49 GMT".dataUsingEncoding(NSUTF8StringEncoding)!)
+        postData.appendData("&start_latitude=\(start_lat)".dataUsingEncoding(NSUTF8StringEncoding)!)
+        postData.appendData("&start_longitude=\(start_long)".dataUsingEncoding(NSUTF8StringEncoding)!)
+        postData.appendData("&end_latitude=\(end_lat)".dataUsingEncoding(NSUTF8StringEncoding)!)
+        postData.appendData("&end_longitude=\(end_long)".dataUsingEncoding(NSUTF8StringEncoding)!)
         
         let request = NSMutableURLRequest(URL: NSURL(string: "http://127.0.0.1:5000/api/rides")!,
             cachePolicy: .UseProtocolCachePolicy,
@@ -250,9 +234,54 @@ class Logout {
     }
 }
 
-class addCustomPlaces {
-    
+class GoooglePlaces {
 
-}
+    
+    var lookupAddressResults: Dictionary<NSObject, AnyObject>!
+    
+    var fetchedFormattedAddress: String!
+    
+    var fetchedAddressLongitude: Double!
+    
+    var fetchedAddressLatitude: Double!
+    var yes = true
+    func geocodeAddress(lat: Double, long: Double) {
+        if yes == true {
+            let baseURLGeocode = "https://maps.googleapis.com/maps/api/geocode/json?latlng=\(lat),\(long)&key=AIzaSyDd_lRDKvpH6ao8KmLTDmQPB4wdhxfuEys"
+            
+            var geocodeURLString = baseURLGeocode
+            geocodeURLString = geocodeURLString.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+            
+            let geocodeURL = NSURL(string: geocodeURLString)
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                let geocodingResultsData = NSData(contentsOfURL: geocodeURL!)
+                
+                var error: NSError?
+                let dictionary: Dictionary<NSObject, AnyObject> = NSJSONSerialization.JSONObjectWithData(geocodingResultsData!, options: NSJSONReadingOptions.MutableContainers, error: &error) as! Dictionary<NSObject, AnyObject>
+                
+                if (error != nil) {
+                    println(error)
+             //       completionHandler(status: "", success: false)
+                }
+                else {
+                    // Get the response status.
+                    let status = dictionary["status"] as! String
+                    
+                    if status == "OK" {
+                        let allResults = dictionary["results"] as! Array<Dictionary<NSObject, AnyObject>>
+                        self.lookupAddressResults = allResults[0]
+                        
+                        // Keep the most important values.
+                        self.fetchedFormattedAddress = self.lookupAddressResults["place_id"]as! String
+                        print(self.fetchedFormattedAddress)
+                    }
+                }
+            })
+        }
+        }
+    }
+
+
 
 
