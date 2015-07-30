@@ -28,6 +28,28 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     var didFindMyLocation = false
     var locationMarker: GMSMarker!
     var endLocationMarker: GMSMarker!
+    var locationDetails = ""
+    
+    let dropoffColor = UIColor(hue: 0, saturation: 0.47, brightness: 0.84, alpha: 1.0) /* #d67171 */
+    let pickupColor = UIColor(hue: 0.4806, saturation: 0.47, brightness: 0.76, alpha: 1.0) /* #66c1b7 */
+    
+    @IBAction func segmentControlSwitch(sender: AnyObject) {
+        
+        switch segmentOutlet.selectedSegmentIndex
+        {
+        case 0:
+            button.backgroundColor = pickupColor
+            segmentOutlet.tintColor = pickupColor
+            myLocationButtonOutlet.backgroundColor = pickupColor
+        case 1:
+            button.backgroundColor = dropoffColor
+            segmentOutlet.tintColor = dropoffColor
+            myLocationButtonOutlet.backgroundColor = dropoffColor
+        default:
+            break; 
+        }
+    }
+    
     
     @IBAction func myLocationButton(sender: AnyObject) {
         let myLocation = locationManager.location
@@ -103,6 +125,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         myLocationButtonOutlet.layer.cornerRadius = 0.5 * myLocationButtonOutlet.bounds.size.width
         myLocationButtonOutlet.layer.shadowOpacity = 0.5
         
+        
     }
     
     func setupLocationMarker(coordinate: CLLocationCoordinate2D) {
@@ -114,9 +137,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             }
             endLocationMarker = GMSMarker(position: coordinate)
             endLocationMarker.appearAnimation = kGMSMarkerAnimationPop
-            endLocationMarker.icon = GMSMarker.markerImageWithColor(UIColor.redColor())
+            endLocationMarker.icon = GMSMarker.markerImageWithColor(pickupColor)
+            endLocationMarker.title = "Pick Up"
+           // endLocationMarker.snippet = "\(locationDetails)"
+            print(locationDetails)
             endLocationMarker.opacity = 0.75
-            
             endLocationMarker.map = mapV
             
             
@@ -126,11 +151,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             }
             locationMarker = GMSMarker(position: coordinate)
             locationMarker.appearAnimation = kGMSMarkerAnimationPop
-            locationMarker.icon = GMSMarker.markerImageWithColor(UIColor.blueColor())
+            locationMarker.icon = GMSMarker.markerImageWithColor(dropoffColor)
+            endLocationMarker.title = "Drop Off"
             locationMarker.opacity = 0.75
             
             locationMarker.map = mapV
-            
+
         }
         
     }
@@ -149,6 +175,7 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
             println(details)
         }
         println(place.description)
+        self.locationDetails = place.description
         dismissViewControllerAnimated(true, completion: nil)
     }
     
