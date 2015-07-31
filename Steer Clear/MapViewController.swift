@@ -20,13 +20,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     @IBOutlet var destinationButton: UIButton!
     @IBOutlet var rideButton: UIButton!
     @IBOutlet var myLocationButtonOutlet: UIButton!
-    @IBOutlet var sendCoordinateButton: UIButton!
+    
+    
+    @IBOutlet var confirmRideOutlet: UIButton!
     
     @IBOutlet var mapV: GMSMapView!
     var startLatitude = CLLocationDegrees()
     var startLongitude = CLLocationDegrees()
     var endLatitude = CLLocationDegrees()
     var endLongitude = CLLocationDegrees()
+    var globalStartLocation = CLLocationCoordinate2D()
+    var globalEndLocation = CLLocationCoordinate2D()
+    var changeStart = CLLocationCoordinate2D()
+    var changeEnd = CLLocationCoordinate2D()
+    var changeStartName = ""
+    var changeEndName = ""
+
     var locationManager = CLLocationManager()
     var didFindMyLocation = false
     var locationMarker: GMSMarker!
@@ -34,6 +43,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     var locationDetails = ""
     var destinationInput = false
     var cameFromSearch = false
+    var change = false
+    var changePickup = false
     var globalStartName = ""
     var globalEndName = ""
     
@@ -48,20 +59,33 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             button.backgroundColor = pickupColor
             segmentOutlet.tintColor = pickupColor
             myLocationButtonOutlet.backgroundColor = pickupColor
-            sendCoordinateButton.backgroundColor = pickupColor
+            confirmRideOutlet.backgroundColor = pickupColor
+            print("Changed")
             self.button.setTitle("\(globalStartName)", forState: UIControlState.Normal)
-
+            
         case 1:
             button.backgroundColor = dropoffColor
             segmentOutlet.tintColor = dropoffColor
             myLocationButtonOutlet.backgroundColor = dropoffColor
-            sendCoordinateButton.backgroundColor = dropoffColor
+            confirmRideOutlet.backgroundColor = dropoffColor
+            print("Changed 2")
             self.button.setTitle("\(globalEndName)", forState: UIControlState.Normal)
+           
         default:
             break; 
         }
     }
     
+    @IBAction func confirmRideButton(sender: AnyObject) {
+        if destinationInput != false {
+            print("hello")
+            } else {
+            let alert = UIAlertController(title: "Trip Error", message: "Please input Destination", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+            }
+    }
+
     
     @IBAction func myLocationButton(sender: AnyObject) {
         let myLocation = locationManager.location
@@ -80,10 +104,67 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     override func viewDidLoad() {
         super.viewDidLoad()
         setupButtons()
-        
+
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
+        if change == true {
+            if changePickup == true {
+                setupLocationMarker(changeStart)
+                self.globalEndName = changeEndName
+                self.mapV.camera = GMSCameraPosition.cameraWithTarget(changeStart, zoom: 17.0)
+                changePickup == false
+                
+                
+                self.setupLocationMarker(changeStart)
+                endLocationMarker = GMSMarker(position: changeEnd)
+                endLocationMarker.appearAnimation = kGMSMarkerAnimationPop
+                endLocationMarker.icon = GMSMarker.markerImageWithColor(dropoffColor)
+                endLocationMarker.title = "Drop Off"
+                // endLocationMarker.snippet = "\(locationDetails)"
+                print(locationDetails)
+                endLocationMarker.opacity = 0.75
+                endLocationMarker.map = mapV
+                endLatitude = changeEnd.latitude
+                endLongitude = changeEnd.longitude
+                destinationInput = true
+                
+            } else {
+                print("change pickup is not equal to true")
+                setupLocationMarker(changeEnd)
+                self.globalStartName = changeStartName
+                self.mapV.camera = GMSCameraPosition.cameraWithTarget(changeEnd, zoom: 17.0)
+                changePickup == false
+                
+                
+                self.setupLocationMarker(changeStart)
+                endLocationMarker = GMSMarker(position: changeEnd)
+                endLocationMarker.appearAnimation = kGMSMarkerAnimationPop
+                endLocationMarker.icon = GMSMarker.markerImageWithColor(dropoffColor)
+                endLocationMarker.title = "Drop Off"
+                // endLocationMarker.snippet = "\(locationDetails)"
+                print(locationDetails)
+                endLocationMarker.opacity = 0.75
+                endLocationMarker.map = mapV
+                endLatitude = changeEnd.latitude
+                endLongitude = changeEnd.longitude
+                destinationInput = true
+                
+                segmentOutlet.selectedSegmentIndex = 1
+                button.backgroundColor = dropoffColor
+                segmentOutlet.tintColor = dropoffColor
+                myLocationButtonOutlet.backgroundColor = dropoffColor
+                confirmRideOutlet.backgroundColor = dropoffColor
+                self.button.setTitle("\(globalStartName)", forState: UIControlState.Normal)
+                
+
+                
+            }
+                change = false
+
+        } else {
         mapV.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
+
+        }
         mapV.delegate = self
     }
     
@@ -100,6 +181,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             //mapV.settings.myLocationButton = true
             self.setupLocationMarker(myLocation.coordinate)
             didFindMyLocation = true
+        } else {
+            print("could not find location")
         }
     }
     //This function detects a long press on the map and places a marker at the coordinates of the long press.
@@ -150,8 +233,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 self.button.setTitle("\(place!.name)", forState: UIControlState.Normal)
                 if self.segmentOutlet.selectedSegmentIndex == 0 {
                     self.globalStartName = place!.name
+                    self.globalStartLocation = coordinate
                 } else {
                     self.globalEndName = place!.name
+                    self.globalEndLocation = coordinate
                 }
 
                 println("Place name \(place!.name)")
@@ -202,6 +287,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         
     }
 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if (segue.identifier == "sendDetails") {
+            
+            var tripInfo = segue.destinationViewController as! TripConfirmation;
+            
+            tripInfo.start = self.globalStartLocation
+            tripInfo.end = self.globalEndLocation
+            
+            tripInfo.startName = self.globalStartName
+            tripInfo.endName = self.globalEndName
+            
+        }
+    }
 
 }
 
@@ -213,15 +311,18 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
             self.button.setTitle("\(place.description)", forState: UIControlState.Normal)
             self.cameFromSearch = true
             self.setupLocationMarker(coordinate)
-
+            
+            if self.segmentOutlet.selectedSegmentIndex == 0 {
+                self.globalStartName = place.description
+                self.globalStartLocation = coordinate
+            } else {
+                self.globalEndName = place.description
+                self.globalEndLocation = coordinate
+            }
             println(details)
 
         }
-        if self.segmentOutlet.selectedSegmentIndex == 0 {
-            self.globalStartName = place.description
-        } else {
-            self.globalEndName = place.description
-        }
+
         
         self.locationDetails = place.description
         dismissViewControllerAnimated(true, completion: nil)

@@ -12,28 +12,32 @@ import GoogleMaps
 
 class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate  {
 
-    @IBOutlet var startLocation: UILabel!
-    
-    @IBOutlet var endLocation: UILabel!
+   
+    @IBOutlet var startLocationOutlet: UILabel!
+
+    @IBOutlet var endLocationOutlet: UILabel!
     @IBOutlet var myPicker: UIPickerView!
     @IBOutlet var numberOfPassengers: UILabel!
 
     let pickerData = ["1","2","3","4","5", "6","7","8"]
-    var startLatitude = ""
-    var startLongitude = ""
-    var endLatitude = ""
+    var start = CLLocationCoordinate2D()
+    var end = CLLocationCoordinate2D()
+    var startName = ""
+    var endName = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         myPicker.delegate = self
         myPicker.dataSource = self
         myPicker.selectRow(1, inComponent: 0, animated: true)
+
+        startLocationOutlet.text = ("\(startName)")
+        endLocationOutlet.text = ("\(endName)")
         
         
     }
     
-    @IBAction func submitRequest(sender: AnyObject) {
-    }
+
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -107,15 +111,34 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         
         
     }
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if (segue.identifier == "changeDetails") {
+            
+            var changeInfo = segue.destinationViewController as! MapViewController;
+            changeInfo.change = true
+            changeInfo.changeStart = start
+            changeInfo.changeEnd = end
+            changeInfo.changePickup = true
+            changeInfo.changeStartName = startName
+            changeInfo.changeEndName = endName
+            
+        }
+        if (segue.identifier == "changeDetails2") {
+            
+            var changeInfo = segue.destinationViewController as! MapViewController;
+            changeInfo.change = true
+            changeInfo.changeStart = start
+            changeInfo.changeEnd = end
+            changeInfo.changeStartName = startName
+            changeInfo.changeEndName = endName
+            print("hello world: \(endName)")
+            
+        }
+        
     }
-    */
+
     
 
 }
