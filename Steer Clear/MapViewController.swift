@@ -146,11 +146,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 segmentOutlet.tintColor = dropoffColor
                 myLocationButtonOutlet.backgroundColor = dropoffColor
                 confirmRideOutlet.backgroundColor = dropoffColor
-//                print("This is \(globalEndName)")
-//                
-//                segmentOutlet.selectedSegmentIndex = 1
-//                self.button.setTitle("\(globalEndName)", forState: UIControlState.Normal)
-//                print("just changed globalend name in change")
             }
             change = false
 

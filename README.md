@@ -18,3 +18,10 @@ IOS repo for Steer Clear app
 ***3.*** Launch "Steer Clear.xcworkspace" in Xcode
 * In Apple's Navigation Bar, go to Product -> Clean
 * Press Play and it will run in IOS simulator. 
+
+
+### If iOS Simulator can't find current location.
+* While in iOS Simulator, go to home by pressing ``` Shift + CMD + H ``` and Click on Settings/General/Reset/Reset Location and Privacy
+* Kill the simulator ``` CMD + Q ```
+* In Apple's Navigation Bar, go to Product -> Clean
+* Build :D
