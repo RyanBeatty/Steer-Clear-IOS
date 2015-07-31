@@ -34,9 +34,16 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         startLocationOutlet.text = ("\(startName)")
         endLocationOutlet.text = ("\(endName)")
         
-        
     }
     
+    @IBAction func confirmButton(sender: AnyObject) {
+        let addRideController = AddRide()
+        let stringStartLat = toString(start.latitude)
+        let stringStartLong = toString(start.longitude)
+        let stringEndLat = toString(end.latitude)
+        let stringEndLong = toString(end.longitude)
+        addRideController.add(stringStartLat, start_long: stringStartLong, end_lat: stringEndLat, end_long: stringEndLong, numOfPassengers: numberOfPassengers.text!)
+    }
 
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1

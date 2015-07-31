@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="nsC-P0-xcL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -29,7 +29,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FWU-bi-022">
                                 <rect key="frame" x="86" y="407" width="148" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v4z-wu-Lpe">
                                 <rect key="frame" x="150" y="324" width="79" height="21"/>
@@ -290,21 +290,6 @@
                                     <segue destination="nsC-P0-xcL" kind="show" identifier="changeDetails" id="wsX-g9-NaP"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SUH-9T-Ih9">
-                                <rect key="frame" x="0.0" y="332" width="326" height="67"/>
-                                <color key="backgroundColor" red="0.96862745098039216" green="0.41568627450980394" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="326" id="pQX-S1-iLR"/>
-                                    <constraint firstAttribute="height" constant="67" id="ys9-jy-bBc"/>
-                                </constraints>
-                                <state key="normal" title="Submit Request">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="submitRequest:" destination="Xq3-zb-LVU" eventType="touchUpInside" id="E4t-yy-I2m"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Start Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GhB-tN-812">
                                 <rect key="frame" x="44" y="131" width="210" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -328,13 +313,17 @@
                                     <segue destination="nsC-P0-xcL" kind="show" identifier="changeDetails2" id="nMd-TS-I8t"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="imm-gA-xTu">
+                                <rect key="frame" x="104" y="368" width="90" height="30"/>
+                                <state key="normal" title="Confirm Ride">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="confirmButton:" destination="Xq3-zb-LVU" eventType="touchUpInside" id="wP0-id-dB9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="SUH-9T-Ih9" firstAttribute="leading" secondItem="LDT-Pz-K4F" secondAttribute="leadingMargin" constant="-16" id="ZyL-ek-ZP0"/>
-                            <constraint firstItem="AQq-N6-28P" firstAttribute="top" secondItem="SUH-9T-Ih9" secondAttribute="bottom" constant="7" id="lIX-cd-80i"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="SUH-9T-Ih9" secondAttribute="trailing" constant="-22" id="qq3-Ne-VoY"/>
-                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
@@ -353,6 +342,6 @@
         <image name="backgroundWithMask" width="440" height="720"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="nMd-TS-I8t"/>
+        <segue reference="SY5-wn-1ZG"/>
     </inferredMetricsTieBreakers>
 </document>
