@@ -133,7 +133,6 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
             changeInfo.changeEnd = end
             changeInfo.changeStartName = startName
             changeInfo.changeEndName = endName
-            print("hello world: \(endName)")
             
         }
         

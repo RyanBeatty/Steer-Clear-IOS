@@ -60,7 +60,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             segmentOutlet.tintColor = pickupColor
             myLocationButtonOutlet.backgroundColor = pickupColor
             confirmRideOutlet.backgroundColor = pickupColor
-            print("Changed")
             self.button.setTitle("\(globalStartName)", forState: UIControlState.Normal)
             
         case 1:
@@ -68,17 +67,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             segmentOutlet.tintColor = dropoffColor
             myLocationButtonOutlet.backgroundColor = dropoffColor
             confirmRideOutlet.backgroundColor = dropoffColor
-            print("Changed 2")
             self.button.setTitle("\(globalEndName)", forState: UIControlState.Normal)
+            print("just changed globalend name in regular!!!")
            
         default:
-            break; 
+            break;
         }
     }
     
     @IBAction func confirmRideButton(sender: AnyObject) {
         if destinationInput != false {
-            print("hello")
             } else {
             let alert = UIAlertController(title: "Trip Error", message: "Please input Destination", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
@@ -95,7 +93,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     
     @IBAction func searchButton(sender: AnyObject) {
         let gpaViewController = GooglePlacesAutocomplete(apiKey: "AIzaSyDd_lRDKvpH6ao8KmLTDmQPB4wdhxfuEys",placeType: .Address)
-        print("hello")
         gpaViewController.placeDelegate = self
         gpaViewController.locationBias = LocationBias(latitude: 37.270821, longitude: -76.709025, radius: 1000)
         presentViewController(gpaViewController, animated: true, completion: nil)
@@ -104,13 +101,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     override func viewDidLoad() {
         super.viewDidLoad()
         setupButtons()
-
+        
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
+        //        unhardcode this tomorrow morning
         if change == true {
             if changePickup == true {
-                setupLocationMarker(changeStart)
+                self.globalStartLocation = changeStart
+                self.globalEndLocation = changeEnd
+                self.globalStartName = changeStartName
                 self.globalEndName = changeEndName
+                setupLocationMarker(changeStart)
                 self.mapV.camera = GMSCameraPosition.cameraWithTarget(changeStart, zoom: 17.0)
                 changePickup == false
                 
@@ -130,36 +131,28 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 
             } else {
                 print("change pickup is not equal to true")
-                setupLocationMarker(changeEnd)
+                self.globalStartLocation = changeStart
+                self.globalEndLocation = changeEnd
                 self.globalStartName = changeStartName
+                self.globalEndName = changeEndName
+                setupLocationMarker(changeStart)
+                segmentOutlet.selectedSegmentIndex = 1
+                self.setupLocationMarker(changeEnd)
                 self.mapV.camera = GMSCameraPosition.cameraWithTarget(changeEnd, zoom: 17.0)
                 changePickup == false
                 
-                
-                self.setupLocationMarker(changeStart)
-                endLocationMarker = GMSMarker(position: changeEnd)
-                endLocationMarker.appearAnimation = kGMSMarkerAnimationPop
-                endLocationMarker.icon = GMSMarker.markerImageWithColor(dropoffColor)
-                endLocationMarker.title = "Drop Off"
-                // endLocationMarker.snippet = "\(locationDetails)"
-                print(locationDetails)
-                endLocationMarker.opacity = 0.75
-                endLocationMarker.map = mapV
-                endLatitude = changeEnd.latitude
-                endLongitude = changeEnd.longitude
-                destinationInput = true
-                
-                segmentOutlet.selectedSegmentIndex = 1
+
                 button.backgroundColor = dropoffColor
                 segmentOutlet.tintColor = dropoffColor
                 myLocationButtonOutlet.backgroundColor = dropoffColor
                 confirmRideOutlet.backgroundColor = dropoffColor
-                self.button.setTitle("\(globalStartName)", forState: UIControlState.Normal)
-                
-
-                
+//                print("This is \(globalEndName)")
+//                
+//                segmentOutlet.selectedSegmentIndex = 1
+//                self.button.setTitle("\(globalEndName)", forState: UIControlState.Normal)
+//                print("just changed globalend name in change")
             }
-                change = false
+            change = false
 
         } else {
         mapV.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
@@ -187,13 +180,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     }
     //This function detects a long press on the map and places a marker at the coordinates of the long press.
     func mapView(mapView: GMSMapView!, didLongPressAtCoordinate coordinate: CLLocationCoordinate2D) {
-        println(1)
+
         //Set variable to latitude of didLongPressAtCoordinate
         var lat = coordinate.latitude
         
         //Set variable to longitude of didLongPressAtCoordinate
         var long = coordinate.longitude
-        println(2)
+
         //Feed position to mapMarker
         let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
         self.setupLocationMarker(coordinate)
@@ -221,7 +214,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         
         var placesClient: GMSPlacesClient?
         placesClient = GMSPlacesClient()
-        //TODO  unhardcode this, add post request to google maps geocode
         
         placesClient!.lookUpPlaceID(googleController.fetchedID, callback: { (place, error) -> Void in
             if error != nil {
@@ -239,10 +231,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                     self.globalEndLocation = coordinate
                 }
 
-                println("Place name \(place!.name)")
-                //                println("Place address \(place!.formattedAddress)")
-                //                println("Place placeID \(place!.placeID)")
-                //                println("Place attributions \(place!.attributions)")
             } else {
                 println("No place details for \(googleController.fetchedID)")
             }

@@ -275,7 +275,7 @@ class GoooglePlaces {
                         
                         // Keep the most important values.
                         self.fetchedFormattedAddress = self.lookupAddressResults["place_id"]as! String
-                        print(self.fetchedFormattedAddress)
+                        //print(self.fetchedFormattedAddress)
                         self.fetchedID = self.fetchedFormattedAddress
                     }
                 }
