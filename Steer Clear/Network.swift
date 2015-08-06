@@ -31,15 +31,17 @@ class Register {
         request.HTTPMethod = "POST"
         
         // Form URL-Encoded Body
-        
+
         let bodyParameters = [
             "email": email,
-            "phone": "+1\(phone)",
+            "phone": phone,
             "password": password
         ]
         let bodyString = self.stringFromQueryParameters(bodyParameters)
-        request.HTTPBody = bodyString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
-        
+        print(bodyString)
+        bodyString.stringByReplacingOccurrencesOfString("+", withString: "%2B")
+        request.HTTPBody = bodyString.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+
         /* Start a new Task */
         let task = session.dataTaskWithRequest(request, completionHandler: { (data : NSData?, response : NSURLResponse?, error : NSError?) -> Void in
             if (error == nil) {
