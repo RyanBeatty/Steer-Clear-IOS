@@ -20,7 +20,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     @IBOutlet var destinationButton: UIButton!
     @IBOutlet var rideButton: UIButton!
     @IBOutlet var myLocationButtonOutlet: UIButton!
-    
+    @IBOutlet weak var pickUpLabel: UILabel!
     
     @IBOutlet var confirmRideOutlet: UIButton!
     
@@ -50,25 +50,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     
     
     let dropoffColor = UIColor(hue: 0, saturation: 0.47, brightness: 0.84, alpha: 1.0) /* #d67171 */
-    let pickupColor = UIColor(hue: 0.4806, saturation: 0.47, brightness: 0.76, alpha: 1.0) /* #66c1b7 */
+    let pickupColor = UIColor.blueColor() /* #66c1b7 */
     
     @IBAction func segmentControlSwitch(sender: AnyObject) {
         switch segmentOutlet.selectedSegmentIndex
         {
         case 0:
-            button.backgroundColor = pickupColor
-            segmentOutlet.tintColor = pickupColor
-            myLocationButtonOutlet.backgroundColor = pickupColor
-            confirmRideOutlet.backgroundColor = pickupColor
+            pickUpLabel.text = "Pick Up"
+            pickUpLabel.textColor = UIColor(hue: 0.4167, saturation: 1, brightness: 0.9, alpha: 1.0) /* #00e676 */
             self.button.setTitle("\(globalStartName)", forState: UIControlState.Normal)
             
         case 1:
-            button.backgroundColor = dropoffColor
-            segmentOutlet.tintColor = dropoffColor
-            myLocationButtonOutlet.backgroundColor = dropoffColor
-            confirmRideOutlet.backgroundColor = dropoffColor
+            pickUpLabel.text = "Drop Off"
+            pickUpLabel.textColor = UIColor.orangeColor()
             self.button.setTitle("\(globalEndName)", forState: UIControlState.Normal)
-            print("just changed globalend name in regular!!!")
            
         default:
             break;

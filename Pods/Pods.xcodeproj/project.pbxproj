@@ -12,6 +12,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		03ED3807C09112AC7DD1C38A31FBBBA7 /* Pods-Steer Clear.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Steer Clear.debug.xcconfig"; sourceTree = "<group>"; };
+		158027F7C260B03BC8E85D0935DDD95E /* Pods-Steer Clear.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Steer Clear.release.xcconfig"; sourceTree = "<group>"; };
 		213B1724C62BE8BC65F92A9BC1A24B5B /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = Frameworks/GoogleMaps.framework; sourceTree = "<group>"; };
 		3B419AC284E7AF1FE6BCC12EFDB284EE /* Pods-Steer Clear-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Steer Clear-resources.sh"; sourceTree = "<group>"; };
 		5D19A6099453A9B29D6FB24E0CBD1415 /* Pods-Steer Clear-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Steer Clear-acknowledgements.markdown"; sourceTree = "<group>"; };
@@ -21,8 +23,6 @@
 		9E17161130B27DB46F01569D1C6C5443 /* GoogleMaps.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = Frameworks/GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		ACE24D3EFE70DCBE83032A87DA2FF6ED /* libPods-Steer Clear.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Steer Clear.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		DCA9BA1B8C6019E8025CFE2455C03BA3 /* Pods-Steer Clear.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Steer Clear.release.xcconfig"; sourceTree = "<group>"; };
-		FE73CD3388E1FDFA03A9A857796896C1 /* Pods-Steer Clear.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Steer Clear.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,8 +96,8 @@
 				88447F2D984013787D6EFD91F7B6BEA8 /* Pods-Steer Clear-acknowledgements.plist */,
 				761B2F185AB03A73C5866D81450C826B /* Pods-Steer Clear-dummy.m */,
 				3B419AC284E7AF1FE6BCC12EFDB284EE /* Pods-Steer Clear-resources.sh */,
-				FE73CD3388E1FDFA03A9A857796896C1 /* Pods-Steer Clear.debug.xcconfig */,
-				DCA9BA1B8C6019E8025CFE2455C03BA3 /* Pods-Steer Clear.release.xcconfig */,
+				03ED3807C09112AC7DD1C38A31FBBBA7 /* Pods-Steer Clear.debug.xcconfig */,
+				158027F7C260B03BC8E85D0935DDD95E /* Pods-Steer Clear.release.xcconfig */,
 			);
 			name = "Pods-Steer Clear";
 			path = "Target Support Files/Pods-Steer Clear";
@@ -184,7 +184,7 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		10DE1947DAC0ED28F6C0A9F9BD75D546 /* Release */ = {
+		052A17875CB827423D627183396CEB60 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -218,7 +218,23 @@
 			};
 			name = Release;
 		};
-		552D02D5BA751AC2E8790D2811D496CA /* Debug */ = {
+		831B94825B29FAB5D2E72F3EBB5B4986 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 03ED3807C09112AC7DD1C38A31FBBBA7 /* Pods-Steer Clear.debug.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		B37F0F91F85060E28F1DAAB522DC7EC1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -257,28 +273,12 @@
 			};
 			name = Debug;
 		};
-		C2015B15CB376269F3B58FE85F6F8B92 /* Debug */ = {
+		D9E520347D321FE01DC1C1EBDC515D80 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FE73CD3388E1FDFA03A9A857796896C1 /* Pods-Steer Clear.debug.xcconfig */;
+			baseConfigurationReference = 158027F7C260B03BC8E85D0935DDD95E /* Pods-Steer Clear.release.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		CB08BDB2690343434A7BC9B9AE916B9A /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = DCA9BA1B8C6019E8025CFE2455C03BA3 /* Pods-Steer Clear.release.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -295,8 +295,8 @@
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				552D02D5BA751AC2E8790D2811D496CA /* Debug */,
-				10DE1947DAC0ED28F6C0A9F9BD75D546 /* Release */,
+				B37F0F91F85060E28F1DAAB522DC7EC1 /* Debug */,
+				052A17875CB827423D627183396CEB60 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -304,8 +304,8 @@
 		BF2CF0139647F1435244045D70F8BBFD /* Build configuration list for PBXNativeTarget "Pods-Steer Clear" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C2015B15CB376269F3B58FE85F6F8B92 /* Debug */,
-				CB08BDB2690343434A7BC9B9AE916B9A /* Release */,
+				831B94825B29FAB5D2E72F3EBB5B4986 /* Debug */,
+				D9E520347D321FE01DC1C1EBDC515D80 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

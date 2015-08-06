@@ -19,6 +19,7 @@
 		38DE57F71B67257F004A37FA /* GooglePlacesAutocomplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DE57F51B67257F004A37FA /* GooglePlacesAutocomplete.swift */; };
 		38DE57F81B67257F004A37FA /* GooglePlacesAutocomplete.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38DE57F61B67257F004A37FA /* GooglePlacesAutocomplete.xib */; };
 		5469980470F3B6AE9CF5ACAE /* libPods-Steer Clear.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F158B373C6AFE9388A5913A /* libPods-Steer Clear.a */; };
+		9050414D1B71A2CA00F2AE51 /* WaitingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9050414C1B71A2CA00F2AE51 /* WaitingController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		38DE57F61B67257F004A37FA /* GooglePlacesAutocomplete.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GooglePlacesAutocomplete.xib; sourceTree = "<group>"; };
 		3F158B373C6AFE9388A5913A /* libPods-Steer Clear.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Steer Clear.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		492E2F7C64AE10D2AEE45C63 /* Pods-Steer Clear.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Steer Clear.release.xcconfig"; path = "Pods/Target Support Files/Pods-Steer Clear/Pods-Steer Clear.release.xcconfig"; sourceTree = "<group>"; };
+		9050414C1B71A2CA00F2AE51 /* WaitingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaitingController.swift; sourceTree = "<group>"; };
 		EEC9118424396C0D48D51E35 /* Pods-Steer Clear.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Steer Clear.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Steer Clear/Pods-Steer Clear.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +104,7 @@
 				387126CC1B65C15600AE4CFE /* MapViewController.swift */,
 				388DBEB11B064DBB009BC774 /* ViewController.swift */,
 				388DBEB31B064DBB009BC774 /* Main.storyboard */,
+				9050414C1B71A2CA00F2AE51 /* WaitingController.swift */,
 				383EC5EA1B69BD2E00D78F36 /* TripConfirmation.swift */,
 				388DBEB61B064DBB009BC774 /* Images.xcassets */,
 				388DBEB81B064DBB009BC774 /* LaunchScreen.xib */,
@@ -296,6 +299,7 @@
 				388DBEB21B064DBB009BC774 /* ViewController.swift in Sources */,
 				388DBEB01B064DBB009BC774 /* AppDelegate.swift in Sources */,
 				3837072E1B64FDB100B7979D /* Network.swift in Sources */,
+				9050414D1B71A2CA00F2AE51 /* WaitingController.swift in Sources */,
 				387126CD1B65C15600AE4CFE /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

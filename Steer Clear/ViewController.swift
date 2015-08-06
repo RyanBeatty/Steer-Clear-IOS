@@ -22,6 +22,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var passwordTextbox: UITextField!
     
+    @IBOutlet weak var phoneTextbox: UITextField!
     
     @IBAction func loginButton(sender: AnyObject) {
         var username = usernameTextbox.text
@@ -39,20 +40,19 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func registerButton(sender: AnyObject) {
-        var username = usernameTextbox.text
+        let email = usernameTextbox.text
         let password = passwordTextbox.text
+        let phone = phoneTextbox.text
         
-        if (username!.isEmpty) || (username!.isEmpty) {
+        if (email!.isEmpty) || (password!.isEmpty) {
             displayAlert("Missing Fields(s)", message: "Username and Password Required")
         } else {
-            //TODO: Add logic for if 404 on registration
-            // Register the user and then log in
             let registerController = Register()
-            registerController.register(username!, password: password!)
-            let loginController = Login()
-            loginController.login(username!, password: password!)
-            //            TODO: insert if 404, display alert that login was no successfull
-            self.performSegueWithIdentifier("loginRider", sender: self)
+            registerController.register(email!, password: password!,phone: phone! )
+//            let loginController = Login()
+//            loginController.login(username!, password: password!)
+//            //            TODO: insert if 404, display alert that login was no successfull
+//            self.performSegueWithIdentifier("loginRider", sender: self)
         }
     }
     
