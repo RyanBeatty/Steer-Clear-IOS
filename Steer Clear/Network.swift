@@ -46,6 +46,11 @@ class Register {
                 // Success
                 let statusCode = (response as! NSHTTPURLResponse).statusCode
                 print("URL Session Task Succeeded: HTTP \(statusCode)")
+                println("response = \(response)")
+                
+                // Print out response body
+                let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                println("responseString = \(responseString)")
             }
             else {
                 // Failure
