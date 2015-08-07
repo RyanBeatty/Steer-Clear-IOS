@@ -3,7 +3,7 @@
 //  Steer Clear
 //
 //  Created by Ulises Giacoman on 5/15/15.
-//  Copyright (c) 2015 Paradoxium. All rights reserved.
+//  Copyright (c) 2015 Steer-Clear. All rights reserved.
 //
 
 import UIKit
@@ -33,8 +33,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         } else {
             let loginController = Login()
             loginController.login(username!, password: password!)
-            //            TODO: insert if 404, display alert that login was no successfull
-            self.performSegueWithIdentifier("loginRider", sender: self)
+            if (loginController.responso == "400") {
+                displayAlert("Login Error", message: "Please check your login information.")
+            }else {
+                self.performSegueWithIdentifier("loginRider", sender: self)
+            }
+
         }
     }
     
@@ -48,11 +52,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
             displayAlert("Missing Fields(s)", message: "Username and Password Required")
         } else {
             let registerController = Register()
+
             registerController.register(email!, password: password!,phone: phone! )
-//            let loginController = Login()
-//            loginController.login(username!, password: password!)
-//            //            TODO: insert if 404, display alert that login was no successfull
-//            self.performSegueWithIdentifier("loginRider", sender: self)
+//            if (registerController.responso == "400") {
+//
+//                displayAlert("Login Error", message: "Please check your login information.")
+//            }else {
+//                self.performSegueWithIdentifier("loginRider", sender: self)
+//            }
         }
     }
     

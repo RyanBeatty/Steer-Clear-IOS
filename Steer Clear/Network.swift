@@ -3,10 +3,11 @@
 //  Steer Clear
 //
 //  Created by Ulises Giacoman on 7/26/15.
-//  Copyright (c) 2015 Paradoxium. All rights reserved.
+//  Copyright (c) 2015 Steer-Clear. All rights reserved.
 //
 
 import Foundation
+import UIKit
 
 class Register {
     func register(email: String, password: String, phone:String) {
@@ -46,15 +47,16 @@ class Register {
                 // Success
                 let statusCode = (response as! NSHTTPURLResponse).statusCode
                 print("URL Session Task Succeeded: HTTP \(statusCode)")
+                ViewController.performSegueWithIdentifier("loginRider")
+                
             }
-            else {
-                // Failure
-                print("URL Session Task Failed: %@", error!.localizedDescription);
-            }
+//            else {
+//                // Failure
+//                print("URL Session Task Failed: %@", error!.localizedDescription);
+//            }
         })
         task.resume()
     }
-    
     /**
     This creates a new query parameters string from the given NSDictionary. For
     example, if the input is @{@"day":@"Tuesday", @"month":@"January"}, the output
@@ -86,6 +88,8 @@ class Register {
 }
 
 class Login {
+    var responso = ""
+    
     func login(username: String, password: String) {
         /* Configure session, choose between:
         * defaultSessionConfiguration
@@ -122,11 +126,14 @@ class Login {
                 // Success
                 let statusCode = (response as! NSHTTPURLResponse).statusCode
                 print("URL Session Task Succeeded: HTTP \(statusCode)")
+                var responso = statusCode
+                print(responso)
             }
-            else {
-                // Failure
-                print("URL Session Task Failed: %@", error!.localizedDescription);
-            }
+//            else {
+//                // Failure
+//                print("URL Session Task Failed: %@", error!.localizedDescription);
+//                var responso =
+//            }
         })
         task.resume()
     }

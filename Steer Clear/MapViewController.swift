@@ -3,7 +3,7 @@
 //  Steer Clear
 //
 //  Created by Ulises Giacoman on 7/26/15.
-//  Copyright © 2015 Paradoxium. All rights reserved.
+//  Copyright (c) 2015 Steer-Clear. All rights reserved.
 //
 
 import UIKit
