@@ -19,26 +19,22 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBOutlet weak var usernameTextbox: UITextField!
-    
     @IBOutlet weak var passwordTextbox: UITextField!
-    
     @IBOutlet weak var phoneTextbox: UITextField!
     
+    var networkController = Network()
+    
+    
     @IBAction func loginButton(sender: AnyObject) {
-        var username = usernameTextbox.text
+        var email = usernameTextbox.text
         let password = passwordTextbox.text
         
-        if (username!.isEmpty) || (username!.isEmpty) {
+        if (email!.isEmpty) || (password!.isEmpty) {
             displayAlert("Missing Fields(s)", message: "Username and Password Required")
-        } else {
-            let loginController = Login()
-            loginController.login(username!, password: password!)
-            if (loginController.responso == "400") {
-                displayAlert("Login Error", message: "Please check your login information.")
-            }else {
-                self.performSegueWithIdentifier("loginRider", sender: self)
-            }
-
+        }
+        else {
+            networkController.login(email!, password: password!)
+            self.performSegueWithIdentifier("loginRider", sender: self)
         }
     }
     
@@ -47,20 +43,25 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let email = usernameTextbox.text
         let password = passwordTextbox.text
         let phone = phoneTextbox.text
-        
+        var response = 2
         if (email!.isEmpty) || (password!.isEmpty) {
             displayAlert("Missing Fields(s)", message: "Username and Password Required")
         } else {
-            let registerController = Register()
-
-            registerController.register(email!, password: password!,phone: phone! )
-//            if (registerController.responso == "400") {
-//
-//                displayAlert("Login Error", message: "Please check your login information.")
-//            }else {
-//                self.performSegueWithIdentifier("loginRider", sender: self)
-//            }
-        }
+            networkController.register(email!, password: password!, phone: phone!)
+            while (networkController.responseFound != true){
+                print("waiting for server response")
+            }
+            response = networkController.responseStatus
+            print("now we can check response = \(response)")
+            if (response == 400) {
+                displayAlert("Registration Error", message: "Invalid Registration")
+                networkController.responseFound = false
+            }
+            else if (response == 409) {
+                displayAlert("Registration Error", message: "You have already registered!")
+                networkController.responseFound = false
+            }
+    }
     }
     
     override func viewDidLoad() {

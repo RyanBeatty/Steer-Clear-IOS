@@ -24,6 +24,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
     var end = CLLocationCoordinate2D()
     var startName = ""
     var endName = ""
+    var networkController = Network()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,12 +38,11 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
     }
     
     @IBAction func confirmButton(sender: AnyObject) {
-        let addRideController = AddRide()
         let stringStartLat = toString(start.latitude)
         let stringStartLong = toString(start.longitude)
         let stringEndLat = toString(end.latitude)
         let stringEndLong = toString(end.longitude)
-        addRideController.add(stringStartLat, start_long: stringStartLong, end_lat: stringEndLat, end_long: stringEndLong, numOfPassengers: numberOfPassengers.text!)
+        networkController.add(stringStartLat, start_long: stringStartLong, end_lat: stringEndLat, end_long: stringEndLong, numOfPassengers: numberOfPassengers.text!)
     }
 
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {

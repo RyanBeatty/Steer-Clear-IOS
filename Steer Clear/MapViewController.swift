@@ -47,6 +47,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     var changePickup = false
     var globalStartName = ""
     var globalEndName = ""
+    var networkController = Network()
+    
     
     
     let dropoffColor = UIColor(hue: 0, saturation: 0.47, brightness: 0.84, alpha: 1.0) /* #d67171 */
@@ -199,13 +201,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     }
     
     func setupLocationMarker(coordinate: CLLocationCoordinate2D) {
-        let googleController = GoooglePlaces()
-        googleController.geocodeAddress(coordinate.latitude, long: coordinate.longitude)
+        networkController.geocodeAddress(coordinate.latitude, long: coordinate.longitude)
         
         var placesClient: GMSPlacesClient?
         placesClient = GMSPlacesClient()
         
-        placesClient!.lookUpPlaceID(googleController.fetchedID, callback: { (place, error) -> Void in
+        placesClient!.lookUpPlaceID(networkController.fetchedID, callback: { (place, error) -> Void in
             if error != nil {
                 println("lookup place id query error: \(error!.localizedDescription)")
                 return
@@ -222,7 +223,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 }
 
             } else {
-                println("No place details for \(googleController.fetchedID)")
+                println("No place details for \(self.networkController.fetchedID)")
             }
             self.cameFromSearch = false
         })
