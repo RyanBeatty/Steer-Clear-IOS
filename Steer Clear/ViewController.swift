@@ -50,6 +50,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             networkController.register(email!, password: password!, phone: phone!)
             while (networkController.responseFound != true){
                 print("waiting for server response")
+                usleep(1000)
             }
             response = networkController.responseStatus
             print("now we can check response = \(response)")
@@ -60,6 +61,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
             else if (response == 409) {
                 displayAlert("Registration Error", message: "You have already registered!")
                 networkController.responseFound = false
+            } else {
+                networkController.login(email!, password: password!)
+                self.performSegueWithIdentifier("loginRider", sender: self)
             }
     }
     }
