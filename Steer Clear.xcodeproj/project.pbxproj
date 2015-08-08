@@ -19,6 +19,7 @@
 		38DE57F71B67257F004A37FA /* GooglePlacesAutocomplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DE57F51B67257F004A37FA /* GooglePlacesAutocomplete.swift */; };
 		38DE57F81B67257F004A37FA /* GooglePlacesAutocomplete.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38DE57F61B67257F004A37FA /* GooglePlacesAutocomplete.xib */; };
 		5469980470F3B6AE9CF5ACAE /* libPods-Steer Clear.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F158B373C6AFE9388A5913A /* libPods-Steer Clear.a */; };
+		900487291B762D6B00EBF80B /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3837072D1B64FDB100B7979D /* Network.swift */; };
 		9050414D1B71A2CA00F2AE51 /* WaitingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9050414C1B71A2CA00F2AE51 /* WaitingController.swift */; };
 /* End PBXBuildFile section */
 
@@ -309,6 +310,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				900487291B762D6B00EBF80B /* Network.swift in Sources */,
 				388DBEC61B064DBB009BC774 /* Steer_ClearTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

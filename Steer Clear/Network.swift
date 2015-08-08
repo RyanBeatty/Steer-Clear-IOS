@@ -13,6 +13,7 @@ class Network {
     
     var responseStatus: Int = 0
     var responseFound = false
+    
     func register(email: String, password: String, phone: String) {
         var postData = NSMutableData(data: "email=\(email)".dataUsingEncoding(NSUTF8StringEncoding)!)
         postData.appendData("&password=\(password)".dataUsingEncoding(NSUTF8StringEncoding)!)
@@ -35,7 +36,7 @@ class Network {
             self.responseStatus = responso
             if self.responseStatus != 0 {
                 self.responseFound = true
-                print("response Found")
+                print("Response Found \n")
             }
         })
         dataTask.resume()

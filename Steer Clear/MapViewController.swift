@@ -139,10 +139,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 changePickup == false
                 
 
-                button.backgroundColor = dropoffColor
-                segmentOutlet.tintColor = dropoffColor
-                myLocationButtonOutlet.backgroundColor = dropoffColor
-                confirmRideOutlet.backgroundColor = dropoffColor
+//                button.backgroundColor = dropoffColor
+//                segmentOutlet.tintColor = dropoffColor
+//                myLocationButtonOutlet.backgroundColor = dropoffColor
+//                confirmRideOutlet.backgroundColor = dropoffColor
             }
             change = false
 
