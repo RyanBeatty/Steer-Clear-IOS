@@ -49,17 +49,6 @@ class Steer_ClearTests: XCTestCase {
         responso = networkController.responseStatus
         XCTAssertEqual(responso, 409)
         print("Conflict Submission Successfull \n")
-        
-        // Test Invalid Phone
-        let invalidPhone =  "703" + (randomIntWithLength(6) as String)
-        networkController.register(email as String, password: password as String, phone: invalidPhone)
-        while (networkController.responseFound != true){
-            usleep(3000)
-        }
-        networkController.responseFound = false
-        responso = networkController.responseStatus
-        XCTAssertEqual(responso, 400)
-        print("Invalid phone Submission Successfull \n")
     }
     
     func testInvalidPhoneRegister() {

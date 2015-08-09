@@ -44,6 +44,13 @@ class Network {
     }
     
     func login(email: String, password: String) {
+//        if email.rangeOfString("@email.wm.edu") != nil{
+//            println("Not appending @")
+//        } else {
+//            email = email + "@email.wm.edu"
+//            print(email)
+//        }
+        
         var postData = NSMutableData(data: "email=\(email)".dataUsingEncoding(NSUTF8StringEncoding)!)
         postData.appendData("&password=\(password)".dataUsingEncoding(NSUTF8StringEncoding)!)
         
