@@ -59,14 +59,20 @@ class Network {
             timeoutInterval: 10.0)
         request.HTTPMethod = "POST"
         request.HTTPBody = postData
-        
+        var responso: Int = 0
         let session = NSURLSession.sharedSession()
         let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {
                 println(error)
             } else {
                 let httpResponse = response as? NSHTTPURLResponse
-                println(httpResponse)
+                responso = httpResponse!.statusCode
+                
+            }
+            self.responseStatus = responso
+            if self.responseStatus != 0 {
+                self.responseFound = true
+                print("Response Found \n")
             }
         })
         
