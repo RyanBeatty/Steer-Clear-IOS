@@ -36,8 +36,8 @@ class Network {
         return isReachable && !needsConnection
     }
     
-    func register(email: String, password: String, phone: String) {
-        var postData = NSMutableData(data: "email=\(email)".dataUsingEncoding(NSUTF8StringEncoding)!)
+    func register(username: String, password: String, phone: String) {
+        var postData = NSMutableData(data: "username=\(username)".dataUsingEncoding(NSUTF8StringEncoding)!)
         postData.appendData("&password=\(password)".dataUsingEncoding(NSUTF8StringEncoding)!)
         postData.appendData("&phone=%2B1\(phone)".dataUsingEncoding(NSUTF8StringEncoding)!)
         var request = NSMutableURLRequest(URL: NSURL(string: "http://127.0.0.1:5000/register")!,
@@ -65,7 +65,7 @@ class Network {
     
     }
     
-    func login(email: String, password: String) {
+    func login(username: String, password: String) {
 //        if email.rangeOfString("@email.wm.edu") != nil{
 //            println("Not appending @")
 //        } else {
@@ -73,7 +73,7 @@ class Network {
 //            print(email)
 //        }
         
-        var postData = NSMutableData(data: "email=\(email)".dataUsingEncoding(NSUTF8StringEncoding)!)
+        var postData = NSMutableData(data: "username=\(username)".dataUsingEncoding(NSUTF8StringEncoding)!)
         postData.appendData("&password=\(password)".dataUsingEncoding(NSUTF8StringEncoding)!)
         
         var request = NSMutableURLRequest(URL: NSURL(string: "http://127.0.0.1:5000/login")!,

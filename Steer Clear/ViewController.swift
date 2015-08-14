@@ -43,14 +43,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func loginButton(sender: AnyObject) {
         let storeUserData = NSUserDefaults.standardUserDefaults()
-        var email = usernameTextbox.text
+        var username = usernameTextbox.text
         let password = passwordTextbox.text
         var response = 0
-        if (email!.isEmpty) || (password!.isEmpty) {
+        if (username!.isEmpty) || (password!.isEmpty) {
             displayAlert("Missing Fields(s)", message: "Username and Password Required")
         }
         else {
-            networkController.login(email!, password: password!)
+            networkController.login(username!, password: password!)
             while (networkController.responseFound != true){
                 print("waiting for server response")
                 usleep(5000)
@@ -64,7 +64,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     networkController.responseFound = false
             } else {
                 print("Login successful")
-                self.defaults.setObject("\(email)", forKey: "lastUser")
+                self.defaults.setObject("\(username)", forKey: "lastUser")
                 self.performSegueWithIdentifier("loginRider", sender: self)
             }
             

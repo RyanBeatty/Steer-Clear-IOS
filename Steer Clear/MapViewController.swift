@@ -84,8 +84,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     
     @IBAction func myLocationButton(sender: AnyObject) {
         let myLocation = locationManager.location
-        mapV.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 17.0)
-        self.setupLocationMarker(myLocation.coordinate)
+        if myLocation != nil {
+            mapV.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 17.0)
+            self.setupLocationMarker(myLocation.coordinate)
+        } else {
+            let alert = UIAlertController(title: "Location Error", message: "Cannot find Current Location.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        
     }
     
     @IBAction func searchButton(sender: AnyObject) {

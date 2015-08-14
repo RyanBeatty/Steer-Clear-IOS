@@ -24,14 +24,14 @@ class Steer_ClearTests: XCTestCase {
     func testSuccessfulRegisterandConflict() {
         var networkController = Network()
         var responso = 0
-        let email = "testuser" + (randomStringWithLength(8) as String)
-        let password = randomStringWithLength(5)
-        let phone =  "703" + (randomIntWithLength(7) as String)
+        let username = "ugiacoman"
+        let password = ""
+        let phone =  "7036786244"
         
         
         // Successful Register Test
-        print("testSuccessfulRegisterandConflict info: email: \(email), password: \(password), phone: \(phone) \n")
-        networkController.register(email as String, password: password as String, phone: phone)
+        print("testSuccessfulRegisterandConflict info: username: \(username), password: \(password), phone: \(phone) \n")
+        networkController.register(username as String, password: password as String, phone: phone)
         while (networkController.responseFound != true){
             usleep(3000)
         }
@@ -41,7 +41,7 @@ class Steer_ClearTests: XCTestCase {
         print("Unique Register Successfull \n")
         
         // Conflict Register Test
-        networkController.register(email as String, password: password as String, phone: phone)
+        networkController.register(username as String, password: password as String, phone: phone)
         while (networkController.responseFound != true){
             usleep(3000)
         }
@@ -49,25 +49,6 @@ class Steer_ClearTests: XCTestCase {
         responso = networkController.responseStatus
         XCTAssertEqual(responso, 409)
         print("Conflict Submission Successfull \n")
-    }
-    
-    func testInvalidPhoneRegister() {
-        var networkController = Network()
-        var responso = 0
-        let email = "testuser" + (randomStringWithLength(8) as String)
-        let password = randomStringWithLength(5)
-        let invalidPhone =  "703" + (randomIntWithLength(6) as String)
-        print("testInvalidPhone info: email: \(email), password: \(password), phone: \(invalidPhone) \n")
-
-        networkController.register(email as String, password: password as String, phone: invalidPhone)
-        while (networkController.responseFound != true){
-            usleep(3000)
-        }
-        networkController.responseFound = false
-        responso = networkController.responseStatus
-        XCTAssertEqual(responso, 400)
-        print("Invalid phone Submission Successfull \n")
-        
     }
     
 //    func testLogout() {
