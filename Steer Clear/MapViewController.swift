@@ -89,7 +89,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     }
     
     @IBAction func searchButton(sender: AnyObject) {
-        if networkController.noNetwork() == true {
+        if networkController.noNetwork() == false {
             let alert = UIAlertController(title: "Network Connection", message: "Unable to connect to the network.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
@@ -107,7 +107,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
-        //        unhardcode this tomorrow morning
         if change == true {
             if changePickup == true {
                 self.globalStartLocation = changeStart
@@ -209,7 +208,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     
     
     func setupLocationMarker(coordinate: CLLocationCoordinate2D) {
-        if networkController.noNetwork() == true {
+        if networkController.noNetwork() == false {
             let alert = UIAlertController(title: "Network Connection", message: "Unable to connect to the network.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
