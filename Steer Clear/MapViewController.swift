@@ -89,10 +89,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     }
     
     @IBAction func searchButton(sender: AnyObject) {
-        let gpaViewController = GooglePlacesAutocomplete(apiKey: "AIzaSyDd_lRDKvpH6ao8KmLTDmQPB4wdhxfuEys",placeType: .Address)
-        gpaViewController.placeDelegate = self
-        gpaViewController.locationBias = LocationBias(latitude: 37.270821, longitude: -76.709025, radius: 1000)
-        presentViewController(gpaViewController, animated: true, completion: nil)
+        if networkController.noNetwork() == true {
+            let alert = UIAlertController(title: "Network Connection", message: "Unable to connect to the network.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        } else {
+            let gpaViewController = GooglePlacesAutocomplete(apiKey: "AIzaSyDd_lRDKvpH6ao8KmLTDmQPB4wdhxfuEys",placeType: .Address)
+            gpaViewController.placeDelegate = self
+            gpaViewController.locationBias = LocationBias(latitude: 37.270821, longitude: -76.709025, radius: 1000)
+            presentViewController(gpaViewController, animated: true, completion: nil)
+        }
     }
 
     override func viewDidLoad() {
@@ -200,69 +206,80 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         
     }
     
+    
+    
     func setupLocationMarker(coordinate: CLLocationCoordinate2D) {
-        networkController.geocodeAddress(coordinate.latitude, long: coordinate.longitude)
-        
-        var placesClient: GMSPlacesClient?
-        placesClient = GMSPlacesClient()
-        
-        placesClient!.lookUpPlaceID(networkController.fetchedID, callback: { (place, error) -> Void in
-            if error != nil {
-                println("lookup place id query error: \(error!.localizedDescription)")
-                return
-            }
+        if networkController.noNetwork() == true {
+            let alert = UIAlertController(title: "Network Connection", message: "Unable to connect to the network.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        } else {
             
-            if place != nil && self.cameFromSearch == false {
-                self.button.setTitle("\(place!.name)", forState: UIControlState.Normal)
-                if self.segmentOutlet.selectedSegmentIndex == 0 {
-                    self.globalStartName = place!.name
-                    self.globalStartLocation = coordinate
-                } else {
-                    self.globalEndName = place!.name
-                    self.globalEndLocation = coordinate
+            networkController.geocodeAddress(coordinate.latitude, long: coordinate.longitude)
+            
+            var placesClient: GMSPlacesClient?
+            placesClient = GMSPlacesClient()
+            
+            placesClient!.lookUpPlaceID(networkController.fetchedID, callback: { (place, error) -> Void in
+                if error != nil {
+                    println("lookup place id query error: \(error!.localizedDescription)")
+                    return
                 }
-
-            } else {
-                println("No place details for \(self.networkController.fetchedID)")
+                
+                if place != nil && self.cameFromSearch == false {
+                    self.button.setTitle("\(place!.name)", forState: UIControlState.Normal)
+                    if self.segmentOutlet.selectedSegmentIndex == 0 {
+                        self.globalStartName = place!.name
+                        self.globalStartLocation = coordinate
+                    } else {
+                        self.globalEndName = place!.name
+                        self.globalEndLocation = coordinate
+                    }
+                    
+                } else {
+                    println("No place details for \(self.networkController.fetchedID)")
+                }
+                self.cameFromSearch = false
+            })
+            
+            if segmentOutlet.selectedSegmentIndex == 0 {
+                
+                if locationMarker != nil {
+                    locationMarker.map = nil
+                }
+                
+                locationMarker = GMSMarker(position: coordinate)
+                locationMarker.appearAnimation = kGMSMarkerAnimationPop
+                locationMarker.icon = GMSMarker.markerImageWithColor(pickupColor)
+                locationMarker.title = "Pick Up"
+                locationMarker.opacity = 0.75
+                locationMarker.map = mapV
+                startLatitude = coordinate.latitude
+                startLongitude = coordinate.longitude
+                
+                
+                
+            } else{
+                if endLocationMarker != nil {
+                    endLocationMarker.map = nil
+                }
+                endLocationMarker = GMSMarker(position: coordinate)
+                endLocationMarker.appearAnimation = kGMSMarkerAnimationPop
+                endLocationMarker.icon = GMSMarker.markerImageWithColor(dropoffColor)
+                endLocationMarker.title = "Drop Off"
+                // endLocationMarker.snippet = "\(locationDetails)"
+                print(locationDetails)
+                endLocationMarker.opacity = 0.75
+                endLocationMarker.map = mapV
+                endLatitude = coordinate.latitude
+                endLongitude = coordinate.longitude
+                destinationInput = true
+                
+                
             }
-            self.cameFromSearch = false
-        })
-        
-        if segmentOutlet.selectedSegmentIndex == 0 {
             
-            if locationMarker != nil {
-                locationMarker.map = nil
-            }
-            
-            locationMarker = GMSMarker(position: coordinate)
-            locationMarker.appearAnimation = kGMSMarkerAnimationPop
-            locationMarker.icon = GMSMarker.markerImageWithColor(pickupColor)
-            locationMarker.title = "Pick Up"
-            locationMarker.opacity = 0.75
-            locationMarker.map = mapV
-            startLatitude = coordinate.latitude
-            startLongitude = coordinate.longitude
-            
-
-            
-        } else{
-            if endLocationMarker != nil {
-                endLocationMarker.map = nil
-            }
-            endLocationMarker = GMSMarker(position: coordinate)
-            endLocationMarker.appearAnimation = kGMSMarkerAnimationPop
-            endLocationMarker.icon = GMSMarker.markerImageWithColor(dropoffColor)
-            endLocationMarker.title = "Drop Off"
-            // endLocationMarker.snippet = "\(locationDetails)"
-            print(locationDetails)
-            endLocationMarker.opacity = 0.75
-            endLocationMarker.map = mapV
-            endLatitude = coordinate.latitude
-            endLongitude = coordinate.longitude
-            destinationInput = true
-            
-
         }
+
         
     }
 

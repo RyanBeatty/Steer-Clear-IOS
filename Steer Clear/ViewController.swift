@@ -19,22 +19,30 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var phoneLabel: UILabel!
     
     var networkController = Network()
-    var newUser = false
     var userLoggedIn = true
+    let defaults = NSUserDefaults.standardUserDefaults()
+    
+    
+    override func viewDidAppear(animated: Bool) {
+        checkUser()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         design()
-        checkUser()
+        
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
         view.addGestureRecognizer(tap)
         self.usernameTextbox.delegate = self;
         self.passwordTextbox.delegate = self;
+        if self.defaults.stringForKey("lastUser") != nil {
+            self.usernameTextbox.text = self.defaults.stringForKey("lastUser")
+        }
     }
 
     
     @IBAction func loginButton(sender: AnyObject) {
+        let storeUserData = NSUserDefaults.standardUserDefaults()
         var email = usernameTextbox.text
         let password = passwordTextbox.text
         var response = 0
@@ -56,6 +64,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     networkController.responseFound = false
             } else {
                 print("Login successful")
+                self.defaults.setObject("\(email)", forKey: "lastUser")
                 self.performSegueWithIdentifier("loginRider", sender: self)
             }
             
@@ -132,14 +141,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func checkUser() {
-        if newUser == true {
+        if isAppAlreadyLaunchedOnce() == false {
             println("new user redirecting to register page")
-            
+            self.performSegueWithIdentifier("registerSegue", sender: self)
         } else {
             println("not new user lets see if logged in")
             if userLoggedIn == true {
                 println("User logged in lets go to maps")
-                self.performSegueWithIdentifier("loginRider", sender: self)
+               // self.performSegueWithIdentifier("loginRider", sender: self)
             } else {
                 println("lets display login screen")
             }
@@ -156,6 +165,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    func isAppAlreadyLaunchedOnce()->Bool{
+        if let isAppAlreadyLaunchedOnce = self.defaults.stringForKey("isAppAlreadyLaunchedOnce"){
+            println("App already launched")
+            return true
+        }else{
+            defaults.setBool(true, forKey: "isAppAlreadyLaunchedOnce")
+            println("App launched first time")
+            return false
+        }
+    }
     
     //Calls this function when the tap is recognized.
     func DismissKeyboard(){

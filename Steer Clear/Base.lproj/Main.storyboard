@@ -84,6 +84,25 @@
             <point key="canvasLocation" x="624" y="-611"/>
         </scene>
         <!--View Controller-->
+        <scene sceneID="jQt-T1-JYU">
+            <objects>
+                <viewController id="665-SF-7yS" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9cD-hS-E3H"/>
+                        <viewControllerLayoutGuide type="bottom" id="86H-ce-BG5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hs4-uu-Fro">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4XN-fC-U9P" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4" y="91"/>
+        </scene>
+        <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="Steer_Clear" customModuleProvider="target" sceneMemberID="viewController">
@@ -132,7 +151,6 @@
                                 </state>
                                 <connections>
                                     <action selector="registerButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Ar7-yt-wxz"/>
-                                    <segue destination="yVC-nT-SHs" kind="show" identifier="registerSegue" id="dvO-iy-OuF"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cej-qQ-h80">
@@ -164,6 +182,7 @@
                         <outlet property="passwordTextbox" destination="FWU-bi-022" id="q0u-tR-28u"/>
                         <outlet property="usernameTextbox" destination="yOZ-WN-l0f" id="BXP-DJ-lWs"/>
                         <segue destination="nsC-P0-xcL" kind="show" identifier="loginRider" id="SY5-wn-1ZG"/>
+                        <segue destination="yVC-nT-SHs" kind="presentation" identifier="registerSegue" id="BpE-L2-UCW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -253,7 +272,7 @@
                                     <navigationItem title="Steer Clear" id="gtN-fw-8BE">
                                         <barButtonItem key="leftBarButtonItem" title="Logout" id="f5v-zN-3cv">
                                             <connections>
-                                                <segue destination="vXZ-lx-hvc" kind="show" id="7gw-2t-jIz"/>
+                                                <segue destination="vXZ-lx-hvc" kind="show" identifier="logoutRider" id="7gw-2t-jIz"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -481,6 +500,6 @@
         <image name="steerClearLogo" width="6963" height="6962"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wsX-g9-NaP"/>
+        <segue reference="SY5-wn-1ZG"/>
     </inferredMetricsTieBreakers>
 </document>

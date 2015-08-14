@@ -14,6 +14,44 @@ class Network {
     var responseStatus: Int = 0
     var responseFound = false
     
+    func noNetwork()->Bool{
+//figure our how to check if internet connection is offline
+
+        
+        var request = NSMutableURLRequest(URL: NSURL(string: "http://localhost:5000/")!,
+            cachePolicy: .UseProtocolCachePolicy,
+            timeoutInterval: 10.0)
+        request.HTTPMethod = "GET"
+        var responso: Int = 0
+        let session = NSURLSession.sharedSession()
+        let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
+            if (error != nil) {
+                println(error)
+            } else {
+                let httpResponse = response as? NSHTTPURLResponse
+                responso = httpResponse!.statusCode
+            }
+            self.responseStatus = responso
+            if self.responseStatus != 0 {
+                self.responseFound = true
+                print("Response Found \n")
+            }
+        })
+        dataTask.resume()
+//        while responseFound == false {
+//            print("waiting for server response")
+//            usleep(5000)
+//        }
+        if (dataTask.error != nil) {
+            println("Network is bad")
+            return true
+            //change to false when get a real test of network
+        } else {
+            println("Network is good")
+            return false
+        }
+    }
+    
     func register(email: String, password: String, phone: String) {
         var postData = NSMutableData(data: "email=\(email)".dataUsingEncoding(NSUTF8StringEncoding)!)
         postData.appendData("&password=\(password)".dataUsingEncoding(NSUTF8StringEncoding)!)

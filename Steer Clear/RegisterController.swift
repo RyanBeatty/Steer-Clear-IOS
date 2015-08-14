@@ -48,7 +48,7 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        println("segue loaded")
         // Do any additional setup after loading the view.
     }
     
