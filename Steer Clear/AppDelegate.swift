@@ -3,10 +3,11 @@
 //  Steer Clear
 //
 //  Created by Ulises Giacoman on 5/15/15.
-//  Copyright (c) 2015 Paradoxium. All rights reserved.
+//  Copyright (c) 2015 Steer-Clear. All rights reserved.
 //
 
 import UIKit
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        GMSServices.provideAPIKey("AIzaSyDd_lRDKvpH6ao8KmLTDmQPB4wdhxfuEys")
         return true
     }
 
