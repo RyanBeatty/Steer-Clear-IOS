@@ -18,6 +18,7 @@
 		388DBEC61B064DBB009BC774 /* Steer_ClearTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388DBEC51B064DBB009BC774 /* Steer_ClearTests.swift */; };
 		38DE57F71B67257F004A37FA /* GooglePlacesAutocomplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DE57F51B67257F004A37FA /* GooglePlacesAutocomplete.swift */; };
 		38DE57F81B67257F004A37FA /* GooglePlacesAutocomplete.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38DE57F61B67257F004A37FA /* GooglePlacesAutocomplete.xib */; };
+		38E9B4DD1B83E2CC00903F82 /* Ride.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E9B4DC1B83E2CC00903F82 /* Ride.swift */; };
 		38EDF5D61B7ADD790054512A /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EDF5D51B7ADD790054512A /* RegisterController.swift */; };
 		5469980470F3B6AE9CF5ACAE /* libPods-Steer Clear.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F158B373C6AFE9388A5913A /* libPods-Steer Clear.a */; };
 		900487291B762D6B00EBF80B /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3837072D1B64FDB100B7979D /* Network.swift */; };
@@ -52,6 +53,7 @@
 		38DE57F41B67257F004A37FA /* GooglePlacesAutocomplete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GooglePlacesAutocomplete.h; sourceTree = "<group>"; };
 		38DE57F51B67257F004A37FA /* GooglePlacesAutocomplete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlacesAutocomplete.swift; sourceTree = "<group>"; };
 		38DE57F61B67257F004A37FA /* GooglePlacesAutocomplete.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GooglePlacesAutocomplete.xib; sourceTree = "<group>"; };
+		38E9B4DC1B83E2CC00903F82 /* Ride.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ride.swift; sourceTree = "<group>"; };
 		38EDF5D51B7ADD790054512A /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 		3F158B373C6AFE9388A5913A /* libPods-Steer Clear.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Steer Clear.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		492E2F7C64AE10D2AEE45C63 /* Pods-Steer Clear.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Steer Clear.release.xcconfig"; path = "Pods/Target Support Files/Pods-Steer Clear/Pods-Steer Clear.release.xcconfig"; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				388DBEB11B064DBB009BC774 /* ViewController.swift */,
 				38EDF5D51B7ADD790054512A /* RegisterController.swift */,
 				388DBEB31B064DBB009BC774 /* Main.storyboard */,
+				38E9B4DC1B83E2CC00903F82 /* Ride.swift */,
 				9004872A1B765D0D00EBF80B /* fontawesome-webfont.ttf */,
 				9050414C1B71A2CA00F2AE51 /* WaitingController.swift */,
 				383EC5EA1B69BD2E00D78F36 /* TripConfirmation.swift */,
@@ -308,6 +311,7 @@
 				388DBEB21B064DBB009BC774 /* ViewController.swift in Sources */,
 				388DBEB01B064DBB009BC774 /* AppDelegate.swift in Sources */,
 				38EDF5D61B7ADD790054512A /* RegisterController.swift in Sources */,
+				38E9B4DD1B83E2CC00903F82 /* Ride.swift in Sources */,
 				3837072E1B64FDB100B7979D /* Network.swift in Sources */,
 				9050414D1B71A2CA00F2AE51 /* WaitingController.swift in Sources */,
 				387126CD1B65C15600AE4CFE /* MapViewController.swift in Sources */,
