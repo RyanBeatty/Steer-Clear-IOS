@@ -37,6 +37,7 @@ class Network {
     }
     
     func register(username: String, password: String, phone: String) {
+        self.responseFound = false
         var postData = NSMutableData(data: "username=\(username)".dataUsingEncoding(NSUTF8StringEncoding)!)
         postData.appendData("&password=\(password)".dataUsingEncoding(NSUTF8StringEncoding)!)
         postData.appendData("&phone=%2B1\(phone)".dataUsingEncoding(NSUTF8StringEncoding)!)
@@ -61,18 +62,23 @@ class Network {
                 print("Response Found \n")
             }
         })
+        var count = 0
         dataTask.resume()
+        while (self.responseFound != true){
+            print("waiting for server response")
+            usleep(5000)
+            count += 1
+            if (count >= 1000) {
+                self.responseFound = true
+                self.responseStatus = 403
+            }
+        }
     
     }
     
     func login(username: String, password: String) {
-//        if email.rangeOfString("@email.wm.edu") != nil{
-//            println("Not appending @")
-//        } else {
-//            email = email + "@email.wm.edu"
-//            print(email)
-//        }
-        
+
+        self.responseFound = false
         var postData = NSMutableData(data: "username=\(username)".dataUsingEncoding(NSUTF8StringEncoding)!)
         postData.appendData("&password=\(password)".dataUsingEncoding(NSUTF8StringEncoding)!)
         
@@ -99,6 +105,16 @@ class Network {
         })
         
         dataTask.resume()
+        var count = 0
+        while (self.responseFound != true) {
+            println("waiting for server response")
+            usleep(15000)
+            count += 1
+            if (count >= 1000) {
+                self.responseFound = true
+                self.responseStatus = 403
+            }
+        }
     }
     
     func add(start_lat: String, start_long: String, end_lat: String, end_long: String, numOfPassengers :String) {
@@ -115,16 +131,37 @@ class Network {
         request.HTTPBody = postData
         
         let session = NSURLSession.sharedSession()
-        let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
-            if (error != nil) {
-                print(error)
-            } else {
-                let httpResponse = response as? NSHTTPURLResponse
-                print(httpResponse)
+        var task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
+            println("Response: \(response)")
+            var strData = NSString(data: data, encoding: NSUTF8StringEncoding)
+            println("Body: \(strData)")
+            var err: NSError?
+            var json = NSJSONSerialization.JSONObjectWithData(data, options: .MutableLeaves, error: &err) as? NSDictionary
+            
+       //     println(json[0])
+            // Did the JSONObjectWithData constructor return an error? If so, log the error to the console
+            if(err != nil) {
+                println(err!.localizedDescription)
+                let jsonStr = NSString(data: data, encoding: NSUTF8StringEncoding)
+                println("Error could not parse JSON: '\(jsonStr)'")
+            }
+            else {
+                // The JSONObjectWithData constructor didn't return an error. But, we should still
+                // check and make sure that json has a value using optional binding.
+                if let parseJSON = json {
+                    // Okay, the parsedJSON is here, let's get the value for 'success' out of it
+                    var success = parseJSON["success"] as? Int
+                    println("Succes: \(success)")
+                }
+                else {
+                    // Woa, okay the json object was nil, something went worng. Maybe the server isn't running?
+                    let jsonStr = NSString(data: data, encoding: NSUTF8StringEncoding)
+                    println("Error could not parse JSON: \(jsonStr)")
+                }
             }
         })
         
-        dataTask.resume()
+        task.resume()
     }
     
     func sendRequest(){

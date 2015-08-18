@@ -16,18 +16,14 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     var networkController = Network()
     
     @IBAction func registerButton(sender: AnyObject) {
-                var email = emailTextField.text
+                var username = emailTextField.text
                 let password = passwordTextField.text
                 let phone = phoneTextField.text
-                var response = 2
-                if (email!.isEmpty) || (password!.isEmpty) {
-                    displayAlert("Missing Fields(s)", message: "Email and Password Required")
+                var response = 0
+                if (username!.isEmpty) || (password!.isEmpty) {
+                    displayAlert("Missing Fields(s)", message: "Username and Password Required")
                 } else {
-                    networkController.register(email!, password: password!, phone: phone!)
-                    while (networkController.responseFound != true){
-                        print("waiting for server response")
-                        usleep(5000)
-                    }
+                    networkController.register(username!, password: password!, phone: phone!)
                     response = networkController.responseStatus
                     print("now we can check response = \(response)")
                     if (response == 400) {
@@ -38,7 +34,7 @@ class RegisterController: UIViewController, UITextFieldDelegate {
                         displayAlert("Registration Error", message: "You have already registered!")
                         networkController.responseFound = false
                     } else if (response == 200){
-                        networkController.login(email!, password: password!)
+                        networkController.login(username!, password: password!)
                         self.performSegueWithIdentifier("loginFromRegister", sender: self)
                     } else {
                          displayAlert("Unsucessful Registration", message: "Please try again later.")

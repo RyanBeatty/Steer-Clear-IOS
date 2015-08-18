@@ -45,8 +45,8 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bhe-EJ-yjC">
-                                <rect key="frame" x="28" y="176" width="42" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bhe-EJ-yjC">
+                                <rect key="frame" x="28" y="176" width="79" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -440,7 +440,15 @@
                                 </state>
                                 <connections>
                                     <action selector="confirmButton:" destination="Xq3-zb-LVU" eventType="touchUpInside" id="wP0-id-dB9"/>
-                                    <segue destination="0s6-dg-VbN" kind="show" id="enw-IO-ggG"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JWS-nq-ede">
+                                <rect key="frame" x="126" y="297" width="38" height="30"/>
+                                <state key="normal" title="Login">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="testLogin:" destination="Xq3-zb-LVU" eventType="touchUpInside" id="Px8-ea-Qw2"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -452,6 +460,7 @@
                         <outlet property="myPicker" destination="AQq-N6-28P" id="S0p-YA-XCD"/>
                         <outlet property="numberOfPassengers" destination="KJ8-c3-i6x" id="ucx-SF-BUZ"/>
                         <outlet property="startLocationOutlet" destination="GhB-tN-812" id="XDD-lw-Pvw"/>
+                        <segue destination="0s6-dg-VbN" kind="show" identifier="waitingSegue" id="drq-Yc-FCO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BLy-qm-jQG" userLabel="First Responder" sceneMemberID="firstResponder"/>

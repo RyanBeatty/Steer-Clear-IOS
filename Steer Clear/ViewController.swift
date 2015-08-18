@@ -51,24 +51,18 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         else {
             networkController.login(username!, password: password!)
-            while (networkController.responseFound != true){
-                print("waiting for server response")
-                usleep(5000)
-            }
             response = networkController.responseStatus
             println("Login Response: \(response)")
             
-            
-            if response != 200 {
-                    displayAlert("Login Unsuccessful", message: "Please check your login information.")
-                    networkController.responseFound = false
-            } else {
+            if response == 200 {
                 print("Login successful")
                 self.defaults.setObject("\(username)", forKey: "lastUser")
                 self.performSegueWithIdentifier("loginRider", sender: self)
+            } else if response == 403 {
+                displayAlert("Login Timeout", message: "Failed to reach server. Try Again.")
+            } else {
+                displayAlert("Login Unsuccessful", message: "Please check your login information.")
             }
-            
-
         }
     }
     
