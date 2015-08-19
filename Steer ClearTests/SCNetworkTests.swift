@@ -8,6 +8,7 @@
 
 import UIKit
 import XCTest
+import OHHTTPStubs
 
 class SCNetworkTests: XCTestCase {
 
@@ -21,35 +22,56 @@ class SCNetworkTests: XCTestCase {
         super.tearDown()
     }
     
-    func testRegisterSuccess() {
-        var username = "rvbeatty"
-        var password = "HighMnt2"
-        var phone = "13018021296"
+    func testRegisterFailedUserAlreadyExists() {
         
+    }
+    
+    /*
+        testRegisterSuccess
+        -------------------
+        Tests that we can successsfully register a user into the system
+    */
+    func testRegisterSuccess() {
+        
+        // stub out network request to server register route
+        OHHTTPStubs.stubRequestsPassingTest({
+            request in
+            return request.URL!.host == "127.0.0.1"
+        }, withStubResponse: {
+            _ in
+            let stubData = "Hello World".dataUsingEncoding(NSUTF8StringEncoding)
+            return OHHTTPStubsResponse(data: stubData!, statusCode: 200, headers: nil)
+        })
+        
+        // fake login credentials
+        var username = "foo"
+        var password = "bar"
+        var phone = "baz"
+        
+        // create expectation for testing
         let expectation = self.expectationWithDescription("response of post request arrived")
         
+        // make request
         SCNetwork.register(
             username,
             password: password,
             phone: phone,
             completionHandler: {
                 success, statusCode in
+                
+                // assert that register succeeded
                 XCTAssertTrue(success, "HTTP POST /register should succeed")
                 XCTAssertEqual(statusCode, 200, "HTTP POST /register success response should be 302")
                 expectation.fulfill()
         })
         
+        // wait for response to finish
         waitForExpectationsWithTimeout(10, handler: {
             error in
             if (error != nil) {
                 print("Error: \(error.localizedDescription)")
             }
         })
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
     }
 
     func testPerformanceExample() {

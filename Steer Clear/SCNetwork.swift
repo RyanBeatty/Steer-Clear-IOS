@@ -16,6 +16,17 @@ let REGISTER_URL_STRING = HOSTNAME + REGISTER_ROUTE
 
 class SCNetwork: NSObject {
     
+    /*
+        register
+        --------
+        Attempts to register a new user into the system
+    
+        :username:              W&M username string
+        :password:              W&M password string
+        :phone:                 User phone number (e.x. 1xxxyyyzzzz) NOTE: there is no plus sign
+        :completionHandler:     Callback function called when response is gotten. Function that takes a boolean stating
+                                whether the request failed or not and also takes the status code from the response
+    */
     class func register(username: String, password: String, phone: String, completionHandler: (success: Bool, statusCode: Int) -> ()) {
         
         // create register url
@@ -33,18 +44,20 @@ class SCNetwork: NSObject {
         var session = NSURLSession.sharedSession()
         var task = session.dataTaskWithRequest(request, completionHandler: {
             data, response, error -> Void in
-            println("response: \(response)")
-            
+
+            // if there was an error, request failed
             if(error != nil) {
                 completionHandler(success: false, statusCode: 0)
                 return
             }
             
+            // if there is no response, request failed
             if(response == nil) {
                 completionHandler(success: false, statusCode: 0)
                 return
             }
             
+            // else request succeeded so return status code
             let httpResponse = response as! NSHTTPURLResponse
             completionHandler(success: true, statusCode: httpResponse.statusCode)
         })
