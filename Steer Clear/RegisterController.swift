@@ -16,34 +16,38 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     var networkController = Network()
     
     @IBAction func registerButton(sender: AnyObject) {
-                var email = emailTextField.text
-                let password = passwordTextField.text
-                let phone = phoneTextField.text
-                var response = 2
-                if (email!.isEmpty) || (password!.isEmpty) {
-                    displayAlert("Missing Fields(s)", message: "Email and Password Required")
-                } else {
-                    networkController.register(email!, password: password!, phone: phone!)
-                    while (networkController.responseFound != true){
-                        print("waiting for server response")
-                        usleep(5000)
-                    }
-                    response = networkController.responseStatus
-                    print("now we can check response = \(response)")
-                    if (response == 400) {
-                        displayAlert("Registration Error", message: "Invalid Registration")
-                        networkController.responseFound = false
-                    }
-                    else if (response == 409) {
-                        displayAlert("Registration Error", message: "You have already registered!")
-                        networkController.responseFound = false
-                    } else if (response == 200){
-                        networkController.login(email!, password: password!)
-                        self.performSegueWithIdentifier("loginFromRegister", sender: self)
-                    } else {
-                         displayAlert("Unsucessful Registration", message: "Please try again later.")
-                    }
-                }
+        
+        // get username, password, and phone
+        let username = emailTextField.text
+        let password = passwordTextField.text
+        let phone = phoneTextField.text
+        
+        // check if form fields are emtpy
+        if (username!.isEmpty) || (password!.isEmpty || (phone!.isEmpty)) {
+            displayAlert("Missing Fields(s)", message: "Email, Password, and Phone Required")
+        } else {
+            
+            // attempt to register user
+            SCNetwork.register(
+                username,
+                password: password,
+                phone: phone,
+                completionHandler: {
+                success, message in
+                    dispatch_async(dispatch_get_main_queue(), {
+                        
+                        // check if registration succeeds
+                        if(!success) {
+                            // if it failed, display error
+                            self.displayAlert("Registration Error", message: message)
+                        } else {
+                            // if it succeeded, log user in and change screens to
+                            self.networkController.login(username!, password: password!)
+                            self.performSegueWithIdentifier("loginFromRegister", sender: self)
+                        }
+                })
+            })
+        }
     }
     
     override func viewDidLoad() {
