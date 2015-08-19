@@ -41,7 +41,7 @@ class SCNetwork: NSObject {
         // set http method to POST and encode form parameters
         request.HTTPMethod = "POST"
         request.HTTPBody = NSMutableData(data:
-            "username=\(username)&password=\(password)&phone=%2B\(phone)".dataUsingEncoding(NSUTF8StringEncoding)!)
+            "username=\(username)&password=\(password)&phone=%2B1\(phone)".dataUsingEncoding(NSUTF8StringEncoding)!)
     
         // initialize session object create http request task
         var session = NSURLSession.sharedSession()
@@ -131,6 +131,86 @@ class SCNetwork: NSObject {
         
         // start task
         task.resume()
+    }
+    
+    class func add(start_lat: String, start_long: String, end_lat: String, end_long: String, numOfPassengers :String) {
+        let postData = NSMutableData(data: "num_passengers=\(numOfPassengers)".dataUsingEncoding(NSUTF8StringEncoding)!)
+        postData.appendData("&start_latitude=\(start_lat)".dataUsingEncoding(NSUTF8StringEncoding)!)
+        postData.appendData("&start_longitude=\(start_long)".dataUsingEncoding(NSUTF8StringEncoding)!)
+        postData.appendData("&end_latitude=\(end_lat)".dataUsingEncoding(NSUTF8StringEncoding)!)
+        postData.appendData("&end_longitude=\(end_long)".dataUsingEncoding(NSUTF8StringEncoding)!)
+        
+        let request = NSMutableURLRequest(URL: NSURL(string: "http://127.0.0.1:5000/api/rides")!,
+            cachePolicy: .UseProtocolCachePolicy,
+            timeoutInterval: 10.0)
+        request.HTTPMethod = "POST"
+        request.HTTPBody = postData
+        
+        let session = NSURLSession.sharedSession()
+        var task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
+            println("Response: \(response)")
+            var strData = NSString(data: data, encoding: NSUTF8StringEncoding)
+            println("Body: \(strData)")
+            var err: NSError?
+            var response = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as! NSDictionary
+            
+            // Did the JSONObjectWithData constructor return an error? If so, log the error to the console
+            if(err != nil) {
+                println(err!.localizedDescription)
+                let jsonStr = NSString(data: data, encoding: NSUTF8StringEncoding)
+                println("Error could not parse JSON: '\(jsonStr)'")
+            }
+            else {
+                // The JSONObjectWithData constructor didn't return an error. But, we should still
+                // check and make sure that json has a value using optional binding.
+                    // Okay, the parsedJSON is here, let's get the value for 'success' out of it
+                    var id: AnyObject = (response["ride"]!["id"]!)!
+                    var pickup: AnyObject = (response["ride"]!["pickup_time"]!)!
+                    println("Ride ID : \(id)")
+                    println("Pick Up Time : \(pickup)")
+                    
+            }
+        })
+        
+        task.resume()
+    }
+    
+    class func clear(){
+        let request = NSMutableURLRequest(URL: NSURL(string: "http://127.0.0.1:5000/api/clear")!,
+            cachePolicy: .UseProtocolCachePolicy,
+            timeoutInterval: 10.0)
+        request.HTTPMethod = "GET"
+        
+        let session = NSURLSession.sharedSession()
+        let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
+            if (error != nil) {
+                print(error)
+            } else {
+                let httpResponse = response as? NSHTTPURLResponse
+                print(httpResponse)
+            }
+        })
+        
+        dataTask.resume()
+    }
+    
+    class func logout(){
+        let request = NSMutableURLRequest(URL: NSURL(string: "http://127.0.0.1:5000/logout")!,
+            cachePolicy: .UseProtocolCachePolicy,
+            timeoutInterval: 10.0)
+        request.HTTPMethod = "GET"
+        
+        let session = NSURLSession.sharedSession()
+        let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
+            if (error != nil) {
+                print(error)
+            } else {
+                let httpResponse = response as? NSHTTPURLResponse
+                print(httpResponse)
+            }
+        })
+        
+        dataTask.resume()
     }
     
     

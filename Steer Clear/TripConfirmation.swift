@@ -37,22 +37,13 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         
     }
     
-    @IBAction func testLogin(sender: AnyObject) {
-        networkController = Network()
-        networkController.login("ugiacoman", password: "Choco123")
-    }
     @IBAction func confirmButton(sender: AnyObject) {
-//        let stringStartLat = toString(start.latitude)
-//        let stringStartLong = toString(start.longitude)
-//        let stringEndLat = toString(end.latitude)
-//        let stringEndLong = toString(end.longitude)
-        //temp hardcode for testing
+        let stringStartLat = toString(start.latitude)
+        let stringStartLong = toString(start.longitude)
+        let stringEndLat = toString(end.latitude)
+        let stringEndLong = toString(end.longitude)
 
-        let stringStartLat = "37.2735"
-        let stringStartLong = "-76.7196"
-        let stringEndLat = "37.2809"
-        let stringEndLong = "-76.7197"
-        networkController.add(stringStartLat, start_long: stringStartLong, end_lat: stringEndLat, end_long: stringEndLong, numOfPassengers: numberOfPassengers.text!)
+        SCNetwork.add(stringStartLat, start_long: stringStartLong, end_lat: stringEndLat, end_long: stringEndLong, numOfPassengers: numberOfPassengers.text!)
     }
 
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {

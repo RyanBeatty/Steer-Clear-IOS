@@ -36,46 +36,6 @@ class Network {
         return isReachable && !needsConnection
     }
     
-    func register(username: String, password: String, phone: String) {
-        self.responseFound = false
-        var postData = NSMutableData(data: "username=\(username)".dataUsingEncoding(NSUTF8StringEncoding)!)
-        postData.appendData("&password=\(password)".dataUsingEncoding(NSUTF8StringEncoding)!)
-        postData.appendData("&phone=%2B1\(phone)".dataUsingEncoding(NSUTF8StringEncoding)!)
-        var request = NSMutableURLRequest(URL: NSURL(string: "http://127.0.0.1:5000/register")!,
-            cachePolicy: .UseProtocolCachePolicy,
-            timeoutInterval: 10.0)
-        request.HTTPMethod = "POST"
-        request.HTTPBody = postData
-        var responso: Int = 0
-        let session = NSURLSession.sharedSession()
-        let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
-            if (error != nil) {
-                println(error)
-            } else {
-                let httpResponse = response as? NSHTTPURLResponse
-                responso = httpResponse!.statusCode
-                
-            }
-            self.responseStatus = responso
-            if self.responseStatus != 0 {
-                self.responseFound = true
-                print("Response Found \n")
-            }
-        })
-        var count = 0
-        dataTask.resume()
-        while (self.responseFound != true){
-            print("waiting for server response")
-            usleep(5000)
-            count += 1
-            if (count >= 1000) {
-                self.responseFound = true
-                self.responseStatus = 403
-            }
-        }
-    
-    }
-    
     func login(username: String, password: String) {
 
         self.responseFound = false
@@ -116,92 +76,6 @@ class Network {
             }
         }
     }
-    
-    func add(start_lat: String, start_long: String, end_lat: String, end_long: String, numOfPassengers :String) {
-        let postData = NSMutableData(data: "num_passengers=\(numOfPassengers)".dataUsingEncoding(NSUTF8StringEncoding)!)
-        postData.appendData("&start_latitude=\(start_lat)".dataUsingEncoding(NSUTF8StringEncoding)!)
-        postData.appendData("&start_longitude=\(start_long)".dataUsingEncoding(NSUTF8StringEncoding)!)
-        postData.appendData("&end_latitude=\(end_lat)".dataUsingEncoding(NSUTF8StringEncoding)!)
-        postData.appendData("&end_longitude=\(end_long)".dataUsingEncoding(NSUTF8StringEncoding)!)
-        
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://127.0.0.1:5000/api/rides")!,
-            cachePolicy: .UseProtocolCachePolicy,
-            timeoutInterval: 10.0)
-        request.HTTPMethod = "POST"
-        request.HTTPBody = postData
-        
-        let session = NSURLSession.sharedSession()
-        var task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
-            println("Response: \(response)")
-            var strData = NSString(data: data, encoding: NSUTF8StringEncoding)
-            println("Body: \(strData)")
-            var err: NSError?
-            var json = NSJSONSerialization.JSONObjectWithData(data, options: .MutableLeaves, error: &err) as? NSDictionary
-            
-       //     println(json[0])
-            // Did the JSONObjectWithData constructor return an error? If so, log the error to the console
-            if(err != nil) {
-                println(err!.localizedDescription)
-                let jsonStr = NSString(data: data, encoding: NSUTF8StringEncoding)
-                println("Error could not parse JSON: '\(jsonStr)'")
-            }
-            else {
-                // The JSONObjectWithData constructor didn't return an error. But, we should still
-                // check and make sure that json has a value using optional binding.
-                if let parseJSON = json {
-                    // Okay, the parsedJSON is here, let's get the value for 'success' out of it
-                    var success = parseJSON["success"] as? Int
-                    println("Succes: \(success)")
-                }
-                else {
-                    // Woa, okay the json object was nil, something went worng. Maybe the server isn't running?
-                    let jsonStr = NSString(data: data, encoding: NSUTF8StringEncoding)
-                    println("Error could not parse JSON: \(jsonStr)")
-                }
-            }
-        })
-        
-        task.resume()
-    }
-    
-    func sendRequest(){
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://127.0.0.1:5000/api/clear")!,
-            cachePolicy: .UseProtocolCachePolicy,
-            timeoutInterval: 10.0)
-        request.HTTPMethod = "GET"
-        
-        let session = NSURLSession.sharedSession()
-        let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
-            if (error != nil) {
-                print(error)
-            } else {
-                let httpResponse = response as? NSHTTPURLResponse
-                print(httpResponse)
-            }
-        })
-        
-        dataTask.resume()
-    }
-    
-    func logout(){
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://127.0.0.1:5000/logout")!,
-            cachePolicy: .UseProtocolCachePolicy,
-            timeoutInterval: 10.0)
-        request.HTTPMethod = "GET"
-        
-        let session = NSURLSession.sharedSession()
-        let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
-            if (error != nil) {
-                print(error)
-            } else {
-                let httpResponse = response as? NSHTTPURLResponse
-                print(httpResponse)
-            }
-        })
-        
-        dataTask.resume()
-    }
-
  
     var lookupAddressResults: Dictionary<NSObject, AnyObject>!
     var fetchedFormattedAddress: String!
