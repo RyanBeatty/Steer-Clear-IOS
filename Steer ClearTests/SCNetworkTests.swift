@@ -10,8 +10,7 @@ import UIKit
 import XCTest
 import OHHTTPStubs
 
-class SCNetworkTests: XCTestCase {
-
+class SCNetworkTestsBase: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -22,6 +21,30 @@ class SCNetworkTests: XCTestCase {
         super.tearDown()
         OHHTTPStubs.removeAllStubs()
     }
+    
+    /*
+    _stub
+    -----
+    Stubs out a network request with the passed in status code
+    
+    :responseStatusCode:    The status code the response should return
+    */
+    func _stub(responseStatusCode: Int32) -> OHHTTPStubsDescriptor {
+        // stub out network request to server register route
+        var stub = OHHTTPStubs.stubRequestsPassingTest({
+            request in
+            return request.URL!.host == "127.0.0.1"
+            }, withStubResponse: {
+                _ in
+                let stubData = "Hello World".dataUsingEncoding(NSUTF8StringEncoding)
+                return OHHTTPStubsResponse(data: stubData!, statusCode: responseStatusCode, headers: nil)
+        })
+        
+        return stub
+    }
+}
+
+class SCNetworkTests: SCNetworkTestsBase {
     
     /*
         testRegisterFailureBadNetwork
@@ -111,26 +134,4 @@ class SCNetworkTests: XCTestCase {
             }
         })
     }
-    
-    /*
-        _stub
-        -----
-        Stubs out a network request with the passed in status code
-    
-        :responseStatusCode:    The status code the response should return
-    */
-    func _stub(responseStatusCode: Int32) -> OHHTTPStubsDescriptor {
-        // stub out network request to server register route
-        var stub = OHHTTPStubs.stubRequestsPassingTest({
-            request in
-            return request.URL!.host == "127.0.0.1"
-            }, withStubResponse: {
-                _ in
-                let stubData = "Hello World".dataUsingEncoding(NSUTF8StringEncoding)
-                return OHHTTPStubsResponse(data: stubData!, statusCode: responseStatusCode, headers: nil)
-        })
-        
-        return stub
-    }
-
 }
