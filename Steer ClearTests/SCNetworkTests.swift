@@ -10,7 +10,12 @@ import UIKit
 import XCTest
 import OHHTTPStubs
 
-class SCNetworkTestsBase: XCTestCase {
+/*
+    SCNetworkBaseTestCase
+    ---------------------
+    Base test class for network tests
+*/
+class SCNetworkBaseTestCase: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -44,7 +49,12 @@ class SCNetworkTestsBase: XCTestCase {
     }
 }
 
-class SCNetworkTests: SCNetworkTestsBase {
+/*
+    RegisterTestCase
+    ----------------
+    Tests the SCNetwork.register function
+*/
+class RegisterTestCase: SCNetworkBaseTestCase {
     
     /*
         testRegisterFailureBadNetwork
@@ -135,3 +145,64 @@ class SCNetworkTests: SCNetworkTestsBase {
         })
     }
 }
+
+
+class LoginTestCase: SCNetworkBaseTestCase {
+    
+    /*
+        testLoginSuccess
+        ----------------
+        Tests that a user can successfully login
+    */
+    func testLoginSuccess() {
+        
+        self._stub(200)
+        self._performRegisterTest(
+            "foo",
+            password: "bar",
+            responseSuccess: true,
+            responseMessage: "Logged in!"
+        )
+    }
+    
+    /*
+    _performLoginTest
+    --------------------
+    Perform a test of the login function
+    
+    :responseSuccess:       the success flag the test request should return
+    :responseMessage:       the message string the test request should return
+    */
+    func _performRegisterTest(username: String, password: String, responseSuccess: Bool, responseMessage: String) {
+        // create expectation for testing
+        let expectation = self.expectationWithDescription("response of post request arrived")
+        
+        // make request
+        SCNetwork.login(
+            username,
+            password: password,
+            completionHandler: {
+                success, message in
+                
+                // assert that register succeeded
+                XCTAssertEqual(success, responseSuccess)
+                XCTAssertEqual(message, responseMessage)
+                expectation.fulfill()
+        })
+        
+        // wait for response to finish
+        waitForExpectationsWithTimeout(10, handler: {
+            error in
+            if (error != nil) {
+                print("Error: \(error.localizedDescription)")
+            }
+        })
+    }
+}
+
+
+
+
+
+
+
