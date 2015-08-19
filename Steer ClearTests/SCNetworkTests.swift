@@ -48,6 +48,11 @@ class SCNetworkBaseTestCase: XCTestCase {
         return stub
     }
     
+    /*
+        _stubBadNetwork
+        ---------------
+        Simulates the network being down
+    */
     func _stubBadNetwork() {
         // stub out the entire network
         OHHTTPStubs.stubRequestsPassingTest({
