@@ -57,11 +57,11 @@ class SCNetworkTests: XCTestCase {
             password: password,
             phone: phone,
             completionHandler: {
-                success, statusCode in
+                success, message in
                 
                 // assert that register succeeded
                 XCTAssertTrue(success, "HTTP POST /register should succeed")
-                XCTAssertEqual(statusCode, 200, "HTTP POST /register success response should be 302")
+                XCTAssertEqual(message, "Registered!")
                 expectation.fulfill()
         })
         

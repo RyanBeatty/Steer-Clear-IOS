@@ -25,9 +25,10 @@ class SCNetwork: NSObject {
         :password:              W&M password string
         :phone:                 User phone number (e.x. 1xxxyyyzzzz) NOTE: there is no plus sign
         :completionHandler:     Callback function called when response is gotten. Function that takes a boolean stating
-                                whether the request failed or not and also takes the status code from the response
+                                whether the register request succeeded or not. If the request failed, the :message: parameter
+                                will contain an error message
     */
-    class func register(username: String, password: String, phone: String, completionHandler: (success: Bool, statusCode: Int) -> ()) {
+    class func register(username: String, password: String, phone: String, completionHandler: (success: Bool, message: String) -> ()) {
         
         // create register url
         var registerUrl = NSURL(string: REGISTER_URL_STRING)
@@ -47,19 +48,28 @@ class SCNetwork: NSObject {
 
             // if there was an error, request failed
             if(error != nil) {
-                completionHandler(success: false, statusCode: 0)
+                completionHandler(success: false, message: "There was an error while registering")
                 return
             }
             
             // if there is no response, request failed
             if(response == nil) {
-                completionHandler(success: false, statusCode: 0)
+                completionHandler(success: false, message: "There was an error while registering")
                 return
             }
             
-            // else request succeeded so return status code
+            // else check the request status code to see if registering succeeded
             let httpResponse = response as! NSHTTPURLResponse
-            completionHandler(success: true, statusCode: httpResponse.statusCode)
+            switch(httpResponse.statusCode) {
+            case 200:
+                completionHandler(success: true, message: "Registered!")
+            case 409:
+                completionHandler(success: false, message: "The username or phone you specified already exists")
+            case 400:
+                completionHandler(success: false, message: "The username, password, or phone number were entered incorrectly")
+            default:
+                completionHandler(success: false, message: "There was an error while registering")
+            }
         })
         
         // start task
