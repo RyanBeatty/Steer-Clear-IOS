@@ -12,9 +12,17 @@ let HOSTNAME = "http://127.0.0.1:5000"
 
 let REGISTER_ROUTE = "/register"
 let LOGIN_ROUTE = "/login"
+let LOGOUT_ROUTE = "/logout"
+let ADD_ROUTE = "/api/rides"
+let CLEAR_ROUTE = "/clear"
+let DELETE_ROUTE = "/api/rides/"
 
 let REGISTER_URL_STRING = HOSTNAME + REGISTER_ROUTE
 let LOGIN_URL_STRING = HOSTNAME + LOGIN_ROUTE
+let LOGOUT_URL_STRING = HOSTNAME + LOGOUT_ROUTE
+let ADD_URL_STRING = HOSTNAME + ADD_ROUTE
+let ClEAR_URL_STRING = HOSTNAME + CLEAR_ROUTE
+let DELETE_URL_STRING = HOSTNAME + DELETE_ROUTE
 
 class SCNetwork: NSObject {
     
@@ -133,6 +141,19 @@ class SCNetwork: NSObject {
         task.resume()
     }
     
+    
+    
+    /*
+        add
+        ---
+        Attempts to add ride to queue
+        
+        :start_lat:             Pickup latitude
+        :start_long:            Pickup Longitude
+        :end_lat:               Dropoff latitude
+        :end_long:              Dropoff Longitude
+        :numOfPassengers:       Number of Passengers
+    */
     class func add(start_lat: String, start_long: String, end_lat: String, end_long: String, numOfPassengers :String) {
         let postData = NSMutableData(data: "num_passengers=\(numOfPassengers)".dataUsingEncoding(NSUTF8StringEncoding)!)
         postData.appendData("&start_latitude=\(start_lat)".dataUsingEncoding(NSUTF8StringEncoding)!)
@@ -140,7 +161,7 @@ class SCNetwork: NSObject {
         postData.appendData("&end_latitude=\(end_lat)".dataUsingEncoding(NSUTF8StringEncoding)!)
         postData.appendData("&end_longitude=\(end_long)".dataUsingEncoding(NSUTF8StringEncoding)!)
         
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://127.0.0.1:5000/api/rides")!,
+        let request = NSMutableURLRequest(URL: NSURL(string: ADD_URL_STRING)!,
             cachePolicy: .UseProtocolCachePolicy,
             timeoutInterval: 10.0)
         request.HTTPMethod = "POST"
@@ -175,8 +196,14 @@ class SCNetwork: NSObject {
         task.resume()
     }
     
+    /*
+        clear
+        ---
+        Clears all rides in queue
+        Note: Only admin user can access request
+    */
     class func clear(){
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://127.0.0.1:5000/api/clear")!,
+        let request = NSMutableURLRequest(URL: NSURL(string: ClEAR_URL_STRING)!,
             cachePolicy: .UseProtocolCachePolicy,
             timeoutInterval: 10.0)
         request.HTTPMethod = "GET"
@@ -194,10 +221,16 @@ class SCNetwork: NSObject {
         dataTask.resume()
     }
     
+    /*
+        logout
+        ---
+        Logs user out
+    */
     class func logout(){
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://127.0.0.1:5000/logout")!,
+        let request = NSMutableURLRequest(URL: NSURL(string: LOGOUT_URL_STRING)!,
             cachePolicy: .UseProtocolCachePolicy,
             timeoutInterval: 10.0)
+        
         request.HTTPMethod = "GET"
         
         let session = NSURLSession.sharedSession()
@@ -212,7 +245,5 @@ class SCNetwork: NSObject {
         
         dataTask.resume()
     }
-    
-    
     
 }
