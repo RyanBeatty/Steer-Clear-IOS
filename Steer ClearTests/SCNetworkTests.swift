@@ -22,8 +22,24 @@ class SCNetworkTests: XCTestCase {
         super.tearDown()
     }
     
-    func testRegisterFailedUserAlreadyExists() {
+    /*
+        testRegisterFailureBadStatusCode
+        --------------------------------
+        Tests that registering fails, if the response status code is not 200
+    */
+    func testRegisterFailureBadStatusCode() {
+        // simulate if the username already exists
+        self._performRegisterTest(409, responseSuccess: false, responseMessage: "The username or phone you specified already exists")
         
+        // simulate if user entered register credentials incorrectly
+        self._performRegisterTest(
+            400,
+            responseSuccess: false,
+            responseMessage: "The username, password, or phone number were entered incorrectly"
+        )
+        
+        // simulate some random internal server error
+        self._performRegisterTest(500, responseSuccess: false, responseMessage: "There was an error while registering")
     }
     
     /*
@@ -32,36 +48,43 @@ class SCNetworkTests: XCTestCase {
         Tests that we can successsfully register a user into the system
     */
     func testRegisterSuccess() {
-        
+        self._performRegisterTest(200, responseSuccess: true, responseMessage: "Registered!")
+    }
+    
+    /*
+        _performRegisterTest
+        --------------------
+        Perform a test of the register function
+    
+        :responseStatusCode:    the status code the test request should return
+        :responseSuccess:       the success flag the test request should return
+        :responseMessage:       the message string the test request should return
+    */
+    func _performRegisterTest(responseStatusCode: Int32, responseSuccess: Bool, responseMessage: String) {
         // stub out network request to server register route
         OHHTTPStubs.stubRequestsPassingTest({
             request in
             return request.URL!.host == "127.0.0.1"
-        }, withStubResponse: {
-            _ in
-            let stubData = "Hello World".dataUsingEncoding(NSUTF8StringEncoding)
-            return OHHTTPStubsResponse(data: stubData!, statusCode: 200, headers: nil)
+            }, withStubResponse: {
+                _ in
+                let stubData = "Hello World".dataUsingEncoding(NSUTF8StringEncoding)
+                return OHHTTPStubsResponse(data: stubData!, statusCode: responseStatusCode, headers: nil)
         })
-        
-        // fake login credentials
-        var username = "foo"
-        var password = "bar"
-        var phone = "baz"
         
         // create expectation for testing
         let expectation = self.expectationWithDescription("response of post request arrived")
         
         // make request
         SCNetwork.register(
-            username,
-            password: password,
-            phone: phone,
+            "foo",
+            password: "bar",
+            phone: "baz",
             completionHandler: {
                 success, message in
                 
                 // assert that register succeeded
-                XCTAssertTrue(success, "HTTP POST /register should succeed")
-                XCTAssertEqual(message, "Registered!")
+                XCTAssertEqual(success, responseSuccess)
+                XCTAssertEqual(message, responseMessage)
                 expectation.fulfill()
         })
         
@@ -72,13 +95,6 @@ class SCNetworkTests: XCTestCase {
                 print("Error: \(error.localizedDescription)")
             }
         })
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock() {
-            // Put the code you want to measure the time of here.
-        }
     }
 
 }
