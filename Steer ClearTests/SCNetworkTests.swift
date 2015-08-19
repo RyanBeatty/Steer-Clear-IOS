@@ -20,6 +20,29 @@ class SCNetworkTests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
+        OHHTTPStubs.removeAllStubs()
+    }
+    
+    /*
+        testRegisterFailureBadNetwork
+        -----------------------------
+        Tests that the register function can handle the network being down
+    */
+    func testRegisterFailureBadNetwork() {
+        // stub out the entire network
+        OHHTTPStubs.stubRequestsPassingTest({
+            request in
+            return request.URL!.host == "127.0.0.1"
+            }, withStubResponse: {
+                _ in
+                
+                // NOTE: -1009 actually stands for the constant kCFURLErrorNotConnectedToInternet in CFNetwork
+                // but I couldn't get swift to recognize the name, so I just used the value
+                let notConnectedError = NSError(domain:NSURLErrorDomain, code:-1009, userInfo:nil)
+                return OHHTTPStubsResponse(error:notConnectedError)
+        })
+        
+        self._performRegisterTest(false, responseMessage: "There was a network error while registering")
     }
     
     /*
@@ -29,17 +52,19 @@ class SCNetworkTests: XCTestCase {
     */
     func testRegisterFailureBadStatusCode() {
         // simulate if the username already exists
-        self._performRegisterTest(409, responseSuccess: false, responseMessage: "The username or phone you specified already exists")
+        self._stub(409)
+        self._performRegisterTest(false, responseMessage: "The username or phone you specified already exists")
         
         // simulate if user entered register credentials incorrectly
+        self._stub(400)
         self._performRegisterTest(
-            400,
-            responseSuccess: false,
+            false,
             responseMessage: "The username, password, or phone number were entered incorrectly"
         )
         
         // simulate some random internal server error
-        self._performRegisterTest(500, responseSuccess: false, responseMessage: "There was an error while registering")
+        self._stub(500)
+        self._performRegisterTest(false, responseMessage: "There was an error while registering")
     }
     
     /*
@@ -48,7 +73,8 @@ class SCNetworkTests: XCTestCase {
         Tests that we can successsfully register a user into the system
     */
     func testRegisterSuccess() {
-        self._performRegisterTest(200, responseSuccess: true, responseMessage: "Registered!")
+        self._stub(200)
+        self._performRegisterTest(true, responseMessage: "Registered!")
     }
     
     /*
@@ -56,21 +82,10 @@ class SCNetworkTests: XCTestCase {
         --------------------
         Perform a test of the register function
     
-        :responseStatusCode:    the status code the test request should return
         :responseSuccess:       the success flag the test request should return
         :responseMessage:       the message string the test request should return
     */
-    func _performRegisterTest(responseStatusCode: Int32, responseSuccess: Bool, responseMessage: String) {
-        // stub out network request to server register route
-        OHHTTPStubs.stubRequestsPassingTest({
-            request in
-            return request.URL!.host == "127.0.0.1"
-            }, withStubResponse: {
-                _ in
-                let stubData = "Hello World".dataUsingEncoding(NSUTF8StringEncoding)
-                return OHHTTPStubsResponse(data: stubData!, statusCode: responseStatusCode, headers: nil)
-        })
-        
+    func _performRegisterTest(responseSuccess: Bool, responseMessage: String) {
         // create expectation for testing
         let expectation = self.expectationWithDescription("response of post request arrived")
         
@@ -95,6 +110,27 @@ class SCNetworkTests: XCTestCase {
                 print("Error: \(error.localizedDescription)")
             }
         })
+    }
+    
+    /*
+        _stub
+        -----
+        Stubs out a network request with the passed in status code
+    
+        :responseStatusCode:    The status code the response should return
+    */
+    func _stub(responseStatusCode: Int32) -> OHHTTPStubsDescriptor {
+        // stub out network request to server register route
+        var stub = OHHTTPStubs.stubRequestsPassingTest({
+            request in
+            return request.URL!.host == "127.0.0.1"
+            }, withStubResponse: {
+                _ in
+                let stubData = "Hello World".dataUsingEncoding(NSUTF8StringEncoding)
+                return OHHTTPStubsResponse(data: stubData!, statusCode: responseStatusCode, headers: nil)
+        })
+        
+        return stub
     }
 
 }

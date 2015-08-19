@@ -48,7 +48,7 @@ class SCNetwork: NSObject {
 
             // if there was an error, request failed
             if(error != nil) {
-                completionHandler(success: false, message: "There was an error while registering")
+                completionHandler(success: false, message: "There was a network error while registering")
                 return
             }
             
