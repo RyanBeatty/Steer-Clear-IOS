@@ -47,6 +47,21 @@ class SCNetworkBaseTestCase: XCTestCase {
         
         return stub
     }
+    
+    func _stubBadNetwork() {
+        // stub out the entire network
+        OHHTTPStubs.stubRequestsPassingTest({
+            request in
+            return request.URL!.host == "127.0.0.1"
+            }, withStubResponse: {
+                _ in
+                
+                // NOTE: -1009 actually stands for the constant kCFURLErrorNotConnectedToInternet in CFNetwork
+                // but I couldn't get swift to recognize the name, so I just used the value
+                let notConnectedError = NSError(domain:NSURLErrorDomain, code:-1009, userInfo:nil)
+                return OHHTTPStubsResponse(error:notConnectedError)
+        })
+    }
 }
 
 /*
@@ -62,19 +77,7 @@ class RegisterTestCase: SCNetworkBaseTestCase {
         Tests that the register function can handle the network being down
     */
     func testRegisterFailureBadNetwork() {
-        // stub out the entire network
-        OHHTTPStubs.stubRequestsPassingTest({
-            request in
-            return request.URL!.host == "127.0.0.1"
-            }, withStubResponse: {
-                _ in
-                
-                // NOTE: -1009 actually stands for the constant kCFURLErrorNotConnectedToInternet in CFNetwork
-                // but I couldn't get swift to recognize the name, so I just used the value
-                let notConnectedError = NSError(domain:NSURLErrorDomain, code:-1009, userInfo:nil)
-                return OHHTTPStubsResponse(error:notConnectedError)
-        })
-        
+        self._stubBadNetwork()
         self._performRegisterTest(false, responseMessage: "There was a network error while registering")
     }
     
@@ -147,7 +150,52 @@ class RegisterTestCase: SCNetworkBaseTestCase {
 }
 
 
+/*
+    LoginTestCase
+    -------------
+    Tests for the SCNetwork.login function
+*/
 class LoginTestCase: SCNetworkBaseTestCase {
+    
+    /*
+        testLoginFailureBadNetwork
+        --------------------------
+        Tests that the login function handles the network being down
+    */
+    func testLoginFailureBadNetwork() {
+        self._stubBadNetwork()
+        self._performLoginTest(
+            "foo",
+            password: "bar",
+            responseSuccess: false,
+            responseMessage: "There was a network error while logging in"
+        )
+    }
+    
+    /*
+        testLoginFailureBadStatusCode
+        -----------------------------
+        Tests that login function handles bad status codes correctly
+    */
+    func testLoginFailureBadStatusCode() {
+        // simulate if the user does not exist
+        self._stub(400)
+        self._performLoginTest(
+            "foo",
+            password: "bar",
+            responseSuccess: false,
+            responseMessage: "Invalid username or password"
+        )
+        
+        // simulate if there is an internal server error
+        self._stub(500)
+        self._performLoginTest(
+            "foo",
+            password: "bar",
+            responseSuccess: false,
+            responseMessage: "There was an error while logging in"
+        )
+    }
     
     /*
         testLoginSuccess
@@ -157,7 +205,7 @@ class LoginTestCase: SCNetworkBaseTestCase {
     func testLoginSuccess() {
         
         self._stub(200)
-        self._performRegisterTest(
+        self._performLoginTest(
             "foo",
             password: "bar",
             responseSuccess: true,
@@ -173,7 +221,7 @@ class LoginTestCase: SCNetworkBaseTestCase {
     :responseSuccess:       the success flag the test request should return
     :responseMessage:       the message string the test request should return
     */
-    func _performRegisterTest(username: String, password: String, responseSuccess: Bool, responseMessage: String) {
+    func _performLoginTest(username: String, password: String, responseSuccess: Bool, responseMessage: String) {
         // create expectation for testing
         let expectation = self.expectationWithDescription("response of post request arrived")
         
