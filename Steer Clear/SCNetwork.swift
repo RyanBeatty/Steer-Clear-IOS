@@ -13,14 +13,14 @@ let HOSTNAME = "http://127.0.0.1:5000"
 let REGISTER_ROUTE = "/register"
 let LOGIN_ROUTE = "/login"
 let LOGOUT_ROUTE = "/logout"
-let ADD_ROUTE = "/api/rides"
+let RIDE_REQUEST_ROUTE = "/api/rides"
 let CLEAR_ROUTE = "/clear"
 let DELETE_ROUTE = "/api/rides/"
 
 let REGISTER_URL_STRING = HOSTNAME + REGISTER_ROUTE
 let LOGIN_URL_STRING = HOSTNAME + LOGIN_ROUTE
 let LOGOUT_URL_STRING = HOSTNAME + LOGOUT_ROUTE
-let ADD_URL_STRING = HOSTNAME + ADD_ROUTE
+let RIDE_REQUEST_URL_STRING = HOSTNAME + RIDE_REQUEST_ROUTE
 let ClEAR_URL_STRING = HOSTNAME + CLEAR_ROUTE
 let DELETE_URL_STRING = HOSTNAME + DELETE_ROUTE
 
@@ -41,7 +41,7 @@ class SCNetwork: NSObject {
     class func register(username: String, password: String, phone: String, completionHandler: (success: Bool, message: String) -> ()) {
         
         // create register url
-        var registerUrl = NSURL(string: REGISTER_URL_STRING)
+        let registerUrl = NSURL(string: REGISTER_URL_STRING)
         
         // initialize url request object
         var request = NSMutableURLRequest(URL: registerUrl!)
@@ -97,8 +97,8 @@ class SCNetwork: NSObject {
                             boolean flag signifying if the request succeeded and a message string
     */
     class func login(username: String, password: String, completionHandler: (success: Bool, message: String) -> ()) {
-        // create register url
-        var loginUrl = NSURL(string: LOGIN_URL_STRING)
+        // create login url
+        let loginUrl = NSURL(string: LOGIN_URL_STRING)
         
         // initialize url request object
         var request = NSMutableURLRequest(URL: loginUrl!)
@@ -141,7 +141,53 @@ class SCNetwork: NSObject {
         task.resume()
     }
     
-    
+//    class func requestRide(startLat: String, startLong: String, endLat: String, endLong: String, numPassengers: String, completionHandler: (success: Bool, needLogin: Bool, message: String, ride: NSData!)) {
+//        
+//        // create rideRequest url
+//        let rideRequestUrl = NSURL(string: RIDE_REQUEST_URL_STRING)
+//        
+//        // build form data string
+//        let formDataString = "start_latitude=\(startLat)" +
+//                             "start_longitude=\(startLong)" +
+//                             "end_latitude=\(endLat)" +
+//                             "end_longitude=\(endLong)" +
+//                             "num_passengers=\(numPassengers)"
+//        
+//        // initialize url request object
+//        var request = NSMutableURLRequest(URL: rideRequestUrl!)
+//        
+//        // set http method to POST and encode form parameters
+//        request.HTTPMethod = "POST"
+//        request.HTTPBody = NSMutableData(data: formDataString.dataUsingEncoding(NSUTF8StringEncoding)!)
+//        
+//        // initialize session object create http request task
+//        var session = NSURLSession.sharedSession()
+//        var task = session.dataTaskWithRequest(request, completionHandler: {
+//            data, response, error -> Void in
+//            
+//            // if there was an error, request failed
+//            if(error != nil || response == nil || data == nil) {
+//                completionHandler(success: false, needLogin: false, message: "There was a network error while requesting a ride", ride:nil)
+//                return
+//            }
+//            
+//            // else check the request status code to see if login succeeded
+//            let httpResponse = response as! NSHTTPURLResponse
+//            switch(httpResponse.statusCode) {
+//            case 201:
+//                completionHandler(success: true, needLogin: false, message: "Ride requested!", ride: data)
+//            case 400:
+//                completionHandler(success: false, needLogin: false, message: "You've entered some ride information incorrectly", ride: nil)
+//            case 401:
+//                completionHandler(success: false, needLogin: true, message: "Please Login", ride: nil)
+//            default:
+//                completionHandler(success: false, needLogin: false, message: "There was an error while requesting a ride", ride: nil)
+//            }
+//        })
+//        
+//        // start task
+//        task.resume()
+//    }
     
     /*
         add
@@ -161,7 +207,7 @@ class SCNetwork: NSObject {
         postData.appendData("&end_latitude=\(end_lat)".dataUsingEncoding(NSUTF8StringEncoding)!)
         postData.appendData("&end_longitude=\(end_long)".dataUsingEncoding(NSUTF8StringEncoding)!)
         
-        let request = NSMutableURLRequest(URL: NSURL(string: ADD_URL_STRING)!,
+        let request = NSMutableURLRequest(URL: NSURL(string: RIDE_REQUEST_URL_STRING)!,
             cachePolicy: .UseProtocolCachePolicy,
             timeoutInterval: 10.0)
         request.HTTPMethod = "POST"
