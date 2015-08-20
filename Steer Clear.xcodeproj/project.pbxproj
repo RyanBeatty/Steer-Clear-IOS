@@ -128,11 +128,11 @@
 				9004872A1B765D0D00EBF80B /* fontawesome-webfont.ttf */,
 				9050414C1B71A2CA00F2AE51 /* WaitingController.swift */,
 				383EC5EA1B69BD2E00D78F36 /* TripConfirmation.swift */,
+				3837072D1B64FDB100B7979D /* Network.swift */,
+				04FB75561B8409F700422750 /* SCNetwork.swift */,
 				388DBEB61B064DBB009BC774 /* Images.xcassets */,
 				388DBEB81B064DBB009BC774 /* LaunchScreen.xib */,
 				388DBEAD1B064DBB009BC774 /* Supporting Files */,
-				3837072D1B64FDB100B7979D /* Network.swift */,
-				04FB75561B8409F700422750 /* SCNetwork.swift */,
 			);
 			path = "Steer Clear";
 			sourceTree = "<group>";

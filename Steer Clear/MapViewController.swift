@@ -72,6 +72,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         }
     }
     
+    @IBAction func logoutButton(sender: AnyObject) {
+        SCNetwork.logout()
+        self.performSegueWithIdentifier("logoutRiderSegue", sender: self)
+        println("Logged out")
+    }
     @IBAction func confirmRideButton(sender: AnyObject) {
         if destinationInput != false {
             } else {

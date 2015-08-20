@@ -253,7 +253,7 @@
                                     <navigationItem title="Steer Clear" id="gtN-fw-8BE">
                                         <barButtonItem key="leftBarButtonItem" title="Logout" id="f5v-zN-3cv">
                                             <connections>
-                                                <segue destination="vXZ-lx-hvc" kind="show" identifier="logoutRider" id="7gw-2t-jIz"/>
+                                                <action selector="logoutButton:" destination="nsC-P0-xcL" id="HXU-eJ-LCe"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -340,6 +340,7 @@
                         <outlet property="myLocationButtonOutlet" destination="Xt9-eA-P5A" id="JIS-fN-QmF"/>
                         <outlet property="pickUpLabel" destination="Ukc-bd-3dQ" id="AxC-08-b0h"/>
                         <outlet property="segmentOutlet" destination="VY1-qt-Xx7" id="ubs-qQ-vqQ"/>
+                        <segue destination="vXZ-lx-hvc" kind="show" identifier="logoutRiderSegue" id="K79-wh-Awl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vBg-rF-pfC" userLabel="First Responder" sceneMemberID="firstResponder"/>
