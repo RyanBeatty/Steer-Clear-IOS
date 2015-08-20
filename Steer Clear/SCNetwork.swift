@@ -243,6 +243,60 @@ class SCNetwork: NSObject {
         return currentRideData
     }
     
+    
+    /*
+    deleteRideById
+    --------------
+    Attempts to delete current ride
+    
+    :id:                    Current Ride Id
+    :completionHandler:     Callback function called when response is gotten. Function that takes a boolean
+    
+    */
+    class func deleteRidebyId(id: String, completionHandler: (success: Bool, message: String) -> ()) {
+        
+        // create register url
+        var deleteUrl = NSURL(string: DELETE_URL_STRING + "\(id)")
+        // initialize url request object
+        var request = NSMutableURLRequest(URL: deleteUrl!)
+        
+        // set http method to POST and encode form parameters
+        request.HTTPMethod = "DELETE"
+        
+        // initialize session object create http request task
+        var session = NSURLSession.sharedSession()
+        var task = session.dataTaskWithRequest(request, completionHandler: {
+            data, response, error -> Void in
+            
+            // if there was an error, request failed
+            if(error != nil) {
+                completionHandler(success: false, message: "There was a network error while canceling ride.")
+                return
+            }
+            
+            // if there is no response, request failed
+            if(response == nil) {
+                completionHandler(success: false, message: "There was an error while canceling your ride.")
+                return
+            }
+            
+            // else check the request status code to see if registering succeeded
+            let httpResponse = response as! NSHTTPURLResponse
+            switch(httpResponse.statusCode) {
+            case 204:
+                completionHandler(success: true, message: "Canceled Current Ride")
+            case 404:
+                completionHandler(success: false, message: "Ride not found to cancel.")
+            default:
+                completionHandler(success: false, message: "There was an error while deleting ride")
+            }
+        })
+        
+        // start task
+        task.resume()
+    }
+    
+    
     /*
         clear
         -----

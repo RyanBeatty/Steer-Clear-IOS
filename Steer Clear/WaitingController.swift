@@ -20,7 +20,6 @@ class WaitingController: UIViewController {
 
     func setupETA() {
         var currentRideData = SCNetwork.getRideData()
-        print(currentRideData["pickup_time"])
         var fullETA = toString(currentRideData["pickup_time"]!)
         
         let formatter = NSDateFormatter()
@@ -37,6 +36,36 @@ class WaitingController: UIViewController {
     }
     
     @IBAction func cancelRideButton(sender: AnyObject) {
+        var currentRideData = SCNetwork.getRideData()
+        var currentRideId = toString(currentRideData["id"]!)
+        
+        SCNetwork.deleteRidebyId(currentRideId,
+            completionHandler: {
+                success, message in
+                
+                // can't make UI updates from background thread, so we need to dispatch
+                // them to the main thread
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    // check if registration succeeds
+                    if(!success) {
+                        // if it failed, display error
+                        self.displayAlert("Ride Error", message: message)
+                    } else {
+                        
+                        self.performSegueWithIdentifier("cancelRideSegue", sender: self)
+                    }
+                })
+        })
+        
+        
+    }
+    
+    func displayAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

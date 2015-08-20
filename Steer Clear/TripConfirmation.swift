@@ -37,21 +37,12 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         
     }
     
-    @IBAction func login(sender: AnyObject) {
-        networkController = Network()
-        networkController.login("ugiacoman", password: "")
-    }
-    
     @IBAction func confirmButton(sender: AnyObject) {
-//        let stringStartLat = toString(start.latitude)
-//        let stringStartLong = toString(start.longitude)
-//        let stringEndLat = toString(end.latitude)
-//        let stringEndLong = toString(end.longitude)
+        let stringStartLat = toString(start.latitude)
+        let stringStartLong = toString(start.longitude)
+        let stringEndLat = toString(end.latitude)
+        let stringEndLong = toString(end.longitude)
 
-        let stringStartLat = "37.2735"
-        let stringStartLong = "-76.7196"
-        let stringEndLat = "37.2809"
-        let stringEndLong = "-76.7197"
         
         SCNetwork.add(stringStartLat,
                         start_long: stringStartLong,
