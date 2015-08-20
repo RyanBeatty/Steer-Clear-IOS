@@ -18,7 +18,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
     
-    var networkController = Network()
     var userLoggedIn = true
     let defaults = NSUserDefaults.standardUserDefaults()
     

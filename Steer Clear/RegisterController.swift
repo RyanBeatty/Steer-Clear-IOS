@@ -13,7 +13,6 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     @IBOutlet var phoneTextField: UITextField!
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
-    var networkController = Network()
     
     @IBAction func registerButton(sender: AnyObject) {
         // get username, password, and phone
