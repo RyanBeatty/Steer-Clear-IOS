@@ -8,8 +8,10 @@
 
 import UIKit
 
+// hostname of server
 let HOSTNAME = "http://127.0.0.1:5000"
 
+// api url routes
 let REGISTER_ROUTE = "/register"
 let LOGIN_ROUTE = "/login"
 let LOGOUT_ROUTE = "/logout"
@@ -17,6 +19,7 @@ let RIDE_REQUEST_ROUTE = "/api/rides"
 let CLEAR_ROUTE = "/clear"
 let DELETE_ROUTE = "/api/rides/"
 
+// complete api route strings
 let REGISTER_URL_STRING = HOSTNAME + REGISTER_ROUTE
 let LOGIN_URL_STRING = HOSTNAME + LOGIN_ROUTE
 let LOGOUT_URL_STRING = HOSTNAME + LOGOUT_ROUTE
@@ -293,17 +296,17 @@ class SCNetwork: NSObject {
     /*
     deleteRideWithId
     --------------
-    Attempts to delete current ride
+    Attempts to delete current ride request
     
-    :id:                    Current Ride Id
+    :rideId:                Current Ride Id
     :completionHandler:     Callback function called when response is gotten. 
                             Function that takes a boolean
     
     */
-    class func deleteRideWithId(id: String, completionHandler: (success: Bool, message: String) -> ()) {
+    class func deleteRideWithId(rideId: String, completionHandler: (success: Bool, message: String) -> ()) {
         
         // create delete url
-        var deleteUrl = NSURL(string: DELETE_URL_STRING + "\(id)")
+        var deleteUrl = NSURL(string: DELETE_URL_STRING + "\(rideId)")
         
         // initialize url request object
         var request = NSMutableURLRequest(URL: deleteUrl!)
