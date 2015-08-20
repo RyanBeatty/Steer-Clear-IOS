@@ -10,12 +10,34 @@ import UIKit
 
 class WaitingController: UIViewController {
 
+    @IBOutlet var etaLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        setupETA()
     }
 
+    func setupETA() {
+        var currentRideData = SCNetwork.getRideData()
+        print(currentRideData["pickup_time"])
+        var fullETA = toString(currentRideData["pickup_time"]!)
+        
+        let formatter = NSDateFormatter()
+        formatter.locale = NSLocale(localeIdentifier: "en_US")
+        formatter.dateFormat = "E, dd MMM yyyy HH:mm:ss Z"
+        let date = formatter.dateFromString(fullETA)
+        
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: date!)
+        let hour = components.hour
+        let minutes = components.minute
+        
+        etaLabel.text = "\(hour):\(minutes)"
+    }
+    
+    @IBAction func cancelRideButton(sender: AnyObject) {
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

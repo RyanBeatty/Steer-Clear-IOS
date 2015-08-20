@@ -4,7 +4,7 @@
 //
 //  Created by Ulises Giacoman on 8/18/15.
 //  Copyright (c) 2015 Steer-Clear. All rights reserved.
-//
+//  *** Currently not in use, Possible in future development ***
 
 import Foundation
 
