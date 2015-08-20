@@ -60,7 +60,7 @@ class RegisterController: UIViewController, UITextFieldDelegate {
                                             self.displayAlert("Login Error", message: message)
                                         } else {
                                             // if it succeeded, log user in and change screens to
-                                            self.performSegueWithIdentifier("loginRider", sender: self)
+                                            self.performSegueWithIdentifier("loginFromRegister", sender: self)
                                         }
                                     })
                             })
