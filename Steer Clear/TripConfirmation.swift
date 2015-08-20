@@ -39,7 +39,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
     
     @IBAction func login(sender: AnyObject) {
         networkController = Network()
-        networkController.login("ugiacoman", password: "Choco123")
+        networkController.login("ugiacoman", password: "")
     }
     
     @IBAction func confirmButton(sender: AnyObject) {
