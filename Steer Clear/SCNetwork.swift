@@ -291,22 +291,24 @@ class SCNetwork: NSObject {
     
     
     /*
-    deleteRideById
+    deleteRideWithId
     --------------
     Attempts to delete current ride
     
     :id:                    Current Ride Id
-    :completionHandler:     Callback function called when response is gotten. Function that takes a boolean
+    :completionHandler:     Callback function called when response is gotten. 
+                            Function that takes a boolean
     
     */
-    class func deleteRidebyId(id: String, completionHandler: (success: Bool, message: String) -> ()) {
+    class func deleteRideWithId(id: String, completionHandler: (success: Bool, message: String) -> ()) {
         
-        // create register url
+        // create delete url
         var deleteUrl = NSURL(string: DELETE_URL_STRING + "\(id)")
+        
         // initialize url request object
         var request = NSMutableURLRequest(URL: deleteUrl!)
         
-        // set http method to POST and encode form parameters
+        // set http method to DELETE
         request.HTTPMethod = "DELETE"
         
         // initialize session object create http request task
@@ -340,33 +342,6 @@ class SCNetwork: NSObject {
         
         // start task
         task.resume()
-    }
-    
-    
-    /*
-        clear
-        -----
-        Clears all rides in queue
-        Note: Only admin user can access request
-    
-    */
-    class func clear(){
-        let request = NSMutableURLRequest(URL: NSURL(string: ClEAR_URL_STRING)!,
-            cachePolicy: .UseProtocolCachePolicy,
-            timeoutInterval: 10.0)
-        request.HTTPMethod = "GET"
-        
-        let session = NSURLSession.sharedSession()
-        let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
-            if (error != nil) {
-                print(error)
-            } else {
-                let httpResponse = response as? NSHTTPURLResponse
-                print(httpResponse)
-            }
-        })
-        
-        dataTask.resume()
     }
     
     /*

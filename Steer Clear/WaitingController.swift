@@ -39,7 +39,7 @@ class WaitingController: UIViewController {
         var currentRideData = SCNetwork.getRideData()
         var currentRideId = toString(currentRideData["id"]!)
         
-        SCNetwork.deleteRidebyId(currentRideId,
+        SCNetwork.deleteRideWithId(currentRideId,
             completionHandler: {
                 success, message in
                 
