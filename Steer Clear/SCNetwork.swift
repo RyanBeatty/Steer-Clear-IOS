@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 // hostname of server
 let HOSTNAME = "http://127.0.0.1:5000"
