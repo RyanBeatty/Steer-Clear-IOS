@@ -40,16 +40,22 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
 
+    /*
+    loginButton
+    -----------
+    Attempts to login user. On success, redirects user to MapViewController and remembers username
+    for next login.
+
+    Helper: SCNetwork.login
     
+    */
     @IBAction func loginButton(sender: AnyObject) {
-        let storeUserData = NSUserDefaults.standardUserDefaults()
         var username = usernameTextbox.text
         let password = passwordTextbox.text
-        var response = 0
+        
         if (username!.isEmpty) || (password!.isEmpty) {
             displayAlert("Missing Fields(s)", message: "Username and Password Required")
-        }
-        else {
+        } else {
             SCNetwork.login(
                 username,
                 password: password,
@@ -66,31 +72,50 @@ class ViewController: UIViewController, UITextFieldDelegate {
                             self.displayAlert("Login Error", message: message)
                         } else {
                             // if it succeeded, log user in and change screens to
+                            self.defaults.setObject("\(username)", forKey: "lastUser")
                             self.performSegueWithIdentifier("loginRider", sender: self)
                         }
                     })
-            })
+                }
+            )
         }
     }
     
+    /*
+    registerButton
+    --------------
+    Redirects user to Registration Page
     
+    */
     @IBAction func registerButton(sender: AnyObject) {
         // redirects to register page
         self.performSegueWithIdentifier("registerSegue", sender: self)
     }
     
+    
+    /*
+    design
+    ------
+    Implements the following styles to the username and password textboxes in the Storyboard ViewController:
+    
+        UsernameTextbox: solid bottom border with customColor, change placeholder text white
+        PasswordTextbox: solid bottom border with customColor, change placeholder text white
+    
+        EmailLabel: Apply font awesome icon
+        PasswordLabel: Apply font awesome icon
+    
+    */
     func design() {
         // Colors
-        let lightBlue = UIColor(hue: 0.1056, saturation: 0.5, brightness: 0.72, alpha: 1.0) /* #b9975b */
+        let customColor = UIColor(hue: 0.1056, saturation: 0.5, brightness: 0.72, alpha: 1.0) /* #b9975b */
         
+
+        // Username text box
         usernameTextbox.layer.masksToBounds = true
-        
-        
-        // Email text box
         self.usernameTextbox.attributedPlaceholder = NSAttributedString(string:self.usernameTextbox.placeholder!, attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
         let border = CALayer()
         let width = CGFloat(2.0)
-        border.borderColor = lightBlue.CGColor
+        border.borderColor = customColor.CGColor
         border.frame = CGRect(x: 0, y: usernameTextbox.frame.size.height - width, width:  usernameTextbox.frame.size.width, height: usernameTextbox.frame.size.height)
         border.borderWidth = width
         usernameTextbox.layer.addSublayer(border)
@@ -103,7 +128,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.passwordTextbox.attributedPlaceholder = NSAttributedString(string:self.passwordTextbox.placeholder!, attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
         let border2 = CALayer()
         let width2 = CGFloat(2.0)
-        border2.borderColor = lightBlue.CGColor
+        border2.borderColor = customColor.CGColor
         border2.frame = CGRect(x: 0, y: passwordTextbox.frame.size.height - width2, width:  passwordTextbox.frame.size.width, height: passwordTextbox.frame.size.height)
         border2.borderWidth = width2
         passwordTextbox.layer.addSublayer(border2)
@@ -111,43 +136,33 @@ class ViewController: UIViewController, UITextFieldDelegate {
         passwordTextbox.leftView = paddingView2
         passwordTextbox.leftViewMode = UITextFieldViewMode.Always
         
-        // Phone text box
-//        self.phoneTextbox.attributedPlaceholder = NSAttributedString(string:self.phoneTextbox.placeholder!, attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
-//        let border3 = CALayer()
-//        let width3 = CGFloat(2.0)
-//        border3.borderColor = lightBlue.CGColor
-//        border3.frame = CGRect(x: 0, y: phoneTextbox.frame.size.height - width3, width:  phoneTextbox.frame.size.width, height: passwordTextbox.frame.size.height)
-//        border3.borderWidth = width3
-//        phoneTextbox.layer.addSublayer(border3)
-//        let paddingView3 = UIView(frame: CGRectMake(0, 0, 25, self.phoneTextbox.frame.height))
-//        phoneTextbox.leftView = paddingView3
-//        phoneTextbox.leftViewMode = UITextFieldViewMode.Always
-        
-        // Email Font Awesome
+        // Email Font Awesome Icon
         emailLabel.font = UIFont(name: "FontAwesome", size: 20)
         emailLabel.text = String(format: "%C", 0xf003)
-        emailLabel.textColor = lightBlue
+        emailLabel.textColor = customColor
         
-        // Password Font Awesome
+        // Password Font Awesome Icon
         passwordLabel.font = UIFont(name: "FontAwesome", size: 20)
         passwordLabel.text = String(format: "%C", 0xf023)
-        passwordLabel.textColor = lightBlue
-        
-        // Phone Font Awesome
-//        phoneLabel.font = UIFont(name: "FontAwesome", size: 30)
-//        phoneLabel.text = String(format: "%C", 0xf10b)
-//        phoneLabel.textColor = lightBlue
-        
+        passwordLabel.textColor = customColor
         
     }
     
+    /*
+    checkUser
+    --------
+    If first time opening app, redirects to RegisterController. Checks if user is already logged in.
+    If so, will redirect to MapViewController.
+    
+    */
     func checkUser() {
-        if isAppAlreadyLaunchedOnce() == false {
+        if !isAppAlreadyLaunchedOnce() {
             println("new user redirecting to register page")
             self.performSegueWithIdentifier("registerSegue", sender: self)
         } else {
             println("not new user lets see if logged in")
-            if userLoggedIn == true {
+            // TODO unhardcode this
+            if SCNetwork.isUserLoggedIn() {
                 println("User logged in lets go to maps")
                // self.performSegueWithIdentifier("loginRider", sender: self)
             } else {
@@ -157,7 +172,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    /* Handles user alerts. For example, when Username or Password is required but not entered.
+    /* 
+    displayAlert
+    ------------
+    Handles user alerts. For example, when Username or Password is required but not entered.
+    
     */
     func displayAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
@@ -166,18 +185,29 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    /*
+    isAppAlreadyLaunchedOnce
+    ------------------------
+    Checks if app has already been launched, returns true if it has.
+    
+    */
     func isAppAlreadyLaunchedOnce()->Bool{
         if let isAppAlreadyLaunchedOnce = self.defaults.stringForKey("isAppAlreadyLaunchedOnce"){
             println("App already launched")
             return true
-        }else{
+        } else {
             defaults.setBool(true, forKey: "isAppAlreadyLaunchedOnce")
             println("App launched first time")
             return false
         }
     }
     
-    //Calls this function when the tap is recognized.
+    /*
+    DismissKeyboard
+    ---------------
+    When keyboard is enabled, will hide keyboard if outside tap recognized.
+    
+    */
     func DismissKeyboard(){
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
@@ -187,12 +217,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return false
-    }
-    
     
 }
 

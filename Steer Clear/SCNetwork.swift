@@ -143,6 +143,16 @@ class SCNetwork: NSObject {
         task.resume()
     }
     
+    /*
+    isUserLoggedIn
+    -----
+    Checks if user is logged in, if so returns true
+    
+    */
+    class func isUserLoggedIn() -> Bool {
+        // TODO unhardcode this
+        return true
+    }
     
     
     /*

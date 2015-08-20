@@ -13,8 +13,25 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     @IBOutlet var phoneTextField: UITextField!
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
-    var networkController = Network()
     
+    var networkController = Network()
+    let defaults = NSUserDefaults.standardUserDefaults()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
+        view.addGestureRecognizer(tap)
+        // Do any additional setup after loading the view.
+    }
+    
+    /*
+    registerButton
+    --------------
+    Attempts to register user. On success, logs user in and redirects user to MapViewController and remembers username for next login.
+    
+    Helper: SCNetwork.register, login
+    
+    */
     @IBAction func registerButton(sender: AnyObject) {
         // get username, password, and phone
         let username = emailTextField.text
@@ -45,40 +62,61 @@ class RegisterController: UIViewController, UITextFieldDelegate {
                         } else {
                             // if it succeeded, log user in and change screens to
                             println("Logging in")
-                            SCNetwork.login(
-                                username,
-                                password: password,
-                                completionHandler: {
-                                    success, message in
-                                    
-                                    // can't make UI updates from background thread, so we need to dispatch
-                                    // them to the main thread
-                                    dispatch_async(dispatch_get_main_queue(), {
-                                        
-                                        // check if registration succeeds
-                                        if(!success) {
-                                            // if it failed, display error
-                                            self.displayAlert("Login Error", message: message)
-                                        } else {
-                                            // if it succeeded, log user in and change screens to
-                                            self.performSegueWithIdentifier("loginFromRegister", sender: self)
-                                        }
-                                    })
-                            })
+                            self.defaults.setObject("\(username)", forKey: "lastUser")
+                            self.login(username, password: password)
                         }
-                })
-            })
+                    })
+                }
+            )
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
-        view.addGestureRecognizer(tap)
-        // Do any additional setup after loading the view.
+    /*
+    login
+    -----
+    Helper Method to log user in.
+    
+    */
+    func login(username: String, password: String) {
+        SCNetwork.login(
+            username,
+            password: password,
+            completionHandler: {
+                success, message in
+                
+                // can't make UI updates from background thread, so we need to dispatch
+                // them to the main thread
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    // check if registration succeeds
+                    if(!success) {
+                        // if it failed, display error
+                        self.displayAlert("Login Error", message: message)
+                    } else {
+                        // if it succeeded, log user in and change screens to
+                        self.performSegueWithIdentifier("loginFromRegister", sender: self)
+                    }
+                })
+        })
+        
+        
     }
     
-    /* Handles user alerts. For example, when Username or Password is required but not entered.
+    /*
+    backButton
+    ----------
+    Returns user to login (ViewController).
+    
+    */
+    @IBAction func backButton(sender: AnyObject) {
+        self.performSegueWithIdentifier("backToLoginSegue", sender: self)
+    }
+    
+    /*
+    displayAlert
+    ------------
+    Handles user alerts. For example, when Username or Password is required but not entered.
+    
     */
     func displayAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
@@ -87,6 +125,12 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         
     }
     
+    /*
+    DismissKeyboard
+    ---------------
+    When keyboard is enabled, will hide keyboard if outside tap recognized.
+    
+    */
     func DismissKeyboard(){
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
@@ -96,16 +140,5 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

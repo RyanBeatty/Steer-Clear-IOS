@@ -155,25 +155,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 self.mapV.camera = GMSCameraPosition.cameraWithTarget(changeEnd, zoom: 17.0)
                 changePickup == false
                 
-
-//                button.backgroundColor = dropoffColor
-//                segmentOutlet.tintColor = dropoffColor
-//                myLocationButtonOutlet.backgroundColor = dropoffColor
-//                confirmRideOutlet.backgroundColor = dropoffColor
             }
             change = false
 
         } else {
-        mapV.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
+            mapV.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
 
         }
         mapV.delegate = self
     }
     
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        if status == CLAuthorizationStatus.AuthorizedWhenInUse {
-            mapV.myLocationEnabled = true
-        }
+            if status == CLAuthorizationStatus.AuthorizedWhenInUse {
+                mapV.myLocationEnabled = true
+            }
     }
     
     override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
