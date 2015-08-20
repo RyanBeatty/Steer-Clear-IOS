@@ -184,17 +184,20 @@ class SCNetwork: NSObject {
                 // get json object
                 let json = JSON(data: data)
                 
-                // get ride request id and pickup_time
+                // get ride request data
                 let id = json["ride"]["id"].int
-                let pickup_time = json["ride"]["id"].string
+                let numPassengers = json["ride"]["num_passengers"].int
+                let pickupAddress = json["ride"]["pickup_address"].string
+                let dropoffAddress = json["ride"]["dropoff_address"].string
+                let pickupTime = json["ride"]["id"].string
                 
                 // check for error in json response
-                if(id == nil || pickup_time == nil) {
+                if(id == nil || numPassengers == nil || pickupAddress == nil || dropoffAddress == nil || pickupTime == nil) {
                     completionHandler(success:false, needLogin:true, message: "There was an error while requesting a ride", ride: nil)
                 }
                 
                 // create ride object
-                let ride = Ride(id: id!, pickup_time: pickup_time!)
+                let ride = Ride(id: id!, numPassengers: numPassengers!, pickupAddress: pickupAddress!, dropoffAddress: dropoffAddress!, pickupTime: pickupTime!)
 
                 completionHandler(success: true, needLogin: false, message: "Ride requested!", ride: ride)
             case 400:
