@@ -254,6 +254,97 @@ class LoginTestCase: SCNetworkBaseTestCase {
 }
 
 
+class DeleteTestCase: SCNetworkBaseTestCase {
+    /*
+    testLoginFailureBadNetwork
+    --------------------------
+    Tests that the delete ride function handles the network being down
+    */
+    func testLoginFailureBadNetwork() {
+        self._stubBadNetwork()
+        self._performDeleteTest(
+            "1",
+            responseSuccess: false,
+            responseMessage: "There was a network error while canceling your ride request"
+        )
+    }
+    
+    /*
+    testDeleteFailureBadStatusCode
+    -----------------------------
+    Tests that delete ride function handles bad status codes correctly
+    */
+    func testLoginFailureBadStatusCode() {
+        // simulate if the user does not exist
+        self._stub(404)
+        self._performDeleteTest(
+            "1",
+            responseSuccess: false,
+            responseMessage: "You have no current ride requests"
+        )
+        
+        // user doesn't have permission to access resource
+        self._stub(403)
+        self._performDeleteTest(
+            "1",
+            responseSuccess: false,
+            responseMessage: "There was an error while canceling your ride request"
+        )
+        
+        // simulate if there is an internal server error
+        self._stub(500)
+        self._performDeleteTest(
+            "1",
+            responseSuccess: false,
+            responseMessage: "There was an error while canceling your ride request"
+        )
+    }
+    
+    /*
+        testDeleteSuccess
+        -----------------
+        Tests that delete ride function can succeed
+    */
+    func testDeleteSuccess() {
+        self._stub(204)
+        self._performDeleteTest("1", responseSuccess: true, responseMessage: "Canceled your ride request!")
+    }
+    
+    /*
+    _performDeleteTest
+    --------------------
+    Perform a test of the delete ride function
+    
+    :responseSuccess:       the success flag the test request should return
+    :responseMessage:       the message string the test request should return
+    */
+    func _performDeleteTest(id: String, responseSuccess: Bool, responseMessage: String) {
+        // create expectation for testing
+        let expectation = self.expectationWithDescription("response of post request arrived")
+        
+        // make request
+        SCNetwork.deleteRideWithId(
+            id,
+            completionHandler: {
+                success, message in
+                
+                // assert that register succeeded
+                XCTAssertEqual(success, responseSuccess)
+                XCTAssertEqual(message, responseMessage)
+                expectation.fulfill()
+        })
+        
+        // wait for response to finish
+        waitForExpectationsWithTimeout(10, handler: {
+            error in
+            if (error != nil) {
+                print("Error: \(error.localizedDescription)")
+            }
+        })
+    }
+}
+
+
 
 
 

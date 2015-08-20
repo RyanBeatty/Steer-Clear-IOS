@@ -317,14 +317,8 @@ class SCNetwork: NSObject {
             data, response, error -> Void in
             
             // if there was an error, request failed
-            if(error != nil) {
-                completionHandler(success: false, message: "There was a network error while canceling ride.")
-                return
-            }
-            
-            // if there is no response, request failed
-            if(response == nil) {
-                completionHandler(success: false, message: "There was an error while canceling your ride.")
+            if(error != nil || response == nil) {
+                completionHandler(success: false, message: "There was a network error while canceling your ride request")
                 return
             }
             
@@ -332,11 +326,11 @@ class SCNetwork: NSObject {
             let httpResponse = response as! NSHTTPURLResponse
             switch(httpResponse.statusCode) {
             case 204:
-                completionHandler(success: true, message: "Canceled Current Ride")
+                completionHandler(success: true, message: "Canceled your ride request!")
             case 404:
-                completionHandler(success: false, message: "Ride not found to cancel.")
+                completionHandler(success: false, message: "You have no current ride requests")
             default:
-                completionHandler(success: false, message: "There was an error while deleting ride")
+                completionHandler(success: false, message: "There was an error while canceling your ride request")
             }
         })
         
