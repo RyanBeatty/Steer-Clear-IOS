@@ -43,11 +43,28 @@ class RegisterController: UIViewController, UITextFieldDelegate {
                             // if it failed, display error
                             self.displayAlert("Registration Error", message: message)
                         } else {
-                            
-                            // THIS CODE FAILS
                             // if it succeeded, log user in and change screens to
-                            self.networkController.login(username!, password: password!)
-                            self.performSegueWithIdentifier("loginFromRegister", sender: self)
+                            println("Logging in")
+                            SCNetwork.login(
+                                username,
+                                password: password,
+                                completionHandler: {
+                                    success, message in
+                                    
+                                    // can't make UI updates from background thread, so we need to dispatch
+                                    // them to the main thread
+                                    dispatch_async(dispatch_get_main_queue(), {
+                                        
+                                        // check if registration succeeds
+                                        if(!success) {
+                                            // if it failed, display error
+                                            self.displayAlert("Login Error", message: message)
+                                        } else {
+                                            // if it succeeded, log user in and change screens to
+                                            self.performSegueWithIdentifier("loginRider", sender: self)
+                                        }
+                                    })
+                            })
                         }
                 })
             })
@@ -56,7 +73,8 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        println("segue loaded")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
+        view.addGestureRecognizer(tap)
         // Do any additional setup after loading the view.
     }
     
@@ -67,6 +85,11 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
         
+    }
+    
+    func DismissKeyboard(){
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
 
     override func didReceiveMemoryWarning() {

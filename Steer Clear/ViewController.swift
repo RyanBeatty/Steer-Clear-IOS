@@ -50,19 +50,26 @@ class ViewController: UIViewController, UITextFieldDelegate {
             displayAlert("Missing Fields(s)", message: "Username and Password Required")
         }
         else {
-            networkController.login(username!, password: password!)
-            response = networkController.responseStatus
-            println("Login Response: \(response)")
-            
-            if response == 200 {
-                print("Login successful")
-                self.defaults.setObject("\(username)", forKey: "lastUser")
-                self.performSegueWithIdentifier("loginRider", sender: self)
-            } else if response == 403 {
-                displayAlert("Login Timeout", message: "Failed to reach server. Try Again.")
-            } else {
-                displayAlert("Login Unsuccessful", message: "Please check your login information.")
-            }
+            SCNetwork.login(
+                username,
+                password: password,
+                completionHandler: {
+                    success, message in
+                    
+                    // can't make UI updates from background thread, so we need to dispatch
+                    // them to the main thread
+                    dispatch_async(dispatch_get_main_queue(), {
+                        
+                        // check if registration succeeds
+                        if(!success) {
+                            // if it failed, display error
+                            self.displayAlert("Login Error", message: message)
+                        } else {
+                            // if it succeeded, log user in and change screens to
+                            self.performSegueWithIdentifier("loginRider", sender: self)
+                        }
+                    })
+            })
         }
     }
     
