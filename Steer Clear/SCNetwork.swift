@@ -24,6 +24,8 @@ let RIDE_REQUEST_URL_STRING = HOSTNAME + RIDE_REQUEST_ROUTE
 let ClEAR_URL_STRING = HOSTNAME + CLEAR_ROUTE
 let DELETE_URL_STRING = HOSTNAME + DELETE_ROUTE
 
+var currentRideData = Dictionary<String, Any>()
+
 class SCNetwork: NSObject {
     
     /*
@@ -200,7 +202,9 @@ class SCNetwork: NSObject {
         :end_long:              Dropoff Longitude
         :numOfPassengers:       Number of Passengers
     */
-    class func add(start_lat: String, start_long: String, end_lat: String, end_long: String, numOfPassengers :String) {
+    class func add(start_lat: String, start_long: String, end_lat: String, end_long: String, numOfPassengers :String,
+        completionHandler: (success: Bool, message: String) -> ()) {
+            
         let postData = NSMutableData(data: "num_passengers=\(numOfPassengers)".dataUsingEncoding(NSUTF8StringEncoding)!)
         postData.appendData("&start_latitude=\(start_lat)".dataUsingEncoding(NSUTF8StringEncoding)!)
         postData.appendData("&start_longitude=\(start_long)".dataUsingEncoding(NSUTF8StringEncoding)!)
@@ -216,26 +220,58 @@ class SCNetwork: NSObject {
         let session = NSURLSession.sharedSession()
         var task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
             println("Response: \(response)")
-            var strData = NSString(data: data, encoding: NSUTF8StringEncoding)
-            println("Body: \(strData)")
-            var err: NSError?
-            var response = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as! NSDictionary
             
-            // Did the JSONObjectWithData constructor return an error? If so, log the error to the console
-            if(err != nil) {
-                println(err!.localizedDescription)
-                let jsonStr = NSString(data: data, encoding: NSUTF8StringEncoding)
-                println("Error could not parse JSON: '\(jsonStr)'")
-            }
-            else {
-                // The JSONObjectWithData constructor didn't return an error. But, we should still
-                // check and make sure that json has a value using optional binding.
-                    // Okay, the parsedJSON is here, let's get the value for 'success' out of it
-                    var id: AnyObject = (response["ride"]!["id"]!)!
-                    var pickup: AnyObject = (response["ride"]!["pickup_time"]!)!
-                    println("Ride ID : \(id)")
-                    println("Pick Up Time : \(pickup)")
+            let httpResponse = response as! NSHTTPURLResponse
+            switch(httpResponse.statusCode) {
+            
+//            update with real completionHandler, neeed to declare it in the func declation 
+            case 201:
+                completionHandler(success: true, message: "Added Ride")
+                
+                var strData = NSString(data: data, encoding: NSUTF8StringEncoding)
+                println("Body: \(strData)")
+                var err: NSError?
+                var response = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as! NSDictionary
+                
+                
+                // Did the JSONObjectWithData constructor return an error? If so, log the error to the console
+                if(err != nil) {
+                    println(err!.localizedDescription)
+                    let jsonStr = NSString(data: data, encoding: NSUTF8StringEncoding)
+                    println("Error could not parse JSON: '\(jsonStr)'")
+                }
+                else {
+                    // The JSONObjectWithData constructor didn't return an error.
                     
+                    
+                    var dropoff_address: AnyObject = (response["ride"]!["dropoff_address"]!)!
+                    var dropoff_time: AnyObject = (response["ride"]!["dropoff_time"]!)!
+                    var end_latitude: AnyObject = (response["ride"]!["end_latitude"]!)!
+                    var end_longitude: AnyObject = (response["ride"]!["end_longitude"]!)!
+                    var id: AnyObject = (response["ride"]!["id"]!)!
+                    var pickup_address: AnyObject = (response["ride"]!["pickup_address"]!)!
+                    var pickup_time: AnyObject = (response["ride"]!["pickup_time"]!)!
+                    var start_latitude: AnyObject = (response["ride"]!["start_latitude"]!)!
+                    var start_longitude: AnyObject = (response["ride"]!["start_longitude"]!)!
+                    var travel_time: AnyObject = (response["ride"]!["travel_time"]!)!
+                    
+                    currentRideData = [ "dropoff_address" : "\(dropoff_address)",
+                        "dropoff_time" : "\(dropoff_time)",
+                        "end_latitude" : end_latitude,
+                        "end_longitude" : end_longitude,
+                        "id" : id,
+                        "pickup_address" : "\(pickup_address)",
+                        "pickup_time" : "\(pickup_time)",
+                        "start_latitude" : start_latitude,
+                        "start_longitude" : start_longitude,
+                        "travel_time" : travel_time,
+                    ]
+                    
+                }
+            case 401:
+                completionHandler(success: false, message: "Not logged in")
+            default:
+                completionHandler(success: false, message: "There was an error while posting ")
             }
         })
         
@@ -243,10 +279,76 @@ class SCNetwork: NSObject {
     }
     
     /*
+    getRideData
+    -----------
+    Returns all ride data
+    
+    */
+    
+    class func getRideData() -> Dictionary<String, Any> {
+        return currentRideData
+    }
+    
+    
+    /*
+    deleteRideById
+    --------------
+    Attempts to delete current ride
+    
+    :id:                    Current Ride Id
+    :completionHandler:     Callback function called when response is gotten. Function that takes a boolean
+    
+    */
+    class func deleteRidebyId(id: String, completionHandler: (success: Bool, message: String) -> ()) {
+        
+        // create register url
+        var deleteUrl = NSURL(string: DELETE_URL_STRING + "\(id)")
+        // initialize url request object
+        var request = NSMutableURLRequest(URL: deleteUrl!)
+        
+        // set http method to POST and encode form parameters
+        request.HTTPMethod = "DELETE"
+        
+        // initialize session object create http request task
+        var session = NSURLSession.sharedSession()
+        var task = session.dataTaskWithRequest(request, completionHandler: {
+            data, response, error -> Void in
+            
+            // if there was an error, request failed
+            if(error != nil) {
+                completionHandler(success: false, message: "There was a network error while canceling ride.")
+                return
+            }
+            
+            // if there is no response, request failed
+            if(response == nil) {
+                completionHandler(success: false, message: "There was an error while canceling your ride.")
+                return
+            }
+            
+            // else check the request status code to see if registering succeeded
+            let httpResponse = response as! NSHTTPURLResponse
+            switch(httpResponse.statusCode) {
+            case 204:
+                completionHandler(success: true, message: "Canceled Current Ride")
+            case 404:
+                completionHandler(success: false, message: "Ride not found to cancel.")
+            default:
+                completionHandler(success: false, message: "There was an error while deleting ride")
+            }
+        })
+        
+        // start task
+        task.resume()
+    }
+    
+    
+    /*
         clear
-        ---
+        -----
         Clears all rides in queue
         Note: Only admin user can access request
+    
     */
     class func clear(){
         let request = NSMutableURLRequest(URL: NSURL(string: ClEAR_URL_STRING)!,
@@ -269,7 +371,7 @@ class SCNetwork: NSObject {
     
     /*
         logout
-        ---
+        ------
         Logs user out
     */
     class func logout(){

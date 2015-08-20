@@ -43,7 +43,30 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         let stringEndLat = toString(end.latitude)
         let stringEndLong = toString(end.longitude)
 
-        SCNetwork.add(stringStartLat, start_long: stringStartLong, end_lat: stringEndLat, end_long: stringEndLong, numOfPassengers: numberOfPassengers.text!)
+        
+        SCNetwork.add(stringStartLat,
+                        start_long: stringStartLong,
+                        end_lat: stringEndLat,
+                        end_long: stringEndLong,
+                        numOfPassengers: numberOfPassengers.text!,
+                        completionHandler: {
+                            success, message in
+                
+                            // can't make UI updates from background thread, so we need to dispatch
+                            // them to the main thread
+                            dispatch_async(dispatch_get_main_queue(), {
+                                
+                                // check if registration succeeds
+                                if(!success) {
+                                    // if it failed, display error
+                                    self.displayAlert("Ride Error", message: message)
+                                } else {
+                                  
+                                    self.performSegueWithIdentifier("waitingSegue", sender: self)
+                                }
+                            })
+                        })
+        
     }
 
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
@@ -84,6 +107,13 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         pickerLabel!.attributedText = myTitle
         
         return pickerLabel
+        
+    }
+        
+    func displayAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
         
     }
     
