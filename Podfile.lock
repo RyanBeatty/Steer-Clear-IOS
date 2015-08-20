@@ -13,13 +13,16 @@ PODS:
   - OHHTTPStubs/NSURLSession (4.2.0):
     - OHHTTPStubs/Core
   - OHHTTPStubs/OHPathHelpers (4.2.0)
+  - SwiftyJSON (2.2.1)
 
 DEPENDENCIES:
   - GoogleMaps
   - OHHTTPStubs
+  - SwiftyJSON (~> 2.2.1)
 
 SPEC CHECKSUMS:
   GoogleMaps: ebf08677f181d9c2dcdbd1721d206f02beccc9b1
   OHHTTPStubs: f639130b83fb5f4f022d38f841141b0a6fa77249
+  SwiftyJSON: ae2d0a3d68025d136602a33c4ee215091ced3e33
 
 COCOAPODS: 0.38.2

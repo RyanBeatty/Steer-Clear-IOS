@@ -172,7 +172,7 @@ class SCNetwork: NSObject {
 //            
 //            // if there was an error, request failed
 //            if(error != nil || response == nil || data == nil) {
-//                completionHandler(success: false, needLogin: false, message: "There was a network error while requesting a ride", ride:nil)
+//                completionHandler(success: false, needLogin: false, message: "There was a network error while requesting a ride", ride:data)
 //                return
 //            }
 //            
@@ -180,13 +180,13 @@ class SCNetwork: NSObject {
 //            let httpResponse = response as! NSHTTPURLResponse
 //            switch(httpResponse.statusCode) {
 //            case 201:
-//                completionHandler(success: true, needLogin: false, message: "Ride requested!", ride: data)
+//                completionHandler(success: true, needLogin: false, message: "Ride requested!", ride: data!)
 //            case 400:
-//                completionHandler(success: false, needLogin: false, message: "You've entered some ride information incorrectly", ride: nil)
+//                completionHandler(success: false, needLogin: false, message: "You've entered some ride information incorrectly", ride: data)
 //            case 401:
-//                completionHandler(success: false, needLogin: true, message: "Please Login", ride: nil)
+//                completionHandler(success: false, needLogin: true, message: "Please Login", ride: data)
 //            default:
-//                completionHandler(success: false, needLogin: false, message: "There was an error while requesting a ride", ride: nil)
+//                completionHandler(success: false, needLogin: false, message: "There was an error while requesting a ride", ride: data)
 //            }
 //        })
 //        
