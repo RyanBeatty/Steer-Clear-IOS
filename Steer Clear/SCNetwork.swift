@@ -147,53 +147,64 @@ class SCNetwork: NSObject {
         task.resume()
     }
     
-//    class func requestRide(startLat: String, startLong: String, endLat: String, endLong: String, numPassengers: String, completionHandler: (success: Bool, needLogin: Bool, message: String, ride: NSData!)) {
-//        
-//        // create rideRequest url
-//        let rideRequestUrl = NSURL(string: RIDE_REQUEST_URL_STRING)
-//        
-//        // build form data string
-//        let formDataString = "start_latitude=\(startLat)" +
-//                             "start_longitude=\(startLong)" +
-//                             "end_latitude=\(endLat)" +
-//                             "end_longitude=\(endLong)" +
-//                             "num_passengers=\(numPassengers)"
-//        
-//        // initialize url request object
-//        var request = NSMutableURLRequest(URL: rideRequestUrl!)
-//        
-//        // set http method to POST and encode form parameters
-//        request.HTTPMethod = "POST"
-//        request.HTTPBody = NSMutableData(data: formDataString.dataUsingEncoding(NSUTF8StringEncoding)!)
-//        
-//        // initialize session object create http request task
-//        var session = NSURLSession.sharedSession()
-//        var task = session.dataTaskWithRequest(request, completionHandler: {
-//            data, response, error -> Void in
-//            
-//            // if there was an error, request failed
-//            if(error != nil || response == nil || data == nil) {
-//                completionHandler(success: false, needLogin: false, message: "There was a network error while requesting a ride", ride:data)
-//                return
-//            }
-//            
-//            // else check the request status code to see if login succeeded
-//            let httpResponse = response as! NSHTTPURLResponse
-//            switch(httpResponse.statusCode) {
-//            case 201:
-//                completionHandler(success: true, needLogin: false, message: "Ride requested!", ride: data!)
-//            case 400:
-//                completionHandler(success: false, needLogin: false, message: "You've entered some ride information incorrectly", ride: data)
-//            case 401:
-//                completionHandler(success: false, needLogin: true, message: "Please Login", ride: data)
-//            default:
-//                completionHandler(success: false, needLogin: false, message: "There was an error while requesting a ride", ride: data)
-//            }
-//        })
-//        
-//        // start task
-//        task.resume()
-//    }
+    class func requestRide(startLat: String, startLong: String, endLat: String, endLong: String, numPassengers: String, completionHandler: (success: Bool, needLogin: Bool, message: String, ride: Ride?)->()) {
+        
+        // create rideRequest url
+        let rideRequestUrl = NSURL(string: RIDE_REQUEST_URL_STRING)
+        
+        // build form data string
+        let formDataString = "start_latitude=\(startLat)" +
+                             "start_longitude=\(startLong)" +
+                             "end_latitude=\(endLat)" +
+                             "end_longitude=\(endLong)" +
+                             "num_passengers=\(numPassengers)"
+        
+        // initialize url request object
+        var request = NSMutableURLRequest(URL: rideRequestUrl!)
+        
+        // set http method to POST and encode form parameters
+        request.HTTPMethod = "POST"
+        request.HTTPBody = NSMutableData(data: formDataString.dataUsingEncoding(NSUTF8StringEncoding)!)
+        
+        // initialize session object create http request task
+        var session = NSURLSession.sharedSession()
+        var task = session.dataTaskWithRequest(request, completionHandler: {
+            data, response, error -> Void in
+            
+            // if there was an error, request failed
+            if(error != nil || response == nil || data == nil) {
+                completionHandler(success: false, needLogin: false, message: "There was a network error while requesting a ride", ride:nil)
+                return
+            }
+            
+            // else check the request status code to see if login succeeded
+            let httpResponse = response as! NSHTTPURLResponse
+            switch(httpResponse.statusCode) {
+            case 201:
+                let json = JSON(data: data)
+                
+                let id = json["ride"]["id"].int
+                let pickup_time = json["ride"]["id"].string
+                
+                if(id == nil || pickup_time == nil) {
+                    completionHandler(success:false, needLogin:true, message: "There was an error while requesting a ride", ride: nil)
+                }
+                
+                let ride = Ride(id: id!, pickup_time: pickup_time!)
+                
+                completionHandler(success: true, needLogin: false, message: "Ride requested!", ride: ride)
+            case 400:
+                completionHandler(success: false, needLogin: false, message: "You've entered some ride information incorrectly", ride: nil)
+            case 401:
+                completionHandler(success: false, needLogin: true, message: "Please Login", ride: nil)
+            default:
+                completionHandler(success: false, needLogin: false, message: "There was an error while requesting a ride", ride: nil)
+            }
+        })
+        
+        // start task
+        task.resume()
+    }
     
     /*
         add
