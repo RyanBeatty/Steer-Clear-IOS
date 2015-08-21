@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import QuartzCore
 
 class WaitingController: UIViewController {
 
@@ -19,20 +20,24 @@ class WaitingController: UIViewController {
     }
 
     func setupETA() {
-        var currentRideData = SCNetwork.getRideData()
-        var fullETA = toString(currentRideData["pickup_time"]!)
+//        var currentRideData = SCNetwork.getRideData()
+//        var fullETA = toString(currentRideData["pickup_time"]!)
+//        
+//        let formatter = NSDateFormatter()
+//        formatter.locale = NSLocale(localeIdentifier: "en_US")
+//        formatter.dateFormat = "E, dd MMM yyyy HH:mm:ss Z"
+//        let date = formatter.dateFromString(fullETA)
+//        
+//        let calendar = NSCalendar.currentCalendar()
+//        let components = calendar.components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: date!)
+//        let hour = components.hour
+//        let minutes = components.minute
         
-        let formatter = NSDateFormatter()
-        formatter.locale = NSLocale(localeIdentifier: "en_US")
-        formatter.dateFormat = "E, dd MMM yyyy HH:mm:ss Z"
-        let date = formatter.dateFromString(fullETA)
+//        etaLabel.text = "\(hour):\(minutes)"
+        etaLabel.layer.cornerRadius = 0.5 * etaLabel.bounds.size.width
+        etaLabel.layer.shadowOpacity = 0.5
+
         
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: date!)
-        let hour = components.hour
-        let minutes = components.minute
-        
-        etaLabel.text = "\(hour):\(minutes)"
     }
     
     @IBAction func cancelRideButton(sender: AnyObject) {

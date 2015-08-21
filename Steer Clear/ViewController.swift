@@ -107,7 +107,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     */
     func design() {
         // Colors
-        let customColor = UIColor(hue: 0.1056, saturation: 0.5, brightness: 0.72, alpha: 1.0) /* #b9975b */
+        let customColor = UIColor(hue: 0.1056, saturation: 0.5, brightness: 0.72, alpha: 0.5) /* #b9975b */
         
 
         // Username text box
@@ -139,12 +139,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // Email Font Awesome Icon
         emailLabel.font = UIFont(name: "FontAwesome", size: 20)
         emailLabel.text = String(format: "%C", 0xf003)
-        emailLabel.textColor = customColor
+        emailLabel.textColor = UIColor.whiteColor()
         
         // Password Font Awesome Icon
         passwordLabel.font = UIFont(name: "FontAwesome", size: 20)
         passwordLabel.text = String(format: "%C", 0xf023)
-        passwordLabel.textColor = customColor
+        passwordLabel.textColor = UIColor.whiteColor()
         
     }
     
