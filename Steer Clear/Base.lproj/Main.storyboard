@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="0s6-dg-VbN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -306,6 +305,10 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AnZ-Qk-icN" customClass="GMSMapView">
+                                <rect key="frame" x="117" y="127" width="160" height="284"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -334,6 +337,7 @@
                     <connections>
                         <outlet property="button" destination="Mec-dU-MNu" id="gCs-Hh-GBT"/>
                         <outlet property="confirmRideOutlet" destination="1e5-aP-JFJ" id="5ik-eg-RWN"/>
+                        <outlet property="mapView" destination="AnZ-Qk-icN" id="JQJ-52-ywu"/>
                         <outlet property="myLocationButtonOutlet" destination="Xt9-eA-P5A" id="JIS-fN-QmF"/>
                         <outlet property="pickUpLabel" destination="Ukc-bd-3dQ" id="AxC-08-b0h"/>
                         <outlet property="segmentOutlet" destination="VY1-qt-Xx7" id="ubs-qQ-vqQ"/>
@@ -518,7 +522,7 @@
         <image name="steerClearLogo" width="6963" height="6962"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ZmU-pM-MLV"/>
         <segue reference="K79-wh-Awl"/>
+        <segue reference="SY5-wn-1ZG"/>
     </inferredMetricsTieBreakers>
 </document>
