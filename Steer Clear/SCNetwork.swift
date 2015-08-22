@@ -189,7 +189,7 @@ class SCNetwork: NSObject {
                 let numPassengers = json["ride"]["num_passengers"].int
                 let pickupAddress = json["ride"]["pickup_address"].string
                 let dropoffAddress = json["ride"]["dropoff_address"].string
-                let pickupTime = json["ride"]["id"].string
+                let pickupTime = json["ride"]["pickup_time"].string
                 
                 // check for error in json response
                 if(id == nil || numPassengers == nil || pickupAddress == nil || dropoffAddress == nil || pickupTime == nil) {

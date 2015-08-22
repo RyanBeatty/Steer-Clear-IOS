@@ -327,6 +327,52 @@ class RequestRideTestCase: SCNetworkBaseTestCase {
     }
     
     /*
+        testRequestRideSuccess
+        ----------------------
+        Test that ride request can succeed
+    */
+    func testRequestRideSuccess() {
+        // stub out network request to server register route
+        var stub = OHHTTPStubs.stubRequestsPassingTest({
+            request in
+            return request.URL!.host == "127.0.0.1"
+            }, withStubResponse: {
+                _ in
+                let stubJSON = ["ride": [
+                        "id": 1,
+                        "num_passengers": 3,
+                        "start_latitude": 37.2735,
+                        "start_longitude": -76.7196,
+                        "end_latitude": 37.2809,
+                        "end_longitude": -76.7197,
+                        "pickup_time": "pickup_time': u'Sat, 22 Aug 2015 22:05:56 -0000",
+                        "travel_time": 239,
+                        "dropoff_time": "Sat, 22 Aug 2015 22:09:55 -0000",
+                        "pickup_address": "2006 Brooks Street, Williamsburg, VA 23185, USA",
+                        "dropoff_address": "1234 Richmond Road, Williamsburg, VA 23185, USA",
+                        "on_campus": true
+                    ]
+                ]
+                return OHHTTPStubsResponse(JSONObject: stubJSON, statusCode: 201, headers: nil)
+        })
+        
+        // build correct ride object response
+        let ride = Ride(id: 1, numPassengers: 3, pickupAddress: "2006 Brooks Street, Williamsburg, VA 23185, USA", dropoffAddress: "1234 Richmond Road, Williamsburg, VA 23185, USA", pickupTime: "pickup_time': u'Sat, 22 Aug 2015 22:05:56 -0000")
+        
+        self._performRideRequestTest(
+            "1.0",
+            startLong: "2.0",
+            endLat: "3.0",
+            endLong: "4.0",
+            numPassengers: "4",
+            responseSuccess: true,
+            responseNeedLogin: false,
+            responseMessage: "Ride requested!",
+            responseRide: ride
+        )
+    }
+    
+    /*
         _performRideRequestTest
         -----------------------
         Perform a ride request
@@ -353,6 +399,7 @@ class RequestRideTestCase: SCNetworkBaseTestCase {
                     XCTAssertNil(ride)
                 }
                 else {
+                    XCTAssertNotNil(ride)
                     XCTAssertEqual(ride!, responseRide!)
                 }
                 expectation.fulfill()
