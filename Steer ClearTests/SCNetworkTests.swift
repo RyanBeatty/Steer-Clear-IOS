@@ -254,6 +254,121 @@ class LoginTestCase: SCNetworkBaseTestCase {
 }
 
 
+class RequestRideTestCase: SCNetworkBaseTestCase {
+    
+    /*
+        testRequestRideFailureBadNetwork
+        --------------------------------
+        Tests that the ride request function handles
+        the network being down
+    */
+    func testRequestRideFailureBadNetwork() {
+        self._stubBadNetwork()
+        self._performRideRequestTest(
+            "1.0",
+            startLong: "2.0",
+            endLat: "3.0",
+            endLong: "4.0",
+            numPassengers: "4",
+            responseSuccess: false,
+            responseNeedLogin: false,
+            responseMessage: "There was a network error while requesting a ride",
+            responseRide: nil
+        )
+    }
+    
+    /*
+        testRequestRideBadStatusCodes
+        -----------------------------
+        Tests that request ride function handles bad status codes
+    */
+    func testRequestRideBadStatusCodes() {
+        // simulate form submission erro
+        self._stub(400)
+        self._performRideRequestTest(
+            "1.0",
+            startLong: "2.0",
+            endLat: "3.0",
+            endLong: "4.0",
+            numPassengers: "4",
+            responseSuccess: false,
+            responseNeedLogin: false,
+            responseMessage: "You've entered some ride information incorrectly",
+            responseRide: nil
+        )
+        
+        // simulate user not logged in
+        self._stub(401)
+        self._performRideRequestTest(
+            "1.0",
+            startLong: "2.0",
+            endLat: "3.0",
+            endLong: "4.0",
+            numPassengers: "4",
+            responseSuccess: false,
+            responseNeedLogin: true,
+            responseMessage: "Please Login",
+            responseRide: nil
+        )
+        
+        // simulate internal server error
+        self._stub(500)
+        self._performRideRequestTest(
+            "1.0",
+            startLong: "2.0",
+            endLat: "3.0",
+            endLong: "4.0",
+            numPassengers: "4",
+            responseSuccess: false,
+            responseNeedLogin: false,
+            responseMessage: "There was an error while requesting a ride",
+            responseRide: nil
+        )
+    }
+    
+    /*
+        _performRideRequestTest
+        -----------------------
+        Perform a ride request
+    */
+    func _performRideRequestTest(startLat: String, startLong: String, endLat: String, endLong: String, numPassengers: String, responseSuccess: Bool, responseNeedLogin: Bool, responseMessage: String, responseRide: Ride?) {
+        // create expectation for testing
+        let expectation = self.expectationWithDescription("response of post request arrived")
+        
+        // make request
+        SCNetwork.requestRide(
+            startLat,
+            startLong: startLong,
+            endLat: endLat,
+            endLong: endLong,
+            numPassengers: numPassengers,
+            completionHandler: {
+                success, needLogin, message, ride in
+                
+                // assert that ride request succeeded
+                XCTAssertEqual(success, responseSuccess)
+                XCTAssertEqual(needLogin, responseNeedLogin)
+                XCTAssertEqual(message, responseMessage)
+                if responseRide == nil {
+                    XCTAssertNil(ride)
+                }
+                else {
+                    XCTAssertEqual(ride!, responseRide!)
+                }
+                expectation.fulfill()
+        })
+        
+        // wait for response to finish
+        waitForExpectationsWithTimeout(10, handler: {
+            error in
+            if (error != nil) {
+                print("Error: \(error.localizedDescription)")
+            }
+        })
+    }
+}
+
+
 class DeleteTestCase: SCNetworkBaseTestCase {
     /*
     testLoginFailureBadNetwork
