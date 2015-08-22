@@ -363,6 +363,40 @@ class SCNetwork: NSObject {
     /*
         logout
         ------
+        Attempts to log the user out
+        
+        :completionHandler: callback method that takes a success flag and a string message
+    */
+    class func logout(completionHandler: (success: Bool, message: String) -> ()) {
+        let request = NSMutableURLRequest(URL: NSURL(string: LOGOUT_URL_STRING)!)
+        request.HTTPMethod = "GET"
+        
+        let session = NSURLSession.sharedSession()
+        let dataTask = session.dataTaskWithRequest(request, completionHandler: {
+            data, response, error in
+            
+            // if there was an error, request failed
+            if(error != nil || response == nil || data == nil) {
+                completionHandler(success: false, message: "There was a network error while logging out")
+                return
+            }
+            
+            // else check the request status code to see if logging out succeeded
+            let httpResponse = response as! NSHTTPURLResponse
+            switch(httpResponse.statusCode) {
+            case 200:
+                completionHandler(success: true, message: "Logged out!")
+            default:
+                completionHandler(success: false, message: "There was an error while logging out")
+            }
+        })
+        
+        dataTask.resume()
+    }
+    
+    /*
+        logout
+        ------
         Logs user out
     */
     class func logout(){
