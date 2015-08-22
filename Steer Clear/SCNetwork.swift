@@ -1,4 +1,4 @@
-//
+    //
 //  SCNetwork.swift
 //  Steer Clear
 //
@@ -192,7 +192,7 @@ class SCNetwork: NSObject {
                 let pickupTime = json["ride"]["pickup_time"].string
                 
                 // check for error in json response
-                if(id == nil || numPassengers == nil || pickupAddress == nil || dropoffAddress == nil || pickupTime == nil) {
+                if id == nil || numPassengers == nil || pickupAddress == nil || dropoffAddress == nil || pickupTime == nil {
                     completionHandler(success:false, needLogin:true, message: "There was an error while requesting a ride", ride: nil)
                 }
                 
