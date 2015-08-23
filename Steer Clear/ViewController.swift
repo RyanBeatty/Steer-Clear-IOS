@@ -33,7 +33,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
 
-    
+    /*
+        loginButton
+        -----------
+        Attemts to log the user into the system
+    */
     @IBAction func loginButton(sender: AnyObject) {
         let storeUserData = NSUserDefaults.standardUserDefaults()
         
@@ -110,18 +114,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         passwordTextbox.leftView = paddingView2
         passwordTextbox.leftViewMode = UITextFieldViewMode.Always
         
-        // Phone text box
-//        self.phoneTextbox.attributedPlaceholder = NSAttributedString(string:self.phoneTextbox.placeholder!, attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
-//        let border3 = CALayer()
-//        let width3 = CGFloat(2.0)
-//        border3.borderColor = lightBlue.CGColor
-//        border3.frame = CGRect(x: 0, y: phoneTextbox.frame.size.height - width3, width:  phoneTextbox.frame.size.width, height: passwordTextbox.frame.size.height)
-//        border3.borderWidth = width3
-//        phoneTextbox.layer.addSublayer(border3)
-//        let paddingView3 = UIView(frame: CGRectMake(0, 0, 25, self.phoneTextbox.frame.height))
-//        phoneTextbox.leftView = paddingView3
-//        phoneTextbox.leftViewMode = UITextFieldViewMode.Always
-        
         // Email Font Awesome
         emailLabel.font = UIFont(name: "FontAwesome", size: 20)
         emailLabel.text = String(format: "%C", 0xf003)
@@ -131,13 +123,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         passwordLabel.font = UIFont(name: "FontAwesome", size: 20)
         passwordLabel.text = String(format: "%C", 0xf023)
         passwordLabel.textColor = lightBlue
-        
-        // Phone Font Awesome
-//        phoneLabel.font = UIFont(name: "FontAwesome", size: 30)
-//        phoneLabel.text = String(format: "%C", 0xf10b)
-//        phoneLabel.textColor = lightBlue
-        
-        
     }
     
     /* Handles user alerts. For example, when Username or Password is required but not entered.
