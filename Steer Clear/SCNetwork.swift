@@ -154,10 +154,10 @@ class SCNetwork: NSObject {
         
         // build form data string
         let formDataString = "start_latitude=\(startLat)" +
-                             "start_longitude=\(startLong)" +
-                             "end_latitude=\(endLat)" +
-                             "end_longitude=\(endLong)" +
-                             "num_passengers=\(numPassengers)"
+                             "&start_longitude=\(startLong)" +
+                             "&end_latitude=\(endLat)" +
+                             "&end_longitude=\(endLong)" +
+                             "&num_passengers=\(numPassengers)"
         
         // initialize url request object
         var request = NSMutableURLRequest(URL: rideRequestUrl!)
@@ -210,93 +210,6 @@ class SCNetwork: NSObject {
         })
         
         // start task
-        task.resume()
-    }
-    
-    /*
-        add
-        ---
-        Attempts to add ride to queue
-        
-        :start_lat:             Pickup latitude
-        :start_long:            Pickup Longitude
-        :end_lat:               Dropoff latitude
-        :end_long:              Dropoff Longitude
-        :numOfPassengers:       Number of Passengers
-    */
-    class func add(start_lat: String, start_long: String, end_lat: String, end_long: String, numOfPassengers :String,
-        completionHandler: (success: Bool, message: String) -> ()) {
-            
-        let postData = NSMutableData(data: "num_passengers=\(numOfPassengers)".dataUsingEncoding(NSUTF8StringEncoding)!)
-        postData.appendData("&start_latitude=\(start_lat)".dataUsingEncoding(NSUTF8StringEncoding)!)
-        postData.appendData("&start_longitude=\(start_long)".dataUsingEncoding(NSUTF8StringEncoding)!)
-        postData.appendData("&end_latitude=\(end_lat)".dataUsingEncoding(NSUTF8StringEncoding)!)
-        postData.appendData("&end_longitude=\(end_long)".dataUsingEncoding(NSUTF8StringEncoding)!)
-        
-        let request = NSMutableURLRequest(URL: NSURL(string: RIDE_REQUEST_URL_STRING)!,
-            cachePolicy: .UseProtocolCachePolicy,
-            timeoutInterval: 10.0)
-        request.HTTPMethod = "POST"
-        request.HTTPBody = postData
-        
-        let session = NSURLSession.sharedSession()
-        var task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
-            println("Response: \(response)")
-            
-            let httpResponse = response as! NSHTTPURLResponse
-            switch(httpResponse.statusCode) {
-            
-//            update with real completionHandler, neeed to declare it in the func declation 
-            case 201:
-                completionHandler(success: true, message: "Added Ride")
-                
-                var strData = NSString(data: data, encoding: NSUTF8StringEncoding)
-                println("Body: \(strData)")
-                var err: NSError?
-                var response = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as! NSDictionary
-                
-                
-                // Did the JSONObjectWithData constructor return an error? If so, log the error to the console
-                if(err != nil) {
-                    println(err!.localizedDescription)
-                    let jsonStr = NSString(data: data, encoding: NSUTF8StringEncoding)
-                    println("Error could not parse JSON: '\(jsonStr)'")
-                }
-                else {
-                    // The JSONObjectWithData constructor didn't return an error.
-                    
-                    
-                    var dropoff_address: AnyObject = (response["ride"]!["dropoff_address"]!)!
-                    var dropoff_time: AnyObject = (response["ride"]!["dropoff_time"]!)!
-                    var end_latitude: AnyObject = (response["ride"]!["end_latitude"]!)!
-                    var end_longitude: AnyObject = (response["ride"]!["end_longitude"]!)!
-                    var id: AnyObject = (response["ride"]!["id"]!)!
-                    var pickup_address: AnyObject = (response["ride"]!["pickup_address"]!)!
-                    var pickup_time: AnyObject = (response["ride"]!["pickup_time"]!)!
-                    var start_latitude: AnyObject = (response["ride"]!["start_latitude"]!)!
-                    var start_longitude: AnyObject = (response["ride"]!["start_longitude"]!)!
-                    var travel_time: AnyObject = (response["ride"]!["travel_time"]!)!
-                    
-                    currentRideData = [ "dropoff_address" : "\(dropoff_address)",
-                        "dropoff_time" : "\(dropoff_time)",
-                        "end_latitude" : end_latitude,
-                        "end_longitude" : end_longitude,
-                        "id" : id,
-                        "pickup_address" : "\(pickup_address)",
-                        "pickup_time" : "\(pickup_time)",
-                        "start_latitude" : start_latitude,
-                        "start_longitude" : start_longitude,
-                        "travel_time" : travel_time,
-                    ]
-                    
-                }
-            case 401:
-                completionHandler(success: false, message: "Not logged in")
-            default:
-                completionHandler(success: false, message: "There was an error while posting ")
-            }
-        })
-        
         task.resume()
     }
     

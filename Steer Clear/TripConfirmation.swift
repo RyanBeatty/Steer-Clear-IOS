@@ -38,35 +38,37 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
     }
     
     @IBAction func confirmButton(sender: AnyObject) {
-        let stringStartLat = toString(start.latitude)
-        let stringStartLong = toString(start.longitude)
-        let stringEndLat = toString(end.latitude)
-        let stringEndLong = toString(end.longitude)
-
+        let startLatString = toString(start.latitude)
+        let startLongString = toString(start.longitude)
+        let endLatString = toString(end.latitude)
+        let endLongString = toString(end.longitude)
+        let numPassengersString = numberOfPassengers.text!
         
-        SCNetwork.add(stringStartLat,
-                        start_long: stringStartLong,
-                        end_lat: stringEndLat,
-                        end_long: stringEndLong,
-                        numOfPassengers: numberOfPassengers.text!,
-                        completionHandler: {
-                            success, message in
+        // request a ride
+        SCNetwork.requestRide(
+            startLatString,
+            startLong: startLongString,
+            endLat: endLatString,
+            endLong: endLongString,
+            numPassengers: numPassengersString,
+            completionHandler: {
+                success, login, message, ride in
                 
-                            // can't make UI updates from background thread, so we need to dispatch
-                            // them to the main thread
-                            dispatch_async(dispatch_get_main_queue(), {
-                                
-                                // check if registration succeeds
-                                if(!success) {
-                                    // if it failed, display error
-                                    self.displayAlert("Ride Error", message: message)
-                                } else {
-                                  
-                                    self.performSegueWithIdentifier("waitingSegue", sender: self)
-                                }
-                            })
-                        })
-        
+                // if something went wrong, display error message
+                if(!success || ride == nil) {
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.displayAlert("Ride Request Error", message: message)
+                    })
+                }
+                else {
+                    // else request was a success, so change screens
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.performSegueWithIdentifier("waitingSegue", sender: self)
+                    })
+                }
+                return
+            }
+        )
     }
 
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
