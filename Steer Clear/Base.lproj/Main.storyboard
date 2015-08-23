@@ -101,10 +101,10 @@
             </objects>
             <point key="canvasLocation" x="-332" y="98"/>
         </scene>
-        <!--View Controller-->
+        <!--LoginScreen-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="Steer_Clear" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="LoginScreen" id="vXZ-lx-hvc" customClass="ViewController" customModule="Steer_Clear" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -511,6 +511,6 @@
         <image name="steerClearLogo" width="6963" height="6962"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ZmU-pM-MLV"/>
+        <segue reference="SY5-wn-1ZG"/>
     </inferredMetricsTieBreakers>
 </document>
