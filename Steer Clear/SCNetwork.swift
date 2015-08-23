@@ -145,6 +145,18 @@ class SCNetwork: NSObject {
         task.resume()
     }
     
+    /*
+        requestRide
+        -----------
+        Attempts to make a new ride request
+    
+        :startLat:          starting latitude coordinate
+        :startLong:         starting longitude coordinate
+        :endLat:            ending latitude coordinate
+        :endLong:           ending longitude coordinate
+        :numPassengers:     number of passengers in the ride request
+        :completionHandler: callback
+    */
     class func requestRide(startLat: String, startLong: String, endLat: String, endLong: String, numPassengers: String, completionHandler: (success: Bool, needLogin: Bool, message: String, ride: Ride?)->()) {
         
         // create rideRequest url
@@ -293,30 +305,4 @@ class SCNetwork: NSObject {
         
         dataTask.resume()
     }
-    
-    /*
-        logout
-        ------
-        Logs user out
-    */
-    class func logout(){
-        let request = NSMutableURLRequest(URL: NSURL(string: LOGOUT_URL_STRING)!,
-            cachePolicy: .UseProtocolCachePolicy,
-            timeoutInterval: 10.0)
-        
-        request.HTTPMethod = "GET"
-        
-        let session = NSURLSession.sharedSession()
-        let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
-            if (error != nil) {
-                print(error)
-            } else {
-                let httpResponse = response as? NSHTTPURLResponse
-                print(httpResponse)
-            }
-        })
-        
-        dataTask.resume()
-    }
-    
 }

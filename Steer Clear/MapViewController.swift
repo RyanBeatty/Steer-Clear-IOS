@@ -73,9 +73,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     }
     
     @IBAction func logoutButton(sender: AnyObject) {
-        SCNetwork.logout()
-        self.performSegueWithIdentifier("logoutRiderSegue", sender: self)
-        println("Logged out")
+        SCNetwork.logout({
+            success, message in
+            // can't make UI updates from background thread, so we need to dispatch
+            // them to the main thread
+            dispatch_async(dispatch_get_main_queue(), {
+                self.performSegueWithIdentifier("logoutRiderSegue", sender: self)
+                println("Logged out")
+            })
+        })
     }
     @IBAction func confirmRideButton(sender: AnyObject) {
         if destinationInput != false {

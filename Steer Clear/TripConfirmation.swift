@@ -50,7 +50,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
             var svc = segue.destinationViewController as! WaitingController;
             
             // pass along ride object to waiting viewcontroller
-            svc.currentRideData = currentRide
+            svc.currentRide = currentRide
             
         }
         else if (segue.identifier == "changeDetails") {
