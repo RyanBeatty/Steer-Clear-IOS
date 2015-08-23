@@ -44,6 +44,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // grab username and password fields and check if they are not null
         var username = usernameTextbox.text
         var password = passwordTextbox.text
+        
         if (username!.isEmpty) || (password!.isEmpty) {
             // alert user to fill in empty fields
             displayAlert("Missing Fields(s)", message: "Username and Password Required")
@@ -76,24 +77,41 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    /*
+    registerButton
+    --------------
+    Redirects user to Registration Page
     
+    */
     @IBAction func registerButton(sender: AnyObject) {
         // redirects to register page
         self.performSegueWithIdentifier("registerSegue", sender: self)
     }
     
+    
+    /*
+    design
+    ------
+    Implements the following styles to the username and password textboxes in the Storyboard ViewController:
+    
+        UsernameTextbox: solid bottom border with customColor, change placeholder text white
+        PasswordTextbox: solid bottom border with customColor, change placeholder text white
+    
+        EmailLabel: Apply font awesome icon
+        PasswordLabel: Apply font awesome icon
+    
+    */
     func design() {
         // Colors
-        let lightBlue = UIColor(hue: 0.1056, saturation: 0.5, brightness: 0.72, alpha: 1.0) /* #b9975b */
+        let customColor = UIColor(hue: 0.1056, saturation: 0.5, brightness: 0.72, alpha: 0.5) /* #b9975b */
         
+
+        // Username text box
         usernameTextbox.layer.masksToBounds = true
-        
-        
-        // Email text box
         self.usernameTextbox.attributedPlaceholder = NSAttributedString(string:self.usernameTextbox.placeholder!, attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
         let border = CALayer()
         let width = CGFloat(2.0)
-        border.borderColor = lightBlue.CGColor
+        border.borderColor = customColor.CGColor
         border.frame = CGRect(x: 0, y: usernameTextbox.frame.size.height - width, width:  usernameTextbox.frame.size.width, height: usernameTextbox.frame.size.height)
         border.borderWidth = width
         usernameTextbox.layer.addSublayer(border)
@@ -106,7 +124,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.passwordTextbox.attributedPlaceholder = NSAttributedString(string:self.passwordTextbox.placeholder!, attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
         let border2 = CALayer()
         let width2 = CGFloat(2.0)
-        border2.borderColor = lightBlue.CGColor
+        border2.borderColor = customColor.CGColor
         border2.frame = CGRect(x: 0, y: passwordTextbox.frame.size.height - width2, width:  passwordTextbox.frame.size.width, height: passwordTextbox.frame.size.height)
         border2.borderWidth = width2
         passwordTextbox.layer.addSublayer(border2)
@@ -117,15 +135,19 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // Email Font Awesome
         emailLabel.font = UIFont(name: "FontAwesome", size: 20)
         emailLabel.text = String(format: "%C", 0xf003)
-        emailLabel.textColor = lightBlue
+        emailLabel.textColor = UIColor.whiteColor()
         
-        // Password Font Awesome
+        // Password Font Awesome Icon
         passwordLabel.font = UIFont(name: "FontAwesome", size: 20)
         passwordLabel.text = String(format: "%C", 0xf023)
-        passwordLabel.textColor = lightBlue
+        passwordLabel.textColor = UIColor.whiteColor()
     }
     
-    /* Handles user alerts. For example, when Username or Password is required but not entered.
+    /* 
+    displayAlert
+    ------------
+    Handles user alerts. For example, when Username or Password is required but not entered.
+    
     */
     func displayAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
@@ -144,12 +166,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return false
-    }
-    
     
 }
 

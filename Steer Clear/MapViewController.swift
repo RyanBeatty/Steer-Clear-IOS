@@ -24,7 +24,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     
     @IBOutlet var confirmRideOutlet: UIButton!
     
-    @IBOutlet var mapV: GMSMapView!
+    @IBOutlet weak var mapView: GMSMapView!
+//    @IBOutlet var mapV: GMSMapView!
     var startLatitude = CLLocationDegrees()
     var startLongitude = CLLocationDegrees()
     var endLatitude = CLLocationDegrees()
@@ -96,7 +97,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     @IBAction func myLocationButton(sender: AnyObject) {
         let myLocation = locationManager.location
         if myLocation != nil {
-            mapV.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 17.0)
+            mapView.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 17.0)
             self.setupLocationMarker(myLocation.coordinate)
         } else {
             let alert = UIAlertController(title: "Location Error", message: "Cannot find Current Location.", preferredStyle: UIAlertControllerStyle.Alert)
@@ -132,7 +133,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 self.globalStartName = changeStartName
                 self.globalEndName = changeEndName
                 setupLocationMarker(changeStart)
-                self.mapV.camera = GMSCameraPosition.cameraWithTarget(changeStart, zoom: 17.0)
+                self.mapView.camera = GMSCameraPosition.cameraWithTarget(changeStart, zoom: 17.0)
                 changePickup == false
                 
                 
@@ -144,7 +145,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 // endLocationMarker.snippet = "\(locationDetails)"
                 print(locationDetails)
                 endLocationMarker.opacity = 0.75
-                endLocationMarker.map = mapV
+                endLocationMarker.map = mapView
                 endLatitude = changeEnd.latitude
                 endLongitude = changeEnd.longitude
                 destinationInput = true
@@ -158,34 +159,29 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 setupLocationMarker(changeStart)
                 segmentOutlet.selectedSegmentIndex = 1
                 self.setupLocationMarker(changeEnd)
-                self.mapV.camera = GMSCameraPosition.cameraWithTarget(changeEnd, zoom: 17.0)
+                self.mapView.camera = GMSCameraPosition.cameraWithTarget(changeEnd, zoom: 17.0)
                 changePickup == false
                 
-
-//                button.backgroundColor = dropoffColor
-//                segmentOutlet.tintColor = dropoffColor
-//                myLocationButtonOutlet.backgroundColor = dropoffColor
-//                confirmRideOutlet.backgroundColor = dropoffColor
             }
             change = false
 
         } else {
-        mapV.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
+            mapView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
 
         }
-        mapV.delegate = self
+        mapView.delegate = self
     }
     
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        if status == CLAuthorizationStatus.AuthorizedWhenInUse {
-            mapV.myLocationEnabled = true
-        }
+            if status == CLAuthorizationStatus.AuthorizedWhenInUse {
+                mapView.myLocationEnabled = true
+            }
     }
     
     override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
         if !didFindMyLocation {
             let myLocation: CLLocation = change[NSKeyValueChangeNewKey] as! CLLocation
-            mapV.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 17.0)
+            mapView.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 17.0)
             //mapV.settings.myLocationButton = true
             self.setupLocationMarker(myLocation.coordinate)
             didFindMyLocation = true
@@ -270,7 +266,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 locationMarker.icon = GMSMarker.markerImageWithColor(pickupColor)
                 locationMarker.title = "Pick Up"
                 locationMarker.opacity = 0.75
-                locationMarker.map = mapV
+                locationMarker.map = mapView
                 startLatitude = coordinate.latitude
                 startLongitude = coordinate.longitude
                 
@@ -287,7 +283,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 // endLocationMarker.snippet = "\(locationDetails)"
                 print(locationDetails)
                 endLocationMarker.opacity = 0.75
-                endLocationMarker.map = mapV
+                endLocationMarker.map = mapView
                 endLatitude = coordinate.latitude
                 endLongitude = coordinate.longitude
                 destinationInput = true
@@ -319,7 +315,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 extension MapViewController: GooglePlacesAutocompleteDelegate {
     func placeSelected(place: Place) {
         place.getDetails { details in
-            self.mapV.camera = GMSCameraPosition.cameraWithLatitude(details.latitude, longitude: details.longitude, zoom: 15.0)
+            self.mapView.camera = GMSCameraPosition.cameraWithLatitude(details.latitude, longitude: details.longitude, zoom: 15.0)
             let coordinate = CLLocationCoordinate2D(latitude: details.latitude, longitude: details.longitude)
             self.button.setTitle("\(place.description)", forState: UIControlState.Normal)
             self.cameFromSearch = true

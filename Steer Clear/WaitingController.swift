@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import QuartzCore
 
 class WaitingController: UIViewController {
 
@@ -28,12 +29,11 @@ class WaitingController: UIViewController {
         formatter.dateFormat = "E, dd MMM yyyy HH:mm:ss Z"
         let date = formatter.dateFromString(fullETA)
         
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: date!)
-        let hour = components.hour
-        let minutes = components.minute
+//        etaLabel.text = "\(hour):\(minutes)"
+        etaLabel.layer.cornerRadius = 0.5 * etaLabel.bounds.size.width
+        etaLabel.layer.shadowOpacity = 0.5
+
         
-        etaLabel.text = "\(hour):\(minutes)"
     }
     
     @IBAction func cancelRideButton(sender: AnyObject) {
