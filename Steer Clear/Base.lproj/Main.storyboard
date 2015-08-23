@@ -529,7 +529,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="etaLabel" destination="gQK-c0-2WN" id="cAR-li-ebt"/>
-                        <segue destination="nsC-P0-xcL" kind="show" identifier="cancelRideSegue" id="ZmU-pM-MLV"/>
+                        <segue destination="nsC-P0-xcL" kind="presentation" identifier="cancelRideSegue" id="ZmU-pM-MLV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LcF-lr-Ma9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -543,6 +543,6 @@
         <image name="steerClearLogo" width="6963" height="6962"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ZmU-pM-MLV"/>
+        <segue reference="wsX-g9-NaP"/>
     </inferredMetricsTieBreakers>
 </document>

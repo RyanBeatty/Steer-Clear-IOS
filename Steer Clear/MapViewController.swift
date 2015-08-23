@@ -87,11 +87,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     
     @IBAction func confirmRideButton(sender: AnyObject) {
         if destinationInput != false {
-            } else {
+            
+        }
+        else {
             let alert = UIAlertController(title: "Trip Error", message: "Please input Destination", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
-            }
+        }
     }
 
     
