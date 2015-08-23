@@ -19,13 +19,18 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
     @IBOutlet var myPicker: UIPickerView!
     @IBOutlet var numberOfPassengers: UILabel!
 
-    var currentRide: Ride? = nil
     let pickerData = ["1","2","3","4","5", "6","7","8"]
+    
+    // ride object recieved from server
+    var currentRide: Ride? = nil
+    
+    // start and end lat/long points
     var start = CLLocationCoordinate2D()
     var end = CLLocationCoordinate2D()
+    
+    // start and end address names
     var startName = ""
     var endName = ""
-    var networkController = Network()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,10 +43,13 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         
     }
     
+    // called when making a segue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        // if seguing to waitingviewcontroller
         if (segue.identifier == "waitingSegue") {
             var svc = segue.destinationViewController as! WaitingController;
             
+            // pass along ride object to waiting viewcontroller
             svc.currentRideData = currentRide
             
         }
@@ -68,6 +76,11 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         }
     }
     
+    /*
+        confirmButton
+        -------------
+        Place ride request
+    */
     @IBAction func confirmButton(sender: AnyObject) {
         let startLatString = toString(start.latitude)
         let startLongString = toString(start.longitude)
@@ -94,6 +107,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
                 else {
                     // else request was a success, so change screens
                     dispatch_async(dispatch_get_main_queue(), {
+                        // make sure we save Ride object
                         self.currentRide = ride
                         self.performSegueWithIdentifier("waitingSegue", sender: self)
                     })

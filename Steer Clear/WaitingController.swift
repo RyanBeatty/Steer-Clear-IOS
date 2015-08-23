@@ -12,7 +12,7 @@ class WaitingController: UIViewController {
 
     @IBOutlet var etaLabel: UILabel!
     
-    var currentRideData: Ride!
+    var currentRide: Ride!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +21,7 @@ class WaitingController: UIViewController {
     }
 
     func setupETA() {
-        var fullETA = toString(currentRideData.pickupTime)
+        var fullETA = toString(currentRide.pickupTime)
         
         let formatter = NSDateFormatter()
         formatter.locale = NSLocale(localeIdentifier: "en_US")
@@ -37,7 +37,7 @@ class WaitingController: UIViewController {
     }
     
     @IBAction func cancelRideButton(sender: AnyObject) {
-        var currentRideId = toString(currentRideData.id)
+        var currentRideId = toString(currentRide.id)
         
         SCNetwork.deleteRideWithId(currentRideId,
             completionHandler: {
