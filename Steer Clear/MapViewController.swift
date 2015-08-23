@@ -84,6 +84,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             })
         })
     }
+    
     @IBAction func confirmRideButton(sender: AnyObject) {
         if destinationInput != false {
             } else {
@@ -118,6 +119,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             gpaViewController.locationBias = LocationBias(latitude: 37.270821, longitude: -76.709025, radius: 1000)
             presentViewController(gpaViewController, animated: true, completion: nil)
         }
+    }
+    
+    // unwind segue method so that you can go back from ride confirmation page
+    @IBAction func backToMapViewController(segue:UIStoryboardSegue) {
+        
     }
 
     override func viewDidLoad() {
