@@ -61,10 +61,11 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem id="W9V-aM-MQg">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="uJc-f9-pTX">
+                                    <navigationItem title="Register" id="W9V-aM-MQg">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="uJc-f9-pTX">
                                             <connections>
                                                 <action selector="backButton:" destination="yVC-nT-SHs" id="IBF-7V-UET"/>
+                                                <segue destination="Ai4-97-nRe" kind="unwind" unwindAction="cancelToLoginViewController:" id="3TB-E2-gTN"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -101,10 +102,10 @@
                         <outlet property="phoneTextField" destination="BrF-HJ-8pJ" id="kgI-uY-PLo"/>
                         <outlet property="usernameLabel" destination="Bhe-EJ-yjC" id="xN5-oR-DvB"/>
                         <segue destination="nsC-P0-xcL" kind="show" identifier="loginFromRegister" id="kr5-Jq-0sE"/>
-                        <segue destination="vXZ-lx-hvc" kind="show" identifier="backToLoginSegue" id="Bpd-1a-1Wk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5U6-KH-dsY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Ai4-97-nRe" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="940" y="-429"/>
         </scene>
@@ -208,7 +209,7 @@
                         <outlet property="passwordTextbox" destination="FWU-bi-022" id="q0u-tR-28u"/>
                         <outlet property="usernameTextbox" destination="yOZ-WN-l0f" id="BXP-DJ-lWs"/>
                         <segue destination="nsC-P0-xcL" kind="show" identifier="loginRider" id="SY5-wn-1ZG"/>
-                        <segue destination="yVC-nT-SHs" kind="presentation" identifier="registerSegue" id="BpE-L2-UCW"/>
+                        <segue destination="yVC-nT-SHs" kind="show" identifier="registerSegue" id="BpE-L2-UCW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -541,7 +542,6 @@
         <image name="steerClearLogo" width="6963" height="6962"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="K79-wh-Awl"/>
-        <segue reference="SY5-wn-1ZG"/>
+        <segue reference="kr5-Jq-0sE"/>
     </inferredMetricsTieBreakers>
 </document>

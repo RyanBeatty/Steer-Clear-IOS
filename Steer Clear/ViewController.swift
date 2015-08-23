@@ -32,6 +32,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
             self.usernameTextbox.text = self.defaults.stringForKey("lastUser")
         }
     }
+    
+    // unwind segue method so that you can cancel registration view controller
+    @IBAction func cancelToLoginViewController(segue:UIStoryboardSegue) {
+        
+    }
 
     /*
         loginButton
