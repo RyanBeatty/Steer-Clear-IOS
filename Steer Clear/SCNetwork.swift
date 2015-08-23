@@ -28,8 +28,6 @@ let RIDE_REQUEST_URL_STRING = HOSTNAME + RIDE_REQUEST_ROUTE
 let ClEAR_URL_STRING = HOSTNAME + CLEAR_ROUTE
 let DELETE_URL_STRING = HOSTNAME + DELETE_ROUTE
 
-var currentRideData = Dictionary<String, Any>()
-
 class SCNetwork: NSObject {
     
     /*
@@ -211,17 +209,6 @@ class SCNetwork: NSObject {
         
         // start task
         task.resume()
-    }
-    
-    /*
-    getRideData
-    -----------
-    Returns all ride data
-    
-    */
-    
-    class func getRideData() -> Dictionary<String, Any> {
-        return currentRideData
     }
     
     

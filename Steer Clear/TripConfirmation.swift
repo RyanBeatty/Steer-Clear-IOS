@@ -19,6 +19,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
     @IBOutlet var myPicker: UIPickerView!
     @IBOutlet var numberOfPassengers: UILabel!
 
+    var currentRide: Ride? = nil
     let pickerData = ["1","2","3","4","5", "6","7","8"]
     var start = CLLocationCoordinate2D()
     var end = CLLocationCoordinate2D()
@@ -35,6 +36,36 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         startLocationOutlet.text = ("\(startName)")
         endLocationOutlet.text = ("\(endName)")
         
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if (segue.identifier == "waitingSegue") {
+            var svc = segue.destinationViewController as! WaitingController;
+            
+            svc.currentRideData = currentRide
+            
+        }
+        else if (segue.identifier == "changeDetails") {
+            
+            var changeInfo = segue.destinationViewController as! MapViewController;
+            changeInfo.change = true
+            changeInfo.changeStart = start
+            changeInfo.changeEnd = end
+            changeInfo.changePickup = true
+            changeInfo.changeStartName = startName
+            changeInfo.changeEndName = endName
+            
+        }
+        else if (segue.identifier == "changeDetails2") {
+            
+            var changeInfo = segue.destinationViewController as! MapViewController;
+            changeInfo.change = true
+            changeInfo.changeStart = start
+            changeInfo.changeEnd = end
+            changeInfo.changeStartName = startName
+            changeInfo.changeEndName = endName
+            
+        }
     }
     
     @IBAction func confirmButton(sender: AnyObject) {
@@ -63,6 +94,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
                 else {
                     // else request was a success, so change screens
                     dispatch_async(dispatch_get_main_queue(), {
+                        self.currentRide = ride
                         self.performSegueWithIdentifier("waitingSegue", sender: self)
                     })
                 }
@@ -153,30 +185,30 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
     }
 
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "changeDetails") {
-            
-            var changeInfo = segue.destinationViewController as! MapViewController;
-            changeInfo.change = true
-            changeInfo.changeStart = start
-            changeInfo.changeEnd = end
-            changeInfo.changePickup = true
-            changeInfo.changeStartName = startName
-            changeInfo.changeEndName = endName
-            
-        }
-        if (segue.identifier == "changeDetails2") {
-            
-            var changeInfo = segue.destinationViewController as! MapViewController;
-            changeInfo.change = true
-            changeInfo.changeStart = start
-            changeInfo.changeEnd = end
-            changeInfo.changeStartName = startName
-            changeInfo.changeEndName = endName
-            
-        }
-        
-    }
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if (segue.identifier == "changeDetails") {
+//            
+//            var changeInfo = segue.destinationViewController as! MapViewController;
+//            changeInfo.change = true
+//            changeInfo.changeStart = start
+//            changeInfo.changeEnd = end
+//            changeInfo.changePickup = true
+//            changeInfo.changeStartName = startName
+//            changeInfo.changeEndName = endName
+//            
+//        }
+//        if (segue.identifier == "changeDetails2") {
+//            
+//            var changeInfo = segue.destinationViewController as! MapViewController;
+//            changeInfo.change = true
+//            changeInfo.changeStart = start
+//            changeInfo.changeEnd = end
+//            changeInfo.changeStartName = startName
+//            changeInfo.changeEndName = endName
+//            
+//        }
+//        
+//    }
 
     
 
