@@ -18,13 +18,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
     
-    var userLoggedIn = true
     let defaults = NSUserDefaults.standardUserDefaults()
-    
-    
-    override func viewDidAppear(animated: Bool) {
-        checkUser()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,32 +36,38 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func loginButton(sender: AnyObject) {
         let storeUserData = NSUserDefaults.standardUserDefaults()
+        
+        // grab username and password fields and check if they are not null
         var username = usernameTextbox.text
-        let password = passwordTextbox.text
-        var response = 0
+        var password = passwordTextbox.text
         if (username!.isEmpty) || (password!.isEmpty) {
+            // alert user to fill in empty fields
             displayAlert("Missing Fields(s)", message: "Username and Password Required")
         }
         else {
+            // else try to log the user in
             SCNetwork.login(
                 username,
                 password: password,
                 completionHandler: {
                     success, message in
                     
-                    // can't make UI updates from background thread, so we need to dispatch
-                    // them to the main thread
-                    dispatch_async(dispatch_get_main_queue(), {
-                        
-                        // check if registration succeeds
-                        if(!success) {
-                            // if it failed, display error
+                    if(!success) {
+                        // can't make UI updates from background thread, so we need to dispatch
+                        // them to the main thread
+                        dispatch_async(dispatch_get_main_queue(), {
+                            // login failed, display error
                             self.displayAlert("Login Error", message: message)
-                        } else {
-                            // if it succeeded, log user in and change screens to
+                        })
+                    }
+                    else {
+                        // can't make UI updates from background thread, so we need to dispatch
+                        // them to the main thread
+                        dispatch_async(dispatch_get_main_queue(), {
+                            // login succeeded, switch to mapview
                             self.performSegueWithIdentifier("loginRider", sender: self)
-                        }
-                    })
+                        })
+                    }
             })
         }
     }
@@ -140,22 +140,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    func checkUser() {
-        if isAppAlreadyLaunchedOnce() == false {
-            println("new user redirecting to register page")
-            self.performSegueWithIdentifier("registerSegue", sender: self)
-        } else {
-            println("not new user lets see if logged in")
-            if userLoggedIn == true {
-                println("User logged in lets go to maps")
-               // self.performSegueWithIdentifier("loginRider", sender: self)
-            } else {
-                println("lets display login screen")
-            }
-        }
-        
-    }
-    
     /* Handles user alerts. For example, when Username or Password is required but not entered.
     */
     func displayAlert(title: String, message: String) {
@@ -163,17 +147,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
         
-    }
-    
-    func isAppAlreadyLaunchedOnce()->Bool{
-        if let isAppAlreadyLaunchedOnce = self.defaults.stringForKey("isAppAlreadyLaunchedOnce"){
-            println("App already launched")
-            return true
-        }else{
-            defaults.setBool(true, forKey: "isAppAlreadyLaunchedOnce")
-            println("App launched first time")
-            return false
-        }
     }
     
     //Calls this function when the tap is recognized.
