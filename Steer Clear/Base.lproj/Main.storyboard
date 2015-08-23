@@ -80,7 +80,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5U6-KH-dsY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="624" y="-611"/>
+            <point key="canvasLocation" x="940" y="-429"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="jQt-T1-JYU">
@@ -99,7 +99,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4XN-fC-U9P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4" y="91"/>
+            <point key="canvasLocation" x="-332" y="98"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
@@ -186,7 +186,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="430" y="98"/>
+            <point key="canvasLocation" x="218" y="98"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="Afp-S1-Nch">
@@ -344,7 +344,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vBg-rF-pfC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="877" y="98"/>
+            <point key="canvasLocation" x="940" y="498"/>
         </scene>
         <!--Trip Confirmation-->
         <scene sceneID="KKQ-Wo-SHx">
@@ -456,7 +456,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BLy-qm-jQG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1302" y="98"/>
+            <point key="canvasLocation" x="1598" y="498"/>
         </scene>
         <!--Waiting Controller-->
         <scene sceneID="FqG-Z1-6QQ">
@@ -502,7 +502,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LcF-lr-Ma9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1702" y="98"/>
+            <point key="canvasLocation" x="2216" y="498"/>
         </scene>
     </scenes>
     <resources>
@@ -511,6 +511,6 @@
         <image name="steerClearLogo" width="6963" height="6962"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="kr5-Jq-0sE"/>
+        <segue reference="ZmU-pM-MLV"/>
     </inferredMetricsTieBreakers>
 </document>
