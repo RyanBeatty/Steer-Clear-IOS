@@ -50,19 +50,22 @@ class RegisterController: UIViewController, UITextFieldDelegate {
                                 completionHandler: {
                                     success, message in
                                     
-                                    // can't make UI updates from background thread, so we need to dispatch
-                                    // them to the main thread
-                                    dispatch_async(dispatch_get_main_queue(), {
-                                        
-                                        // check if registration succeeds
-                                        if(!success) {
-                                            // if it failed, display error
+                                    if(!success) {
+                                        //can't make UI updates from background thread, so we need to dispatch
+                                        // them to the main thread
+                                        dispatch_async(dispatch_get_main_queue(), {
+                                            // login failed, display alert
                                             self.displayAlert("Login Error", message: message)
-                                        } else {
-                                            // if it succeeded, log user in and change screens to
+                                        })
+                                    }
+                                    else {
+                                        //can't make UI updates from background thread, so we need to dispatch
+                                        // them to the main thread
+                                        dispatch_async(dispatch_get_main_queue(), {
+                                            // login succeeded, change to map screen
                                             self.performSegueWithIdentifier("loginFromRegister", sender: self)
-                                        }
-                                    })
+                                        })
+                                    }
                             })
                         }
                 })

@@ -37,6 +37,8 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         myPicker.delegate = self
         myPicker.dataSource = self
         myPicker.selectRow(1, inComponent: 0, animated: true)
+        
+        currentRide = nil
 
         startLocationOutlet.text = ("\(startName)")
         endLocationOutlet.text = ("\(endName)")
@@ -112,7 +114,6 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
                         self.performSegueWithIdentifier("waitingSegue", sender: self)
                     })
                 }
-                return
             }
         )
     }
@@ -197,33 +198,4 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         
         
     }
-
-
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if (segue.identifier == "changeDetails") {
-//            
-//            var changeInfo = segue.destinationViewController as! MapViewController;
-//            changeInfo.change = true
-//            changeInfo.changeStart = start
-//            changeInfo.changeEnd = end
-//            changeInfo.changePickup = true
-//            changeInfo.changeStartName = startName
-//            changeInfo.changeEndName = endName
-//            
-//        }
-//        if (segue.identifier == "changeDetails2") {
-//            
-//            var changeInfo = segue.destinationViewController as! MapViewController;
-//            changeInfo.change = true
-//            changeInfo.changeStart = start
-//            changeInfo.changeEnd = end
-//            changeInfo.changeStartName = startName
-//            changeInfo.changeEndName = endName
-//            
-//        }
-//        
-//    }
-
-    
-
 }
