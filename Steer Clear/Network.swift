@@ -12,9 +12,6 @@ import SystemConfiguration
 
 class Network {
     
-    var responseStatus: Int = 0
-    var responseFound = false
-    
     func noNetwork() -> Bool {
         
         var zeroAddress = sockaddr_in(sin_len: 0, sin_family: 0, sin_port: 0, sin_addr: in_addr(s_addr: 0), sin_zero: (0, 0, 0, 0, 0, 0, 0, 0))
@@ -34,47 +31,6 @@ class Network {
         let needsConnection = (flags & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
         
         return isReachable && !needsConnection
-    }
-    
-    func login(username: String, password: String) {
-
-        self.responseFound = false
-        var postData = NSMutableData(data: "username=\(username)".dataUsingEncoding(NSUTF8StringEncoding)!)
-        postData.appendData("&password=\(password)".dataUsingEncoding(NSUTF8StringEncoding)!)
-        
-        var request = NSMutableURLRequest(URL: NSURL(string: "http://127.0.0.1:5000/login")!,
-            cachePolicy: .UseProtocolCachePolicy,
-            timeoutInterval: 10.0)
-        request.HTTPMethod = "POST"
-        request.HTTPBody = postData
-        var responso: Int = 0
-        let session = NSURLSession.sharedSession()
-        let dataTask = session.dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
-            if (error != nil) {
-                println(error)
-            } else {
-                let httpResponse = response as? NSHTTPURLResponse
-                responso = httpResponse!.statusCode
-                
-            }
-            self.responseStatus = responso
-            if self.responseStatus != 0 {
-                self.responseFound = true
-                print("Response Found \n")
-            }
-        })
-        
-        dataTask.resume()
-        var count = 0
-        while (self.responseFound != true) {
-            println("waiting for server response")
-            usleep(15000)
-            count += 1
-            if (count >= 1000) {
-                self.responseFound = true
-                self.responseStatus = 403
-            }
-        }
     }
  
     var lookupAddressResults: Dictionary<NSObject, AnyObject>!
