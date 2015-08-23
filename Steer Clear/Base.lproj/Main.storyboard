@@ -101,7 +101,7 @@
                         <outlet property="phoneLabel" destination="CZ5-3O-385" id="DmI-Ck-Agm"/>
                         <outlet property="phoneTextField" destination="BrF-HJ-8pJ" id="kgI-uY-PLo"/>
                         <outlet property="usernameLabel" destination="Bhe-EJ-yjC" id="xN5-oR-DvB"/>
-                        <segue destination="nsC-P0-xcL" kind="show" identifier="loginFromRegister" id="kr5-Jq-0sE"/>
+                        <segue destination="nsC-P0-xcL" kind="presentation" identifier="loginFromRegister" id="kr5-Jq-0sE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5U6-KH-dsY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -361,7 +361,7 @@
                         <outlet property="myLocationButtonOutlet" destination="Xt9-eA-P5A" id="JIS-fN-QmF"/>
                         <outlet property="pickUpLabel" destination="Ukc-bd-3dQ" id="AxC-08-b0h"/>
                         <outlet property="segmentOutlet" destination="VY1-qt-Xx7" id="ubs-qQ-vqQ"/>
-                        <segue destination="vXZ-lx-hvc" kind="show" identifier="logoutRiderSegue" id="K79-wh-Awl"/>
+                        <segue destination="vXZ-lx-hvc" kind="presentation" identifier="logoutRiderSegue" id="K79-wh-Awl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vBg-rF-pfC" userLabel="First Responder" sceneMemberID="firstResponder"/>
