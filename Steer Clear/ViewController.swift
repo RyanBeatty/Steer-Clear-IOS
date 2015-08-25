@@ -114,6 +114,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // Username text box
         usernameTextbox.layer.masksToBounds = true
         self.usernameTextbox.attributedPlaceholder = NSAttributedString(string:self.usernameTextbox.placeholder!, attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
+        
         let border = CALayer()
         let width = CGFloat(2.0)
         border.borderColor = customColor.CGColor
