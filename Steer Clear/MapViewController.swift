@@ -64,11 +64,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         {
         case 0:
             segmentOutlet.tintColor = self.spiritYellow
-//            self.button.setTitle("\(globalStartName)", forState: UIControlState.Normal)
+            if globalStartName != "" {
+                self.mapView.animateToCameraPosition(GMSCameraPosition.cameraWithTarget(globalStartLocation,
+                    zoom: 17.0, bearing: 30, viewingAngle: 45))
+            }
+            
             
         case 1:
             segmentOutlet.tintColor = self.green
-//            self.button.setTitle("\(globalEndName)", forState: UIControlState.Normal)
+            if globalEndName != "" {
+                self.mapView.animateToCameraPosition(GMSCameraPosition.cameraWithTarget(globalEndLocation,
+                    zoom: 17.0, bearing: 30, viewingAngle: 45))
+            }
+           
             
         default:
             break;
@@ -104,6 +112,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         } else {
+            segmentOutlet.selectedSegmentIndex = 0
+            segmentOutlet.tintColor = self.spiritYellow
             let gpaViewController = GooglePlacesAutocomplete(apiKey: "AIzaSyDd_lRDKvpH6ao8KmLTDmQPB4wdhxfuEys",placeType: .Address)
             gpaViewController.placeDelegate = self
             gpaViewController.locationBias = LocationBias(latitude: 37.270821, longitude: -76.709025, radius: 1000)
@@ -111,6 +121,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         }
     }
     
+    @IBAction func dropOffSearchButton(sender: AnyObject) {
+        if networkController.noNetwork() == false {
+            let alert = UIAlertController(title: "Network Connection", message: "Unable to connect to the network.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        } else {
+            segmentOutlet.selectedSegmentIndex = 1
+            segmentOutlet.tintColor = self.green
+            let gpaViewController = GooglePlacesAutocomplete(apiKey: "AIzaSyDd_lRDKvpH6ao8KmLTDmQPB4wdhxfuEys",placeType: .Address)
+            gpaViewController.placeDelegate = self
+            gpaViewController.locationBias = LocationBias(latitude: 37.270821, longitude: -76.709025, radius: 1000)
+            presentViewController(gpaViewController, animated: true, completion: nil)
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setupButtons()
@@ -151,6 +175,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 self.button.setTitle("\(globalStartName)", forState: UIControlState.Normal)
                 setupLocationMarker(changeStart)
                 segmentOutlet.selectedSegmentIndex = 1
+                segmentOutlet.tintColor = self.green
                 self.setupLocationMarker(changeEnd)
                 self.mapView.animateToCameraPosition(GMSCameraPosition.cameraWithTarget(changeEnd, zoom: 17.0, bearing: 30, viewingAngle: 45))
                 changePickup == false
