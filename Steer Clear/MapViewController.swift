@@ -123,6 +123,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 self.globalEndLocation = changeEnd
                 self.globalStartName = changeStartName
                 self.globalEndName = changeEndName
+                self.dropOffButtonText.setTitle("\(globalEndName)", forState: UIControlState.Normal)
                 setupLocationMarker(changeStart)
                 self.mapView.animateToCameraPosition(GMSCameraPosition.cameraWithTarget(changeStart, zoom: 17.0, bearing: 30, viewingAngle: 45))
                 changePickup == false
@@ -147,6 +148,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 self.globalEndLocation = changeEnd
                 self.globalStartName = changeStartName
                 self.globalEndName = changeEndName
+                self.button.setTitle("\(globalStartName)", forState: UIControlState.Normal)
                 setupLocationMarker(changeStart)
                 segmentOutlet.selectedSegmentIndex = 1
                 self.setupLocationMarker(changeEnd)
