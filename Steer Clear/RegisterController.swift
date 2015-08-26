@@ -17,6 +17,7 @@ class RegisterController: UIViewController, UITextFieldDelegate {
     @IBOutlet var phoneLabel: UILabel!
     @IBOutlet var usernameLabel: UILabel!
     @IBOutlet var passwordLabel: UILabel!
+    let defaults = NSUserDefaults.standardUserDefaults()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,7 +83,7 @@ class RegisterController: UIViewController, UITextFieldDelegate {
                                         //can't make UI updates from background thread, so we need to dispatch
                                         // them to the main thread
                                         dispatch_async(dispatch_get_main_queue(), {
-                                            // login succeeded, change to map screen
+                                            self.defaults.setObject("\(username)", forKey: "lastUser")                                    
                                             self.performSegueWithIdentifier("loginFromRegister", sender: self)
                                         })
                                     }

@@ -33,6 +33,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    override func viewDidAppear(animated: Bool) {
+        checkUser()
+    }
+    
     // unwind segue method so that you can cancel registration view controller
     @IBAction func cancelToLoginViewController(segue:UIStoryboardSegue) {
         
@@ -44,7 +48,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         Attemts to log the user into the system
     */
     @IBAction func loginButton(sender: AnyObject) {
-        let storeUserData = NSUserDefaults.standardUserDefaults()
         
         // grab username and password fields and check if they are not null
         var username = usernameTextbox.text
@@ -74,7 +77,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                         // can't make UI updates from background thread, so we need to dispatch
                         // them to the main thread
                         dispatch_async(dispatch_get_main_queue(), {
-                            // login succeeded, switch to mapview
+                            self.defaults.setObject("\(username)", forKey: "lastUser")
                             self.performSegueWithIdentifier("loginRider", sender: self)
                         })
                     }
@@ -147,6 +150,37 @@ class ViewController: UIViewController, UITextFieldDelegate {
         passwordLabel.font = UIFont(name: "FontAwesome", size: 20)
         passwordLabel.text = String(format: "%C", 0xf023)
         passwordLabel.textColor = UIColor.whiteColor()
+    }
+    
+    //unhardcode this
+    var userLoggedIn = false
+    
+    func checkUser() {
+        if isAppAlreadyLaunchedOnce() == false {
+            println("new user redirecting to register page")
+            self.performSegueWithIdentifier("registerSegue", sender: self)
+        }
+        else {
+            println("not new user lets see if logged in")
+            if userLoggedIn {
+                println("User logged in lets go to maps")
+                self.performSegueWithIdentifier("loginRider", sender: self)
+            } else {
+                println("lets display login screen")
+            }
+        }
+    }
+    
+    func isAppAlreadyLaunchedOnce()->Bool{
+        if let isAppAlreadyLaunchedOnce = self.defaults.stringForKey("isAppAlreadyLaunchedOnce"){
+            println("App already launched")
+            return true
+        }
+        else {
+            defaults.setBool(true, forKey: "isAppAlreadyLaunchedOnce")
+            println("App launched first time")
+            return false
+        }
     }
     
     /* 

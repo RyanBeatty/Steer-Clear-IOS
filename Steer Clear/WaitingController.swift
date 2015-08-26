@@ -27,9 +27,14 @@ class WaitingController: UIViewController {
         let formatter = NSDateFormatter()
         formatter.locale = NSLocale(localeIdentifier: "en_US")
         formatter.dateFormat = "E, dd MMM yyyy HH:mm:ss Z"
+        formatter.dateFormat = "h:mm"
         let date = formatter.dateFromString(fullETA)
-        
-//        etaLabel.text = "\(hour):\(minutes)"
+        print(date)
+        let calendar = NSCalendar.currentCalendar()
+//        let comp = calendar.components((.CalendarUnitHour | .CalendarUnitMinute), fromDate: date!)
+//        let hour = comp.hour
+//        let minutes = comp.minute
+        etaLabel.text = "date"
         etaLabel.layer.cornerRadius = 0.5 * etaLabel.bounds.size.width
         etaLabel.layer.shadowOpacity = 0.5
 
