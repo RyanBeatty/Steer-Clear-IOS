@@ -15,6 +15,8 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
    
     @IBOutlet var startLocationOutlet: UILabel!
 
+    @IBOutlet var changePickup: UIButton!
+    @IBOutlet weak var changeDropoff: UIButton!
     @IBOutlet var endLocationOutlet: UILabel!
     @IBOutlet var myPicker: UIPickerView!
     @IBOutlet var numberOfPassengers: UILabel!
@@ -33,6 +35,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
     var endName = ""
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         myPicker.delegate = self
         myPicker.dataSource = self

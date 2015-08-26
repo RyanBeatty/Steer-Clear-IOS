@@ -10,7 +10,7 @@ import UIKit
 import SwiftyJSON
 
 // hostname of server
-let HOSTNAME = "http://127.0.0.1:5000"
+let HOSTNAME = "http://steerclear.wm.edu/"
 
 // api url routes
 let REGISTER_ROUTE = "/register"
