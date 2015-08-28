@@ -82,6 +82,7 @@ class SCNetwork: NSObject {
             case 400:
                 completionHandler(success: false, message: "The username, password, or phone number were entered incorrectly")
             default:
+                println("Status Code received: \(httpResponse.statusCode)")
                 completionHandler(success: false, message: "There was an error while registering")
             }
         })
@@ -137,6 +138,7 @@ class SCNetwork: NSObject {
             case 400:
                 completionHandler(success: false, message: "Invalid username or password")
             default:
+                println("Status Code received: \(httpResponse.statusCode)")
                 completionHandler(success: false, message: "There was an error while logging in")
             }
         })
@@ -215,6 +217,7 @@ class SCNetwork: NSObject {
             case 401:
                 completionHandler(success: false, needLogin: true, message: "Please Login", ride: nil)
             default:
+                println("Status Code received: \(httpResponse.statusCode)")
                 completionHandler(success: false, needLogin: false, message: "There was an error while requesting a ride", ride: nil)
             }
         })
@@ -264,6 +267,7 @@ class SCNetwork: NSObject {
             case 404:
                 completionHandler(success: false, message: "You have no current ride requests")
             default:
+                println("Status Code received: \(httpResponse.statusCode)")
                 completionHandler(success: false, message: "There was an error while canceling your ride request")
             }
         })
@@ -299,6 +303,7 @@ class SCNetwork: NSObject {
             case 200:
                 completionHandler(success: true, message: "Logged out!")
             default:
+                println("Status Code received: \(httpResponse.statusCode)")                
                 completionHandler(success: false, message: "There was an error while logging out")
             }
         })
