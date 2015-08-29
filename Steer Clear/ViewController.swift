@@ -118,38 +118,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         usernameTextbox.layer.masksToBounds = true
         self.usernameTextbox.attributedPlaceholder = NSAttributedString(string:self.usernameTextbox.placeholder!, attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
         
-        let border = CALayer()
-        let width = CGFloat(2.0)
-        border.borderColor = customColor.CGColor
-        border.frame = CGRect(x: 0, y: usernameTextbox.frame.size.height - width, width:  usernameTextbox.frame.size.width, height: usernameTextbox.frame.size.height)
-        border.borderWidth = width
-        usernameTextbox.layer.addSublayer(border)
-        
-        let paddingView = UIView(frame: CGRectMake(0, 0, 25, self.usernameTextbox.frame.height))
-        usernameTextbox.leftView = paddingView
-        usernameTextbox.leftViewMode = UITextFieldViewMode.Always
-        
         // Password text box
         self.passwordTextbox.attributedPlaceholder = NSAttributedString(string:self.passwordTextbox.placeholder!, attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
-        let border2 = CALayer()
-        let width2 = CGFloat(2.0)
-        border2.borderColor = customColor.CGColor
-        border2.frame = CGRect(x: 0, y: passwordTextbox.frame.size.height - width2, width:  passwordTextbox.frame.size.width, height: passwordTextbox.frame.size.height)
-        border2.borderWidth = width2
-        passwordTextbox.layer.addSublayer(border2)
-        let paddingView2 = UIView(frame: CGRectMake(0, 0, 25, self.passwordTextbox.frame.height))
-        passwordTextbox.leftView = paddingView2
-        passwordTextbox.leftViewMode = UITextFieldViewMode.Always
-        
-        // Email Font Awesome
-        emailLabel.font = UIFont(name: "FontAwesome", size: 20)
-        emailLabel.text = String(format: "%C", 0xf003)
-        emailLabel.textColor = UIColor.whiteColor()
-        
-        // Password Font Awesome Icon
-        passwordLabel.font = UIFont(name: "FontAwesome", size: 20)
-        passwordLabel.text = String(format: "%C", 0xf023)
-        passwordLabel.textColor = UIColor.whiteColor()
     }
     
     //unhardcode this

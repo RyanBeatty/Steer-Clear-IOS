@@ -22,21 +22,30 @@ class WaitingController: UIViewController {
     }
 
     func setupETA() {
+        // time in UTC we need to
+        
         var fullETA = toString(currentRide.pickupTime)
         
-        let formatter = NSDateFormatter()
-        formatter.locale = NSLocale(localeIdentifier: "en_US")
-        formatter.dateFormat = "E, dd MMM yyyy HH:mm:ss Z"
-        formatter.dateFormat = "h:mm"
-        let date = formatter.dateFromString(fullETA)
-        print(date)
-        let calendar = NSCalendar.currentCalendar()
-//        let comp = calendar.components((.CalendarUnitHour | .CalendarUnitMinute), fromDate: date!)
-//        let hour = comp.hour
-//        let minutes = comp.minute
-        etaLabel.text = "date"
-        etaLabel.layer.cornerRadius = 0.5 * etaLabel.bounds.size.width
-        etaLabel.layer.shadowOpacity = 0.5
+//        let formatter = NSDateFormatter()
+//        formatter.locale = NSLocale(localeIdentifier: "en_US")
+//        formatter.dateFormat = "E, dd MMM yyyy HH:mm:ss Z"
+//        
+//        let date = formatter.dateFromString(fullETA)
+//        println(date)
+//        let calendar = NSCalendar.currentCalendar()
+//        let components = calendar.components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: date!)
+//        let hour = components.hour
+//        let minutes = components.minute
+        
+        let dateAsString = "\(fullETA)"
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "E, dd MMM yyyy HH:mm:ss Z"
+        let date = dateFormatter.dateFromString(dateAsString)
+        
+        dateFormatter.dateFormat = "h:mm"
+        let date24 = dateFormatter.stringFromDate(date!)
+        
+        etaLabel.text = "\(date24)"
 
         
     }

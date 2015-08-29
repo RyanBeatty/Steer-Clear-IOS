@@ -215,21 +215,6 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         passwordTextField.leftView = paddingView3
         passwordTextField.leftViewMode = UITextFieldViewMode.Always
         
-        // Phone Font Awesome Icon
-        phoneLabel.font = UIFont(name: "FontAwesome", size: 20)
-        phoneLabel.text = String(format: "%C", 0xf018)
-        phoneLabel.textColor = UIColor.blackColor()
-        
-        // Username Font Awesome Icon
-        usernameLabel.font = UIFont(name: "FontAwesome", size: 20)
-        usernameLabel.text = String(format: "%C", 0xf003)
-        usernameLabel.textColor = UIColor.blackColor()
-        
-        // Password Font Awesome Icon
-        passwordLabel.font = UIFont(name: "FontAwesome", size: 20)
-        passwordLabel.text = String(format: "%C", 0xf023)
-        passwordLabel.textColor = UIColor.blackColor()
-        
     }
 
     override func didReceiveMemoryWarning() {
