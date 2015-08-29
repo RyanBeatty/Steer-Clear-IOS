@@ -180,40 +180,14 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         // Username text box
         emailTextField.layer.masksToBounds = true
         self.emailTextField.attributedPlaceholder = NSAttributedString(string:self.emailTextField.placeholder!, attributes: [NSForegroundColorAttributeName: UIColor.grayColor()])
-        let border = CALayer()
-        let width = CGFloat(2.0)
-        border.borderColor = customColor.CGColor
-        border.frame = CGRect(x: 0, y: emailTextField.frame.size.height - width, width:  emailTextField.frame.size.width, height: emailTextField.frame.size.height)
-        border.borderWidth = width
-        emailTextField.layer.addSublayer(border)
-        
-        let paddingView = UIView(frame: CGRectMake(0, 0, 25, self.emailTextField.frame.height))
-        emailTextField.leftView = paddingView
-        emailTextField.leftViewMode = UITextFieldViewMode.Always
         
         // Phone text box
         self.phoneTextField.attributedPlaceholder = NSAttributedString(string:self.phoneTextField.placeholder!, attributes: [NSForegroundColorAttributeName: UIColor.grayColor()])
-        let border2 = CALayer()
-        let width2 = CGFloat(2.0)
-        border2.borderColor = customColor.CGColor
-        border2.frame = CGRect(x: 0, y: phoneTextField.frame.size.height - width2, width:  phoneTextField.frame.size.width, height: phoneTextField.frame.size.height)
-        border2.borderWidth = width2
-        phoneTextField.layer.addSublayer(border2)
-        let paddingView2 = UIView(frame: CGRectMake(0, 0, 25, self.phoneTextField.frame.height))
-        phoneTextField.leftView = paddingView2
-        phoneTextField.leftViewMode = UITextFieldViewMode.Always
+
         
         // Password text box
         self.passwordTextField.attributedPlaceholder = NSAttributedString(string:self.passwordTextField.placeholder!, attributes: [NSForegroundColorAttributeName: UIColor.grayColor()])
-        let border3 = CALayer()
-        let width3  = CGFloat(2.0)
-        border3.borderColor = customColor.CGColor
-        border3.frame = CGRect(x: 0, y: passwordTextField.frame.size.height - width3, width:  passwordTextField.frame.size.width, height: passwordTextField.frame.size.height)
-        border3.borderWidth = width3
-        passwordTextField.layer.addSublayer(border3)
-        let paddingView3 = UIView(frame: CGRectMake(0, 0, 25, self.passwordTextField.frame.height))
-        passwordTextField.leftView = paddingView3
-        passwordTextField.leftViewMode = UITextFieldViewMode.Always
+
         
     }
 
