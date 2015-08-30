@@ -25,6 +25,7 @@ class RegisterController: UIViewController, UITextFieldDelegate {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
         view.addGestureRecognizer(tap)
         // Do any additional setup after loading the view.
+        
     }
     
     /*
