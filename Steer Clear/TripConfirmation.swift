@@ -146,9 +146,9 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
     
     func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
         var pickerLabel = view as! UILabel!
+       
         if view == nil {  //if no label there yet
             pickerLabel = UILabel()
-
             //color  and center the label's background
             let hue = CGFloat(row)/CGFloat(pickerData.count)
             //pickerLabel.backgroundColor = UIColor(hue: hue, saturation: 1.0, brightness:1.0, alpha: 1.0)
@@ -156,7 +156,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
             
         }
         let titleData = pickerData[row]
-        let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "Georgia", size: 26.0)!,NSForegroundColorAttributeName:UIColor.blackColor()])
+        let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "Avenir Next", size: 26.0)!,NSForegroundColorAttributeName:UIColor.blackColor()])
         pickerLabel!.attributedText = myTitle
         
         return pickerLabel

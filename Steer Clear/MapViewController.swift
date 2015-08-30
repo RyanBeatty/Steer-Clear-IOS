@@ -86,7 +86,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     @IBAction func confirmRideButton(sender: AnyObject) {
         if destinationInput != false {
         } else {
-            let alert = UIAlertController(title: "Trip Error", message: "Please input Destination", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "Trip Error", message: "Please Select a Drop Off Location", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         }
@@ -232,8 +232,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         
         segmentOutlet.tintColor = self.spiritYellow
         
-        button.layer.shadowOpacity = 0.5
-        dropOffButtonText.layer.shadowOpacity = 0.5
+        button.layer.shadowOpacity = 0.2
+        dropOffButtonText.layer.shadowOpacity = 0.2
         
         //adds left block to pickup location button (yellow)
         var border = CALayer()
@@ -247,8 +247,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         border1.frame = CGRect(x: -20, y: 0, width: 20, height: 36)
         dropOffButtonText.layer.addSublayer(border1)
         
-        myLocationButtonOutlet.layer.cornerRadius = 0.5 * myLocationButtonOutlet.bounds.size.width
-        myLocationButtonOutlet.layer.shadowOpacity = 0.5
+//        myLocationButtonOutlet.layer.cornerRadius = 0.5 * myLocationButtonOutlet.bounds.size.width
+        myLocationButtonOutlet.layer.shadowOpacity = 0.2
         
         
         
