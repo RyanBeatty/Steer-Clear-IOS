@@ -19,6 +19,7 @@ class WaitingController: UIViewController {
         super.viewDidLoad()
 
         setupETA()
+        self.etaLabel.layer.cornerRadius = 8;
     }
 
     func setupETA() {

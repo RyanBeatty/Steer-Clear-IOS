@@ -31,6 +31,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
         if self.defaults.stringForKey("lastUser") != nil {
             self.usernameTextbox.text = self.defaults.stringForKey("lastUser")
         }
+        
+//        let numberToolbar = UIToolbar(frame: CGRectMake(0,0,320,50))
+//        numberToolbar.barStyle = UIBarStyle.Default
+//        
+//        numberToolbar.items = [
+//            UIBarButtonItem(title: "Next", style: UIBarButtonItemStyle.Plain, target: self, action: "keyboardCancelButtonTapped:"),
+//            UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil),
+//            UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: "keyboardDoneButtonTapped:")]
+//        
+//        numberToolbar.sizeToFit()
+//        usernameTextbox.inputAccessoryView = numberToolbar
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -102,11 +113,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     ------
     Implements the following styles to the username and password textboxes in the Storyboard ViewController:
     
-        UsernameTextbox: solid bottom border with customColor, change placeholder text white
-        PasswordTextbox: solid bottom border with customColor, change placeholder text white
-    
-        EmailLabel: Apply font awesome icon
-        PasswordLabel: Apply font awesome icon
+        UsernameTextbox: change placeholder text white
+        PasswordTextbox: change placeholder text white
     
     */
     func design() {
@@ -122,9 +130,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.passwordTextbox.attributedPlaceholder = NSAttributedString(string:self.passwordTextbox.placeholder!, attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
     }
     
-    //unhardcode this
-    var userLoggedIn = false
-    
     func checkUser() {
         if isAppAlreadyLaunchedOnce() == false {
             println("new user redirecting to register page")
@@ -132,12 +137,26 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         else {
             println("not new user lets see if logged in")
-            if userLoggedIn {
-                println("User logged in lets go to maps")
-                self.performSegueWithIdentifier("loginRider", sender: self)
-            } else {
-                println("lets display login screen")
-            }
+            SCNetwork.checkIndex(
+                {
+                    success, message in
+                    
+                    if(!success) {
+                        // can't make UI updates from background thread, so we need to dispatch
+                        // them to the main thread
+                        dispatch_async(dispatch_get_main_queue(), {
+                            println("User not logged in, let user log in.")
+                            
+                        })
+                    }
+                    else {
+                        // can't make UI updates from background thread, so we need to dispatch
+                        // them to the main thread
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.performSegueWithIdentifier("loginRider", sender: self)
+                        })
+                    }
+            })
         }
     }
     

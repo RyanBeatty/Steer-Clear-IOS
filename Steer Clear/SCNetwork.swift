@@ -19,6 +19,7 @@ let LOGOUT_ROUTE = "/logout"
 let RIDE_REQUEST_ROUTE = "/api/rides"
 let CLEAR_ROUTE = "/clear"
 let DELETE_ROUTE = "/api/rides/"
+let INDEX = "/index"
 
 // complete api route strings
 let REGISTER_URL_STRING = HOSTNAME + REGISTER_ROUTE
@@ -81,6 +82,59 @@ class SCNetwork: NSObject {
                 completionHandler(success: false, message: "The username or phone you specified already exists")
             case 400:
                 completionHandler(success: false, message: "The username, password, or phone number were entered incorrectly")
+            default:
+                println("Status Code received: \(httpResponse.statusCode)")
+                completionHandler(success: false, message: "There was an error while registering")
+            }
+        })
+        
+        // start task
+        task.resume()
+    }
+    
+    
+    /*
+    checkIndex
+    ----------
+    Checks to see whether user is logged in by checking the index page, if user is logged in, page will
+    return a 200 status code. If not, it will return a 401.
+    
+    */
+    class func checkIndex(completionHandler: (success: Bool, message: String) -> ()) {
+        
+        // create register url
+        let registerUrl = NSURL(string: INDEX)
+        
+        // initialize url request object
+        var request = NSMutableURLRequest(URL: registerUrl!)
+        
+        // set http method to POST and encode form parameters
+        request.HTTPMethod = "GET"
+        
+        // initialize session object create http request task
+        var session = NSURLSession.sharedSession()
+        var task = session.dataTaskWithRequest(request, completionHandler: {
+            data, response, error -> Void in
+            
+            // if there was an error, request failed
+            if(error != nil) {
+                completionHandler(success: false, message: "Error checking if user is logged in")
+                return
+            }
+            
+            // if there is no response, request failed
+            if(response == nil) {
+                completionHandler(success: false, message: "There was an error while checking whether user is logged in.")
+                return
+            }
+            
+            // else check the request status code to see if registering succeeded
+            let httpResponse = response as! NSHTTPURLResponse
+            switch(httpResponse.statusCode) {
+            case 200:
+                completionHandler(success: true, message: "Logged In")
+            case 401:
+                completionHandler(success: false, message: "User not logged in: Status code 401")
             default:
                 println("Status Code received: \(httpResponse.statusCode)")
                 completionHandler(success: false, message: "There was an error while registering")
