@@ -19,8 +19,9 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
     @IBOutlet weak var changeDropoff: UIButton!
     @IBOutlet var endLocationOutlet: UILabel!
     @IBOutlet var myPicker: UIPickerView!
-    @IBOutlet var numberOfPassengers: UILabel!
 
+    @IBOutlet weak var numOfPassengers: UILabel!
+    
     let pickerData = ["1","2","3","4","5", "6","7","8"]
     
     // ride object recieved from server
@@ -91,7 +92,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         let startLongString = toString(start.longitude)
         let endLatString = toString(end.latitude)
         let endLongString = toString(end.longitude)
-        let numPassengersString = numberOfPassengers.text!
+        let numPassengersString = numOfPassengers.text!
         
         // request a ride
         SCNetwork.requestRide(
@@ -134,7 +135,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        numberOfPassengers.text = pickerData[row]
+        numOfPassengers.text = pickerData[row]
     }
     
     func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {

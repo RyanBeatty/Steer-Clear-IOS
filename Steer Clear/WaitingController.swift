@@ -22,30 +22,24 @@ class WaitingController: UIViewController {
     }
 
     func setupETA() {
-        // time in UTC we need to
-        
+//         time in UTC we need to
         var fullETA = toString(currentRide.pickupTime)
         
-//        let formatter = NSDateFormatter()
-//        formatter.locale = NSLocale(localeIdentifier: "en_US")
-//        formatter.dateFormat = "E, dd MMM yyyy HH:mm:ss Z"
-//        
-//        let date = formatter.dateFromString(fullETA)
-//        println(date)
-//        let calendar = NSCalendar.currentCalendar()
-//        let components = calendar.components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: date!)
-//        let hour = components.hour
-//        let minutes = components.minute
-        
-        let dateAsString = "\(fullETA)"
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "E, dd MMM yyyy HH:mm:ss Z"
-        let date = dateFormatter.dateFromString(dateAsString)
-        
-        dateFormatter.dateFormat = "h:mm"
-        let date24 = dateFormatter.stringFromDate(date!)
-        
-        etaLabel.text = "\(date24)"
+        if fullETA != "" {
+
+            
+            let dateAsString = "\(fullETA)"
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "E, dd MMM yyyy HH:mm:ss Z"
+            let date = dateFormatter.dateFromString(dateAsString)
+            
+            dateFormatter.dateFormat = "h:mm"
+            let date24 = dateFormatter.stringFromDate(date!)
+            
+            etaLabel.text = "\(date24)"
+        } else {
+            println("For some reason eta not given.")
+        }
 
         
     }
