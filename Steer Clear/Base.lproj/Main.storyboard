@@ -330,7 +330,7 @@
                         <outlet property="passwordLabel" destination="3TI-AJ-rom" id="TVC-Pa-T7t"/>
                         <outlet property="passwordTextbox" destination="FWU-bi-022" id="q0u-tR-28u"/>
                         <outlet property="usernameTextbox" destination="yOZ-WN-l0f" id="BXP-DJ-lWs"/>
-                        <segue destination="nsC-P0-xcL" kind="show" identifier="loginRider" id="SY5-wn-1ZG"/>
+                        <segue destination="nsC-P0-xcL" kind="presentation" identifier="loginRider" modalTransitionStyle="flipHorizontal" id="SY5-wn-1ZG"/>
                         <segue destination="yVC-nT-SHs" kind="show" identifier="registerSegue" id="BpE-L2-UCW"/>
                     </connections>
                 </viewController>
@@ -399,7 +399,7 @@
                                 </state>
                                 <connections>
                                     <action selector="confirmRideButton:" destination="nsC-P0-xcL" eventType="touchUpInside" id="35X-hN-vF3"/>
-                                    <segue destination="Xq3-zb-LVU" kind="show" identifier="sendDetails" id="JXw-2M-yrE"/>
+                                    <segue destination="Xq3-zb-LVU" kind="presentation" identifier="sendDetails" modalPresentationStyle="fullScreen" modalTransitionStyle="partialCurl" id="JXw-2M-yrE"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mec-dU-MNu">
@@ -486,7 +486,6 @@
                         <outlet property="mapView" destination="AnZ-Qk-icN" id="JQJ-52-ywu"/>
                         <outlet property="myLocationButtonOutlet" destination="Xt9-eA-P5A" id="JIS-fN-QmF"/>
                         <outlet property="segmentOutlet" destination="VY1-qt-Xx7" id="ubs-qQ-vqQ"/>
-                        <segue destination="vXZ-lx-hvc" kind="presentation" identifier="logoutRiderSegue" id="K79-wh-Awl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vBg-rF-pfC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -763,6 +762,6 @@
         <image name="steerClearLogo" width="6963" height="6962"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ZmU-pM-MLV"/>
+        <segue reference="SY5-wn-1ZG"/>
     </inferredMetricsTieBreakers>
 </document>
