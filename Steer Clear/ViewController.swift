@@ -16,12 +16,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var phoneTextbox: UITextField!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var passwordLabel: UILabel!
+    @IBOutlet weak var loginBtn: UIButton!
     
     @IBOutlet weak var logo: UIImageView!
     
-    @IBOutlet weak var hailButton: UIButton!
     let defaults = NSUserDefaults.standardUserDefaults()
     
+
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,8 +63,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         -----------
         Attempts to log the user into the system
     */
-    @IBAction func loginButton(sender: AnyObject) {
-        
+    @IBAction func login(sender: AnyObject) {
         // grab username and password fields and check if they are not null
         var username = usernameTextbox.text
         var password = passwordTextbox.text
@@ -123,7 +124,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     func design() {
         // Colors
         let customColor = UIColor(hue: 0.1056, saturation: 0.5, brightness: 0.72, alpha: 0.5) /* #b9975b */
-        
+        self.loginBtn.layer.borderWidth = 2
+        self.loginBtn.layer.borderColor = UIColor.whiteColor().CGColor
 
         // Username text box
         usernameTextbox.layer.masksToBounds = true
