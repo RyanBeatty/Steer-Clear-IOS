@@ -64,6 +64,7 @@
 		38E9B4E41B8459E600903F82 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		38E9B4E61B8459F200903F82 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		38EDF5D51B7ADD790054512A /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
+		38FAEA5B1B94DC0800EDCCFF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		492E2F7C64AE10D2AEE45C63 /* Pods-Steer Clear.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Steer Clear.release.xcconfig"; path = "Pods/Target Support Files/Pods-Steer Clear/Pods-Steer Clear.release.xcconfig"; sourceTree = "<group>"; };
 		9004872A1B765D0D00EBF80B /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
 		9050414C1B71A2CA00F2AE51 /* WaitingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaitingController.swift; sourceTree = "<group>"; };
@@ -166,6 +167,7 @@
 		A1AC33A39D447FE48CFB1A0F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				38FAEA5B1B94DC0800EDCCFF /* CoreGraphics.framework */,
 				38E9B4E61B8459F200903F82 /* QuartzCore.framework */,
 				38E9B4E41B8459E600903F82 /* AVFoundation.framework */,
 				38E9B4E21B8459DC00903F82 /* CoreData.framework */,

@@ -13,12 +13,6 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundwithoutlogos" translatesAutoresizingMaskIntoConstraints="NO" id="Vu2-9f-kbv">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                 </imageView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2015 Steer-Clear. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
-                    <rect key="frame" x="20" y="527" width="281" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Green overlay" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6fS-gA-HfY">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <color key="backgroundColor" red="0.070588235289999995" green="0.27450980390000002" blue="0.1960784314" alpha="0.54000000000000004" colorSpace="calibratedRGB"/>
@@ -26,19 +20,37 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2015 Steer-Clear. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
+                    <rect key="frame" x="20" y="527" width="281" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="281" id="eGT-rt-eRo"/>
+                        <constraint firstAttribute="height" constant="21" id="k9O-yJ-Sl2"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="steerClearLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Wg8-G1-m68">
+                    <rect key="frame" x="60" y="13" width="200" height="200"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="WP9-mg-emm"/>
+                        <constraint firstAttribute="height" constant="200" id="hn2-OC-13p"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" constant="-0.5" id="1ae-ze-bmN"/>
                 <constraint firstItem="6fS-gA-HfY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Grk-Si-BZd"/>
-                <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="Kzo-t9-V3l"/>
-                <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="MfP-vx-nX0"/>
+                <constraint firstItem="Wg8-G1-m68" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="13" id="MHS-fL-aBn"/>
                 <constraint firstItem="6fS-gA-HfY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="SqV-Db-S3v"/>
-                <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="ZEH-qu-HZ9"/>
+                <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="Yvy-oY-0cE"/>
                 <constraint firstItem="Vu2-9f-kbv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="aEG-fo-jCd"/>
                 <constraint firstItem="Vu2-9f-kbv" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="jRx-0h-vG6"/>
                 <constraint firstAttribute="bottom" secondItem="Vu2-9f-kbv" secondAttribute="bottom" id="ovJ-97-0sF"/>
                 <constraint firstAttribute="bottom" secondItem="6fS-gA-HfY" secondAttribute="bottom" id="pEi-Br-IEc"/>
                 <constraint firstAttribute="trailing" secondItem="6fS-gA-HfY" secondAttribute="trailing" id="rtf-EV-McO"/>
+                <constraint firstAttribute="centerX" secondItem="Wg8-G1-m68" secondAttribute="centerX" id="vE0-g0-lnk"/>
                 <constraint firstAttribute="trailing" secondItem="Vu2-9f-kbv" secondAttribute="trailing" id="vrL-5U-6Bp"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -48,5 +60,6 @@
     </objects>
     <resources>
         <image name="backgroundwithoutlogos" width="305" height="424"/>
+        <image name="steerClearLogo" width="6963" height="6962"/>
     </resources>
 </document>

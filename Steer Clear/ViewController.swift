@@ -16,9 +16,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var phoneTextbox: UITextField!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var passwordLabel: UILabel!
-    @IBOutlet weak var phoneLabel: UILabel!
     
+    @IBOutlet weak var logo: UIImageView!
+    
+    @IBOutlet weak var hailButton: UIButton!
     let defaults = NSUserDefaults.standardUserDefaults()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +59,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     /*
         loginButton
         -----------
-        Attemts to log the user into the system
+        Attempts to log the user into the system
     */
     @IBAction func loginButton(sender: AnyObject) {
         
