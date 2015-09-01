@@ -31,10 +31,10 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="steerClearLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Wg8-G1-m68">
-                    <rect key="frame" x="60" y="13" width="200" height="200"/>
+                    <rect key="frame" x="70" y="20" width="180" height="180"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="200" id="WP9-mg-emm"/>
-                        <constraint firstAttribute="height" constant="200" id="hn2-OC-13p"/>
+                        <constraint firstAttribute="width" constant="180" id="WP9-mg-emm"/>
+                        <constraint firstAttribute="height" constant="180" id="hn2-OC-13p"/>
                     </constraints>
                 </imageView>
             </subviews>
@@ -42,7 +42,7 @@
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" constant="-0.5" id="1ae-ze-bmN"/>
                 <constraint firstItem="6fS-gA-HfY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Grk-Si-BZd"/>
-                <constraint firstItem="Wg8-G1-m68" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="13" id="MHS-fL-aBn"/>
+                <constraint firstItem="Wg8-G1-m68" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="MHS-fL-aBn"/>
                 <constraint firstItem="6fS-gA-HfY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="SqV-Db-S3v"/>
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="Yvy-oY-0cE"/>
                 <constraint firstItem="Vu2-9f-kbv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="aEG-fo-jCd"/>
@@ -60,6 +60,6 @@
     </objects>
     <resources>
         <image name="backgroundwithoutlogos" width="305" height="424"/>
-        <image name="steerClearLogo" width="6963" height="6962"/>
+        <image name="steerClearLogo" width="573" height="573"/>
     </resources>
 </document>

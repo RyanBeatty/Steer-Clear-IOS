@@ -22,8 +22,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var logo: UIImageView!
     
     let defaults = NSUserDefaults.standardUserDefaults()
-    
-
+    var isRotating = false
+    var shouldStopRotating = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +57,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func cancelToLoginViewController(segue:UIStoryboardSegue) {
         
     }
-
     /*
         loginButton
         -----------
@@ -68,9 +67,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         var username = usernameTextbox.text
         var password = passwordTextbox.text
+        let startX = self.loginBtn.frame.origin.x
         
         if (username!.isEmpty) || (password!.isEmpty) {
-            let startX = self.loginBtn.frame.origin.x
             UIView.animateWithDuration(
                 0.1,
                 animations: {
@@ -96,6 +95,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.displayAlert("Form Error", message: "Please enter your username and password.")
         }
         else {
+            if self.isRotating == false {
+                self.logo.rotate360Degrees(completionDelegate: self)
+                // Perhaps start a process which will refresh the UI...
+                self.isRotating = true
+            }
+            if self.isRotating == false {
+                self.logo.rotate360Degrees(completionDelegate: self)
+                // Perhaps start a process which will refresh the UI...
+                self.shouldStopRotating = true
+                self.isRotating = true
+            }
             // else try to log the user in
             SCNetwork.login(
                 username,
@@ -108,7 +118,30 @@ class ViewController: UIViewController, UITextFieldDelegate {
                         // them to the main thread
                         dispatch_async(dispatch_get_main_queue(), {
                             // login failed, display error
+                            UIView.animateWithDuration(
+                                0.1,
+                                animations: {
+                                    self.loginBtn.frame.origin.x = startX - 10
+                                },
+                                completion: { finish in
+                                    UIView.animateWithDuration(
+                                        0.1,
+                                        animations: {
+                                            self.loginBtn.frame.origin.x = startX + 10
+                                        },
+                                        completion: { finish in
+                                            UIView.animateWithDuration(
+                                                0.1,
+                                                animations: {
+                                                    self.loginBtn.frame.origin.x = startX
+                                                }
+                                            )
+                                        }
+                                    )
+                                }
+                            )
                             self.displayAlert("Login Error", message: message)
+                            self.shouldStopRotating = true
                         })
                     }
                     else {
@@ -117,6 +150,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                         dispatch_async(dispatch_get_main_queue(), {
                             self.defaults.setObject("\(username)", forKey: "lastUser")
                             self.performSegueWithIdentifier("loginRider", sender: self)
+                            self.shouldStopRotating = true
                         })
                     }
             })
@@ -211,6 +245,20 @@ class ViewController: UIViewController, UITextFieldDelegate {
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
         
+    }
+    
+    
+    override func animationDidStop(anim: CAAnimation!, finished flag: Bool) {
+        if self.shouldStopRotating == false {
+            self.logo.rotate360Degrees(completionDelegate: self)
+        } else {
+            self.reset()
+        }
+    }
+    
+    func reset() {
+        self.isRotating = false
+        self.shouldStopRotating = false
     }
     
     //Calls this function when the tap is recognized.

@@ -232,10 +232,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="steerClearLogo" translatesAutoresizingMaskIntoConstraints="NO" id="D5p-w4-R45">
-                                <rect key="frame" x="60" y="13" width="200" height="200"/>
+                                <rect key="frame" x="70" y="20" width="180" height="180"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="Ejv-Yh-vID"/>
-                                    <constraint firstAttribute="height" constant="200" id="X5Q-Dn-Sgd"/>
+                                    <constraint firstAttribute="width" constant="180" id="Ejv-Yh-vID"/>
+                                    <constraint firstAttribute="height" constant="180" id="X5Q-Dn-Sgd"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d7c-xn-STg" customClass="CSAnimationView">
@@ -402,17 +402,17 @@
                             <constraint firstItem="D5p-w4-R45" firstAttribute="centerX" secondItem="FWU-bi-022" secondAttribute="centerX" constant="-7.5" id="0W2-Wb-RtL"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="xsf-45-lIk" secondAttribute="bottom" constant="20" id="1nK-TR-XcE"/>
                             <constraint firstAttribute="centerX" secondItem="xsf-45-lIk" secondAttribute="centerX" id="3QG-57-3T0"/>
-                            <constraint firstItem="D5p-w4-R45" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="-7" id="4QE-ni-lhq"/>
+                            <constraint firstItem="D5p-w4-R45" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="4QE-ni-lhq"/>
                             <constraint firstItem="d7c-xn-STg" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="FM5-4R-CNA"/>
                             <constraint firstAttribute="trailingMargin" secondItem="hWV-oj-ECh" secondAttribute="trailing" constant="-16" id="GVv-9U-8ZP"/>
-                            <constraint firstItem="FWU-bi-022" firstAttribute="top" secondItem="D5p-w4-R45" secondAttribute="bottom" constant="87" id="H7m-n0-jJp"/>
+                            <constraint firstItem="FWU-bi-022" firstAttribute="top" secondItem="D5p-w4-R45" secondAttribute="bottom" constant="100" id="H7m-n0-jJp"/>
                             <constraint firstItem="BVA-4k-YkG" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="HS1-sY-wFh"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="hWV-oj-ECh" secondAttribute="bottom" id="Ir5-np-IeH"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="d7c-xn-STg" secondAttribute="bottom" id="KGl-3f-lFU"/>
                             <constraint firstAttribute="centerX" secondItem="D5p-w4-R45" secondAttribute="centerX" id="OWn-j5-yAL"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="BVA-4k-YkG" secondAttribute="bottom" id="aiT-sn-iWi"/>
                             <constraint firstItem="hWV-oj-ECh" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="ble-RZ-g4O"/>
-                            <constraint firstItem="D5p-w4-R45" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="-7" id="fmw-MN-MyP"/>
+                            <constraint firstItem="D5p-w4-R45" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="fmw-MN-MyP"/>
                             <constraint firstItem="hWV-oj-ECh" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="kYg-1f-ivl"/>
                             <constraint firstItem="d7c-xn-STg" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="lgF-Ut-awd"/>
                             <constraint firstItem="BVA-4k-YkG" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="pGl-Yo-4DE"/>
@@ -861,7 +861,7 @@
     </scenes>
     <resources>
         <image name="backgroundwithoutlogos" width="305" height="424"/>
-        <image name="steerClearLogo" width="6963" height="6962"/>
+        <image name="steerClearLogo" width="573" height="573"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="SY5-wn-1ZG"/>
