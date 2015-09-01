@@ -30,11 +30,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var isRotating = false
     var shouldStopRotating = false
     var offset: CGFloat = 500
+    var myString:NSString = "Don't have an account? REGISTER"
+    var cancelNSString:NSString = "Cancel"
+    var cancelMutableString = NSMutableAttributedString()
+    var registerMutableString = NSMutableAttributedString()
+    var spiritGold = UIColor(hue: 0.1167, saturation: 0.85, brightness: 0.94, alpha: 1.0) /* #f0b323 */
     
     override func viewDidLoad() {
         super.viewDidLoad()
         design()
-        
+
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
         view.addGestureRecognizer(tap)
         self.usernameTextbox.delegate = self;
@@ -270,7 +275,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 completion: nil
             )
             
-            createAnAccountLabel.setTitle("Cancel", forState: UIControlState.Normal)
+            createAnAccountLabel.setAttributedTitle(self.cancelMutableString, forState: UIControlState.Normal)
             loginBtn.setTitle("REGISTER", forState: UIControlState.Normal)
             self.usernameTextbox.attributedPlaceholder = NSAttributedString(string:"W&M USERNAME (treveley)", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
             loginBtn.backgroundColor = UIColor.whiteColor()
@@ -297,7 +302,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 }
             )
             
-            createAnAccountLabel.setTitle("Don't have an account? REGISTER", forState: UIControlState.Normal)
+            createAnAccountLabel.setAttributedTitle(registerMutableString, forState: UIControlState.Normal)
             loginBtn.setTitle("LOGIN", forState: UIControlState.Normal)
             
             self.usernameTextbox.attributedPlaceholder = NSAttributedString(string:"W&M USERNAME", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
@@ -333,6 +338,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.passwordTextbox.attributedPlaceholder = NSAttributedString(string:self.passwordTextbox.placeholder!, attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
         
         self.phoneTextbox.attributedPlaceholder = NSAttributedString(string:self.phoneTextbox.placeholder!, attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
+        
+        
+        
+        cancelMutableString = NSMutableAttributedString(string: cancelNSString as String, attributes: [NSFontAttributeName:UIFont(name: "Avenir Next", size: 15.0)!])
+        
+        registerMutableString = NSMutableAttributedString(string: myString as String, attributes: [NSFontAttributeName:UIFont(name: "Avenir Next", size: 15.0)!])
+        
+        registerMutableString.addAttribute(NSForegroundColorAttributeName, value: spiritGold, range: NSRange(location:23,length:8))
+        
+        createAnAccountLabel.setAttributedTitle(registerMutableString, forState: UIControlState.Normal)
+        
     }
     
     func checkUser() {
