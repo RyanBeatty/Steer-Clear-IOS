@@ -45,14 +45,19 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewDidAppear(animated: Bool) {
-        checkUser()
+
         let startXphoneTextBox = self.phoneTextbox.frame.origin.x
         let startXphonelabel = self.phoneLabel.frame.origin.x
         let startXphoneUnderline = self.phoneUnderlineLabel.frame.origin.x
+        
         self.phoneTextbox.frame.origin.x = startXphoneTextBox - self.offset
         self.phoneLabel.frame.origin.x = startXphonelabel - self.offset
         self.phoneUnderlineLabel.frame.origin.x = startXphoneUnderline - self.offset
         
+        phoneTextbox.hidden = true
+        phoneLabel.hidden = true
+        phoneUnderlineLabel.hidden = true
+        checkUser()
     }
     
     // unwind segue method so that you can cancel registration view controller
@@ -145,9 +150,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
                             // can't make UI updates from background thread, so we need to dispatch
                             // them to the main thread
                             dispatch_async(dispatch_get_main_queue(), {
+                                self.shouldStopRotating = true
+                                self.phoneTextbox.hidden = true
+                                self.phoneLabel.hidden = true
+                                self.phoneUnderlineLabel.hidden = true
+                                
                                 self.defaults.setObject("\(username)", forKey: "lastUser")
                                 self.performSegueWithIdentifier("loginRider", sender: self)
-                                self.shouldStopRotating = true
                             })
                         }
                 })
@@ -221,6 +230,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let startXphoneUnderline = self.phoneUnderlineLabel.frame.origin.x
         
         if createAnAccountLabel.titleLabel!.text == "Don't have an account? REGISTER" {
+            
+            phoneTextbox.hidden = false
+            phoneLabel.hidden = false
+            phoneUnderlineLabel.hidden = false
+            
             UIView.animateWithDuration(
                 0.1,
                 animations: {
@@ -230,12 +244,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 },
                 completion: nil
             )
+            
             createAnAccountLabel.setTitle("Cancel", forState: UIControlState.Normal)
             loginBtn.setTitle("REGISTER", forState: UIControlState.Normal)
+            self.usernameTextbox.attributedPlaceholder = NSAttributedString(string:"W&M USERNAME (treveley)", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
             loginBtn.backgroundColor = UIColor.whiteColor()
             loginBtn.setTitleColor(customColor , forState: UIControlState.Normal)
         }
         else {
+            
             UIView.animateWithDuration(
                 0.1,
                 animations: {
@@ -243,10 +260,23 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     self.phoneLabel.frame.origin.x = startXphonelabel - self.offset
                     self.phoneUnderlineLabel.frame.origin.x = startXphoneUnderline - self.offset
                 },
-                completion: nil
+                completion: { finish in
+                    UIView.animateWithDuration(
+                        0.1,
+                        animations: {
+                            self.phoneTextbox.frame.origin.x = startXphoneTextBox - self.offset
+                            self.phoneLabel.frame.origin.x = startXphonelabel - self.offset
+                            self.phoneUnderlineLabel.frame.origin.x = startXphoneUnderline - self.offset
+                        }
+                    )
+                }
             )
+            
             createAnAccountLabel.setTitle("Don't have an account? REGISTER", forState: UIControlState.Normal)
             loginBtn.setTitle("LOGIN", forState: UIControlState.Normal)
+            
+            self.usernameTextbox.attributedPlaceholder = NSAttributedString(string:"W&M USERNAME", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
+            
             loginBtn.backgroundColor = UIColor.clearColor()
             loginBtn.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         }
@@ -281,9 +311,25 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func checkUser() {
+        let customColor = UIColor(hue: 0.4444, saturation: 0.8, brightness: 0.34, alpha: 1.0) /* #115740 */
+        let startXphoneTextBox = self.phoneTextbox.frame.origin.x
+        let startXphonelabel = self.phoneLabel.frame.origin.x
+        let startXphoneUnderline = self.phoneUnderlineLabel.frame.origin.x
+        
         if isAppAlreadyLaunchedOnce() == false {
-            println("new user redirecting to register page")
-            self.performSegueWithIdentifier("registerSegue", sender: self)
+            phoneTextbox.hidden = false
+            phoneLabel.hidden = false
+            phoneUnderlineLabel.hidden = false
+            
+                    self.phoneTextbox.frame.origin.x = startXphoneTextBox + self.offset
+                    self.phoneLabel.frame.origin.x = startXphonelabel + self.offset
+                    self.phoneUnderlineLabel.frame.origin.x = startXphoneUnderline + self.offset
+            
+            createAnAccountLabel.setTitle("Cancel", forState: UIControlState.Normal)
+            loginBtn.setTitle("REGISTER", forState: UIControlState.Normal)
+            self.usernameTextbox.attributedPlaceholder = NSAttributedString(string:"W&M USERNAME (treveley)", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
+            loginBtn.backgroundColor = UIColor.whiteColor()
+            loginBtn.setTitleColor(customColor , forState: UIControlState.Normal)
         }
         else {
             println("not new user lets see if logged in")
