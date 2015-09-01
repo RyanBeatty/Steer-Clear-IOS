@@ -36,6 +36,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var registerMutableString = NSMutableAttributedString()
     var spiritGold = UIColor(hue: 0.1167, saturation: 0.85, brightness: 0.94, alpha: 1.0) /* #f0b323 */
     
+    var startXphoneTextBox = CGFloat()
+    var startXphonelabel = CGFloat()
+    var startXphoneUnderline = CGFloat()
+    var endXphoneTextBox = CGFloat()
+    var endXphonelabel = CGFloat()
+    var endXphoneUnderline = CGFloat()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         design()
@@ -51,13 +59,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidAppear(animated: Bool) {
 
-        let startXphoneTextBox = self.phoneTextbox.frame.origin.x
-        let startXphonelabel = self.phoneLabel.frame.origin.x
-        let startXphoneUnderline = self.phoneUnderlineLabel.frame.origin.x
+        self.startXphoneTextBox = self.phoneTextbox.frame.origin.x
+        self.startXphonelabel = self.phoneLabel.frame.origin.x
+        self.startXphoneUnderline = self.phoneUnderlineLabel.frame.origin.x
         
         self.phoneTextbox.frame.origin.x = startXphoneTextBox - self.offset
         self.phoneLabel.frame.origin.x = startXphonelabel - self.offset
         self.phoneUnderlineLabel.frame.origin.x = startXphoneUnderline - self.offset
+        
+        self.endXphoneTextBox = self.phoneTextbox.frame.origin.x
+        self.endXphonelabel = self.phoneLabel.frame.origin.x
+        self.endXphoneUnderline = self.phoneUnderlineLabel.frame.origin.x
         
         phoneTextbox.hidden = true
         phoneLabel.hidden = true
@@ -268,9 +280,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
             UIView.animateWithDuration(
                 0.5,
                 animations: {
-                    self.phoneTextbox.frame.origin.x = startXphoneTextBox + self.offset
-                    self.phoneLabel.frame.origin.x = startXphonelabel + self.offset
-                    self.phoneUnderlineLabel.frame.origin.x = startXphoneUnderline + self.offset
+                    self.phoneTextbox.frame.origin.x = self.startXphoneTextBox
+                    self.phoneLabel.frame.origin.x = self.startXphonelabel
+                    self.phoneUnderlineLabel.frame.origin.x = self.startXphoneUnderline
                 },
                 completion: nil
             )
@@ -286,20 +298,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
             UIView.animateWithDuration(
                 0.5,
                 animations: {
-                    self.phoneTextbox.frame.origin.x = startXphoneTextBox - self.offset
-                    self.phoneLabel.frame.origin.x = startXphonelabel - self.offset
-                    self.phoneUnderlineLabel.frame.origin.x = startXphoneUnderline - self.offset
+                    self.phoneTextbox.frame.origin.x = self.endXphoneTextBox
+                    self.phoneLabel.frame.origin.x = self.endXphonelabel
+                    self.phoneUnderlineLabel.frame.origin.x = self.endXphoneUnderline
                 },
-                completion: { finish in
-                    UIView.animateWithDuration(
-                        0.1,
-                        animations: {
-                            self.phoneTextbox.frame.origin.x = startXphoneTextBox - self.offset
-                            self.phoneLabel.frame.origin.x = startXphonelabel - self.offset
-                            self.phoneUnderlineLabel.frame.origin.x = startXphoneUnderline - self.offset
-                        }
-                    )
-                }
+                completion: nil
             )
             
             createAnAccountLabel.setAttributedTitle(registerMutableString, forState: UIControlState.Normal)
@@ -362,11 +365,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
             phoneLabel.hidden = false
             phoneUnderlineLabel.hidden = false
             
-                    self.phoneTextbox.frame.origin.x = startXphoneTextBox + self.offset
-                    self.phoneLabel.frame.origin.x = startXphonelabel + self.offset
-                    self.phoneUnderlineLabel.frame.origin.x = startXphoneUnderline + self.offset
+            self.phoneTextbox.frame.origin.x = self.startXphoneTextBox
+            self.phoneLabel.frame.origin.x = self.startXphonelabel
+            self.phoneUnderlineLabel.frame.origin.x = self.startXphoneUnderline
             
-            createAnAccountLabel.setTitle("Cancel", forState: UIControlState.Normal)
+            createAnAccountLabel.setAttributedTitle(self.cancelMutableString, forState: UIControlState.Normal)
             loginBtn.setTitle("REGISTER", forState: UIControlState.Normal)
             self.usernameTextbox.attributedPlaceholder = NSAttributedString(string:"W&M USERNAME (treveley)", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
             loginBtn.backgroundColor = UIColor.whiteColor()

@@ -20,31 +20,19 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2015 Steer-Clear. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
-                    <rect key="frame" x="20" y="527" width="281" height="21"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="281" id="eGT-rt-eRo"/>
-                        <constraint firstAttribute="height" constant="21" id="k9O-yJ-Sl2"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="steerClearLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Wg8-G1-m68">
-                    <rect key="frame" x="70" y="30" width="180" height="180"/>
+                    <rect key="frame" x="85" y="30" width="150" height="150"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="180" id="WP9-mg-emm"/>
-                        <constraint firstAttribute="height" constant="180" id="hn2-OC-13p"/>
+                        <constraint firstAttribute="width" constant="150" id="WP9-mg-emm"/>
+                        <constraint firstAttribute="height" constant="150" id="hn2-OC-13p"/>
                     </constraints>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" constant="-0.5" id="1ae-ze-bmN"/>
                 <constraint firstItem="6fS-gA-HfY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Grk-Si-BZd"/>
                 <constraint firstItem="Wg8-G1-m68" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="30" id="MHS-fL-aBn"/>
                 <constraint firstItem="6fS-gA-HfY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="SqV-Db-S3v"/>
-                <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="Yvy-oY-0cE"/>
                 <constraint firstItem="Vu2-9f-kbv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="aEG-fo-jCd"/>
                 <constraint firstItem="Vu2-9f-kbv" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="jRx-0h-vG6"/>
                 <constraint firstAttribute="bottom" secondItem="Vu2-9f-kbv" secondAttribute="bottom" id="ovJ-97-0sF"/>
