@@ -15,15 +15,21 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var usernameTextbox: UITextField!
     @IBOutlet weak var passwordTextbox: UITextField!
     @IBOutlet weak var phoneTextbox: UITextField!
+
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var passwordLabel: UILabel!
+    @IBOutlet weak var phoneLabel: UILabel!
+    @IBOutlet weak var phoneUnderlineLabel: UIView!
+    
     @IBOutlet weak var loginBtn: UIButton!
+    @IBOutlet weak var createAnAccountLabel: UIButton!
     
     @IBOutlet weak var logo: UIImageView!
     
     let defaults = NSUserDefaults.standardUserDefaults()
     var isRotating = false
     var shouldStopRotating = false
+    var offset: CGFloat = 500
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,21 +42,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
         if self.defaults.stringForKey("lastUser") != nil {
             self.usernameTextbox.text = self.defaults.stringForKey("lastUser")
         }
-        
-//        let numberToolbar = UIToolbar(frame: CGRectMake(0,0,320,50))
-//        numberToolbar.barStyle = UIBarStyle.Default
-//        
-//        numberToolbar.items = [
-//            UIBarButtonItem(title: "Next", style: UIBarButtonItemStyle.Plain, target: self, action: "keyboardCancelButtonTapped:"),
-//            UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil),
-//            UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: "keyboardDoneButtonTapped:")]
-//        
-//        numberToolbar.sizeToFit()
-//        usernameTextbox.inputAccessoryView = numberToolbar
     }
     
     override func viewDidAppear(animated: Bool) {
         checkUser()
+        let startXphoneTextBox = self.phoneTextbox.frame.origin.x
+        let startXphonelabel = self.phoneLabel.frame.origin.x
+        let startXphoneUnderline = self.phoneUnderlineLabel.frame.origin.x
+        self.phoneTextbox.frame.origin.x = startXphoneTextBox - self.offset
+        self.phoneLabel.frame.origin.x = startXphonelabel - self.offset
+        self.phoneUnderlineLabel.frame.origin.x = startXphoneUnderline - self.offset
+        
     }
     
     // unwind segue method so that you can cancel registration view controller
@@ -67,8 +69,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         var username = usernameTextbox.text
         var password = passwordTextbox.text
+        var phone = phoneTextbox.text
         let startX = self.loginBtn.frame.origin.x
-        
         if (username!.isEmpty) || (password!.isEmpty) {
             UIView.animateWithDuration(
                 0.1,
@@ -92,71 +94,120 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     )
                 }
             )
-        self.displayAlert("Form Error", message: "Please enter your username and password.")
-        }
-        else {
-            if self.isRotating == false {
-                self.logo.rotate360Degrees(completionDelegate: self)
-                // Perhaps start a process which will refresh the UI...
-                self.isRotating = true
+            self.displayAlert("Form Error", message: "Please enter your username and password.")
+        } else {
+            if loginBtn.titleLabel?.text == "LOGIN" {
+                if self.isRotating == false {
+                    self.logo.rotate360Degrees(completionDelegate: self)
+                    // Perhaps start a process which will refresh the UI...
+                    self.shouldStopRotating = true
+                    self.isRotating = true
+                }
+                // else try to log the user in
+                SCNetwork.login(
+                    username,
+                    password: password,
+                    completionHandler: {
+                        success, message in
+                        
+                        if(!success) {
+                            // can't make UI updates from background thread, so we need to dispatch
+                            // them to the main thread
+                            dispatch_async(dispatch_get_main_queue(), {
+                                // login failed, display error
+                                UIView.animateWithDuration(
+                                    0.1,
+                                    animations: {
+                                        self.loginBtn.frame.origin.x = startX - 10
+                                    },
+                                    completion: { finish in
+                                        UIView.animateWithDuration(
+                                            0.1,
+                                            animations: {
+                                                self.loginBtn.frame.origin.x = startX + 10
+                                            },
+                                            completion: { finish in
+                                                UIView.animateWithDuration(
+                                                    0.1,
+                                                    animations: {
+                                                        self.loginBtn.frame.origin.x = startX
+                                                    }
+                                                )
+                                            }
+                                        )
+                                    }
+                                )
+                                self.displayAlert("Login Error", message: message)
+                                self.shouldStopRotating = true
+                            })
+                        }
+                        else {
+                            // can't make UI updates from background thread, so we need to dispatch
+                            // them to the main thread
+                            dispatch_async(dispatch_get_main_queue(), {
+                                self.defaults.setObject("\(username)", forKey: "lastUser")
+                                self.performSegueWithIdentifier("loginRider", sender: self)
+                                self.shouldStopRotating = true
+                            })
+                        }
+                })
             }
-            if self.isRotating == false {
-                self.logo.rotate360Degrees(completionDelegate: self)
-                // Perhaps start a process which will refresh the UI...
-                self.shouldStopRotating = true
-                self.isRotating = true
-            }
-            // else try to log the user in
-            SCNetwork.login(
-                username,
-                password: password,
-                completionHandler: {
-                    success, message in
-                    
-                    if(!success) {
+            else {
+                //lets register
+                
+                // attempt to register user
+                SCNetwork.register(
+                    username,
+                    password: password,
+                    phone: phone,
+                    completionHandler: {
+                        success, message in
+                        
                         // can't make UI updates from background thread, so we need to dispatch
                         // them to the main thread
                         dispatch_async(dispatch_get_main_queue(), {
-                            // login failed, display error
-                            UIView.animateWithDuration(
-                                0.1,
-                                animations: {
-                                    self.loginBtn.frame.origin.x = startX - 10
-                                },
-                                completion: { finish in
-                                    UIView.animateWithDuration(
-                                        0.1,
-                                        animations: {
-                                            self.loginBtn.frame.origin.x = startX + 10
-                                        },
-                                        completion: { finish in
-                                            UIView.animateWithDuration(
-                                                0.1,
-                                                animations: {
-                                                    self.loginBtn.frame.origin.x = startX
-                                                }
-                                            )
+                            
+                            // check if registration succeeds
+                            if(!success) {
+                                // if it failed, display error
+                                self.displayAlert("Registration Error", message: message)
+                            } else {
+                                // if it succeeded, log user in and change screens to
+                                println("Logging in")
+                                SCNetwork.login(
+                                    username,
+                                    password: password,
+                                    completionHandler: {
+                                        success, message in
+                                        
+                                        if(!success) {
+                                            //can't make UI updates from background thread, so we need to dispatch
+                                            // them to the main thread
+                                            dispatch_async(dispatch_get_main_queue(), {
+                                                // login failed, display alert
+                                                self.displayAlert("Login Error", message: message)
+                                            })
                                         }
-                                    )
-                                }
-                            )
-                            self.displayAlert("Login Error", message: message)
-                            self.shouldStopRotating = true
+                                        else {
+                                            //can't make UI updates from background thread, so we need to dispatch
+                                            // them to the main thread
+                                            dispatch_async(dispatch_get_main_queue(), {
+                                                self.defaults.setObject("\(username)", forKey: "lastUser")
+                                                self.performSegueWithIdentifier("loginRider", sender: self)
+                                            })
+                                        }
+                                })
+                            }
                         })
                     }
-                    else {
-                        // can't make UI updates from background thread, so we need to dispatch
-                        // them to the main thread
-                        dispatch_async(dispatch_get_main_queue(), {
-                            self.defaults.setObject("\(username)", forKey: "lastUser")
-                            self.performSegueWithIdentifier("loginRider", sender: self)
-                            self.shouldStopRotating = true
-                        })
-                    }
-            })
+                )
+            }
+            
         }
+            
     }
-    
+        
+       
     /*
     registerButton
     --------------
@@ -164,9 +215,44 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     */
     @IBAction func registerButton(sender: AnyObject) {
-        // redirects to register page
-        self.performSegueWithIdentifier("registerSegue", sender: self)
+        let customColor = UIColor(hue: 0.4444, saturation: 0.8, brightness: 0.34, alpha: 1.0) /* #115740 */
+        let startXphoneTextBox = self.phoneTextbox.frame.origin.x
+        let startXphonelabel = self.phoneLabel.frame.origin.x
+        let startXphoneUnderline = self.phoneUnderlineLabel.frame.origin.x
+        
+        if createAnAccountLabel.titleLabel!.text == "Don't have an account? REGISTER" {
+            UIView.animateWithDuration(
+                0.1,
+                animations: {
+                    self.phoneTextbox.frame.origin.x = startXphoneTextBox + self.offset
+                    self.phoneLabel.frame.origin.x = startXphonelabel + self.offset
+                    self.phoneUnderlineLabel.frame.origin.x = startXphoneUnderline + self.offset
+                },
+                completion: nil
+            )
+            createAnAccountLabel.setTitle("Cancel", forState: UIControlState.Normal)
+            loginBtn.setTitle("REGISTER", forState: UIControlState.Normal)
+            loginBtn.backgroundColor = UIColor.whiteColor()
+            loginBtn.setTitleColor(customColor , forState: UIControlState.Normal)
+        }
+        else {
+            UIView.animateWithDuration(
+                0.1,
+                animations: {
+                    self.phoneTextbox.frame.origin.x = startXphoneTextBox - self.offset
+                    self.phoneLabel.frame.origin.x = startXphonelabel - self.offset
+                    self.phoneUnderlineLabel.frame.origin.x = startXphoneUnderline - self.offset
+                },
+                completion: nil
+            )
+            createAnAccountLabel.setTitle("Don't have an account? REGISTER", forState: UIControlState.Normal)
+            loginBtn.setTitle("LOGIN", forState: UIControlState.Normal)
+            loginBtn.backgroundColor = UIColor.clearColor()
+            loginBtn.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        }
+       
     }
+    
     
     
     /*
@@ -190,6 +276,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         // Password text box
         self.passwordTextbox.attributedPlaceholder = NSAttributedString(string:self.passwordTextbox.placeholder!, attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
+        
+        self.phoneTextbox.attributedPlaceholder = NSAttributedString(string:self.phoneTextbox.placeholder!, attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
     }
     
     func checkUser() {
