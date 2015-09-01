@@ -288,13 +288,18 @@
                         <outlet property="createAnAccountLabel" destination="JDI-df-Ylq" id="G2u-nj-96O"/>
                         <outlet property="emailLabel" destination="sWh-rY-AGT" id="qzG-Aw-2yp"/>
                         <outlet property="loginBtn" destination="kWC-UI-x25" id="zj1-lH-fJb"/>
-                        <outlet property="logo" destination="D5p-w4-R45" id="p1K-6l-fOd"/>
+                        <outlet property="passwordIcon" destination="sWh-rY-AGT" id="dW4-0D-hjx"/>
                         <outlet property="passwordLabel" destination="3TI-AJ-rom" id="TVC-Pa-T7t"/>
                         <outlet property="passwordTextbox" destination="FWU-bi-022" id="q0u-tR-28u"/>
+                        <outlet property="passwordUnderlineLabel" destination="doO-yy-MgT" id="nS5-3m-Hmb"/>
+                        <outlet property="phoneIcon" destination="3TI-AJ-rom" id="xbL-fc-9gf"/>
                         <outlet property="phoneLabel" destination="kCY-jI-P3u" id="S8E-DH-URj"/>
                         <outlet property="phoneTextbox" destination="iEl-Z1-dFw" id="QWM-v1-TTI"/>
                         <outlet property="phoneUnderlineLabel" destination="YuP-Y8-Grd" id="ZSS-Jk-oux"/>
+                        <outlet property="steerClearLogo" destination="D5p-w4-R45" id="miE-q6-bfW"/>
+                        <outlet property="usernameIcon" destination="kCY-jI-P3u" id="yt1-MV-PvW"/>
                         <outlet property="usernameTextbox" destination="yOZ-WN-l0f" id="BXP-DJ-lWs"/>
+                        <outlet property="usernameUnderlineLabel" destination="kSI-g6-MNo" id="0hm-sw-pMb"/>
                         <segue destination="nsC-P0-xcL" kind="presentation" identifier="loginRider" modalTransitionStyle="flipHorizontal" id="SY5-wn-1ZG"/>
                     </connections>
                 </viewController>

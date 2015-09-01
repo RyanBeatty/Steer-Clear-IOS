@@ -19,12 +19,20 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var passwordLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
+
+    
+    @IBOutlet weak var usernameIcon: UILabel!
+    @IBOutlet weak var passwordIcon: UILabel!
+    @IBOutlet weak var phoneIcon: UILabel!
+    
+    @IBOutlet weak var usernameUnderlineLabel: UIView!
     @IBOutlet weak var phoneUnderlineLabel: UIView!
+    @IBOutlet weak var passwordUnderlineLabel: UIView!
     
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var createAnAccountLabel: UIButton!
     
-    @IBOutlet weak var logo: UIImageView!
+    @IBOutlet weak var steerClearLogo: UIImageView!
     
     let defaults = NSUserDefaults.standardUserDefaults()
     var isRotating = false
@@ -36,6 +44,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var registerMutableString = NSMutableAttributedString()
     var spiritGold = UIColor(hue: 0.1167, saturation: 0.85, brightness: 0.94, alpha: 1.0) /* #f0b323 */
     
+    var startX = CGFloat()
     var startXphoneTextBox = CGFloat()
     var startXphonelabel = CGFloat()
     var startXphoneUnderline = CGFloat()
@@ -55,6 +64,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         if self.defaults.stringForKey("lastUser") != nil {
             self.usernameTextbox.text = self.defaults.stringForKey("lastUser")
         }
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -71,6 +83,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.endXphonelabel = self.phoneLabel.frame.origin.x
         self.endXphoneUnderline = self.phoneUnderlineLabel.frame.origin.x
         
+        self.startX = self.loginBtn.frame.origin.x
+        
         phoneTextbox.hidden = true
         phoneLabel.hidden = true
         phoneUnderlineLabel.hidden = true
@@ -79,6 +93,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         usernameTextbox.delegate = self
         passwordTextbox.delegate = self
         self.usernameTextbox.nextField = self.passwordTextbox
+        
+
     }
     
     // unwind segue method so that you can cancel registration view controller
@@ -96,35 +112,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
         var username = usernameTextbox.text
         var password = passwordTextbox.text
         var phone = phoneTextbox.text
-        let startX = self.loginBtn.frame.origin.x
         if (username!.isEmpty) || (password!.isEmpty) {
-            UIView.animateWithDuration(
-                0.1,
-                animations: {
-                    self.loginBtn.frame.origin.x = startX - 10
-                },
-                completion: { finish in
-                    UIView.animateWithDuration(
-                        0.1,
-                        animations: {
-                            self.loginBtn.frame.origin.x = startX + 10
-                        },
-                        completion: { finish in
-                            UIView.animateWithDuration(
-                                0.1,
-                                animations: {
-                                    self.loginBtn.frame.origin.x = startX
-                                }
-                            )
-                        }
-                    )
-                }
-            )
+            jiggleLogin()
             self.displayAlert("Form Error", message: "Please make sure you have filled all fields.")
         } else {
             if loginBtn.titleLabel?.text == "LOGIN" {
                 if self.isRotating == false {
-                    self.logo.rotate360Degrees(completionDelegate: self)
+                    self.steerClearLogo.rotate360Degrees(completionDelegate: self)
                     // Perhaps start a process which will refresh the UI...
                     self.shouldStopRotating = true
                     self.isRotating = true
@@ -141,28 +135,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                             // them to the main thread
                             dispatch_async(dispatch_get_main_queue(), {
                                 // login failed, display error
-                                UIView.animateWithDuration(
-                                    0.1,
-                                    animations: {
-                                        self.loginBtn.frame.origin.x = startX - 10
-                                    },
-                                    completion: { finish in
-                                        UIView.animateWithDuration(
-                                            0.1,
-                                            animations: {
-                                                self.loginBtn.frame.origin.x = startX + 10
-                                            },
-                                            completion: { finish in
-                                                UIView.animateWithDuration(
-                                                    0.1,
-                                                    animations: {
-                                                        self.loginBtn.frame.origin.x = startX
-                                                    }
-                                                )
-                                            }
-                                        )
-                                    }
-                                )
+                                self.jiggleLogin()
                                 self.displayAlert("Login Error", message: message)
                                 self.shouldStopRotating = true
                             })
@@ -185,28 +158,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             else {
                 //lets register
                 if (phone!.isEmpty) {
-                    UIView.animateWithDuration(
-                        0.1,
-                        animations: {
-                            self.loginBtn.frame.origin.x = startX - 10
-                        },
-                        completion: { finish in
-                            UIView.animateWithDuration(
-                                0.1,
-                                animations: {
-                                    self.loginBtn.frame.origin.x = startX + 10
-                                },
-                                completion: { finish in
-                                    UIView.animateWithDuration(
-                                        0.1,
-                                        animations: {
-                                            self.loginBtn.frame.origin.x = startX
-                                        }
-                                    )
-                                }
-                            )
-                        }
-                    )
+                    jiggleLogin()
                     self.displayAlert("Form Error", message: "Please make sure you have filled all fields.")
                 } else {
                 // attempt to register user
@@ -360,9 +312,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     func checkUser() {
         let customColor = UIColor(hue: 0.4444, saturation: 0.8, brightness: 0.34, alpha: 1.0) /* #115740 */
-        let startXphoneTextBox = self.phoneTextbox.frame.origin.x
-        let startXphonelabel = self.phoneLabel.frame.origin.x
-        let startXphoneUnderline = self.phoneUnderlineLabel.frame.origin.x
         
         if isAppAlreadyLaunchedOnce() == false {
             phoneTextbox.hidden = false
@@ -432,7 +381,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     override func animationDidStop(anim: CAAnimation!, finished flag: Bool) {
         if self.shouldStopRotating == false {
-            self.logo.rotate360Degrees(completionDelegate: self)
+            self.steerClearLogo.rotate360Degrees(completionDelegate: self)
         } else {
             self.reset()
         }
@@ -455,6 +404,42 @@ class ViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    func registerForKeyboardNotifications() {
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.addObserver(self,
+            selector: "keyboardWillBeShown:",
+            name: UIKeyboardWillShowNotification,
+            object: nil)
+        notificationCenter.addObserver(self,
+            selector: "keyboardWillBeHidden:",
+            name: UIKeyboardWillHideNotification,
+            object: nil)
+    }
+    
+    func jiggleLogin() {
+        UIView.animateWithDuration(
+            0.1,
+            animations: {
+                self.loginBtn.frame.origin.x = self.startX - 10
+            },
+            completion: { finish in
+                UIView.animateWithDuration(
+                    0.1,
+                    animations: {
+                        self.loginBtn.frame.origin.x = self.startX + 10
+                    },
+                    completion: { finish in
+                        UIView.animateWithDuration(
+                            0.1,
+                            animations: {
+                                self.loginBtn.frame.origin.x = self.startX
+                            }
+                        )
+                    }
+                )
+            }
+        )
+    }
     //Calls this function when the tap is recognized.
     func DismissKeyboard(){
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
@@ -464,6 +449,53 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    func keyboardWillShow(notification: NSNotification) {
+        
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            
+            UIView.animateWithDuration(0.5, animations: {
+                self.steerClearLogo.alpha = 0.0
+
+            })
+            
+            self.usernameTextbox.frame.origin.y -= 100
+            self.usernameIcon.frame.origin.y -= 100
+            self.usernameUnderlineLabel.frame.origin.y -= 100
+            
+            self.passwordTextbox.frame.origin.y -= 100
+            self.passwordIcon.frame.origin.y -= 100
+            self.passwordUnderlineLabel.frame.origin.y -= 100
+            
+            self.phoneTextbox.frame.origin.y -= 100
+            self.phoneIcon.frame.origin.y -= 100
+            self.phoneUnderlineLabel.frame.origin.y -= 100
+
+
+        }
+        
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            self.usernameTextbox.frame.origin.y += 100
+            self.usernameIcon.frame.origin.y += 100
+            self.usernameUnderlineLabel.frame.origin.y += 100
+            
+            self.passwordTextbox.frame.origin.y += 100
+            self.passwordIcon.frame.origin.y += 100
+            self.passwordUnderlineLabel.frame.origin.y += 100
+            
+            self.phoneTextbox.frame.origin.y += 100
+            self.phoneIcon.frame.origin.y += 100
+            self.phoneUnderlineLabel.frame.origin.y += 100
+            
+            
+            UIView.animateWithDuration(0.5, animations: {
+                self.steerClearLogo.alpha = 1.0
+                
+            })
+        }
     }
     
 }
