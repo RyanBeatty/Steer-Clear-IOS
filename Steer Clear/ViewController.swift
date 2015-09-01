@@ -75,6 +75,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
         phoneLabel.hidden = true
         phoneUnderlineLabel.hidden = true
         checkUser()
+        
+        usernameTextbox.delegate = self
+        passwordTextbox.delegate = self
+        self.usernameTextbox.nextField = self.passwordTextbox
     }
     
     // unwind segue method so that you can cancel registration view controller
@@ -437,6 +441,18 @@ class ViewController: UIViewController, UITextFieldDelegate {
     func reset() {
         self.isRotating = false
         self.shouldStopRotating = false
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if let nextField = textField.nextField {
+            nextField.becomeFirstResponder()
+        }
+        if (textField.returnKeyType==UIReturnKeyType.Go)
+        {
+        textField.resignFirstResponder() // Dismiss the keyboard
+        loginBtn.sendActionsForControlEvents(.TouchUpInside)
+        }
+        return true
     }
     
     //Calls this function when the tap is recognized.
