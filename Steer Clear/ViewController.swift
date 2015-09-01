@@ -9,6 +9,7 @@
 import UIKit
 import Foundation
 
+
 class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var usernameTextbox: UITextField!
@@ -22,7 +23,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     let defaults = NSUserDefaults.standardUserDefaults()
     
-
 
     
     override func viewDidLoad() {
@@ -65,12 +65,35 @@ class ViewController: UIViewController, UITextFieldDelegate {
     */
     @IBAction func login(sender: AnyObject) {
         // grab username and password fields and check if they are not null
+        
         var username = usernameTextbox.text
         var password = passwordTextbox.text
         
         if (username!.isEmpty) || (password!.isEmpty) {
-            // alert user to fill in empty fields
-            displayAlert("Missing Fields(s)", message: "Username and Password Required")
+            let startX = self.loginBtn.frame.origin.x
+            UIView.animateWithDuration(
+                0.1,
+                animations: {
+                    self.loginBtn.frame.origin.x = startX - 10
+                },
+                completion: { finish in
+                    UIView.animateWithDuration(
+                        0.1,
+                        animations: {
+                            self.loginBtn.frame.origin.x = startX + 10
+                        },
+                        completion: { finish in
+                            UIView.animateWithDuration(
+                                0.1,
+                                animations: {
+                                    self.loginBtn.frame.origin.x = startX
+                                }
+                            )
+                        }
+                    )
+                }
+            )
+        self.displayAlert("Form Error", message: "Please enter your username and password.")
         }
         else {
             // else try to log the user in
