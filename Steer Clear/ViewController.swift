@@ -236,7 +236,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             phoneUnderlineLabel.hidden = false
             
             UIView.animateWithDuration(
-                0.1,
+                0.5,
                 animations: {
                     self.phoneTextbox.frame.origin.x = startXphoneTextBox + self.offset
                     self.phoneLabel.frame.origin.x = startXphonelabel + self.offset
@@ -254,7 +254,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         else {
             
             UIView.animateWithDuration(
-                0.1,
+                0.5,
                 animations: {
                     self.phoneTextbox.frame.origin.x = startXphoneTextBox - self.offset
                     self.phoneLabel.frame.origin.x = startXphonelabel - self.offset
