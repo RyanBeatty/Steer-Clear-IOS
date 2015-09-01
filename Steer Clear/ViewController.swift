@@ -99,7 +99,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     )
                 }
             )
-            self.displayAlert("Form Error", message: "Please enter your username and password.")
+            self.displayAlert("Form Error", message: "Please make sure you have filled all fields.")
         } else {
             if loginBtn.titleLabel?.text == "LOGIN" {
                 if self.isRotating == false {
@@ -163,7 +163,31 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
             else {
                 //lets register
-                
+                if (phone!.isEmpty) {
+                    UIView.animateWithDuration(
+                        0.1,
+                        animations: {
+                            self.loginBtn.frame.origin.x = startX - 10
+                        },
+                        completion: { finish in
+                            UIView.animateWithDuration(
+                                0.1,
+                                animations: {
+                                    self.loginBtn.frame.origin.x = startX + 10
+                                },
+                                completion: { finish in
+                                    UIView.animateWithDuration(
+                                        0.1,
+                                        animations: {
+                                            self.loginBtn.frame.origin.x = startX
+                                        }
+                                    )
+                                }
+                            )
+                        }
+                    )
+                    self.displayAlert("Form Error", message: "Please make sure you have filled all fields.")
+                } else {
                 // attempt to register user
                 SCNetwork.register(
                     username,
@@ -213,7 +237,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
             
         }
-            
+        }
+        
     }
         
        
