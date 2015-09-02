@@ -1,0 +1,11 @@
+version: "Apple Swift version 1.2 (swiftlang-602.0.53.1 clang-602.0.53)"
+options: "be4e71b0b06112c8ef4b186f841adbc9"
+inputs: 
+- "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Steer Clear/GooglePlacesAutocomplete.swift"
+- "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Steer Clear/TripConfirmation.swift"
+- "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Steer Clear/ViewController.swift"
+- "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Steer Clear/AppDelegate.swift"
+- "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Steer Clear/RegisterController.swift"
+- "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Steer Clear/Network.swift"
+- "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Steer Clear/WaitingController.swift"
+- "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Steer Clear/MapViewController.swift"

@@ -1,0 +1,4 @@
+version: "Apple Swift version 1.2 (swiftlang-602.0.53.1 clang-602.0.53)"
+options: "650bf2e1005f9b061dd6643dd450c331"
+inputs: 
+- "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Pods/SwiftyJSON/Source/SwiftyJSON.swift"

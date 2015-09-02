@@ -1,0 +1,13 @@
+{
+  'version': 0,
+  'case-sensitive': 'false',
+  'roots': [{
+    'type': 'directory',
+    'name': '/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Build/Products/Debug-iphoneos/GooglePlacesAutocomplete.framework/Modules'
+    'contents': [{
+      'type': 'file',
+      'name': 'module.modulemap',
+      'external-contents': '/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Build/Intermediates/Pods.build/Debug-iphoneos/GooglePlacesAutocomplete.build/unextended-module.modulemap',
+    }]
+  }]
+}

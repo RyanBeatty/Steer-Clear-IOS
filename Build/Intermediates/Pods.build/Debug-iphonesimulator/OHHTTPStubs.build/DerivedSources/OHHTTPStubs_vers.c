@@ -1,0 +1,1 @@
+ const unsigned char OHHTTPStubsVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:OHHTTPStubs  PROJECT:Pods-4.2.0" "\n"; const double OHHTTPStubsVersionNumber __attribute__ ((used)) = (double)4.2;

@@ -1,0 +1,1 @@
+ const unsigned char UIImage_BlurredFrameVersionString[] __attribute__ ((used)) = "@(#)PROGRAM:UIImage_BlurredFrame  PROJECT:Pods-0.0.4" "\n"; const double UIImage_BlurredFrameVersionNumber __attribute__ ((used)) = (double)0.0;

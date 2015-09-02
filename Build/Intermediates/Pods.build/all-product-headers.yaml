@@ -1,0 +1,142 @@
+{
+  'version': 0,
+  'case-sensitive': 'false',
+  'roots': [
+    {
+      'type': 'directory',
+      'name': "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Build/Products/Debug-iphonesimulator/Canvas.framework/Headers",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "CSAnimation.h",
+          'external-contents': "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Pods/Canvas/CanvasLibrary/CSAnimation.h"
+        },
+        {
+          'type': 'file',
+          'name': "CSAnimationView.h",
+          'external-contents': "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Pods/Canvas/CanvasLibrary/CSAnimationView.h"
+        },
+        {
+          'type': 'file',
+          'name': "CSBlurView.h",
+          'external-contents': "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Pods/Canvas/CanvasLibrary/CSBlurView.h"
+        },
+        {
+          'type': 'file',
+          'name': "CSNavigationController.h",
+          'external-contents': "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Pods/Canvas/CanvasLibrary/CSNavigationController.h"
+        },
+        {
+          'type': 'file',
+          'name': "Canvas-Swift.h",
+          'external-contents': "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Build/Products/Debug-iphonesimulator/Canvas.framework/Headers/Canvas-Swift.h"
+        },
+        {
+          'type': 'file',
+          'name': "Canvas-umbrella.h",
+          'external-contents': "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Pods/Target Support Files/Canvas/Canvas-umbrella.h"
+        },
+        {
+          'type': 'file',
+          'name': "Canvas.h",
+          'external-contents': "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Pods/Canvas/CanvasLibrary/Canvas.h"
+        },
+        {
+          'type': 'file',
+          'name': "UIButton+TCCustomFont.h",
+          'external-contents': "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Pods/Canvas/CanvasLibrary/UIButton+TCCustomFont.h"
+        },
+        {
+          'type': 'file',
+          'name': "UILabel+TCCustomFont.h",
+          'external-contents': "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Pods/Canvas/CanvasLibrary/UILabel+TCCustomFont.h"
+        },
+        {
+          'type': 'file',
+          'name': "UINavigationBar+TCCustomFont.h",
+          'external-contents': "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Pods/Canvas/CanvasLibrary/UINavigationBar+TCCustomFont.h"
+        },
+        {
+          'type': 'file',
+          'name': "UITextField+PlaceholderColor.h",
+          'external-contents': "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Pods/Canvas/CanvasLibrary/UITextField+PlaceholderColor.h"
+        },
+        {
+          'type': 'file',
+          'name': "UITextField+TCCustomFont.h",
+          'external-contents': "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Pods/Canvas/CanvasLibrary/UITextField+TCCustomFont.h"
+        },
+        {
+          'type': 'file',
+          'name': "UITextView+TCCustomFont.h",
+          'external-contents': "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Pods/Canvas/CanvasLibrary/UITextView+TCCustomFont.h"
+        }
+      ]
+    },
+    {
+      'type': 'directory',
+      'name': "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Build/Products/Debug-iphonesimulator/Canvas.framework/Modules",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "module.modulemap",
+          'external-contents': "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Build/Intermediates/Pods.build/Debug-iphonesimulator/Canvas.build/module.modulemap"
+        }
+      ]
+    },
+    {
+      'type': 'directory',
+      'name': "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Build/Products/Debug-iphonesimulator/Pods_Steer_Clear.framework/Headers",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "Pods-Steer Clear-umbrella.h",
+          'external-contents': "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Pods/Target Support Files/Pods-Steer Clear/Pods-Steer Clear-umbrella.h"
+        },
+        {
+          'type': 'file',
+          'name': "Pods_Steer_Clear-Swift.h",
+          'external-contents': "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Build/Products/Debug-iphonesimulator/Pods_Steer_Clear.framework/Headers/Pods_Steer_Clear-Swift.h"
+        }
+      ]
+    },
+    {
+      'type': 'directory',
+      'name': "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Build/Products/Debug-iphonesimulator/Pods_Steer_Clear.framework/Modules",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "module.modulemap",
+          'external-contents': "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Build/Intermediates/Pods.build/Debug-iphonesimulator/Pods-Steer Clear.build/module.modulemap"
+        }
+      ]
+    },
+    {
+      'type': 'directory',
+      'name': "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Build/Products/Debug-iphonesimulator/SwiftyJSON.framework/Headers",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "SwiftyJSON-Swift.h",
+          'external-contents': "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Build/Products/Debug-iphonesimulator/SwiftyJSON.framework/Headers/SwiftyJSON-Swift.h"
+        },
+        {
+          'type': 'file',
+          'name': "SwiftyJSON-umbrella.h",
+          'external-contents': "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Pods/Target Support Files/SwiftyJSON/SwiftyJSON-umbrella.h"
+        }
+      ]
+    },
+    {
+      'type': 'directory',
+      'name': "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Build/Products/Debug-iphonesimulator/SwiftyJSON.framework/Modules",
+      'contents': [
+        {
+          'type': 'file',
+          'name': "module.modulemap",
+          'external-contents': "/Users/Ulises/Documents/Projects/Steer-Clear-IOS/Build/Intermediates/Pods.build/Debug-iphonesimulator/SwiftyJSON.build/module.modulemap"
+        }
+      ]
+    }
+  ]
+}
