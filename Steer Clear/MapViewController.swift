@@ -114,7 +114,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         } else {
             segmentOutlet.selectedSegmentIndex = 0
             segmentOutlet.tintColor = self.spiritYellow
-            let gpaViewController = GooglePlacesAutocomplete(apiKey: "AIzaSyDd_lRDKvpH6ao8KmLTDmQPB4wdhxfuEys",placeType: .Address)
+            let gpaViewController = GooglePlacesAutocomplete(apiKey: "AIzaSyACaI8OFFdRgQ0gf0jRTAR2WJ5cDx7miac",placeType: .Address)
             gpaViewController.placeDelegate = self
             gpaViewController.locationBias = LocationBias(latitude: 37.270821, longitude: -76.709025, radius: 1000)
             presentViewController(gpaViewController, animated: true, completion: nil)
@@ -129,7 +129,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         } else {
             segmentOutlet.selectedSegmentIndex = 1
             segmentOutlet.tintColor = self.green
-            let gpaViewController = GooglePlacesAutocomplete(apiKey: "AIzaSyDd_lRDKvpH6ao8KmLTDmQPB4wdhxfuEys",placeType: .Address)
+            let gpaViewController = GooglePlacesAutocomplete(apiKey: "AIzaSyACaI8OFFdRgQ0gf0jRTAR2WJ5cDx7miac",placeType: .Address)
             gpaViewController.placeDelegate = self
             gpaViewController.locationBias = LocationBias(latitude: 37.270821, longitude: -76.709025, radius: 1000)
             presentViewController(gpaViewController, animated: true, completion: nil)
