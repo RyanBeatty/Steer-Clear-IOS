@@ -26,11 +26,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     @IBOutlet var confirmRideOutlet: UIButton!
     
     @IBOutlet weak var mapView: GMSMapView!
-    //    @IBOutlet var mapV: GMSMapView!
-    var startLatitude = CLLocationDegrees()
-    var startLongitude = CLLocationDegrees()
-    var endLatitude = CLLocationDegrees()
-    var endLongitude = CLLocationDegrees()
+
     var globalStartLocation = CLLocationCoordinate2D()
     var globalEndLocation = CLLocationCoordinate2D()
     var changeStart = CLLocationCoordinate2D()
@@ -156,8 +152,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 print(locationDetails)
                 endLocationMarker.opacity = 0.75
                 endLocationMarker.map = mapView
-                endLatitude = changeEnd.latitude
-                endLongitude = changeEnd.longitude
+                globalEndLocation.latitude = changeEnd.latitude
+                globalEndLocation.longitude = changeEnd.longitude
                 destinationInput = true
                 
             } else {
@@ -298,8 +294,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 locationMarker.title = "Pick Up"
                 locationMarker.opacity = 0.75
                 locationMarker.map = mapView
-                startLatitude = coordinate.latitude
-                startLongitude = coordinate.longitude
+                globalStartLocation.latitude = coordinate.latitude
+                globalStartLocation.longitude = coordinate.longitude
                 
                 
                 
@@ -314,10 +310,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 print(locationDetails)
                 endLocationMarker.opacity = 0.75
                 endLocationMarker.map = mapView
-                endLatitude = coordinate.latitude
-                endLongitude = coordinate.longitude
+                globalEndLocation.latitude = coordinate.latitude
+                globalEndLocation.longitude = coordinate.longitude
                 destinationInput = true
-                
                 
             }
             
