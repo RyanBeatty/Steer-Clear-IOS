@@ -12,6 +12,8 @@ import SystemConfiguration
 
 class Network {
     
+    var settings = Settings()
+    
     func noNetwork() -> Bool {
         
         var zeroAddress = sockaddr_in(sin_len: 0, sin_family: 0, sin_port: 0, sin_addr: in_addr(s_addr: 0), sin_zero: (0, 0, 0, 0, 0, 0, 0, 0))
@@ -32,7 +34,7 @@ class Network {
         
         return isReachable && !needsConnection
     }
- 
+    
     var lookupAddressResults: Dictionary<NSObject, AnyObject>!
     var fetchedFormattedAddress: String!
     var fetchedID: String!
@@ -42,7 +44,7 @@ class Network {
     
     func geocodeAddress(lat: Double, long: Double) {
         if yes == true {
-            let baseURLGeocode = "https://maps.googleapis.com/maps/api/geocode/json?latlng=\(lat),\(long)&key=AIzaSyACaI8OFFdRgQ0gf0jRTAR2WJ5cDx7miac"
+            let baseURLGeocode = "https://maps.googleapis.com/maps/api/geocode/json?latlng=\(lat),\(long)&key=\(settings.GMSAPIKEY)"
             
             var geocodeURLString = baseURLGeocode
             geocodeURLString = geocodeURLString.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!

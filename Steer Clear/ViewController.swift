@@ -42,7 +42,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var cancelNSString:NSString = "Cancel"
     var cancelMutableString = NSMutableAttributedString()
     var registerMutableString = NSMutableAttributedString()
-    var spiritGold = UIColor(hue: 0.1167, saturation: 0.85, brightness: 0.94, alpha: 1.0) /* #f0b323 */
     
     var startX = CGFloat()
     var startXphoneTextBox = CGFloat()
@@ -52,6 +51,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var endXphonelabel = CGFloat()
     var endXphoneUnderline = CGFloat()
     
+    var settings = Settings()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -245,7 +245,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
             createAnAccountLabel.setAttributedTitle(self.cancelMutableString, forState: UIControlState.Normal)
             loginBtn.setTitle("REGISTER", forState: UIControlState.Normal)
-            self.usernameTextbox.attributedPlaceholder = NSAttributedString(string:"W&M USERNAME (treveley)", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
+            self.usernameTextbox.attributedPlaceholder = NSAttributedString(string:"W&M USERNAME (treveley)", attributes: [NSForegroundColorAttributeName: UIColor.grayColor()])
             loginBtn.backgroundColor = UIColor.whiteColor()
             loginBtn.setTitleColor(customColor , forState: UIControlState.Normal)
         }
@@ -264,7 +264,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             createAnAccountLabel.setAttributedTitle(registerMutableString, forState: UIControlState.Normal)
             loginBtn.setTitle("LOGIN", forState: UIControlState.Normal)
             
-            self.usernameTextbox.attributedPlaceholder = NSAttributedString(string:"W&M USERNAME", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
+            self.usernameTextbox.attributedPlaceholder = NSAttributedString(string:"W&M USERNAME", attributes: [NSForegroundColorAttributeName: UIColor.grayColor()])
             
             loginBtn.backgroundColor = UIColor.clearColor()
             loginBtn.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
@@ -291,12 +291,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
         // Username text box
         usernameTextbox.layer.masksToBounds = true
-        self.usernameTextbox.attributedPlaceholder = NSAttributedString(string:self.usernameTextbox.placeholder!, attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
+        self.usernameTextbox.attributedPlaceholder = NSAttributedString(string:self.usernameTextbox.placeholder!, attributes: [NSForegroundColorAttributeName: UIColor.grayColor()])
         
         // Password text box
-        self.passwordTextbox.attributedPlaceholder = NSAttributedString(string:self.passwordTextbox.placeholder!, attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
+        self.passwordTextbox.attributedPlaceholder = NSAttributedString(string:self.passwordTextbox.placeholder!, attributes: [NSForegroundColorAttributeName: UIColor.grayColor()])
         
-        self.phoneTextbox.attributedPlaceholder = NSAttributedString(string:self.phoneTextbox.placeholder!, attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
+        self.phoneTextbox.attributedPlaceholder = NSAttributedString(string:self.phoneTextbox.placeholder!, attributes: [NSForegroundColorAttributeName: UIColor.grayColor()])
         
         
         
@@ -304,7 +304,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         registerMutableString = NSMutableAttributedString(string: myString as String, attributes: [NSFontAttributeName:UIFont(name: "Avenir Next", size: 15.0)!])
         
-        registerMutableString.addAttribute(NSForegroundColorAttributeName, value: spiritGold, range: NSRange(location:23,length:8))
+        registerMutableString.addAttribute(NSForegroundColorAttributeName, value: settings.spiritGold, range: NSRange(location:23,length:8))
         
         createAnAccountLabel.setAttributedTitle(registerMutableString, forState: UIControlState.Normal)
         
@@ -324,7 +324,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
             createAnAccountLabel.setAttributedTitle(self.cancelMutableString, forState: UIControlState.Normal)
             loginBtn.setTitle("REGISTER", forState: UIControlState.Normal)
-            self.usernameTextbox.attributedPlaceholder = NSAttributedString(string:"W&M USERNAME (treveley)", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
+            self.usernameTextbox.attributedPlaceholder = NSAttributedString(string:"W&M USERNAME (treveley)", attributes: [NSForegroundColorAttributeName: UIColor.grayColor()])
             loginBtn.backgroundColor = UIColor.whiteColor()
             loginBtn.setTitleColor(customColor , forState: UIControlState.Normal)
         }

@@ -11,9 +11,10 @@
 		04FB75571B8409F700422750 /* SCNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FB75561B8409F700422750 /* SCNetwork.swift */; };
 		04FB75591B84133800422750 /* SCNetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FB75581B84133800422750 /* SCNetworkTests.swift */; };
 		04FB755A1B84140A00422750 /* SCNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FB75561B8409F700422750 /* SCNetwork.swift */; };
-		3837072E1B64FDB100B7979D /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3837072D1B64FDB100B7979D /* Network.swift */; };
 		383EC5EB1B69BD2E00D78F36 /* TripConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383EC5EA1B69BD2E00D78F36 /* TripConfirmation.swift */; };
 		387126CD1B65C15600AE4CFE /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387126CC1B65C15600AE4CFE /* MapViewController.swift */; };
+		3889BE7E1B97C30F00A0930F /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3889BE7D1B97C30F00A0930F /* Settings.swift */; };
+		3889BE801B97C5B300A0930F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3889BE7F1B97C5B300A0930F /* Network.swift */; };
 		388DBEB01B064DBB009BC774 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388DBEAF1B064DBB009BC774 /* AppDelegate.swift */; };
 		388DBEB21B064DBB009BC774 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388DBEB11B064DBB009BC774 /* ViewController.swift */; };
 		388DBEB51B064DBB009BC774 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 388DBEB31B064DBB009BC774 /* Main.storyboard */; };
@@ -24,7 +25,6 @@
 		38E9B4DD1B83E2CC00903F82 /* Ride.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E9B4DC1B83E2CC00903F82 /* Ride.swift */; };
 		38F5AE421B9534F900CE66A1 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F5AE411B9534F900CE66A1 /* UIViewExtensions.swift */; };
 		38F5AE461B9645D700CE66A1 /* NextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F5AE451B9645D700CE66A1 /* NextField.swift */; };
-		900487291B762D6B00EBF80B /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3837072D1B64FDB100B7979D /* Network.swift */; };
 		9004872B1B765D0D00EBF80B /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9004872A1B765D0D00EBF80B /* fontawesome-webfont.ttf */; };
 		9050414D1B71A2CA00F2AE51 /* WaitingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9050414C1B71A2CA00F2AE51 /* WaitingController.swift */; };
 		9FBB9B69EBFF92C5F3936366 /* Pods_Steer_Clear.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B92C63846602880E01A1AD92 /* Pods_Steer_Clear.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -44,9 +44,10 @@
 /* Begin PBXFileReference section */
 		04FB75561B8409F700422750 /* SCNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCNetwork.swift; sourceTree = "<group>"; };
 		04FB75581B84133800422750 /* SCNetworkTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCNetworkTests.swift; sourceTree = "<group>"; };
-		3837072D1B64FDB100B7979D /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		383EC5EA1B69BD2E00D78F36 /* TripConfirmation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripConfirmation.swift; sourceTree = "<group>"; };
 		387126CC1B65C15600AE4CFE /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		3889BE7D1B97C30F00A0930F /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		3889BE7F1B97C5B300A0930F /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		388DBEAA1B064DBB009BC774 /* Steer Clear.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Steer Clear.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		388DBEAE1B064DBB009BC774 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		388DBEAF1B064DBB009BC774 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -120,21 +121,22 @@
 		388DBEAC1B064DBB009BC774 /* Steer Clear */ = {
 			isa = PBXGroup;
 			children = (
+				388DBEB11B064DBB009BC774 /* ViewController.swift */,
+				387126CC1B65C15600AE4CFE /* MapViewController.swift */,
+				383EC5EA1B69BD2E00D78F36 /* TripConfirmation.swift */,
+				9050414C1B71A2CA00F2AE51 /* WaitingController.swift */,
+				388DBEB31B064DBB009BC774 /* Main.storyboard */,
+				388DBEAF1B064DBB009BC774 /* AppDelegate.swift */,
+				3889BE7D1B97C30F00A0930F /* Settings.swift */,
+				38E9B4DC1B83E2CC00903F82 /* Ride.swift */,
+				38F5AE451B9645D700CE66A1 /* NextField.swift */,
+				38F5AE411B9534F900CE66A1 /* UIViewExtensions.swift */,
+				3889BE7F1B97C5B300A0930F /* Network.swift */,
+				04FB75561B8409F700422750 /* SCNetwork.swift */,
 				38DE57F41B67257F004A37FA /* GooglePlacesAutocomplete.h */,
 				38DE57F51B67257F004A37FA /* GooglePlacesAutocomplete.swift */,
 				38DE57F61B67257F004A37FA /* GooglePlacesAutocomplete.xib */,
-				38F5AE451B9645D700CE66A1 /* NextField.swift */,
-				38F5AE411B9534F900CE66A1 /* UIViewExtensions.swift */,
-				388DBEAF1B064DBB009BC774 /* AppDelegate.swift */,
-				387126CC1B65C15600AE4CFE /* MapViewController.swift */,
-				388DBEB11B064DBB009BC774 /* ViewController.swift */,
-				388DBEB31B064DBB009BC774 /* Main.storyboard */,
-				38E9B4DC1B83E2CC00903F82 /* Ride.swift */,
 				9004872A1B765D0D00EBF80B /* fontawesome-webfont.ttf */,
-				9050414C1B71A2CA00F2AE51 /* WaitingController.swift */,
-				383EC5EA1B69BD2E00D78F36 /* TripConfirmation.swift */,
-				3837072D1B64FDB100B7979D /* Network.swift */,
-				04FB75561B8409F700422750 /* SCNetwork.swift */,
 				388DBEB61B064DBB009BC774 /* Images.xcassets */,
 				388DBEB81B064DBB009BC774 /* LaunchScreen.xib */,
 				388DBEAD1B064DBB009BC774 /* Supporting Files */,
@@ -398,12 +400,13 @@
 			files = (
 				38F5AE421B9534F900CE66A1 /* UIViewExtensions.swift in Sources */,
 				38F5AE461B9645D700CE66A1 /* NextField.swift in Sources */,
+				3889BE801B97C5B300A0930F /* Network.swift in Sources */,
 				38DE57F71B67257F004A37FA /* GooglePlacesAutocomplete.swift in Sources */,
 				383EC5EB1B69BD2E00D78F36 /* TripConfirmation.swift in Sources */,
 				388DBEB21B064DBB009BC774 /* ViewController.swift in Sources */,
 				388DBEB01B064DBB009BC774 /* AppDelegate.swift in Sources */,
+				3889BE7E1B97C30F00A0930F /* Settings.swift in Sources */,
 				38E9B4DD1B83E2CC00903F82 /* Ride.swift in Sources */,
-				3837072E1B64FDB100B7979D /* Network.swift in Sources */,
 				04FB75571B8409F700422750 /* SCNetwork.swift in Sources */,
 				9050414D1B71A2CA00F2AE51 /* WaitingController.swift in Sources */,
 				387126CD1B65C15600AE4CFE /* MapViewController.swift in Sources */,
@@ -414,7 +417,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				900487291B762D6B00EBF80B /* Network.swift in Sources */,
 				0485BCF01B85A59C00DFBB3A /* Ride.swift in Sources */,
 				04FB755A1B84140A00422750 /* SCNetwork.swift in Sources */,
 				04FB75591B84133800422750 /* SCNetworkTests.swift in Sources */,
