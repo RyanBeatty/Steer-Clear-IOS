@@ -368,7 +368,6 @@
                                 </state>
                                 <connections>
                                     <action selector="confirmRideButton:" destination="nsC-P0-xcL" eventType="touchUpInside" id="35X-hN-vF3"/>
-                                    <segue destination="Xq3-zb-LVU" kind="presentation" identifier="sendDetails" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="JXw-2M-yrE"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mec-dU-MNu">
@@ -380,7 +379,7 @@
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
                                 <color key="tintColor" red="0.082352941176470587" green="0.37254901960784315" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="Select a Pick Off Location">
+                                <state key="normal" title="Select a Pick Up Location">
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -448,18 +447,17 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="button" destination="Mec-dU-MNu" id="gCs-Hh-GBT"/>
-                        <outlet property="confirmRideOutlet" destination="1e5-aP-JFJ" id="5ik-eg-RWN"/>
-                        <outlet property="dropOffButtonText" destination="vMw-yO-Jg9" id="0fx-0z-vlI"/>
-                        <outlet property="dropOffLabel" destination="vMw-yO-Jg9" id="2VS-ym-9Vw"/>
+                        <outlet property="dropOffButton" destination="vMw-yO-Jg9" id="RYY-tq-ArZ"/>
                         <outlet property="mapView" destination="AnZ-Qk-icN" id="JQJ-52-ywu"/>
                         <outlet property="myLocationButtonOutlet" destination="Xt9-eA-P5A" id="JIS-fN-QmF"/>
+                        <outlet property="pickUpButton" destination="Mec-dU-MNu" id="EDY-Ha-UzT"/>
                         <outlet property="segmentOutlet" destination="VY1-qt-Xx7" id="ubs-qQ-vqQ"/>
+                        <segue destination="Xq3-zb-LVU" kind="presentation" identifier="sendDetails" id="wc4-Qx-ZrL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vBg-rF-pfC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="940" y="498"/>
+            <point key="canvasLocation" x="979" y="507"/>
         </scene>
         <!--Trip Confirmation-->
         <scene sceneID="KKQ-Wo-SHx">

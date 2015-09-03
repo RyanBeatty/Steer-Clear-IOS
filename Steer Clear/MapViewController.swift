@@ -16,14 +16,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     
     
     @IBOutlet var segmentOutlet: UISegmentedControl!
-    @IBOutlet var button: UIButton!
-    @IBOutlet var dropOffButtonText: UIButton!
+
+    @IBOutlet weak var pickUpButton: UIButton!
+    @IBOutlet weak var dropOffButton: UIButton!
+    
+    
     @IBOutlet var destinationButton: UIButton!
     @IBOutlet var rideButton: UIButton!
     @IBOutlet var myLocationButtonOutlet: UIButton!
-    @IBOutlet weak var pickUpLabel: UILabel!
-    @IBOutlet weak var dropOffLabel: UIButton!
-    @IBOutlet var confirmRideOutlet: UIButton!
     
     @IBOutlet weak var mapView: GMSMapView!
 
@@ -45,8 +45,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     var changePickup = false
     var globalStartName = ""
     var globalEndName = ""
-    var networkController = Network()
     
+    var networkController = Network()
     var settings = Settings()
     
     @IBAction func segmentControlSwitch(sender: AnyObject) {
@@ -74,11 +74,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     }
 
     @IBAction func confirmRideButton(sender: AnyObject) {
-        if destinationInput != false {
-        } else {
-            let alert = UIAlertController(title: "Trip Error", message: "Please Select a Drop Off Location", preferredStyle: UIAlertControllerStyle.Alert)
+        if (pickUpButton.titleLabel!.text == "Select a Pick Up Location") || (dropOffButton.titleLabel!.text == "Select a Drop Off Location") {
+            let alert = UIAlertController(title: "Trip Error", message: "Please Select a Pick Up and Drop Off Location", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
+
+        }
+        else {
+            self.performSegueWithIdentifier("sendDetails", sender: self)
+        
         }
     }
     
@@ -137,7 +141,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 self.globalEndLocation = changeEnd
                 self.globalStartName = changeStartName
                 self.globalEndName = changeEndName
-                self.dropOffButtonText.setTitle("\(globalEndName)", forState: UIControlState.Normal)
+                self.dropOffButton.setTitle("\(globalEndName)", forState: UIControlState.Normal)
                 setupLocationMarker(changeStart)
                 self.mapView.animateToCameraPosition(GMSCameraPosition.cameraWithTarget(changeStart, zoom: 17.0, bearing: 30, viewingAngle: 45))
                 changePickup == false
@@ -162,7 +166,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 self.globalEndLocation = changeEnd
                 self.globalStartName = changeStartName
                 self.globalEndName = changeEndName
-                self.button.setTitle("\(globalStartName)", forState: UIControlState.Normal)
+                self.pickUpButton.setTitle("\(globalStartName)", forState: UIControlState.Normal)
                 setupLocationMarker(changeStart)
                 segmentOutlet.selectedSegmentIndex = 1
                 segmentOutlet.tintColor = settings.wmGreen
@@ -222,20 +226,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         
         segmentOutlet.tintColor = settings.spiritGold
         
-        button.layer.shadowOpacity = 0.2
-        dropOffButtonText.layer.shadowOpacity = 0.2
+        pickUpButton.layer.shadowOpacity = 0.2
+        dropOffButton.layer.shadowOpacity = 0.2
         
         //adds left block to pickup location button (yellow)
         var border = CALayer()
         border.backgroundColor = settings.spiritGold.CGColor
         border.frame = CGRect(x: -20, y: 0, width: 20, height: 36)
-        button.layer.addSublayer(border)
+        pickUpButton.layer.addSublayer(border)
         
         //dropoff left block (green)
         var border1 = CALayer()
         border1.backgroundColor = settings.wmGreen.CGColor
         border1.frame = CGRect(x: -20, y: 0, width: 20, height: 36)
-        dropOffButtonText.layer.addSublayer(border1)
+        dropOffButton.layer.addSublayer(border1)
         
 //        myLocationButtonOutlet.layer.cornerRadius = 0.5 * myLocationButtonOutlet.bounds.size.width
         myLocationButtonOutlet.layer.shadowOpacity = 0.2
@@ -267,11 +271,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 
                 if place != nil && self.cameFromSearch == false {
                     if self.segmentOutlet.selectedSegmentIndex == 0 {
-                        self.button.setTitle("\(place!.name)", forState: UIControlState.Normal)
+                        self.pickUpButton.setTitle("\(place!.name)", forState: UIControlState.Normal)
                         self.globalStartName = place!.name
                         self.globalStartLocation = coordinate
                     } else {
-                        self.dropOffButtonText.setTitle("\(place!.name)", forState: UIControlState.Normal)
+                        self.dropOffButton.setTitle("\(place!.name)", forState: UIControlState.Normal)
                         self.globalEndName = place!.name
                         self.globalEndLocation = coordinate
                     }
@@ -344,10 +348,10 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
             let coordinate = CLLocationCoordinate2D(latitude: details.latitude, longitude: details.longitude)
             
             if self.segmentOutlet.selectedSegmentIndex == 0 {
-                self.button.setTitle("\(place.description)", forState: UIControlState.Normal)
+                self.pickUpButton.setTitle("\(place.description)", forState: UIControlState.Normal)
             }
             else {
-                self.dropOffButtonText.setTitle("\(place.description)", forState: UIControlState.Normal)
+                self.dropOffButton.setTitle("\(place.description)", forState: UIControlState.Normal)
             }
             
             self.cameFromSearch = true
