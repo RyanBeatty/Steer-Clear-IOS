@@ -19,11 +19,12 @@ class WaitingController: UIViewController {
         super.viewDidLoad()
 
         setupETA()
-        self.etaLabel.layer.cornerRadius = 8;
+
     }
 
     func setupETA() {
-//         time in UTC we need to
+        self.etaLabel.layer.masksToBounds = true;
+        self.etaLabel.layer.cornerRadius = 0.5 * self.etaLabel.bounds.size.width
         var fullETA = toString(currentRide.pickupTime)
         
         if fullETA != "" {

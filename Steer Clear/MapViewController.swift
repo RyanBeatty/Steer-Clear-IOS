@@ -157,7 +157,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 endLocationMarker.icon = GMSMarker.markerImageWithColor(settings.wmGreen)
                 endLocationMarker.title = "Drop Off"
                 // endLocationMarker.snippet = "\(locationDetails)"
-                print(locationDetails)
+                println(locationDetails)
                 endLocationMarker.opacity = 0.75
                 endLocationMarker.map = mapView
                 globalEndLocation.latitude = changeEnd.latitude
@@ -165,7 +165,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 destinationInput = true
                 
             } else {
-                print("change pickup is not equal to true")
+                println("change pickup is not equal to true")
                 self.globalStartLocation = changeStart
                 self.globalEndLocation = changeEnd
                 self.globalStartName = changeStartName
@@ -202,7 +202,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             self.setupLocationMarker(myLocation.coordinate)
             didFindMyLocation = true
         } else {
-            print("could not find location")
+            println("could not find location")
         }
     }
     //This function detects a long press on the map and places a marker at the coordinates of the long press.
@@ -321,7 +321,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 endLocationMarker.appearAnimation = kGMSMarkerAnimationPop
                 endLocationMarker.icon = GMSMarker.markerImageWithColor(settings.wmGreen)
                 endLocationMarker.title = "Drop Off"
-                print(locationDetails)
+                println(locationDetails)
                 endLocationMarker.opacity = 0.75
                 endLocationMarker.map = mapView
                 globalEndLocation.latitude = coordinate.latitude
