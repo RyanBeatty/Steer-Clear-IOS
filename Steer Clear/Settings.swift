@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 class Settings: UIViewController {
 
@@ -21,5 +22,7 @@ class Settings: UIViewController {
     let spiritGold = UIColor(red:0.94, green:0.70, blue:0.14, alpha:1.0)
     let wmGreen = UIColor(hue: 0.4444, saturation: 0.8, brightness: 0.34, alpha: 1.0) /* #115740 */
     
+    // Geofence center coordinate Wren Building (~3 mile radius)
     
+    let geofenceCenter = CLLocationCoordinate2D(latitude: 37.270821 , longitude: -76.709025)
 }

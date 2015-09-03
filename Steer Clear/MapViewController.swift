@@ -48,6 +48,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     var networkController = Network()
     var settings = Settings()
     
+    var geofence = CLCircularRegion()
+    
     @IBAction func segmentControlSwitch(sender: AnyObject) {
         switch segmentOutlet.selectedSegmentIndex
         {
@@ -109,7 +111,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             segmentOutlet.tintColor = settings.spiritGold
             let gpaViewController = GooglePlacesAutocomplete(apiKey: settings.GMSAPIKEY, placeType: .Address)
             gpaViewController.placeDelegate = self
-            gpaViewController.locationBias = LocationBias(latitude: 37.270821, longitude: -76.709025, radius: 1000)
+            gpaViewController.locationBias = LocationBias(latitude: 37.270821, longitude: -76.709025, radius: 4828)
             presentViewController(gpaViewController, animated: true, completion: nil)
         }
     }
@@ -134,6 +136,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
+        
+        self.geofence = CLCircularRegion(center: settings.geofenceCenter, radius: 4828.03, identifier: "serviceGeofence")
+        
         if change == true {
             if changePickup == true {
                 self.globalStartLocation = changeStart
@@ -211,7 +216,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         
         //Feed position to mapMarker
         let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-        self.setupLocationMarker(coordinate)
+        if self.geofence.containsCoordinate(coordinate){
+            self.setupLocationMarker(coordinate)
+        } else {
+            let alert = UIAlertController(title: "Region Error", message: "The location you have chosen is outside of Steer Cleer's service area.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
         
     }
     
@@ -343,27 +354,36 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 extension MapViewController: GooglePlacesAutocompleteDelegate {
     func placeSelected(place: Place) {
         place.getDetails { details in
-            self.mapView.animateToCameraPosition(GMSCameraPosition.cameraWithLatitude(details.latitude, longitude: details.longitude, zoom: 17.0, bearing: 30, viewingAngle: 45))
-            let coordinate = CLLocationCoordinate2D(latitude: details.latitude, longitude: details.longitude)
-            
-            if self.segmentOutlet.selectedSegmentIndex == 0 {
-                self.pickUpButton.setTitle("\(place.description)", forState: UIControlState.Normal)
-            }
-            else {
-                self.dropOffButton.setTitle("\(place.description)", forState: UIControlState.Normal)
-            }
-            
-            self.cameFromSearch = true
-            self.setupLocationMarker(coordinate)
-            
-            if self.segmentOutlet.selectedSegmentIndex == 0 {
-                self.globalStartName = place.description
-                self.globalStartLocation = coordinate
+            let tempCoord = CLLocationCoordinate2D(latitude: details.latitude, longitude: details.longitude)
+            if self.geofence.containsCoordinate(tempCoord){
+                
+                self.mapView.animateToCameraPosition(GMSCameraPosition.cameraWithLatitude(details.latitude, longitude: details.longitude, zoom: 17.0, bearing: 30, viewingAngle: 45))
+                let coordinate = CLLocationCoordinate2D(latitude: details.latitude, longitude: details.longitude)
+                
+                if self.segmentOutlet.selectedSegmentIndex == 0 {
+                    self.pickUpButton.setTitle("\(place.description)", forState: UIControlState.Normal)
+                }
+                else {
+                    self.dropOffButton.setTitle("\(place.description)", forState: UIControlState.Normal)
+                }
+                
+                self.cameFromSearch = true
+                
+                self.setupLocationMarker(coordinate)
+                
+                if self.segmentOutlet.selectedSegmentIndex == 0 {
+                    self.globalStartName = place.description
+                    self.globalStartLocation = coordinate
+                } else {
+                    self.globalEndName = place.description
+                    self.globalEndLocation = coordinate
+                }
+                println(details)
             } else {
-                self.globalEndName = place.description
-                self.globalEndLocation = coordinate
+                let alert = UIAlertController(title: "Region Error", message: "The location you have chosen is outside of Steer Cleer's service area.", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
             }
-            println(details)
             
         }
         
