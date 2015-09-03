@@ -735,10 +735,18 @@
                             <constraint firstItem="gQK-c0-2WN" firstAttribute="top" secondItem="ReD-WL-vh3" secondAttribute="bottom" constant="3" id="WJV-zE-eJM"/>
                             <constraint firstItem="LHS-J4-C9E" firstAttribute="top" secondItem="Ykz-wm-0B7" secondAttribute="topMargin" id="Zmg-c9-rkV"/>
                             <constraint firstAttribute="trailingMargin" secondItem="izX-jC-RJZ" secondAttribute="trailing" constant="-16" id="fgm-Ds-Ki2"/>
+                            <constraint firstItem="ReD-WL-vh3" firstAttribute="top" secondItem="izX-jC-RJZ" secondAttribute="bottom" constant="8" id="iAl-wh-8cE"/>
                             <constraint firstItem="gQK-c0-2WN" firstAttribute="centerX" secondItem="ReD-WL-vh3" secondAttribute="centerX" id="oJY-Gj-xWR"/>
                             <constraint firstItem="izX-jC-RJZ" firstAttribute="leading" secondItem="Ykz-wm-0B7" secondAttribute="leadingMargin" constant="-16" id="xaa-aN-Hmk"/>
+                            <constraint firstItem="gQK-c0-2WN" firstAttribute="top" secondItem="ReD-WL-vh3" secondAttribute="bottom" constant="3" id="y8e-aJ-ZWS"/>
                             <constraint firstItem="izX-jC-RJZ" firstAttribute="top" secondItem="Xfa-dx-pTx" secondAttribute="bottom" id="z2L-ZV-6F9"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="WJV-zE-eJM"/>
+                                <exclude reference="J1r-0e-Ory"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
