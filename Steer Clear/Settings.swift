@@ -24,5 +24,10 @@ class Settings: UIViewController {
     
     // Geofence center coordinate Wren Building (~3 mile radius)
     
-    let geofenceCenter = CLLocationCoordinate2D(latitude: 37.270821 , longitude: -76.709025)
+    let geofenceCenter = CLLocationCoordinate2D(latitude: 37.271689 , longitude: -76.714215)
+    
+    let zoom: Float = 17.0
+    
+    let bearing: CLLocationDirection = 30
+    let viewingAngle: Double = 45
 }

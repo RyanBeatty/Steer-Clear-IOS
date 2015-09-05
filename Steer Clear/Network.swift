@@ -44,7 +44,7 @@ class Network {
     
     func geocodeAddress(lat: Double, long: Double) {
         if yes == true {
-            let baseURLGeocode = "https://maps.googleapis.com/maps/api/geocode/json?latlng=\(lat),\(long)&key=\(settings.GMSAPIKEY)"
+            let baseURLGeocode = "https://maps.googleapis.com/maps/api/geocode/json?latlng=\(lat),\(long)"
             
             var geocodeURLString = baseURLGeocode
             geocodeURLString = geocodeURLString.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!

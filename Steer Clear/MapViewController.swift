@@ -57,7 +57,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             segmentOutlet.tintColor = settings.spiritGold
             if globalStartName != "" {
                 self.mapView.animateToCameraPosition(GMSCameraPosition.cameraWithTarget(globalStartLocation,
-                    zoom: 17.0, bearing: 30, viewingAngle: 45))
+                    zoom: settings.zoom, bearing: settings.bearing, viewingAngle: settings.viewingAngle))
             }
             
             
@@ -65,7 +65,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             segmentOutlet.tintColor = settings.wmGreen
             if globalEndName != "" {
                 self.mapView.animateToCameraPosition(GMSCameraPosition.cameraWithTarget(globalEndLocation,
-                    zoom: 17.0, bearing: 30, viewingAngle: 45))
+                    zoom: settings.zoom, bearing: settings.bearing, viewingAngle: settings.viewingAngle))
             }
            
             
@@ -111,7 +111,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             segmentOutlet.tintColor = settings.spiritGold
             let gpaViewController = GooglePlacesAutocomplete(apiKey: settings.GMSAPIKEY, placeType: .Address)
             gpaViewController.placeDelegate = self
-            gpaViewController.locationBias = LocationBias(latitude: 37.270821, longitude: -76.709025, radius: 4828)
+            gpaViewController.locationBias = LocationBias(latitude: 37.270821, longitude: -76.709025, radius: 3219)
             presentViewController(gpaViewController, animated: true, completion: nil)
         }
     }
@@ -137,7 +137,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         
-        self.geofence = CLCircularRegion(center: settings.geofenceCenter, radius: 4828.03, identifier: "serviceGeofence")
+        self.geofence = CLCircularRegion(center: settings.geofenceCenter, radius: 3219, identifier: "serviceGeofence")
         
         if change == true {
             if changePickup == true {
@@ -206,7 +206,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         }
     }
     //This function detects a long press on the map and places a marker at the coordinates of the long press.
-    func mapView(mapView: GMSMapView!, didLongPressAtCoordinate coordinate: CLLocationCoordinate2D) {
+    func mapView(mapView: GMSMapView!, didTapAtCoordinate coordinate: CLLocationCoordinate2D) {
         
         //Set variable to latitude of didLongPressAtCoordinate
         var lat = coordinate.latitude
