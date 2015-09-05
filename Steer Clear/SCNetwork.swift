@@ -1,4 +1,4 @@
-    //
+//
 //  SCNetwork.swift
 //  Steer Clear
 //
@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 import SwiftyJSON
 
 // hostname of server
@@ -31,17 +32,18 @@ let DELETE_URL_STRING = HOSTNAME + DELETE_ROUTE
 
 class SCNetwork: NSObject {
     
-    /*
-        register
-        --------
-        Attempts to register a new user into the system
     
-        :username:              W&M username string
-        :password:              W&M password string
-        :phone:                 User phone number (e.x. 1xxxyyyzzzz) NOTE: there is no plus sign
-        :completionHandler:     Callback function called when response is gotten. Function that takes a boolean stating
-                                whether the register request succeeded or not. If the request failed, the :message: parameter
-                                will contain an error message
+    /*
+    register
+    --------
+    Attempts to register a new user into the system
+    
+    :username:              W&M username string
+    :password:              W&M password string
+    :phone:                 User phone number (e.x. 1xxxyyyzzzz) NOTE: there is no plus sign
+    :completionHandler:     Callback function called when response is gotten. Function that takes a boolean stating
+    whether the register request succeeded or not. If the request failed, the :message: parameter
+    will contain an error message
     */
     class func register(username: String, password: String, phone: String, completionHandler: (success: Bool, message: String) -> ()) {
         
@@ -55,12 +57,12 @@ class SCNetwork: NSObject {
         request.HTTPMethod = "POST"
         request.HTTPBody = NSMutableData(data:
             "username=\(username)&password=\(password)&phone=%2B1\(phone)".dataUsingEncoding(NSUTF8StringEncoding)!)
-    
+        
         // initialize session object create http request task
         var session = NSURLSession.sharedSession()
         var task = session.dataTaskWithRequest(request, completionHandler: {
             data, response, error -> Void in
-
+            
             // if there was an error, request failed
             if(error != nil) {
                 completionHandler(success: false, message: "There was a network error while registering")
@@ -101,43 +103,61 @@ class SCNetwork: NSObject {
     
     */
     class func checkIndex(completionHandler: (success: Bool, message: String) -> ()) {
+        let defaults = NSUserDefaults.standardUserDefaults()
         
         // create register url
-        let registerUrl = NSURL(string: INDEX)
+        let indexUrl = NSURL(string: "http://steerclear.wm.edu/api/rides/15")
         
         // initialize url request object
-        var request = NSMutableURLRequest(URL: registerUrl!)
+        var request = NSMutableURLRequest(URL: indexUrl!)
         
         // set http method to POST and encode form parameters
         request.HTTPMethod = "GET"
         
+        let data: NSData? = defaults.objectForKey("cookie") as? NSData
+        if let cookie = data {
+            let datas: NSArray? = NSKeyedUnarchiver.unarchiveObjectWithData(cookie) as? NSArray
+            if let cookies = datas {
+                for c in cookies as! [NSHTTPCookie] {
+                    NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookie(c)
+                }
+            }
+        }
+
         // initialize session object create http request task
         var session = NSURLSession.sharedSession()
+        
+        
         var task = session.dataTaskWithRequest(request, completionHandler: {
             data, response, error -> Void in
             
             // if there was an error, request failed
             if(error != nil) {
                 completionHandler(success: false, message: "Error checking if user is logged in")
+
                 return
             }
             
             // if there is no response, request failed
             if(response == nil) {
                 completionHandler(success: false, message: "There was an error while checking whether user is logged in.")
+                
                 return
             }
             
             // else check the request status code to see if registering succeeded
             let httpResponse = response as! NSHTTPURLResponse
+            println(NSString(data: data, encoding: NSUTF8StringEncoding))
             switch(httpResponse.statusCode) {
             case 200:
+                println("loggedin")
                 completionHandler(success: true, message: "Logged In")
             case 401:
-                completionHandler(success: false, message: "User not logged in: Status code 401")
+                println("User not logged in: Status code 401")
+                completionHandler(success: false, message: "User not loggefd in: Status code 401")
             default:
                 println("Status Code received: \(httpResponse.statusCode)")
-                completionHandler(success: false, message: "There was an error while registering")
+                completionHandler(success: false, message: "There was an error while checking if logged in")
             }
         })
         
@@ -146,18 +166,19 @@ class SCNetwork: NSObject {
     }
     
     /*
-        login
-        -----
-        Attempts to log the user in
+    login
+    -----
+    Attempts to log the user in
     
-        :username:          the username string of the user attempting to login
-        :password:          the password string of the user attempting to login
-        :completionHandler: the function to call when the response is recieved. Takes a
-                            boolean flag signifying if the request succeeded and a message string
+    :username:          the username string of the user attempting to login
+    :password:          the password string of the user attempting to login
+    :completionHandler: the function to call when the response is recieved. Takes a
+    boolean flag signifying if the request succeeded and a message string
     */
     class func login(username: String, password: String, completionHandler: (success: Bool, message: String) -> ()) {
         // create login url
         let loginUrl = NSURL(string: LOGIN_URL_STRING)
+        let defaults = NSUserDefaults.standardUserDefaults()
         
         // initialize url request object
         var request = NSMutableURLRequest(URL: loginUrl!)
@@ -188,6 +209,12 @@ class SCNetwork: NSObject {
             let httpResponse = response as! NSHTTPURLResponse
             switch(httpResponse.statusCode) {
             case 200:
+                    
+                    let cookieJar: NSHTTPCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+                    let data: NSData = NSKeyedArchiver.archivedDataWithRootObject(cookieJar)
+                    defaults.setObject(data, forKey: "cookie")
+                    
+                
                 completionHandler(success: true, message: "Logged in!")
             case 400:
                 completionHandler(success: false, message: "Invalid username or password")
@@ -202,16 +229,16 @@ class SCNetwork: NSObject {
     }
     
     /*
-        requestRide
-        -----------
-        Attempts to make a new ride request
+    requestRide
+    -----------
+    Attempts to make a new ride request
     
-        :startLat:          starting latitude coordinate
-        :startLong:         starting longitude coordinate
-        :endLat:            ending latitude coordinate
-        :endLong:           ending longitude coordinate
-        :numPassengers:     number of passengers in the ride request
-        :completionHandler: callback
+    :startLat:          starting latitude coordinate
+    :startLong:         starting longitude coordinate
+    :endLat:            ending latitude coordinate
+    :endLong:           ending longitude coordinate
+    :numPassengers:     number of passengers in the ride request
+    :completionHandler: callback
     */
     class func requestRide(startLat: String, startLong: String, endLat: String, endLong: String, numPassengers: String, completionHandler: (success: Bool, needLogin: Bool, message: String, ride: Ride?)->()) {
         
@@ -220,10 +247,10 @@ class SCNetwork: NSObject {
         
         // build form data string
         let formDataString = "start_latitude=\(startLat)" +
-                             "&start_longitude=\(startLong)" +
-                             "&end_latitude=\(endLat)" +
-                             "&end_longitude=\(endLong)" +
-                             "&num_passengers=\(numPassengers)"
+            "&start_longitude=\(startLong)" +
+            "&end_latitude=\(endLat)" +
+            "&end_longitude=\(endLong)" +
+        "&num_passengers=\(numPassengers)"
         
         // initialize url request object
         var request = NSMutableURLRequest(URL: rideRequestUrl!)
@@ -264,7 +291,7 @@ class SCNetwork: NSObject {
                 
                 // create ride object
                 let ride = Ride(id: id!, numPassengers: numPassengers!, pickupAddress: pickupAddress!, dropoffAddress: dropoffAddress!, pickupTime: pickupTime!)
-
+                
                 completionHandler(success: true, needLogin: false, message: "Ride requested!", ride: ride)
             case 400:
                 completionHandler(success: false, needLogin: false, message: "You've entered some ride information incorrectly", ride: nil)
@@ -287,8 +314,8 @@ class SCNetwork: NSObject {
     Attempts to delete current ride request
     
     :rideId:                Current Ride Id
-    :completionHandler:     Callback function called when response is gotten. 
-                            Function that takes a boolean
+    :completionHandler:     Callback function called when response is gotten.
+    Function that takes a boolean
     
     */
     class func deleteRideWithId(rideId: String, completionHandler: (success: Bool, message: String) -> ()) {
@@ -331,11 +358,11 @@ class SCNetwork: NSObject {
     }
     
     /*
-        logout
-        ------
-        Attempts to log the user out
-        
-        :completionHandler: callback method that takes a success flag and a string message
+    logout
+    ------
+    Attempts to log the user out
+    
+    :completionHandler: callback method that takes a success flag and a string message
     */
     class func logout(completionHandler: (success: Bool, message: String) -> ()) {
         let request = NSMutableURLRequest(URL: NSURL(string: LOGOUT_URL_STRING)!)
@@ -357,7 +384,7 @@ class SCNetwork: NSObject {
             case 200:
                 completionHandler(success: true, message: "Logged out!")
             default:
-                println("Status Code received: \(httpResponse.statusCode)")                
+                println("Status Code received: \(httpResponse.statusCode)")
                 completionHandler(success: false, message: "There was an error while logging out")
             }
         })
