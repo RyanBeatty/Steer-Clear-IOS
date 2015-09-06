@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Steer-Clear. All rights reserved.
 //
 
-import UIKit
 import Foundation
 import SwiftyJSON
 
@@ -114,7 +113,7 @@ class SCNetwork: NSObject {
         // set http method to POST and encode form parameters
         request.HTTPMethod = "GET"
         
-        let data: NSData? = defaults.objectForKey("cookie") as? NSData
+        let data: NSData? = defaults.objectForKey("sessionCookies") as? NSData
         if let cookie = data {
             let datas: NSArray? = NSKeyedUnarchiver.unarchiveObjectWithData(cookie) as? NSArray
             if let cookies = datas {
@@ -207,13 +206,10 @@ class SCNetwork: NSObject {
             
             // else check the request status code to see if login succeeded
             let httpResponse = response as! NSHTTPURLResponse
+            
+            
             switch(httpResponse.statusCode) {
             case 200:
-                    
-                    let cookieJar: NSHTTPCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-                    let data: NSData = NSKeyedArchiver.archivedDataWithRootObject(cookieJar)
-                    defaults.setObject(data, forKey: "cookie")
-                    
                 
                 completionHandler(success: true, message: "Logged in!")
             case 400:
@@ -391,4 +387,25 @@ class SCNetwork: NSObject {
         
         dataTask.resume()
     }
+    
+    
+//    
+//    func saveCookie() {
+//        let cookieJar: NSHTTPCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+//        let data: NSData = NSKeyedArchiver.archivedDataWithRootObject(cookieJar)
+//        let ud: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+//        ud.setObject(data, forKey: "cookie")
+//    }
+//    func loadCookie() {
+//
+//    }
+//    
+//    func wipeCookies() {
+//        let ud: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+//        let cookieStorage: NSHTTPCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+//        let cookies: [NSHTTPCookie] = cookieStorage.cookies as! [NSHTTPCookie]
+//        for cookie in cookies {
+//            cookieStorage.deleteCookie(cookie)
+//        }
+//    }
 }

@@ -15,6 +15,7 @@
 		387126CD1B65C15600AE4CFE /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387126CC1B65C15600AE4CFE /* MapViewController.swift */; };
 		3889BE7E1B97C30F00A0930F /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3889BE7D1B97C30F00A0930F /* Settings.swift */; };
 		3889BE801B97C5B300A0930F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3889BE7F1B97C5B300A0930F /* Network.swift */; };
+		3889BE881B9C031A00A0930F /* Cookies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3889BE871B9C031A00A0930F /* Cookies.swift */; };
 		388DBEB01B064DBB009BC774 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388DBEAF1B064DBB009BC774 /* AppDelegate.swift */; };
 		388DBEB21B064DBB009BC774 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 388DBEB11B064DBB009BC774 /* ViewController.swift */; };
 		388DBEB51B064DBB009BC774 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 388DBEB31B064DBB009BC774 /* Main.storyboard */; };
@@ -48,6 +49,7 @@
 		387126CC1B65C15600AE4CFE /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		3889BE7D1B97C30F00A0930F /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		3889BE7F1B97C5B300A0930F /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		3889BE871B9C031A00A0930F /* Cookies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cookies.swift; sourceTree = "<group>"; };
 		388DBEAA1B064DBB009BC774 /* Steer Clear.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Steer Clear.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		388DBEAE1B064DBB009BC774 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		388DBEAF1B064DBB009BC774 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				38F5AE451B9645D700CE66A1 /* NextField.swift */,
 				38F5AE411B9534F900CE66A1 /* UIViewExtensions.swift */,
 				3889BE7F1B97C5B300A0930F /* Network.swift */,
+				3889BE871B9C031A00A0930F /* Cookies.swift */,
 				04FB75561B8409F700422750 /* SCNetwork.swift */,
 				38DE57F41B67257F004A37FA /* GooglePlacesAutocomplete.h */,
 				38DE57F51B67257F004A37FA /* GooglePlacesAutocomplete.swift */,
@@ -405,6 +408,7 @@
 				383EC5EB1B69BD2E00D78F36 /* TripConfirmation.swift in Sources */,
 				388DBEB21B064DBB009BC774 /* ViewController.swift in Sources */,
 				388DBEB01B064DBB009BC774 /* AppDelegate.swift in Sources */,
+				3889BE881B9C031A00A0930F /* Cookies.swift in Sources */,
 				3889BE7E1B97C30F00A0930F /* Settings.swift in Sources */,
 				38E9B4DD1B83E2CC00903F82 /* Ride.swift in Sources */,
 				04FB75571B8409F700422750 /* SCNetwork.swift in Sources */,

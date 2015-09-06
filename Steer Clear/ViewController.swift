@@ -138,6 +138,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
                                 self.jiggleLogin()
                                 self.displayAlert("Login Error", message: message)
                                 self.shouldStopRotating = true
+//                                
+//                                var dict = [
+//                                    NSHTTPCookieExpires:[NSDate .distantFuture()],
+//                                ]
+//                                
+//                                var cookie = NSHTTPCookie(properties: dict as [NSObject : AnyObject])
+//                                var sharedHTTPCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+//                                
+//                                sharedHTTPCookieStorage.setCookie(cookie!)
+                            
                             })
                         }
                         else {
@@ -148,6 +158,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
                                 self.phoneTextbox.hidden = true
                                 self.phoneLabel.hidden = true
                                 self.phoneUnderlineLabel.hidden = true
+                                
+                                var cookies: NSArray = NSHTTPCookieStorage.sharedHTTPCookieStorage().cookies as NSArray!
+                                
+                                Cookies.setCookiesWithArr(cookies)
                                 
                                 self.defaults.setObject("\(username)", forKey: "lastUser")
                                 self.performSegueWithIdentifier("loginRider", sender: self)
