@@ -40,6 +40,13 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="steerClearLogo" translatesAutoresizingMaskIntoConstraints="NO" id="tfn-BU-vK7">
+                                <rect key="frame" x="85" y="30" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="d35-q1-vba"/>
+                                    <constraint firstAttribute="height" constant="150" id="fBJ-a6-dOY"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -49,7 +56,9 @@
                             <constraint firstItem="8GB-Z7-7LJ" firstAttribute="top" secondItem="z8I-Rb-Fkz" secondAttribute="bottom" id="OlE-fS-vgc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="z8I-Rb-Fkz" secondAttribute="trailing" constant="-16" id="aCj-8T-IlO"/>
                             <constraint firstAttribute="trailingMargin" secondItem="UsE-US-a21" secondAttribute="trailing" constant="-16" id="cLp-cU-2L9"/>
+                            <constraint firstItem="tfn-BU-vK7" firstAttribute="top" secondItem="MlQ-gP-SGM" secondAttribute="bottom" constant="10" id="lqi-K5-fQx"/>
                             <constraint firstItem="z8I-Rb-Fkz" firstAttribute="top" secondItem="JY2-oE-g77" secondAttribute="topMargin" id="qRL-oD-lVv"/>
+                            <constraint firstAttribute="centerX" secondItem="tfn-BU-vK7" secondAttribute="centerX" id="vsf-TU-G9V"/>
                             <constraint firstItem="UsE-US-a21" firstAttribute="top" secondItem="JY2-oE-g77" secondAttribute="topMargin" id="wVa-M0-qRr"/>
                         </constraints>
                     </view>
