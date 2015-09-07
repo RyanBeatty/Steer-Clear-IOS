@@ -49,6 +49,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     var settings = Settings()
     
     var geofence = CLCircularRegion()
+    let defaults = NSUserDefaults.standardUserDefaults()
     
     @IBAction func segmentControlSwitch(sender: AnyObject) {
         switch segmentOutlet.selectedSegmentIndex
@@ -391,6 +392,13 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
         self.locationDetails = place.description
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    @IBAction func logoutButton(sender: AnyObject) {
+        
+        self.defaults.setObject(nil, forKey: "sessionCookies")
+        self.performSegueWithIdentifier("logoutSegue", sender: self)
+    }
+    
     
     func placeViewClosed() {
         dismissViewControllerAnimated(true, completion: nil)

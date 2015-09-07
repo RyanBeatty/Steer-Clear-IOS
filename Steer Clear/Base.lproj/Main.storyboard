@@ -301,6 +301,7 @@
                         <outlet property="usernameTextbox" destination="yOZ-WN-l0f" id="BXP-DJ-lWs"/>
                         <outlet property="usernameUnderlineLabel" destination="kSI-g6-MNo" id="0hm-sw-pMb"/>
                         <segue destination="nsC-P0-xcL" kind="presentation" identifier="loginRider" modalTransitionStyle="flipHorizontal" id="SY5-wn-1ZG"/>
+                        <segue destination="0s6-dg-VbN" kind="presentation" identifier="waitingSegue" modalTransitionStyle="flipHorizontal" id="F1i-gB-7Ro"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -339,7 +340,29 @@
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="Steer Clear" id="gtN-fw-8BE"/>
+                                    <navigationItem title="Steer Clear" id="gtN-fw-8BE">
+                                        <barButtonItem key="leftBarButtonItem" id="HoA-Vb-z7K">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="D8C-AI-SLW">
+                                                <rect key="frame" x="-23" y="-15" width="71" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Logout">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="logoutButton:" destination="nsC-P0-xcL" eventType="touchUpInside" id="3QM-ty-paf"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" id="uBk-pv-3iA">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Edh-U9-N8J">
+                                                <rect key="frame" x="-23" y="-15" width="71" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Info">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                            </button>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xt9-eA-P5A">
@@ -453,6 +476,7 @@
                         <outlet property="pickUpButton" destination="Mec-dU-MNu" id="EDY-Ha-UzT"/>
                         <outlet property="segmentOutlet" destination="VY1-qt-Xx7" id="ubs-qQ-vqQ"/>
                         <segue destination="Xq3-zb-LVU" kind="presentation" identifier="sendDetails" id="wc4-Qx-ZrL"/>
+                        <segue destination="vXZ-lx-hvc" kind="presentation" identifier="logoutSegue" modalTransitionStyle="flipHorizontal" id="lZw-qN-yEC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vBg-rF-pfC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -765,5 +789,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="SY5-wn-1ZG"/>
+        <segue reference="F1i-gB-7Ro"/>
     </inferredMetricsTieBreakers>
 </document>

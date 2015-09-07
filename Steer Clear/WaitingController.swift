@@ -12,9 +12,9 @@ import QuartzCore
 class WaitingController: UIViewController {
 
     @IBOutlet var etaLabel: UILabel!
-    
     var currentRide: Ride!
-    
+    let defaults = NSUserDefaults.standardUserDefaults()
+    var fullETA = ""
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,9 +23,24 @@ class WaitingController: UIViewController {
     }
 
     func setupETA() {
+        
         self.etaLabel.layer.masksToBounds = true;
         self.etaLabel.layer.cornerRadius = 0.5 * self.etaLabel.bounds.size.width
-        var fullETA = toString(currentRide.pickupTime)
+        
+        if (self.defaults.objectForKey("pickupTime") != nil) {
+            fullETA = self.defaults.objectForKey("pickupTime") as! String
+            print(fullETA)
+        }
+
+//        if currentRide.pickupTime != fullETA{
+//            fullETA = toString(currentRide.pickupTime)
+//        }
+//        
+        
+        
+//        if (defaults.stringForKey("pickupTime") != nil) {
+//                fullETA = toString(defaults.stringForKey("pickupTime"))
+//        }
         
         if fullETA != "" {
 
@@ -37,7 +52,6 @@ class WaitingController: UIViewController {
             
             dateFormatter.dateFormat = "h:mm"
             let date24 = dateFormatter.stringFromDate(date!)
-            
             etaLabel.text = "\(date24)"
         } else {
             println("For some reason eta not given.")
@@ -47,9 +61,9 @@ class WaitingController: UIViewController {
     }
     
     @IBAction func cancelRideButton(sender: AnyObject) {
-        var currentRideId = toString(currentRide.id)
+        var currentRideId = defaults.stringForKey("rideID")
         
-        SCNetwork.deleteRideWithId(currentRideId,
+        SCNetwork.deleteRideWithId(currentRideId!,
             completionHandler: {
                 success, message in
                 
@@ -62,7 +76,8 @@ class WaitingController: UIViewController {
                         // if it failed, display error
                         self.displayAlert("Ride Error", message: message)
                     } else {
-                        
+                        self.defaults.setObject(nil, forKey: "pickupTime")
+                        self.defaults.setObject(nil, forKey: "rideID")
                         self.performSegueWithIdentifier("cancelRideSegue", sender: self)
                     }
                 })

@@ -56,7 +56,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         design()
-
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
         view.addGestureRecognizer(tap)
         self.usernameTextbox.delegate = self;
@@ -70,29 +69,52 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewDidAppear(animated: Bool) {
+        
+        let data: NSData? = defaults.objectForKey("sessionCookies") as? NSData
+        if let cookie = data {
+            let datas: NSArray? = NSKeyedUnarchiver.unarchiveObjectWithData(cookie) as? NSArray
+            if let cookies = datas {
+                for c in cookies as! [NSHTTPCookie] {
+                    NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookie(c)
+                }
+            }
+        }
+        
+        
+        if cookiesPresent() {
+            if pickupPresent() {
+                self.performSegueWithIdentifier("waitingSegue", sender: self)
+            }
+            else {
+                self.performSegueWithIdentifier("loginRider", sender: self)
+            }
+        }
+        else {
+            println("no cooies")
+            self.startXphoneTextBox = self.phoneTextbox.frame.origin.x
+            self.startXphonelabel = self.phoneLabel.frame.origin.x
+            self.startXphoneUnderline = self.phoneUnderlineLabel.frame.origin.x
+            
+            self.phoneTextbox.frame.origin.x = startXphoneTextBox - self.offset
+            self.phoneLabel.frame.origin.x = startXphonelabel - self.offset
+            self.phoneUnderlineLabel.frame.origin.x = startXphoneUnderline - self.offset
+            
+            self.endXphoneTextBox = self.phoneTextbox.frame.origin.x
+            self.endXphonelabel = self.phoneLabel.frame.origin.x
+            self.endXphoneUnderline = self.phoneUnderlineLabel.frame.origin.x
+            
+            self.startX = self.loginBtn.frame.origin.x
+            
+            phoneTextbox.hidden = true
+            phoneLabel.hidden = true
+            phoneUnderlineLabel.hidden = true
+            checkUser()
+            
+            usernameTextbox.delegate = self
+            passwordTextbox.delegate = self
+            self.usernameTextbox.nextField = self.passwordTextbox
+        }
 
-        self.startXphoneTextBox = self.phoneTextbox.frame.origin.x
-        self.startXphonelabel = self.phoneLabel.frame.origin.x
-        self.startXphoneUnderline = self.phoneUnderlineLabel.frame.origin.x
-        
-        self.phoneTextbox.frame.origin.x = startXphoneTextBox - self.offset
-        self.phoneLabel.frame.origin.x = startXphonelabel - self.offset
-        self.phoneUnderlineLabel.frame.origin.x = startXphoneUnderline - self.offset
-        
-        self.endXphoneTextBox = self.phoneTextbox.frame.origin.x
-        self.endXphonelabel = self.phoneLabel.frame.origin.x
-        self.endXphoneUnderline = self.phoneUnderlineLabel.frame.origin.x
-        
-        self.startX = self.loginBtn.frame.origin.x
-        
-        phoneTextbox.hidden = true
-        phoneLabel.hidden = true
-        phoneUnderlineLabel.hidden = true
-        checkUser()
-        
-        usernameTextbox.delegate = self
-        passwordTextbox.delegate = self
-        self.usernameTextbox.nextField = self.passwordTextbox
         
 
     }
@@ -333,37 +355,42 @@ class ViewController: UIViewController, UITextFieldDelegate {
             phoneUnderlineLabel.hidden = false
             
             self.phoneTextbox.frame.origin.x = self.startXphoneTextBox
+            println("bringing back to center")
+            self.phoneTextbox.frame.origin.x = self.startXphoneTextBox
             self.phoneLabel.frame.origin.x = self.startXphonelabel
             self.phoneUnderlineLabel.frame.origin.x = self.startXphoneUnderline
             
             createAnAccountLabel.setAttributedTitle(self.cancelMutableString, forState: UIControlState.Normal)
             loginBtn.setTitle("REGISTER", forState: UIControlState.Normal)
             self.usernameTextbox.attributedPlaceholder = NSAttributedString(string:"W&M USERNAME (treveley)", attributes: [NSForegroundColorAttributeName: UIColor.grayColor()])
+            println("bringing back to center")
             loginBtn.backgroundColor = UIColor.whiteColor()
             loginBtn.setTitleColor(customColor , forState: UIControlState.Normal)
         }
         else {
-            println("not new user lets see if logged in")
-            SCNetwork.checkIndex(
-                {
-                    success, message in
-                    
-                    if(!success) {
-                        // can't make UI updates from background thread, so we need to dispatch
-                        // them to the main thread
-                        dispatch_async(dispatch_get_main_queue(), {
-                            println("User not logged in, let user log in.")
-                            
-                        })
-                    }
-                    else {
-                        // can't make UI updates from background thread, so we need to dispatch
-                        // them to the main thread
-                        dispatch_async(dispatch_get_main_queue(), {
-                            self.performSegueWithIdentifier("loginRider", sender: self)
-                        })
-                    }
-            })
+            println("let user log in")
+        }
+    }
+    
+    
+    func pickupPresent()->Bool{
+        let pickupTime: AnyObject? = defaults.objectForKey("pickupTime")
+        if (pickupTime == nil){
+            println("No pickup time")
+            return false
+        }
+        else {
+            return true
+        }
+    }
+    func cookiesPresent()->Bool{
+        let data: NSData? = defaults.objectForKey("sessionCookies") as? NSData
+        if (data == nil){
+            println("No cookies, let user log in")
+            return false
+        }
+        else {
+            return true
         }
     }
     

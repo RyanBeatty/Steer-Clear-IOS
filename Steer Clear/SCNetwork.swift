@@ -95,73 +95,33 @@ class SCNetwork: NSObject {
     
     
     /*
-    checkIndex
+    checkCookie
     ----------
     Checks to see whether user is logged in by checking the index page, if user is logged in, page will
     return a 200 status code. If not, it will return a 401.
     
     */
-    class func checkIndex(completionHandler: (success: Bool, message: String) -> ()) {
+    class func checkCookie(completionHandler: (success: Bool, message: String) -> ()) {
         let defaults = NSUserDefaults.standardUserDefaults()
         
-        // create register url
-        let indexUrl = NSURL(string: "http://steerclear.wm.edu/api/rides/15")
-        
-        // initialize url request object
-        var request = NSMutableURLRequest(URL: indexUrl!)
-        
-        // set http method to POST and encode form parameters
-        request.HTTPMethod = "GET"
-        
         let data: NSData? = defaults.objectForKey("sessionCookies") as? NSData
-        if let cookie = data {
-            let datas: NSArray? = NSKeyedUnarchiver.unarchiveObjectWithData(cookie) as? NSArray
-            if let cookies = datas {
-                for c in cookies as! [NSHTTPCookie] {
-                    NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookie(c)
-                }
-            }
+        
+//        if let cookie = data {
+//            let datas: NSArray? = NSKeyedUnarchiver.unarchiveObjectWithData(cookie) as? NSArray
+//            if let cookies = datas {
+//                for c in cookies as! [NSHTTPCookie] {
+//                    NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookie(c)
+//                }
+//            }
+//        }
+        switch(data) {
+        case nil:
+            println("User not logged in, defaults empty")
+            completionHandler(success: false, message: "User not logged in, defaults empty")
+        default:
+            println("Cookies found")
+            completionHandler(success: true, message: "Cookies found")
         }
-
-        // initialize session object create http request task
-        var session = NSURLSession.sharedSession()
-        
-        
-        var task = session.dataTaskWithRequest(request, completionHandler: {
-            data, response, error -> Void in
-            
-            // if there was an error, request failed
-            if(error != nil) {
-                completionHandler(success: false, message: "Error checking if user is logged in")
-
-                return
-            }
-            
-            // if there is no response, request failed
-            if(response == nil) {
-                completionHandler(success: false, message: "There was an error while checking whether user is logged in.")
-                
-                return
-            }
-            
-            // else check the request status code to see if registering succeeded
-            let httpResponse = response as! NSHTTPURLResponse
-            println(NSString(data: data, encoding: NSUTF8StringEncoding))
-            switch(httpResponse.statusCode) {
-            case 200:
-                println("loggedin")
-                completionHandler(success: true, message: "Logged In")
-            case 401:
-                println("User not logged in: Status code 401")
-                completionHandler(success: false, message: "User not loggefd in: Status code 401")
-            default:
-                println("Status Code received: \(httpResponse.statusCode)")
-                completionHandler(success: false, message: "There was an error while checking if logged in")
-            }
-        })
-        
-        // start task
-        task.resume()
     }
     
     /*
@@ -238,6 +198,7 @@ class SCNetwork: NSObject {
     */
     class func requestRide(startLat: String, startLong: String, endLat: String, endLong: String, numPassengers: String, completionHandler: (success: Bool, needLogin: Bool, message: String, ride: Ride?)->()) {
         
+        let defaults = NSUserDefaults.standardUserDefaults()
         // create rideRequest url
         let rideRequestUrl = NSURL(string: RIDE_REQUEST_URL_STRING)
         
@@ -287,6 +248,9 @@ class SCNetwork: NSObject {
                 
                 // create ride object
                 let ride = Ride(id: id!, numPassengers: numPassengers!, pickupAddress: pickupAddress!, dropoffAddress: dropoffAddress!, pickupTime: pickupTime!)
+                
+                defaults.setObject(pickupTime, forKey: "pickupTime")
+                defaults.setObject(id, forKey: "rideID")
                 
                 completionHandler(success: true, needLogin: false, message: "Ride requested!", ride: ride)
             case 400:
