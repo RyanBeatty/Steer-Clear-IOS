@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 import MapKit
 import CoreLocation
 import GoogleMaps
@@ -50,6 +51,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     
     var geofence = CLCircularRegion()
     let defaults = NSUserDefaults.standardUserDefaults()
+    
+    @IBOutlet weak var popOver: UIView!
+    var popOverStartY = CGFloat()
+    var popOverViewable = false
     
     @IBAction func segmentControlSwitch(sender: AnyObject) {
         switch segmentOutlet.selectedSegmentIndex
@@ -131,9 +136,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             presentViewController(gpaViewController, animated: true, completion: nil)
         }
     }
+    
+    override func viewWillAppear(animated: Bool) {
+
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setupButtons()
+        
+        self.popOverStartY = self.popOver.frame.origin.y
         
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -391,6 +402,32 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
         
         self.locationDetails = place.description
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    @IBAction func popUp(sender: AnyObject) {
+        
+        if !popOverViewable {
+            UIView.animateWithDuration(
+                0.5,
+                animations: {
+                    self.popOver.frame.origin.y = self.popOverStartY + 600
+                },
+                completion: nil
+            )
+            popOverViewable = true
+        } else {
+            UIView.animateWithDuration(
+                0.5,
+                animations: {
+                    self.popOver.frame.origin.y = self.popOverStartY - 600
+                },
+                completion: nil
+            )
+            popOverViewable = false
+            
+        }
+            
+
+
     }
     
     @IBAction func logoutButton(sender: AnyObject) {

@@ -77,26 +77,26 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidAppear(animated: Bool) {
         
-        let data: NSData? = defaults.objectForKey("sessionCookies") as? NSData
-        if let cookie = data {
-            let datas: NSArray? = NSKeyedUnarchiver.unarchiveObjectWithData(cookie) as? NSArray
-            if let cookies = datas {
-                for c in cookies as! [NSHTTPCookie] {
-                    NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookie(c)
-                }
-            }
-        }
-        
-        
-        if cookiesPresent() {
-            if pickupPresent() {
-                self.performSegueWithIdentifier("waitingSegue", sender: self)
-            }
-            else {
-                self.performSegueWithIdentifier("loginRider", sender: self)
-            }
-        }
-        else {
+//        let data: NSData? = defaults.objectForKey("sessionCookies") as? NSData
+//        if let cookie = data {
+//            let datas: NSArray? = NSKeyedUnarchiver.unarchiveObjectWithData(cookie) as? NSArray
+//            if let cookies = datas {
+//                for c in cookies as! [NSHTTPCookie] {
+//                    NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookie(c)
+//                }
+//            }
+//        }
+//        
+//        
+//        if cookiesPresent() {
+//            if pickupPresent() {
+//                self.performSegueWithIdentifier("waitingSegue", sender: self)
+//            }
+//            else {
+//                self.performSegueWithIdentifier("loginRider", sender: self)
+//            }
+//        }
+//        else {
             println("no cookies")
             self.startXphoneTextBox = self.phoneTextbox.frame.origin.x
             self.startXphonelabel = self.phoneLabel.frame.origin.x
@@ -116,7 +116,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             usernameTextbox.delegate = self
             passwordTextbox.delegate = self
             self.usernameTextbox.nextField = self.passwordTextbox
-        }
+//        }
 
         
 
