@@ -67,6 +67,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
     }
+
+    override func viewWillAppear(animated: Bool) {
+        phoneTextbox.hidden = true
+        phoneLabel.hidden = true
+        phoneUnderlineLabel.hidden = true
+        
+    }
     
     override func viewDidAppear(animated: Bool) {
         
@@ -90,7 +97,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
         }
         else {
-            println("no cooies")
+            println("no cookies")
             self.startXphoneTextBox = self.phoneTextbox.frame.origin.x
             self.startXphonelabel = self.phoneLabel.frame.origin.x
             self.startXphoneUnderline = self.phoneUnderlineLabel.frame.origin.x
@@ -104,10 +111,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
             self.endXphoneUnderline = self.phoneUnderlineLabel.frame.origin.x
             
             self.startX = self.loginBtn.frame.origin.x
-            
-            phoneTextbox.hidden = true
-            phoneLabel.hidden = true
-            phoneUnderlineLabel.hidden = true
             checkUser()
             
             usernameTextbox.delegate = self
