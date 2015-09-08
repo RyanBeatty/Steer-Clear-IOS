@@ -69,56 +69,22 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
 
     override func viewWillAppear(animated: Bool) {
-        phoneTextbox.hidden = true
-        phoneLabel.hidden = true
-        phoneUnderlineLabel.hidden = true
-        
+        hidePhoneLabels()
     }
     
     override func viewDidAppear(animated: Bool) {
-        
-//        let data: NSData? = defaults.objectForKey("sessionCookies") as? NSData
-//        if let cookie = data {
-//            let datas: NSArray? = NSKeyedUnarchiver.unarchiveObjectWithData(cookie) as? NSArray
-//            if let cookies = datas {
-//                for c in cookies as! [NSHTTPCookie] {
-//                    NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookie(c)
-//                }
-//            }
-//        }
-//        
-//        
-//        if cookiesPresent() {
-//            if pickupPresent() {
-//                self.performSegueWithIdentifier("waitingSegue", sender: self)
-//            }
-//            else {
-//                self.performSegueWithIdentifier("loginRider", sender: self)
-//            }
-//        }
-//        else {
+
             println("no cookies")
-            self.startXphoneTextBox = self.phoneTextbox.frame.origin.x
-            self.startXphonelabel = self.phoneLabel.frame.origin.x
-            self.startXphoneUnderline = self.phoneUnderlineLabel.frame.origin.x
-            
-            self.phoneTextbox.frame.origin.x = startXphoneTextBox - self.offset
-            self.phoneLabel.frame.origin.x = startXphonelabel - self.offset
-            self.phoneUnderlineLabel.frame.origin.x = startXphoneUnderline - self.offset
-            
-            self.endXphoneTextBox = self.phoneTextbox.frame.origin.x
-            self.endXphonelabel = self.phoneLabel.frame.origin.x
-            self.endXphoneUnderline = self.phoneUnderlineLabel.frame.origin.x
-            
+            getPhoneLabelsLocation()
+            movePhoneLabelsOffScreen(false)
+        
             self.startX = self.loginBtn.frame.origin.x
+        
             checkUser()
             
             usernameTextbox.delegate = self
             passwordTextbox.delegate = self
             self.usernameTextbox.nextField = self.passwordTextbox
-//        }
-
-        
 
     }
     
@@ -262,25 +228,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
     */
     @IBAction func registerButton(sender: AnyObject) {
         let customColor = UIColor(hue: 0.4444, saturation: 0.8, brightness: 0.34, alpha: 1.0) /* #115740 */
-        let startXphoneTextBox = self.phoneTextbox.frame.origin.x
-        let startXphonelabel = self.phoneLabel.frame.origin.x
-        let startXphoneUnderline = self.phoneUnderlineLabel.frame.origin.x
         
         if createAnAccountLabel.titleLabel!.text == "Don't have an account? REGISTER" {
             
-            phoneTextbox.hidden = false
-            phoneLabel.hidden = false
-            phoneUnderlineLabel.hidden = false
+            unHidePhoneLabels()
             
-            UIView.animateWithDuration(
-                0.5,
-                animations: {
-                    self.phoneTextbox.frame.origin.x = self.startXphoneTextBox
-                    self.phoneLabel.frame.origin.x = self.startXphonelabel
-                    self.phoneUnderlineLabel.frame.origin.x = self.startXphoneUnderline
-                },
-                completion: nil
-            )
+            movePhoneLabelsOnScreen()
+            
             
             createAnAccountLabel.setAttributedTitle(self.cancelMutableString, forState: UIControlState.Normal)
             loginBtn.setTitle("REGISTER", forState: UIControlState.Normal)
@@ -290,15 +244,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         else {
             
-            UIView.animateWithDuration(
-                0.5,
-                animations: {
-                    self.phoneTextbox.frame.origin.x = self.endXphoneTextBox
-                    self.phoneLabel.frame.origin.x = self.endXphonelabel
-                    self.phoneUnderlineLabel.frame.origin.x = self.endXphoneUnderline
-                },
-                completion: nil
-            )
+            movePhoneLabelsOffScreen(true)
             
             createAnAccountLabel.setAttributedTitle(registerMutableString, forState: UIControlState.Normal)
             loginBtn.setTitle("LOGIN", forState: UIControlState.Normal)
@@ -519,6 +465,66 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         
     }
+    
+    
+    func hidePhoneLabels() {
+        phoneTextbox.hidden = true
+        phoneLabel.hidden = true
+        phoneUnderlineLabel.hidden = true
+        
+    }
+    
+    func unHidePhoneLabels() {
+        phoneTextbox.hidden = false
+        phoneLabel.hidden = false
+        phoneUnderlineLabel.hidden = false
+    }
+    
+    func getPhoneLabelsLocation() {
+        self.startXphoneTextBox = self.phoneTextbox.frame.origin.x
+        self.startXphonelabel = self.phoneLabel.frame.origin.x
+        self.startXphoneUnderline = self.phoneUnderlineLabel.frame.origin.x
+
+    }
+    
+    func movePhoneLabelsOffScreen(animate: Bool) {
+        if animate {
+            UIView.animateWithDuration(
+                0.5,
+                animations: {
+                    self.phoneTextbox.frame.origin.x = self.endXphoneTextBox
+                    self.phoneLabel.frame.origin.x = self.endXphonelabel
+                    self.phoneUnderlineLabel.frame.origin.x = self.endXphoneUnderline
+                },
+                completion: nil
+            )
+
+        }
+        else {
+            self.phoneTextbox.frame.origin.x = startXphoneTextBox - self.offset
+            self.phoneLabel.frame.origin.x = startXphonelabel - self.offset
+            self.phoneUnderlineLabel.frame.origin.x = startXphoneUnderline - self.offset
+            
+            self.endXphoneTextBox = self.phoneTextbox.frame.origin.x
+            self.endXphonelabel = self.phoneLabel.frame.origin.x
+            self.endXphoneUnderline = self.phoneUnderlineLabel.frame.origin.x
+            
+        }
+    }
+    
+    func movePhoneLabelsOnScreen() {
+        UIView.animateWithDuration(
+            0.5,
+            animations: {
+                self.phoneTextbox.frame.origin.x = self.startXphoneTextBox
+                self.phoneLabel.frame.origin.x = self.startXphonelabel
+                self.phoneUnderlineLabel.frame.origin.x = self.startXphoneUnderline
+            },
+            completion: nil
+        )
+
+    }
+    
     
     func keyboardWillHide(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {

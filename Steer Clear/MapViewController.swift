@@ -12,6 +12,7 @@ import MapKit
 import CoreLocation
 import GoogleMaps
 import QuartzCore
+import Canvas
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
     
@@ -137,9 +138,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
 
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setupButtons()
