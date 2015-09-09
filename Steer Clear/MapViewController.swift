@@ -54,9 +54,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     var geofence = CLCircularRegion()
     let defaults = NSUserDefaults.standardUserDefaults()
     
+    @IBOutlet weak var popOverOutlet: UIButton!
     @IBOutlet weak var mapsGroupView: UIView!
     @IBOutlet weak var navigationBar: UINavigationBar!
-    @IBOutlet weak var popOver: UIView!
+
     var popOverStartY = CGFloat()
     var popOverViewable = false
     var offset: CGFloat = 600
@@ -200,6 +201,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             
         }
         mapView.delegate = self
+        popOverOutlet.enabled = true
     }
     
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
@@ -444,6 +446,27 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
     }
     
     
+    @IBAction func ulisesLink(sender: AnyObject) {
+        UIApplication.sharedApplication().openURL(NSURL(string: "http://udiscover.me")!)
+    }
+
+    @IBAction func ryanLink(sender: AnyObject) {
+        UIApplication.sharedApplication().openURL(NSURL(string: "https://github.com/RyanBeatty")!)
+    }
+    @IBAction func kelvinLink(sender: AnyObject) {
+        UIApplication.sharedApplication().openURL(NSURL(string: "http://abrokwa.org/")!)        
+    }
+
+    @IBAction func nathanLink(sender: AnyObject) {
+        UIApplication.sharedApplication().openURL(NSURL(string: "http://www.nateo.co")!)
+    }
+    
+    @IBAction func corynneLink(sender: AnyObject) {
+        UIApplication.sharedApplication().openURL(NSURL(string: "http://www.corynnedech.com")!)
+    }
+    @IBAction func milesLink(sender: AnyObject) {
+        UIApplication.sharedApplication().openURL(NSURL(string: "https://github.com/mformetal")!)
+    }
     
     @IBAction func logoutButton(sender: AnyObject) {
         
