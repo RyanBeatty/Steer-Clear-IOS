@@ -54,6 +54,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     var geofence = CLCircularRegion()
     let defaults = NSUserDefaults.standardUserDefaults()
     
+    @IBOutlet weak var mapsGroupView: UIView!
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var popOver: UIView!
     var popOverStartY = CGFloat()
@@ -270,6 +271,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         dropOffButton.layer.addSublayer(dropOffBorder)
         
         myLocationButtonOutlet.layer.shadowOpacity = 0.2
+        self.offset = self.mapsGroupView.frame.height
         
     }
     
@@ -406,14 +408,16 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
         dismissViewControllerAnimated(true, completion: nil)
     }
     @IBAction func popUp(sender: AnyObject) {
+
         
         if !popOverViewable {
             UIView.animateWithDuration(
                 0.5,
                 animations: {
-                    self.mapView.frame.origin.y -= self.offset
-                    self.pickUpButton.frame.origin.y -= self.offset
-                    self.dropOffButton.frame.origin.y -= self.offset
+                    self.mapsGroupView.frame.origin.y -= self.offset
+//                    self.mapView.frame.origin.y -= self.offset
+//                    self.pickUpButton.frame.origin.y -= self.offset
+//                    self.dropOffButton.frame.origin.y -= self.offset
                     
                     self.segmentOutlet.frame.origin.y += self.offset
                     self.myLocationButtonOutlet.frame.origin.y += self.offset
@@ -426,9 +430,7 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
             UIView.animateWithDuration(
                 0.5,
                 animations: {
-                    self.mapView.frame.origin.y += self.offset
-                    self.pickUpButton.frame.origin.y += self.offset
-                    self.dropOffButton.frame.origin.y += self.offset
+                    self.mapsGroupView.frame.origin.y += self.offset
                     
                     self.segmentOutlet.frame.origin.y -= self.offset
                     self.myLocationButtonOutlet.frame.origin.y -= self.offset
