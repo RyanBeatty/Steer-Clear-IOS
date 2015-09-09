@@ -58,6 +58,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     @IBOutlet weak var mapsGroupView: UIView!
     @IBOutlet weak var navigationBar: UINavigationBar!
 
+    var navWidth = CGFloat()
     var popOverStartY = CGFloat()
     var popOverViewable = false
     var offset: CGFloat = 600
@@ -142,9 +143,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        self.navWidth = self.navigationBar.frame.width
+        var navBorder = CALayer()
+        navBorder.backgroundColor = settings.spiritGold.CGColor
+        navBorder.frame = CGRect(x: 0, y: 44, width: self.navWidth, height: 5)
+        navigationBar.layer.addSublayer(navBorder)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         setupButtons()
         
 //        self.popOverStartY = self.popOver.frame.origin.y
@@ -249,11 +258,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     }
     
     func setupButtons() {
-        let navWidth = self.navigationBar.frame.width
-        var navBorder = CALayer()
-        navBorder.backgroundColor = settings.spiritGold.CGColor
-        navBorder.frame = CGRect(x: 0, y: 44, width: navWidth, height: 5)
-        navigationBar.layer.addSublayer(navBorder)
         
         segmentOutlet.tintColor = settings.spiritGold
         

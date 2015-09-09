@@ -36,7 +36,16 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
     var startName = ""
     var endName = ""
     var settings = Settings()
+    var navWidth = CGFloat()
     @IBOutlet weak var navigationBar: UINavigationBar!
+    
+    override func viewDidLayoutSubviews() {
+        self.navWidth = self.navigationBar.frame.width
+        var navBorder = CALayer()
+        navBorder.backgroundColor = settings.spiritGold.CGColor
+        navBorder.frame = CGRect(x: 0, y: 44, width: self.navWidth, height: 5)
+        navigationBar.layer.addSublayer(navBorder)
+    }
     
     override func viewDidLoad() {
         
@@ -45,7 +54,6 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         myPicker.dataSource = self
         myPicker.selectRow(1, inComponent: 0, animated: true)
         
-        let navWidth = self.navigationBar.frame.width
         var navBorder = CALayer()
         navBorder.backgroundColor = settings.spiritGold.CGColor
         navBorder.frame = CGRect(x: 0, y: 44, width: navWidth, height: 5)

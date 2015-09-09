@@ -17,15 +17,22 @@ class WaitingController: UIViewController {
     let defaults = NSUserDefaults.standardUserDefaults()
     var fullETA = ""
     var settings = Settings()
+    var navWidth = CGFloat()
     
+    
+    override func viewDidLayoutSubviews() {
+        self.navWidth = self.navigationBar.frame.width
+        var navBorder = CALayer()
+        navBorder.backgroundColor = settings.spiritGold.CGColor
+        navBorder.frame = CGRect(x: 0, y: 44, width: self.navWidth, height: 5)
+        navigationBar.layer.addSublayer(navBorder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let navWidth = self.navigationBar.frame.width
         var navBorder = CALayer()
         navBorder.backgroundColor = settings.spiritGold.CGColor
-        navBorder.frame = CGRect(x: 0, y: 44, width: navWidth, height: 5)
+        navBorder.frame = CGRect(x: 0, y: 44, width: self.navWidth, height: 5)
         navigationBar.layer.addSublayer(navBorder)
         
         setupETA()
