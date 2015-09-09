@@ -28,6 +28,10 @@ class WaitingController: UIViewController {
         navigationBar.layer.addSublayer(navBorder)
     }
     
+    override func viewWillAppear(animated: Bool) {
+            dropTime()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         var navBorder = CALayer()
@@ -36,6 +40,7 @@ class WaitingController: UIViewController {
         navigationBar.layer.addSublayer(navBorder)
         
         setupETA()
+
 
     }
 
@@ -49,16 +54,6 @@ class WaitingController: UIViewController {
             print(fullETA)
         }
 
-//        if currentRide.pickupTime != fullETA{
-//            fullETA = toString(currentRide.pickupTime)
-//        }
-//        
-        
-        
-//        if (defaults.stringForKey("pickupTime") != nil) {
-//                fullETA = toString(defaults.stringForKey("pickupTime"))
-//        }
-        
         if fullETA != "" {
 
             
@@ -76,6 +71,22 @@ class WaitingController: UIViewController {
 
         
     }
+    var labelPositionisLeft = true
+    
+    func dropTime() {
+        UIView.animateWithDuration(0.7, delay: 0.7, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: nil, animations: {
+            if self.labelPositionisLeft {
+                self.etaLabel.center.y = self.view.bounds.height + 200
+            }
+            else {
+                self.etaLabel.center.y = 500
+            }
+            
+            }, completion: nil)
+        
+        labelPositionisLeft = !labelPositionisLeft
+    }
+    
     
     @IBAction func cancelRideButton(sender: AnyObject) {
         var currentRideId = defaults.stringForKey("rideID")
