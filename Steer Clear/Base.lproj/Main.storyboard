@@ -643,8 +643,8 @@
                                     <constraint firstItem="Gik-Kz-LlF" firstAttribute="centerX" secondItem="JZ6-yj-RwO" secondAttribute="centerX" constant="-29" id="zXR-Sj-J8Z"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K3P-H2-eZa">
-                                <rect key="frame" x="500" y="0.0" width="320" height="568"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K3P-H2-eZa">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AnZ-Qk-icN" customClass="GMSMapView">
                                         <rect key="frame" x="0.0" y="63" width="320" height="445"/>
