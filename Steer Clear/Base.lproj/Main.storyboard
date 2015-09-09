@@ -373,20 +373,69 @@
                         <viewControllerLayoutGuide type="top" id="7Ox-ol-eTQ"/>
                         <viewControllerLayoutGuide type="bottom" id="ULf-gl-SJ4"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="9Bf-8m-mF0" customClass="CSAnimationView">
+                    <view key="view" contentMode="scaleToFill" id="9Bf-8m-mF0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K3P-H2-eZa">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AnZ-Qk-icN" customClass="GMSMapView">
+                                        <rect key="frame" x="0.0" y="63" width="320" height="445"/>
+                                        <color key="backgroundColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mec-dU-MNu">
+                                        <rect key="frame" x="29" y="75" width="275" height="35"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="fVp-4x-7AD"/>
+                                            <constraint firstAttribute="width" constant="275" id="nqF-iQ-bqk"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
+                                        <color key="tintColor" red="0.082352941176470587" green="0.37254901960784315" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
+                                        <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="Select a Pick Up Location">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="searchButton:" destination="nsC-P0-xcL" eventType="touchUpInside" id="VOl-bZ-Man"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vMw-yO-Jg9">
+                                        <rect key="frame" x="29" y="122" width="275" height="35"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="275" id="ntY-xQ-sut"/>
+                                            <constraint firstAttribute="height" constant="35" id="z0z-yu-ROG"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
+                                        <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="Select a Drop Off Location">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="dropOffSearchButton:" destination="nsC-P0-xcL" eventType="touchUpInside" id="J23-s2-gTe"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="AnZ-Qk-icN" secondAttribute="bottom" constant="60" id="3Lq-iK-the"/>
+                                    <constraint firstItem="vMw-yO-Jg9" firstAttribute="top" secondItem="Mec-dU-MNu" secondAttribute="bottom" constant="12" id="NnM-o2-IVc"/>
+                                    <constraint firstAttribute="trailing" secondItem="AnZ-Qk-icN" secondAttribute="trailing" id="bOd-bd-L5o"/>
+                                    <constraint firstItem="AnZ-Qk-icN" firstAttribute="leading" secondItem="K3P-H2-eZa" secondAttribute="leading" id="f45-Mz-MMZ"/>
+                                    <constraint firstItem="AnZ-Qk-icN" firstAttribute="top" secondItem="K3P-H2-eZa" secondAttribute="top" constant="63" id="mi0-zE-Gnu"/>
+                                    <constraint firstItem="Mec-dU-MNu" firstAttribute="centerX" secondItem="vMw-yO-Jg9" secondAttribute="centerX" id="tih-oj-bBn"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ddW-dg-MWe">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                 <color key="backgroundColor" red="0.066666666669999999" green="0.27450980390000002" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="SGF-VC-7dn"/>
+                                    <constraint firstAttribute="height" constant="64" id="ysG-ub-7dm"/>
                                 </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AnZ-Qk-icN" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="64" width="320" height="445"/>
-                                <color key="backgroundColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                             </view>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERD-fU-Ocz">
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
@@ -431,6 +480,18 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="VY1-qt-Xx7">
+                                <rect key="frame" x="88" y="468" width="143" height="29"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <segments>
+                                    <segment title="Pick Up"/>
+                                    <segment title="Drop Off"/>
+                                </segments>
+                                <color key="tintColor" red="0.070588235289999995" green="0.27450980390000002" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="segmentControlSwitch:" destination="nsC-P0-xcL" eventType="valueChanged" id="7ID-rT-9kA"/>
+                                </connections>
+                            </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xt9-eA-P5A">
                                 <rect key="frame" x="266" y="465" width="38" height="34"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -450,6 +511,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1e5-aP-JFJ">
                                 <rect key="frame" x="0.0" y="508" width="320" height="60"/>
                                 <color key="backgroundColor" red="0.070588235289999995" green="0.27450980390000002" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Fi4-Wd-KvM"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="22"/>
                                 <state key="normal" title="CONFIRM RIDE">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -459,114 +523,39 @@
                                     <action selector="confirmRideButton:" destination="nsC-P0-xcL" eventType="touchUpInside" id="35X-hN-vF3"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mec-dU-MNu">
-                                <rect key="frame" x="29" y="75" width="275" height="35"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="00B-bq-cfj"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
-                                <color key="tintColor" red="0.082352941176470587" green="0.37254901960784315" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
-                                <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="Select a Pick Up Location">
-                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="searchButton:" destination="nsC-P0-xcL" eventType="touchUpInside" id="VOl-bZ-Man"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vMw-yO-Jg9">
-                                <rect key="frame" x="29" y="121" width="275" height="35"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="1Wv-68-zRH"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="15"/>
-                                <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="Select a Drop Off Location">
-                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="dropOffSearchButton:" destination="nsC-P0-xcL" eventType="touchUpInside" id="J23-s2-gTe"/>
-                                </connections>
-                            </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="VY1-qt-Xx7">
-                                <rect key="frame" x="88" y="468" width="143" height="29"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <segments>
-                                    <segment title="Pick Up"/>
-                                    <segment title="Drop Off"/>
-                                </segments>
-                                <color key="tintColor" red="0.070588235289999995" green="0.27450980390000002" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <action selector="segmentControlSwitch:" destination="nsC-P0-xcL" eventType="valueChanged" id="7ID-rT-9kA"/>
-                                </connections>
-                            </segmentedControl>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fqJ-Oj-kFI">
-                                <rect key="frame" x="41" y="-500" width="238" height="400"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="msQ-6D-Htp">
-                                        <rect key="frame" x="98" y="155" width="42" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.98039215690000003" green="0.65098039220000004" blue="0.20392156859999999" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="fqJ-Oj-kFI" firstAttribute="top" secondItem="7Ox-ol-eTQ" secondAttribute="bottom" constant="-520" id="1fz-54-PuR"/>
-                            <constraint firstItem="vMw-yO-Jg9" firstAttribute="trailing" secondItem="9Bf-8m-mF0" secondAttribute="trailingMargin" id="2Bn-vl-zh1"/>
-                            <constraint firstItem="1e5-aP-JFJ" firstAttribute="top" secondItem="AnZ-Qk-icN" secondAttribute="bottom" constant="-1" id="3Kc-HA-ExU"/>
-                            <constraint firstItem="Mec-dU-MNu" firstAttribute="leading" secondItem="9Bf-8m-mF0" secondAttribute="leadingMargin" constant="13" id="4e2-WI-lQI"/>
+                            <constraint firstItem="Mec-dU-MNu" firstAttribute="top" secondItem="ERD-fU-Ocz" secondAttribute="bottom" constant="11" id="1Lb-SK-aGX"/>
+                            <constraint firstItem="ERD-fU-Ocz" firstAttribute="centerX" secondItem="Mec-dU-MNu" secondAttribute="centerX" constant="-6.5" id="6OA-YD-5Y1"/>
                             <constraint firstItem="1e5-aP-JFJ" firstAttribute="top" secondItem="Xt9-eA-P5A" secondAttribute="bottom" constant="9" id="744-f6-x7x"/>
                             <constraint firstItem="Xt9-eA-P5A" firstAttribute="trailing" secondItem="9Bf-8m-mF0" secondAttribute="trailingMargin" id="7Fv-jR-NEi"/>
-                            <constraint firstItem="AnZ-Qk-icN" firstAttribute="top" secondItem="ERD-fU-Ocz" secondAttribute="bottom" id="H7P-zX-uXw"/>
-                            <constraint firstItem="ERD-fU-Ocz" firstAttribute="leading" secondItem="AnZ-Qk-icN" secondAttribute="leading" id="Mc5-ly-d5f"/>
-                            <constraint firstItem="fqJ-Oj-kFI" firstAttribute="leading" secondItem="9Bf-8m-mF0" secondAttribute="leadingMargin" constant="25" id="OSp-Lf-RhH"/>
-                            <constraint firstAttribute="centerX" secondItem="fqJ-Oj-kFI" secondAttribute="centerX" id="OsV-eW-04f"/>
-                            <constraint firstItem="ddW-dg-MWe" firstAttribute="top" secondItem="9Bf-8m-mF0" secondAttribute="topMargin" id="RPv-f0-tKW"/>
-                            <constraint firstItem="vMw-yO-Jg9" firstAttribute="top" secondItem="Mec-dU-MNu" secondAttribute="bottom" constant="11" id="SBA-nq-c7N"/>
+                            <constraint firstItem="K3P-H2-eZa" firstAttribute="leading" secondItem="9Bf-8m-mF0" secondAttribute="leadingMargin" constant="-16" id="Aq2-nG-mhK"/>
+                            <constraint firstItem="ddW-dg-MWe" firstAttribute="leading" secondItem="9Bf-8m-mF0" secondAttribute="leadingMargin" constant="-16" id="BNS-88-iSv"/>
+                            <constraint firstItem="ERD-fU-Ocz" firstAttribute="leading" secondItem="9Bf-8m-mF0" secondAttribute="leadingMargin" constant="-16" id="Cob-cp-ORw"/>
+                            <constraint firstItem="K3P-H2-eZa" firstAttribute="top" secondItem="9Bf-8m-mF0" secondAttribute="topMargin" id="EPf-Ad-FD6"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ERD-fU-Ocz" secondAttribute="trailing" constant="-16" id="JdA-tT-EYQ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="K3P-H2-eZa" secondAttribute="trailing" constant="-16" id="SCi-xi-CrW"/>
+                            <constraint firstItem="ERD-fU-Ocz" firstAttribute="top" secondItem="7Ox-ol-eTQ" secondAttribute="bottom" id="Uiy-6r-OPw"/>
+                            <constraint firstItem="ddW-dg-MWe" firstAttribute="top" secondItem="9Bf-8m-mF0" secondAttribute="topMargin" id="V5A-mx-5Xb"/>
                             <constraint firstItem="1e5-aP-JFJ" firstAttribute="top" secondItem="VY1-qt-Xx7" secondAttribute="bottom" constant="12" id="W7N-K5-VhX"/>
                             <constraint firstItem="ULf-gl-SJ4" firstAttribute="top" secondItem="1e5-aP-JFJ" secondAttribute="bottom" id="b49-g2-Cuv"/>
                             <constraint firstItem="1e5-aP-JFJ" firstAttribute="centerX" secondItem="VY1-qt-Xx7" secondAttribute="centerX" constant="0.5" id="bWx-G5-jzp"/>
-                            <constraint firstItem="ERD-fU-Ocz" firstAttribute="trailing" secondItem="AnZ-Qk-icN" secondAttribute="trailing" id="beJ-Cp-EDK"/>
                             <constraint firstItem="Xt9-eA-P5A" firstAttribute="leading" secondItem="VY1-qt-Xx7" secondAttribute="trailing" constant="35" id="bsR-Ng-EU4"/>
                             <constraint firstAttribute="trailingMargin" secondItem="1e5-aP-JFJ" secondAttribute="trailing" constant="-16" id="dro-U2-MJG"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ddW-dg-MWe" secondAttribute="trailing" constant="-16" id="f5D-nC-utd"/>
                             <constraint firstItem="1e5-aP-JFJ" firstAttribute="leading" secondItem="9Bf-8m-mF0" secondAttribute="leadingMargin" constant="-16" id="fdE-Ff-UCf"/>
-                            <constraint firstItem="Mec-dU-MNu" firstAttribute="trailing" secondItem="9Bf-8m-mF0" secondAttribute="trailingMargin" id="gda-JP-Z1s"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ddW-dg-MWe" secondAttribute="trailing" constant="-16" id="gdd-rd-iWO"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="AnZ-Qk-icN" secondAttribute="trailing" constant="-16" id="iQO-4m-5Na"/>
-                            <constraint firstItem="ERD-fU-Ocz" firstAttribute="top" secondItem="7Ox-ol-eTQ" secondAttribute="bottom" id="lVo-PH-5cF"/>
-                            <constraint firstItem="AnZ-Qk-icN" firstAttribute="leading" secondItem="9Bf-8m-mF0" secondAttribute="leadingMargin" constant="-16" id="oKc-9n-nCR"/>
-                            <constraint firstItem="vMw-yO-Jg9" firstAttribute="leading" secondItem="9Bf-8m-mF0" secondAttribute="leadingMargin" constant="13" id="pir-RJ-rBA"/>
-                            <constraint firstItem="ddW-dg-MWe" firstAttribute="leading" secondItem="9Bf-8m-mF0" secondAttribute="leadingMargin" constant="-16" id="rR8-SE-P0W"/>
-                            <constraint firstItem="ULf-gl-SJ4" firstAttribute="top" secondItem="AnZ-Qk-icN" secondAttribute="bottom" constant="59" id="tQO-o4-8Pa"/>
-                            <constraint firstItem="ULf-gl-SJ4" firstAttribute="top" secondItem="fqJ-Oj-kFI" secondAttribute="bottom" constant="668" id="tdw-UY-7He"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="fqJ-Oj-kFI" secondAttribute="trailing" constant="25" id="tyL-Dr-aZP"/>
-                            <constraint firstItem="Mec-dU-MNu" firstAttribute="top" secondItem="ERD-fU-Ocz" secondAttribute="bottom" constant="11" id="wWr-de-Dcl"/>
+                            <constraint firstItem="ULf-gl-SJ4" firstAttribute="top" secondItem="K3P-H2-eZa" secondAttribute="bottom" id="z1p-MG-Sjv"/>
                         </constraints>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="string" keyPath="type" value="fadeIn"/>
-                            <userDefinedRuntimeAttribute type="number" keyPath="duration">
-                                <integer key="value" value="5"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="number" keyPath="delay">
-                                <real key="value" value="0.5"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="confirmRideOutlet" destination="1e5-aP-JFJ" id="gmv-hY-5GW"/>
                         <outlet property="dropOffButton" destination="vMw-yO-Jg9" id="RYY-tq-ArZ"/>
                         <outlet property="mapView" destination="AnZ-Qk-icN" id="JQJ-52-ywu"/>
                         <outlet property="myLocationButtonOutlet" destination="Xt9-eA-P5A" id="JIS-fN-QmF"/>
+                        <outlet property="navigationBar" destination="ERD-fU-Ocz" id="kbW-XD-a8k"/>
                         <outlet property="pickUpButton" destination="Mec-dU-MNu" id="EDY-Ha-UzT"/>
-                        <outlet property="popOver" destination="fqJ-Oj-kFI" id="tki-Xh-U2z"/>
                         <outlet property="segmentOutlet" destination="VY1-qt-Xx7" id="ubs-qQ-vqQ"/>
                         <segue destination="Xq3-zb-LVU" kind="presentation" identifier="sendDetails" id="wc4-Qx-ZrL"/>
                         <segue destination="vXZ-lx-hvc" kind="presentation" identifier="logoutSegue" modalTransitionStyle="flipHorizontal" id="lZw-qN-yEC"/>
@@ -764,7 +753,9 @@
                         <outlet property="changePickup" destination="MR5-gr-9aN" id="Vck-AM-eEo"/>
                         <outlet property="endLocationOutlet" destination="vhg-vl-jgt" id="An4-XT-z4J"/>
                         <outlet property="myPicker" destination="AQq-N6-28P" id="S0p-YA-XCD"/>
+                        <outlet property="navigationBar" destination="Dyz-C0-KkH" id="gTF-uN-mEm"/>
                         <outlet property="numOfPassengers" destination="2WX-EZ-whe" id="OH9-QP-8Em"/>
+                        <outlet property="requestRideOutlet" destination="imm-gA-xTu" id="2eg-sl-eg8"/>
                         <outlet property="startLocationOutlet" destination="GhB-tN-812" id="XDD-lw-Pvw"/>
                         <segue destination="0s6-dg-VbN" kind="presentation" identifier="waitingSegue" id="drq-Yc-FCO"/>
                     </connections>
@@ -868,6 +859,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="etaLabel" destination="gQK-c0-2WN" id="cAR-li-ebt"/>
+                        <outlet property="navigationBar" destination="izX-jC-RJZ" id="VH5-xD-kuX"/>
                         <segue destination="nsC-P0-xcL" kind="presentation" identifier="cancelRideSegue" id="ZmU-pM-MLV"/>
                     </connections>
                 </viewController>
@@ -881,8 +873,8 @@
         <image name="steerClearLogo" width="573" height="573"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qTu-tQ-YLd"/>
-        <segue reference="XI0-cn-d9T"/>
-        <segue reference="Yzy-Ph-T08"/>
+        <segue reference="lZw-qN-yEC"/>
+        <segue reference="wsX-g9-NaP"/>
+        <segue reference="drq-Yc-FCO"/>
     </inferredMetricsTieBreakers>
 </document>

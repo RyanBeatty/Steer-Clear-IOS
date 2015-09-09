@@ -12,6 +12,7 @@ import GoogleMaps
 
 class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate  {
 
+    @IBOutlet weak var requestRideOutlet: UIButton!
    
     @IBOutlet var startLocationOutlet: UILabel!
 
@@ -34,6 +35,8 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
     // start and end address names
     var startName = ""
     var endName = ""
+    var settings = Settings()
+    @IBOutlet weak var navigationBar: UINavigationBar!
     
     override func viewDidLoad() {
         
@@ -41,6 +44,12 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         myPicker.delegate = self
         myPicker.dataSource = self
         myPicker.selectRow(1, inComponent: 0, animated: true)
+        
+        let navWidth = self.navigationBar.frame.width
+        var navBorder = CALayer()
+        navBorder.backgroundColor = settings.spiritGold.CGColor
+        navBorder.frame = CGRect(x: 0, y: 44, width: navWidth, height: 5)
+        navigationBar.layer.addSublayer(navBorder)
         
         currentRide = nil
 
@@ -93,7 +102,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         let endLatString = toString(end.latitude)
         let endLongString = toString(end.longitude)
         let numPassengersString = numOfPassengers.text!
-        
+        requestRideOutlet.enabled = false
         // request a ride
         SCNetwork.requestRide(
             startLatString,
@@ -108,6 +117,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
                 if(!success || ride == nil) {
                     dispatch_async(dispatch_get_main_queue(), {
                         self.displayAlert("Ride Request Error", message: message)
+                        self.requestRideOutlet.enabled = true
                     })
                 }
                 else {
@@ -115,6 +125,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
                     dispatch_async(dispatch_get_main_queue(), {
                         // make sure we save Ride object
                         self.currentRide = ride
+                        self.requestRideOutlet.enabled = true
                         self.performSegueWithIdentifier("waitingSegue", sender: self)
                     })
                 }

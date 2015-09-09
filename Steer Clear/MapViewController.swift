@@ -16,6 +16,7 @@ import Canvas
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
     
+    @IBOutlet weak var confirmRideOutlet: UIButton!
     
     @IBOutlet var segmentOutlet: UISegmentedControl!
 
@@ -53,10 +54,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     var geofence = CLCircularRegion()
     let defaults = NSUserDefaults.standardUserDefaults()
     
+    @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var popOver: UIView!
     var popOverStartY = CGFloat()
     var popOverViewable = false
-    
+    var offset: CGFloat = 600
     @IBAction func segmentControlSwitch(sender: AnyObject) {
         switch segmentOutlet.selectedSegmentIndex
         {
@@ -143,7 +145,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         super.viewDidLoad()
         setupButtons()
         
-        self.popOverStartY = self.popOver.frame.origin.y
+//        self.popOverStartY = self.popOver.frame.origin.y
         
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -244,6 +246,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     }
     
     func setupButtons() {
+        let navWidth = self.navigationBar.frame.width
+        var navBorder = CALayer()
+        navBorder.backgroundColor = settings.spiritGold.CGColor
+        navBorder.frame = CGRect(x: 0, y: 44, width: navWidth, height: 5)
+        navigationBar.layer.addSublayer(navBorder)
         
         segmentOutlet.tintColor = settings.spiritGold
         
@@ -251,22 +258,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         dropOffButton.layer.shadowOpacity = 0.2
         
         //adds left block to pickup location button (yellow)
-        var border = CALayer()
-        border.backgroundColor = settings.spiritGold.CGColor
-        border.frame = CGRect(x: -20, y: 0, width: 20, height: 36)
-        pickUpButton.layer.addSublayer(border)
+        var pickUpBorder = CALayer()
+        pickUpBorder.backgroundColor = settings.spiritGold.CGColor
+        pickUpBorder.frame = CGRect(x: -20, y: 0, width: 20, height: 36)
+        pickUpButton.layer.addSublayer(pickUpBorder)
         
         //dropoff left block (green)
-        var border1 = CALayer()
-        border1.backgroundColor = settings.wmGreen.CGColor
-        border1.frame = CGRect(x: -20, y: 0, width: 20, height: 36)
-        dropOffButton.layer.addSublayer(border1)
+        var dropOffBorder = CALayer()
+        dropOffBorder.backgroundColor = settings.wmGreen.CGColor
+        dropOffBorder.frame = CGRect(x: -20, y: 0, width: 20, height: 36)
+        dropOffButton.layer.addSublayer(dropOffBorder)
         
-//        myLocationButtonOutlet.layer.cornerRadius = 0.5 * myLocationButtonOutlet.bounds.size.width
         myLocationButtonOutlet.layer.shadowOpacity = 0.2
-        
-        
-        
         
     }
     
@@ -278,34 +281,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         } else {
-            
-            networkController.geocodeAddress(coordinate.latitude, long: coordinate.longitude)
-            
-            var placesClient: GMSPlacesClient?
-            placesClient = GMSPlacesClient()
-            
-            placesClient!.lookUpPlaceID(networkController.fetchedID, callback: { (place, error) -> Void in
-                if error != nil {
-                    println("lookup place id query error: \(error!.localizedDescription)")
-                    return
-                }
-                
-                if place != nil && self.cameFromSearch == false {
-                    if self.segmentOutlet.selectedSegmentIndex == 0 {
-                        self.pickUpButton.setTitle("\(place!.name)", forState: UIControlState.Normal)
-                        self.globalStartName = place!.name
-                        self.globalStartLocation = coordinate
-                    } else {
-                        self.dropOffButton.setTitle("\(place!.name)", forState: UIControlState.Normal)
-                        self.globalEndName = place!.name
-                        self.globalEndLocation = coordinate
-                    }
-                    
-                } else {
-                    println("No place details for \(self.networkController.fetchedID)")
-                }
-                self.cameFromSearch = false
-            })
             
             if segmentOutlet.selectedSegmentIndex == 0 {
                 
@@ -340,6 +315,34 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 destinationInput = true
                 
             }
+            networkController.geocodeAddress(coordinate.latitude, long: coordinate.longitude)
+            
+            var placesClient: GMSPlacesClient?
+            placesClient = GMSPlacesClient()
+            
+            placesClient!.lookUpPlaceID(networkController.fetchedID, callback: { (place, error) -> Void in
+                if error != nil {
+                    println("lookup place id query error: \(error!.localizedDescription)")
+                    return
+                }
+                
+                if place != nil && self.cameFromSearch == false {
+                    if self.segmentOutlet.selectedSegmentIndex == 0 {
+                        self.pickUpButton.setTitle("\(place!.name)", forState: UIControlState.Normal)
+                        self.globalStartName = place!.name
+                        self.globalStartLocation = coordinate
+                    } else {
+                        self.dropOffButton.setTitle("\(place!.name)", forState: UIControlState.Normal)
+                        self.globalEndName = place!.name
+                        self.globalEndLocation = coordinate
+                    }
+                    
+                } else {
+                    println("No place details for \(self.networkController.fetchedID)")
+                }
+                self.cameFromSearch = false
+            })
+            
             
         }
         
@@ -408,7 +411,13 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
             UIView.animateWithDuration(
                 0.5,
                 animations: {
-                    self.popOver.frame.origin.y = self.popOverStartY + 600
+                    self.mapView.frame.origin.y -= self.offset
+                    self.pickUpButton.frame.origin.y -= self.offset
+                    self.dropOffButton.frame.origin.y -= self.offset
+                    
+                    self.segmentOutlet.frame.origin.y += self.offset
+                    self.myLocationButtonOutlet.frame.origin.y += self.offset
+                    
                 },
                 completion: nil
             )
@@ -417,17 +426,22 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
             UIView.animateWithDuration(
                 0.5,
                 animations: {
-                    self.popOver.frame.origin.y = self.popOverStartY - 600
+                    self.mapView.frame.origin.y += self.offset
+                    self.pickUpButton.frame.origin.y += self.offset
+                    self.dropOffButton.frame.origin.y += self.offset
+                    
+                    self.segmentOutlet.frame.origin.y -= self.offset
+                    self.myLocationButtonOutlet.frame.origin.y -= self.offset
                 },
                 completion: nil
             )
             popOverViewable = false
             
         }
-            
-
 
     }
+    
+    
     
     @IBAction func logoutButton(sender: AnyObject) {
         

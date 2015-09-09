@@ -11,13 +11,23 @@ import QuartzCore
 
 class WaitingController: UIViewController {
 
+    @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet var etaLabel: UILabel!
     var currentRide: Ride!
     let defaults = NSUserDefaults.standardUserDefaults()
     var fullETA = ""
+    var settings = Settings()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        let navWidth = self.navigationBar.frame.width
+        var navBorder = CALayer()
+        navBorder.backgroundColor = settings.spiritGold.CGColor
+        navBorder.frame = CGRect(x: 0, y: 44, width: navWidth, height: 5)
+        navigationBar.layer.addSublayer(navBorder)
+        
         setupETA()
 
     }
