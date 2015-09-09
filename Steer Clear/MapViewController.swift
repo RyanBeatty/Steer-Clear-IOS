@@ -61,7 +61,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     var navWidth = CGFloat()
     var popOverStartY = CGFloat()
     var popOverViewable = false
-    var offset: CGFloat = 600
+    var offset = CGFloat()
     @IBAction func segmentControlSwitch(sender: AnyObject) {
         switch segmentOutlet.selectedSegmentIndex
         {
@@ -149,6 +149,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         navBorder.backgroundColor = settings.spiritGold.CGColor
         navBorder.frame = CGRect(x: 0, y: 44, width: self.navWidth, height: 5)
         navigationBar.layer.addSublayer(navBorder)
+        
+        self.offset = self.mapsGroupView.frame.height
     }
 
     override func viewDidLoad() {
@@ -277,7 +279,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         dropOffButton.layer.addSublayer(dropOffBorder)
         
         myLocationButtonOutlet.layer.shadowOpacity = 0.2
-        self.offset = self.mapsGroupView.frame.height
         
     }
     
@@ -420,10 +421,9 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
             UIView.animateWithDuration(
                 0.5,
                 animations: {
+                    self.navigationBar.topItem!.title = "Team";
+                    
                     self.mapsGroupView.frame.origin.y -= self.offset
-//                    self.mapView.frame.origin.y -= self.offset
-//                    self.pickUpButton.frame.origin.y -= self.offset
-//                    self.dropOffButton.frame.origin.y -= self.offset
                     
                     self.segmentOutlet.frame.origin.y += self.offset
                     self.myLocationButtonOutlet.frame.origin.y += self.offset
@@ -436,6 +436,7 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
             UIView.animateWithDuration(
                 0.5,
                 animations: {
+                    self.navigationBar.topItem!.title = "Steer Clear";
                     self.mapsGroupView.frame.origin.y += self.offset
                     
                     self.segmentOutlet.frame.origin.y -= self.offset
