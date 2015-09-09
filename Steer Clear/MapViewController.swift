@@ -62,6 +62,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     var popOverStartY = CGFloat()
     var popOverViewable = false
     var offset = CGFloat()
+    var mapgroupStartY = CGFloat()
+    var segmentOutletStartY = CGFloat()
+    var locationButtonStartY = CGFloat()
+    
+    var mapgroupEndY = CGFloat()
+    var segmentOutletEndY = CGFloat()
+    var locationButtonEndY = CGFloat()
+    
     @IBAction func segmentControlSwitch(sender: AnyObject) {
         switch segmentOutlet.selectedSegmentIndex
         {
@@ -151,9 +159,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         navigationBar.layer.addSublayer(navBorder)
         
         self.offset = self.mapsGroupView.frame.height
+        
+        self.mapgroupStartY = self.mapsGroupView.frame.origin.y
+        self.mapgroupEndY = self.mapgroupStartY - self.offset
+        
+        self.segmentOutletStartY = self.segmentOutlet.frame.origin.y
+        self.segmentOutletEndY = self.segmentOutletStartY + self.offset
+        
+        self.locationButtonStartY = self.myLocationButtonOutlet.frame.origin.y
+        self.locationButtonEndY = self.locationButtonStartY + offset
     }
 
     override func viewDidLoad() {
+        popOverOutlet.enabled = false
         super.viewDidLoad()
 
         setupButtons()
@@ -354,7 +372,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             
             
         }
-        
+        popOverOutlet.enabled = true
         
     }
     
@@ -421,12 +439,13 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
             UIView.animateWithDuration(
                 0.5,
                 animations: {
+
+                    
+                    self.mapsGroupView.frame.origin.y = self.mapgroupEndY
+                    
+                    self.segmentOutlet.frame.origin.y = self.segmentOutletEndY
+                    self.myLocationButtonOutlet.frame.origin.y = self.locationButtonEndY
                     self.navigationBar.topItem!.title = "Team";
-                    
-                    self.mapsGroupView.frame.origin.y -= self.offset
-                    
-                    self.segmentOutlet.frame.origin.y += self.offset
-                    self.myLocationButtonOutlet.frame.origin.y += self.offset
                     
                 },
                 completion: nil
@@ -436,11 +455,13 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
             UIView.animateWithDuration(
                 0.5,
                 animations: {
-                    self.navigationBar.topItem!.title = "Steer Clear";
-                    self.mapsGroupView.frame.origin.y += self.offset
+
+                    self.mapsGroupView.frame.origin.y = self.mapgroupStartY
                     
-                    self.segmentOutlet.frame.origin.y -= self.offset
-                    self.myLocationButtonOutlet.frame.origin.y -= self.offset
+                    self.segmentOutlet.frame.origin.y = self.segmentOutletStartY
+                    self.myLocationButtonOutlet.frame.origin.y = self.locationButtonStartY
+                    
+                    self.navigationBar.topItem!.title = "Steer Clear";
                 },
                 completion: nil
             )
