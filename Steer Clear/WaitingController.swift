@@ -29,11 +29,13 @@ class WaitingController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-            dropTime()
+        etaLabel.hidden = true
+        dropTime()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         var navBorder = CALayer()
         navBorder.backgroundColor = settings.spiritGold.CGColor
         navBorder.frame = CGRect(x: 0, y: 44, width: self.navWidth, height: 5)
@@ -74,6 +76,7 @@ class WaitingController: UIViewController {
     var labelPositionisLeft = true
     
     func dropTime() {
+        etaLabel.hidden = false
         UIView.animateWithDuration(0.7, delay: 0.7, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: nil, animations: {
             if self.labelPositionisLeft {
                 self.etaLabel.center.y = self.view.bounds.height + 200

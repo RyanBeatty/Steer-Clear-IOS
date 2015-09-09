@@ -1043,7 +1043,7 @@
                         <outlet property="numOfPassengers" destination="2WX-EZ-whe" id="OH9-QP-8Em"/>
                         <outlet property="requestRideOutlet" destination="imm-gA-xTu" id="2eg-sl-eg8"/>
                         <outlet property="startLocationOutlet" destination="GhB-tN-812" id="XDD-lw-Pvw"/>
-                        <segue destination="0s6-dg-VbN" kind="presentation" identifier="waitingSegue" id="drq-Yc-FCO"/>
+                        <segue destination="0s6-dg-VbN" kind="presentation" identifier="waitingSegue" modalTransitionStyle="crossDissolve" id="drq-Yc-FCO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BLy-qm-jQG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1159,8 +1159,8 @@
         <image name="steerClearLogo" width="573" height="573"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lZw-qN-yEC"/>
         <segue reference="ZmU-pM-MLV"/>
-        <segue reference="qTu-tQ-YLd"/>
+        <segue reference="drq-Yc-FCO"/>
+        <segue reference="lZw-qN-yEC"/>
     </inferredMetricsTieBreakers>
 </document>
