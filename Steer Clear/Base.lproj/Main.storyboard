@@ -168,7 +168,7 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sWh-rY-AGT">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sWh-rY-AGT">
                                         <rect key="frame" x="30" y="267" width="26" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="26" id="IGK-A4-sK5"/>
@@ -1159,8 +1159,8 @@
         <image name="steerClearLogo" width="573" height="573"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ZmU-pM-MLV"/>
-        <segue reference="drq-Yc-FCO"/>
+        <segue reference="SY5-wn-1ZG"/>
         <segue reference="lZw-qN-yEC"/>
+        <segue reference="F1i-gB-7Ro"/>
     </inferredMetricsTieBreakers>
 </document>

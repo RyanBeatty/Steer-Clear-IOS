@@ -28,6 +28,7 @@ class NavigationController: UIViewController {
         
         if cookiesPresent() {
             if pickupPresent() {
+                // check whether ride has already been deleted
                 self.performSegueWithIdentifier("waitingViewController", sender: self)
             }
             else {
