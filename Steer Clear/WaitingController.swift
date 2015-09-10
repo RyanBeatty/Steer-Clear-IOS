@@ -19,6 +19,11 @@ class WaitingController: UIViewController {
     var settings = Settings()
     var navWidth = CGFloat()
     
+    @IBOutlet weak var overlay: UIView!
+    var isRotating = false
+    var shouldStopRotating = false
+    
+    @IBOutlet weak var gear: UIImageView!
     
     override func viewDidLayoutSubviews() {
         self.navWidth = self.navigationBar.frame.width
@@ -29,6 +34,8 @@ class WaitingController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        self.gear.alpha = 0.0
+        self.overlay.alpha = 0.0
         etaLabel.hidden = true
         dropTime()
     }
@@ -93,7 +100,17 @@ class WaitingController: UIViewController {
     
     @IBAction func cancelRideButton(sender: AnyObject) {
         var currentRideId = defaults.stringForKey("rideID")
+        UIView.animateWithDuration(0.5, animations: {
+            self.gear.alpha = 1.0
+            self.overlay.alpha = 1.0
+        })
         
+        if self.isRotating == false {
+            self.gear.rotate360Degrees(completionDelegate: self)
+            // Perhaps start a process which will refresh the UI...
+
+        }
+
         SCNetwork.deleteRideWithId(currentRideId!,
             completionHandler: {
                 success, message in
@@ -105,7 +122,11 @@ class WaitingController: UIViewController {
                     // check if registration succeeds
                     if(!success) {
                         // if it failed, display error
+
                         self.displayAlert("Ride Error", message: message)
+                        self.overlay.alpha = 0.0
+                        self.gear.alpha = 0.0
+                        self.shouldStopRotating = true
                     } else {
                         self.defaults.setObject(nil, forKey: "pickupTime")
                         self.defaults.setObject(nil, forKey: "rideID")
@@ -126,6 +147,19 @@ class WaitingController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func animationDidStop(anim: CAAnimation!, finished flag: Bool) {
+        if self.shouldStopRotating == false {
+            self.gear.rotate360Degrees(completionDelegate: self)
+        } else {
+            self.reset()
+        }
+    }
+    
+    func reset() {
+        self.isRotating = false
+        self.shouldStopRotating = false
     }
     
 

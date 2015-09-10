@@ -111,8 +111,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 if self.isRotating == false {
                     self.steerClearLogo.rotate360Degrees(completionDelegate: self)
                     // Perhaps start a process which will refresh the UI...
-                    self.shouldStopRotating = true
-                    self.isRotating = true
                 }
                 // else try to log the user in
                 SCNetwork.login(

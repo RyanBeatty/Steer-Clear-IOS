@@ -39,12 +39,23 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
     var navWidth = CGFloat()
     @IBOutlet weak var navigationBar: UINavigationBar!
     
+    @IBOutlet weak var overlay: UIView!
+    @IBOutlet weak var gear: UIImageView!
+
+    var isRotating = false
+    var shouldStopRotating = false
+    
     override func viewDidLayoutSubviews() {
         self.navWidth = self.navigationBar.frame.width
         var navBorder = CALayer()
         navBorder.backgroundColor = settings.spiritGold.CGColor
         navBorder.frame = CGRect(x: 0, y: 44, width: self.navWidth, height: 5)
         navigationBar.layer.addSublayer(navBorder)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.gear.alpha = 0.0
+        self.overlay.alpha = 0.0
     }
     
     override func viewDidLoad() {
@@ -111,6 +122,18 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         let endLongString = toString(end.longitude)
         let numPassengersString = numOfPassengers.text!
         requestRideOutlet.enabled = false
+        
+        UIView.animateWithDuration(0.5, animations: {
+            self.gear.alpha = 1.0
+            self.overlay.alpha = 1.0
+        })
+        
+        if self.isRotating == false {
+            self.gear.rotate360Degrees(completionDelegate: self)
+            // Perhaps start a process which will refresh the UI...
+        }
+        
+        
         // request a ride
         SCNetwork.requestRide(
             startLatString,
@@ -125,6 +148,9 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
                 if(!success || ride == nil) {
                     dispatch_async(dispatch_get_main_queue(), {
                         self.displayAlert("Ride Request Error", message: message)
+                        self.overlay.alpha = 0.0
+                        self.gear.alpha = 0.0
+                        self.shouldStopRotating = true
                         self.requestRideOutlet.enabled = true
                     })
                 }
@@ -220,5 +246,18 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         })
         
         
+    }
+    
+    override func animationDidStop(anim: CAAnimation!, finished flag: Bool) {
+        if self.shouldStopRotating == false {
+            self.gear.rotate360Degrees(completionDelegate: self)
+        } else {
+            self.reset()
+        }
+    }
+    
+    func reset() {
+        self.isRotating = false
+        self.shouldStopRotating = false
     }
 }
