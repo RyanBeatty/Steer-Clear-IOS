@@ -96,6 +96,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
     @IBAction func confirmRideButton(sender: AnyObject) {
         if (pickUpButton.titleLabel!.text == "Select a Pick Up Location") || (dropOffButton.titleLabel!.text == "Select a Drop Off Location") {
+            
             let alert = UIAlertController(title: "Trip Error", message: "Please Select a Pick Up and Drop Off Location", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
@@ -303,7 +304,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     
     
     func setupLocationMarker(coordinate: CLLocationCoordinate2D) {
-        confirmRideOutlet.enabled = false
         if networkController.noNetwork() == false {
             let alert = UIAlertController(title: "Network Connection", message: "Unable to connect to the network.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
@@ -335,47 +335,46 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                     println("No place details for \(self.networkController.fetchedID)")
                 }
                 self.cameFromSearch = false
+                
+                if self.segmentOutlet.selectedSegmentIndex == 0 {
+                    
+                    if self.locationMarker != nil {
+                        self.locationMarker.map = nil
+                    }
+                    self.globalStartLocation.latitude = coordinate.latitude
+                    self.globalStartLocation.longitude = coordinate.longitude
+                    self.locationMarker = GMSMarker(position: coordinate)
+                    self.locationMarker.appearAnimation = kGMSMarkerAnimationPop
+                    self.locationMarker.icon = GMSMarker.markerImageWithColor(self.settings.spiritGold)
+                    self.locationMarker.title = "Pick Up"
+                    self.locationMarker.opacity = 0.75
+                    self.locationMarker.map = self.mapView
+                
+                }
+                else {
+                  if self.endLocationMarker != nil {
+                        self.endLocationMarker.map = nil
+                    }
+                    self.globalEndLocation.latitude = coordinate.latitude
+                    self.globalEndLocation.longitude = coordinate.longitude
+                    self.endLocationMarker = GMSMarker(position: coordinate)
+                    self.endLocationMarker.appearAnimation = kGMSMarkerAnimationPop
+                    self.endLocationMarker.icon = GMSMarker.markerImageWithColor(self.settings.wmGreen)
+                    self.endLocationMarker.title = "Drop Off"
+                    println(self.locationDetails)
+                    self.endLocationMarker.opacity = 0.75
+                    self.endLocationMarker.map = self.mapView
+                    
+                    self.destinationInput = true
+                    
+                }
+                
             })
 
-            if segmentOutlet.selectedSegmentIndex == 0 {
-                
-                if locationMarker != nil {
-                    locationMarker.map = nil
-                }
-                globalStartLocation.latitude = coordinate.latitude
-                globalStartLocation.longitude = coordinate.longitude
-                locationMarker = GMSMarker(position: coordinate)
-                locationMarker.appearAnimation = kGMSMarkerAnimationPop
-                locationMarker.icon = GMSMarker.markerImageWithColor(settings.spiritGold)
-                locationMarker.title = "Pick Up"
-                locationMarker.opacity = 0.75
-                locationMarker.map = mapView
 
-                
-                
-                
-            } else {
-                if endLocationMarker != nil {
-                    endLocationMarker.map = nil
-                }
-                globalEndLocation.latitude = coordinate.latitude
-                globalEndLocation.longitude = coordinate.longitude
-                endLocationMarker = GMSMarker(position: coordinate)
-                endLocationMarker.appearAnimation = kGMSMarkerAnimationPop
-                endLocationMarker.icon = GMSMarker.markerImageWithColor(settings.wmGreen)
-                endLocationMarker.title = "Drop Off"
-                println(locationDetails)
-                endLocationMarker.opacity = 0.75
-                endLocationMarker.map = mapView
-
-                destinationInput = true
-                
-            }
             
             
         }
-        confirmRideOutlet.enabled = true
-        popOverOutlet.enabled = true
         
     }
     
