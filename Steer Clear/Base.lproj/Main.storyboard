@@ -1192,7 +1192,7 @@
                         <outlet property="gear" destination="14w-Jz-ZtX" id="ACH-vg-4AB"/>
                         <outlet property="navigationBar" destination="izX-jC-RJZ" id="VH5-xD-kuX"/>
                         <outlet property="overlay" destination="Vy0-PS-vw3" id="UGC-IW-OCi"/>
-                        <segue destination="nsC-P0-xcL" kind="presentation" identifier="cancelRideSegue" id="ZmU-pM-MLV"/>
+                        <segue destination="nsC-P0-xcL" kind="presentation" identifier="cancelRideSegue" modalTransitionStyle="crossDissolve" id="ZmU-pM-MLV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LcF-lr-Ma9" userLabel="First Responder" sceneMemberID="firstResponder"/>

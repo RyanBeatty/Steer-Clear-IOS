@@ -303,45 +303,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     
     
     func setupLocationMarker(coordinate: CLLocationCoordinate2D) {
+        confirmRideOutlet.enabled = false
         if networkController.noNetwork() == false {
             let alert = UIAlertController(title: "Network Connection", message: "Unable to connect to the network.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         } else {
-            
-            if segmentOutlet.selectedSegmentIndex == 0 {
-                
-                if locationMarker != nil {
-                    locationMarker.map = nil
-                }
-                
-                locationMarker = GMSMarker(position: coordinate)
-                locationMarker.appearAnimation = kGMSMarkerAnimationPop
-                locationMarker.icon = GMSMarker.markerImageWithColor(settings.spiritGold)
-                locationMarker.title = "Pick Up"
-                locationMarker.opacity = 0.75
-                locationMarker.map = mapView
-                globalStartLocation.latitude = coordinate.latitude
-                globalStartLocation.longitude = coordinate.longitude
-                
-                
-                
-            } else {
-                if endLocationMarker != nil {
-                    endLocationMarker.map = nil
-                }
-                endLocationMarker = GMSMarker(position: coordinate)
-                endLocationMarker.appearAnimation = kGMSMarkerAnimationPop
-                endLocationMarker.icon = GMSMarker.markerImageWithColor(settings.wmGreen)
-                endLocationMarker.title = "Drop Off"
-                println(locationDetails)
-                endLocationMarker.opacity = 0.75
-                endLocationMarker.map = mapView
-                globalEndLocation.latitude = coordinate.latitude
-                globalEndLocation.longitude = coordinate.longitude
-                destinationInput = true
-                
-            }
             networkController.geocodeAddress(coordinate.latitude, long: coordinate.longitude)
             
             var placesClient: GMSPlacesClient?
@@ -369,9 +336,45 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 }
                 self.cameFromSearch = false
             })
+
+            if segmentOutlet.selectedSegmentIndex == 0 {
+                
+                if locationMarker != nil {
+                    locationMarker.map = nil
+                }
+                globalStartLocation.latitude = coordinate.latitude
+                globalStartLocation.longitude = coordinate.longitude
+                locationMarker = GMSMarker(position: coordinate)
+                locationMarker.appearAnimation = kGMSMarkerAnimationPop
+                locationMarker.icon = GMSMarker.markerImageWithColor(settings.spiritGold)
+                locationMarker.title = "Pick Up"
+                locationMarker.opacity = 0.75
+                locationMarker.map = mapView
+
+                
+                
+                
+            } else {
+                if endLocationMarker != nil {
+                    endLocationMarker.map = nil
+                }
+                globalEndLocation.latitude = coordinate.latitude
+                globalEndLocation.longitude = coordinate.longitude
+                endLocationMarker = GMSMarker(position: coordinate)
+                endLocationMarker.appearAnimation = kGMSMarkerAnimationPop
+                endLocationMarker.icon = GMSMarker.markerImageWithColor(settings.wmGreen)
+                endLocationMarker.title = "Drop Off"
+                println(locationDetails)
+                endLocationMarker.opacity = 0.75
+                endLocationMarker.map = mapView
+
+                destinationInput = true
+                
+            }
             
             
         }
+        confirmRideOutlet.enabled = true
         popOverOutlet.enabled = true
         
     }
