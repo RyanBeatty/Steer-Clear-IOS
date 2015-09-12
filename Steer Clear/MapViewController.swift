@@ -41,7 +41,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     var locationMarker: GMSMarker!
     var endLocationMarker: GMSMarker!
     var locationDetails = ""
-    var destinationInput = false
     var cameFromSearch = false
     var change = false
     var changePickup = false
@@ -69,6 +68,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     var mapgroupEndY = CGFloat()
     var segmentOutletEndY = CGFloat()
     var locationButtonEndY = CGFloat()
+    var finished = false
     
     @IBAction func segmentControlSwitch(sender: AnyObject) {
         switch segmentOutlet.selectedSegmentIndex
@@ -207,7 +207,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 endLocationMarker.map = mapView
                 globalEndLocation.latitude = changeEnd.latitude
                 globalEndLocation.longitude = changeEnd.longitude
-                destinationInput = true
                 
             } else {
                 println("change pickup is not equal to true")
@@ -215,13 +214,33 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 self.globalEndLocation = changeEnd
                 self.globalStartName = changeStartName
                 self.globalEndName = changeEndName
+                self.dropOffButton.setTitle("\(globalEndName)", forState: UIControlState.Normal)
                 self.pickUpButton.setTitle("\(globalStartName)", forState: UIControlState.Normal)
-                setupLocationMarker(changeStart)
-                segmentOutlet.selectedSegmentIndex = 1
-                segmentOutlet.tintColor = settings.wmGreen
-                self.setupLocationMarker(changeEnd)
                 self.mapView.animateToCameraPosition(GMSCameraPosition.cameraWithTarget(changeEnd, zoom: 17.0, bearing: 30, viewingAngle: 45))
                 changePickup == false
+                
+                locationMarker = GMSMarker(position: changeStart)
+                locationMarker.appearAnimation = kGMSMarkerAnimationPop
+                locationMarker.icon = GMSMarker.markerImageWithColor(settings.spiritGold)
+                locationMarker.title = "Pick Up"
+                locationMarker.opacity = 0.75
+                locationMarker.map = mapView
+                
+                endLocationMarker = GMSMarker(position: changeEnd)
+                endLocationMarker.appearAnimation = kGMSMarkerAnimationPop
+                endLocationMarker.icon = GMSMarker.markerImageWithColor(settings.wmGreen)
+                endLocationMarker.title = "Drop Off"
+                endLocationMarker.snippet = "\(locationDetails)"
+                println(locationDetails)
+                endLocationMarker.opacity = 0.75
+                endLocationMarker.map = mapView
+                globalEndLocation.latitude = changeEnd.latitude
+                globalEndLocation.longitude = changeEnd.longitude
+
+                segmentOutlet.tintColor = settings.wmGreen
+                segmentOutlet.selectedSegmentIndex = 1
+                
+
                 
             }
             change = false
@@ -365,14 +384,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                     self.endLocationMarker.opacity = 0.75
                     self.endLocationMarker.map = self.mapView
                     
-                    self.destinationInput = true
                     
                 }
                 
             })
 
 
-            
+            finished = true
             
         }
         
