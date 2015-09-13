@@ -68,7 +68,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     var mapgroupEndY = CGFloat()
     var segmentOutletEndY = CGFloat()
     var locationButtonEndY = CGFloat()
-    var finished = false
     
     @IBAction func segmentControlSwitch(sender: AnyObject) {
         switch segmentOutlet.selectedSegmentIndex
@@ -112,8 +111,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     @IBAction func myLocationButton(sender: AnyObject) {
         let myLocation = locationManager.location
         if myLocation != nil {
-            mapView.animateToCameraPosition(GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 17.0, bearing: 30, viewingAngle: 45))
-            self.setupLocationMarker(myLocation.coordinate)
+            if self.geofence.containsCoordinate(myLocation.coordinate){
+                self.setupLocationMarker(myLocation.coordinate)
+                self.mapView.animateToCameraPosition(GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 17.0, bearing: 30, viewingAngle: 45))
+            } else {
+                let alert = UIAlertController(title: "Region Error", message: "Your Current Location is outside of Steer Clear's service area. Please select a location inside of our area.", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
         } else {
             let alert = UIAlertController(title: "Location Error", message: "Cannot find Current Location.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
@@ -262,9 +267,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
         if !didFindMyLocation {
             let myLocation: CLLocation = change[NSKeyValueChangeNewKey] as! CLLocation
-            mapView.animateToCameraPosition(GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 17.0, bearing: 30, viewingAngle: 45))
-            //mapV.settings.myLocationButton = true
-            self.setupLocationMarker(myLocation.coordinate)
+                if self.geofence.containsCoordinate(myLocation.coordinate){
+                    self.setupLocationMarker(myLocation.coordinate)
+                    self.mapView.animateToCameraPosition(GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 17.0, bearing: 30, viewingAngle: 45))
+                } else {
+                    let alert = UIAlertController(title: "Region Error", message: "Your Current Location is outside of Steer Clear's service area. Please select a location inside of our area.", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
             didFindMyLocation = true
         } else {
             println("could not find location")
@@ -388,9 +398,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 }
                 
             })
-
-
-            finished = true
             
         }
         
