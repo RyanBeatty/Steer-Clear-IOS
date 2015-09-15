@@ -280,9 +280,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             println("could not find location")
         }
     }
-    //This function detects a long press on the map and places a marker at the coordinates of the long press.
+    //This function detects a tap on the map and places a marker at the coordinates of the long press.
     func mapView(mapView: GMSMapView!, didTapAtCoordinate coordinate: CLLocationCoordinate2D) {
-        
         //Set variable to latitude of didLongPressAtCoordinate
         var lat = coordinate.latitude
         
