@@ -1,10 +1,31 @@
 PODS:
-  - GoogleMaps (1.10.1)
+  - Canvas (0.1.2)
+  - GoogleMaps (1.10.2)
+  - OHHTTPStubs (4.2.0):
+    - OHHTTPStubs/Default (= 4.2.0)
+  - OHHTTPStubs/Core (4.2.0)
+  - OHHTTPStubs/Default (4.2.0):
+    - OHHTTPStubs/Core
+    - OHHTTPStubs/JSON
+    - OHHTTPStubs/NSURLSession
+    - OHHTTPStubs/OHPathHelpers
+  - OHHTTPStubs/JSON (4.2.0):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/NSURLSession (4.2.0):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/OHPathHelpers (4.2.0)
+  - SwiftyJSON (2.2.1)
 
 DEPENDENCIES:
+  - Canvas
   - GoogleMaps
+  - OHHTTPStubs
+  - SwiftyJSON (~> 2.2.1)
 
 SPEC CHECKSUMS:
-  GoogleMaps: ebf08677f181d9c2dcdbd1721d206f02beccc9b1
+  Canvas: eb861e3b555d032648146c8ffda1a5dea40059ca
+  GoogleMaps: 5c92e599b07b0a2a9b367c5dd128edc629bddfea
+  OHHTTPStubs: f639130b83fb5f4f022d38f841141b0a6fa77249
+  SwiftyJSON: ae2d0a3d68025d136602a33c4ee215091ced3e33
 
 COCOAPODS: 0.38.2

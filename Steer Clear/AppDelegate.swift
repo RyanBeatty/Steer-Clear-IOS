@@ -13,11 +13,11 @@ import GoogleMaps
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var settings = Settings()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        GMSServices.provideAPIKey("AIzaSyDd_lRDKvpH6ao8KmLTDmQPB4wdhxfuEys")
+        GMSServices.provideAPIKey("\(settings.GMSAPIKEY)")
         return true
     }
 

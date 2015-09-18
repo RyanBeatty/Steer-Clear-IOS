@@ -12,37 +12,159 @@ import GoogleMaps
 
 class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate  {
 
+    @IBOutlet weak var requestRideOutlet: UIButton!
    
     @IBOutlet var startLocationOutlet: UILabel!
 
+    @IBOutlet var changePickup: UIButton!
+    @IBOutlet weak var changeDropoff: UIButton!
     @IBOutlet var endLocationOutlet: UILabel!
     @IBOutlet var myPicker: UIPickerView!
-    @IBOutlet var numberOfPassengers: UILabel!
 
+    @IBOutlet weak var numOfPassengers: UILabel!
+    
     let pickerData = ["1","2","3","4","5", "6","7","8"]
+    
+    // ride object recieved from server
+    var currentRide: Ride? = nil
+    
+    // start and end lat/long points
     var start = CLLocationCoordinate2D()
     var end = CLLocationCoordinate2D()
+    
+    // start and end address names
     var startName = ""
     var endName = ""
-    var networkController = Network()
+    var settings = Settings()
+    var navWidth = CGFloat()
+    @IBOutlet weak var navigationBar: UINavigationBar!
+    
+    @IBOutlet weak var overlay: UIView!
+    @IBOutlet weak var gear: UIImageView!
+
+    var isRotating = false
+    var shouldStopRotating = false
+    
+    override func viewDidLayoutSubviews() {
+        self.navWidth = self.navigationBar.frame.width
+        var navBorder = CALayer()
+        navBorder.backgroundColor = settings.spiritGold.CGColor
+        navBorder.frame = CGRect(x: 0, y: 44, width: self.navWidth, height: 5)
+        navigationBar.layer.addSublayer(navBorder)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.gear.alpha = 0.0
+        self.overlay.alpha = 0.0
+    }
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         myPicker.delegate = self
         myPicker.dataSource = self
         myPicker.selectRow(1, inComponent: 0, animated: true)
+        
+        var navBorder = CALayer()
+        navBorder.backgroundColor = settings.spiritGold.CGColor
+        navBorder.frame = CGRect(x: 0, y: 44, width: navWidth, height: 5)
+        navigationBar.layer.addSublayer(navBorder)
+        
+        currentRide = nil
 
         startLocationOutlet.text = ("\(startName)")
         endLocationOutlet.text = ("\(endName)")
         
     }
     
+    // called when making a segue
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        // if seguing to waitingviewcontroller
+        if (segue.identifier == "waitingSegue") {
+            var svc = segue.destinationViewController as! WaitingController;
+            
+            // pass along ride object to waiting viewcontroller
+            svc.currentRide = currentRide
+            
+        }
+        else if (segue.identifier == "changeDetails") {
+            
+            var changeInfo = segue.destinationViewController as! MapViewController;
+            changeInfo.change = true
+            changeInfo.changeStart = start
+            changeInfo.changeEnd = end
+            changeInfo.changePickup = true
+            changeInfo.changeStartName = startName
+            changeInfo.changeEndName = endName
+            
+        }
+        else if (segue.identifier == "changeDetails2") {
+            
+            var changeInfo = segue.destinationViewController as! MapViewController;
+            changeInfo.change = true
+            changeInfo.changeStart = start
+            changeInfo.changeEnd = end
+            changeInfo.changeStartName = startName
+            changeInfo.changeEndName = endName
+            
+        }
+    }
+    
+    /*
+        confirmButton
+        -------------
+        Place ride request
+    */
     @IBAction func confirmButton(sender: AnyObject) {
-        let stringStartLat = toString(start.latitude)
-        let stringStartLong = toString(start.longitude)
-        let stringEndLat = toString(end.latitude)
-        let stringEndLong = toString(end.longitude)
-        networkController.add(stringStartLat, start_long: stringStartLong, end_lat: stringEndLat, end_long: stringEndLong, numOfPassengers: numberOfPassengers.text!)
+        let startLatString = toString(start.latitude)
+        let startLongString = toString(start.longitude)
+        let endLatString = toString(end.latitude)
+        let endLongString = toString(end.longitude)
+        let numPassengersString = numOfPassengers.text!
+        requestRideOutlet.enabled = false
+        
+        UIView.animateWithDuration(0.5, animations: {
+            self.gear.alpha = 1.0
+            self.overlay.alpha = 1.0
+        })
+        
+        if self.isRotating == false {
+            self.gear.rotate360Degrees(completionDelegate: self)
+            // Perhaps start a process which will refresh the UI...
+        }
+        
+        
+        // request a ride
+        SCNetwork.requestRide(
+            startLatString,
+            startLong: startLongString,
+            endLat: endLatString,
+            endLong: endLongString,
+            numPassengers: numPassengersString,
+            completionHandler: {
+                success, login, message, ride in
+                
+                // if something went wrong, display error message
+                if(!success || ride == nil) {
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.displayAlert("Ride Request Error", message: message)
+                        self.overlay.alpha = 0.0
+                        self.gear.alpha = 0.0
+                        self.shouldStopRotating = true
+                        self.requestRideOutlet.enabled = true
+                    })
+                }
+                else {
+                    // else request was a success, so change screens
+                    dispatch_async(dispatch_get_main_queue(), {
+                        // make sure we save Ride object
+                        self.currentRide = ride
+                        self.requestRideOutlet.enabled = true
+                        self.performSegueWithIdentifier("waitingSegue", sender: self)
+                    })
+                }
+            }
+        )
     }
 
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
@@ -58,7 +180,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        numberOfPassengers.text = pickerData[row]
+        numOfPassengers.text = pickerData[row]
     }
     
     func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
@@ -69,9 +191,9 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
     
     func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
         var pickerLabel = view as! UILabel!
+       
         if view == nil {  //if no label there yet
             pickerLabel = UILabel()
-
             //color  and center the label's background
             let hue = CGFloat(row)/CGFloat(pickerData.count)
             //pickerLabel.backgroundColor = UIColor(hue: hue, saturation: 1.0, brightness:1.0, alpha: 1.0)
@@ -79,10 +201,17 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
             
         }
         let titleData = pickerData[row]
-        let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "Georgia", size: 26.0)!,NSForegroundColorAttributeName:UIColor.blackColor()])
+        let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "Avenir Next", size: 26.0)!,NSForegroundColorAttributeName:UIColor.blackColor()])
         pickerLabel!.attributedText = myTitle
         
         return pickerLabel
+        
+    }
+        
+    func displayAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
         
     }
     
@@ -118,33 +247,17 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         
         
     }
-
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "changeDetails") {
-            
-            var changeInfo = segue.destinationViewController as! MapViewController;
-            changeInfo.change = true
-            changeInfo.changeStart = start
-            changeInfo.changeEnd = end
-            changeInfo.changePickup = true
-            changeInfo.changeStartName = startName
-            changeInfo.changeEndName = endName
-            
-        }
-        if (segue.identifier == "changeDetails2") {
-            
-            var changeInfo = segue.destinationViewController as! MapViewController;
-            changeInfo.change = true
-            changeInfo.changeStart = start
-            changeInfo.changeEnd = end
-            changeInfo.changeStartName = startName
-            changeInfo.changeEndName = endName
-            
-        }
-        
-    }
-
     
-
+    override func animationDidStop(anim: CAAnimation!, finished flag: Bool) {
+        if self.shouldStopRotating == false {
+            self.gear.rotate360Degrees(completionDelegate: self)
+        } else {
+            self.reset()
+        }
+    }
+    
+    func reset() {
+        self.isRotating = false
+        self.shouldStopRotating = false
+    }
 }
