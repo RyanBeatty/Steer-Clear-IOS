@@ -111,9 +111,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     @IBAction func myLocationButton(sender: AnyObject) {
         let myLocation = locationManager.location
         if myLocation != nil {
-            if self.geofence.containsCoordinate(myLocation.coordinate){
-                self.setupLocationMarker(myLocation.coordinate)
-                self.mapView.animateToCameraPosition(GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 17.0, bearing: 30, viewingAngle: 45))
+            if self.geofence.containsCoordinate(myLocation!.coordinate){
+                self.setupLocationMarker(myLocation!.coordinate)
+                self.mapView.animateToCameraPosition(GMSCameraPosition.cameraWithTarget(myLocation!.coordinate, zoom: 17.0, bearing: 30, viewingAngle: 45))
             } else {
                 let alert = UIAlertController(title: "Region Error", message: "Your Current Location is outside of Steer Clear's service area. Please select a location inside of our area.", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
@@ -159,7 +159,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     
     override func viewDidLayoutSubviews() {
         self.navWidth = self.navigationBar.frame.width
-        var navBorder = CALayer()
+        let navBorder = CALayer()
         navBorder.backgroundColor = settings.spiritGold.CGColor
         navBorder.frame = CGRect(x: 0, y: 44, width: self.navWidth, height: 5)
         navigationBar.layer.addSublayer(navBorder)
@@ -207,14 +207,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 endLocationMarker.icon = GMSMarker.markerImageWithColor(settings.wmGreen)
                 endLocationMarker.title = "Drop Off"
                 // endLocationMarker.snippet = "\(locationDetails)"
-                println(locationDetails)
+                print(locationDetails)
                 endLocationMarker.opacity = 0.75
                 endLocationMarker.map = mapView
                 globalEndLocation.latitude = changeEnd.latitude
                 globalEndLocation.longitude = changeEnd.longitude
                 
             } else {
-                println("change pickup is not equal to true")
+                print("change pickup is not equal to true")
                 self.globalStartLocation = changeStart
                 self.globalEndLocation = changeEnd
                 self.globalStartName = changeStartName
@@ -236,7 +236,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 endLocationMarker.icon = GMSMarker.markerImageWithColor(settings.wmGreen)
                 endLocationMarker.title = "Drop Off"
                 endLocationMarker.snippet = "\(locationDetails)"
-                println(locationDetails)
+                print(locationDetails)
                 endLocationMarker.opacity = 0.75
                 endLocationMarker.map = mapView
                 globalEndLocation.latitude = changeEnd.latitude
@@ -258,15 +258,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         popOverOutlet.enabled = true
     }
     
-    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if status == CLAuthorizationStatus.AuthorizedWhenInUse {
             mapView.myLocationEnabled = true
         }
     }
     
-    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+    
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String:AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if !didFindMyLocation {
-            let myLocation: CLLocation = change[NSKeyValueChangeNewKey] as! CLLocation
+            let myLocation: CLLocation = change![NSKeyValueChangeNewKey] as! CLLocation
                 if self.geofence.containsCoordinate(myLocation.coordinate){
                     self.setupLocationMarker(myLocation.coordinate)
                     self.mapView.animateToCameraPosition(GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 17.0, bearing: 30, viewingAngle: 45))
@@ -277,16 +278,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 }
             didFindMyLocation = true
         } else {
-            println("could not find location")
+            print("could not find location")
         }
     }
     //This function detects a tap on the map and places a marker at the coordinates of the long press.
     func mapView(mapView: GMSMapView!, didTapAtCoordinate coordinate: CLLocationCoordinate2D) {
         //Set variable to latitude of didLongPressAtCoordinate
-        var lat = coordinate.latitude
+        let lat = coordinate.latitude
         
         //Set variable to longitude of didLongPressAtCoordinate
-        var long = coordinate.longitude
+        let long = coordinate.longitude
         
         //Feed position to mapMarker
         let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
@@ -314,13 +315,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         dropOffButton.layer.shadowOpacity = 0.2
         
         //adds left block to pickup location button (yellow)
-        var pickUpBorder = CALayer()
+        let pickUpBorder = CALayer()
         pickUpBorder.backgroundColor = settings.spiritGold.CGColor
         pickUpBorder.frame = CGRect(x: -20, y: 0, width: 20, height: 36)
         pickUpButton.layer.addSublayer(pickUpBorder)
         
         //dropoff left block (green)
-        var dropOffBorder = CALayer()
+        let dropOffBorder = CALayer()
         dropOffBorder.backgroundColor = settings.wmGreen.CGColor
         dropOffBorder.frame = CGRect(x: -20, y: 0, width: 20, height: 36)
         dropOffButton.layer.addSublayer(dropOffBorder)
@@ -344,7 +345,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             
             placesClient!.lookUpPlaceID(networkController.fetchedID, callback: { (place, error) -> Void in
                 if error != nil {
-                    println("lookup place id query error: \(error!.localizedDescription)")
+                    print("lookup place id query error: \(error!.localizedDescription)")
                     return
                 }
                 
@@ -360,7 +361,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                     }
                     
                 } else {
-                    println("No place details for \(self.networkController.fetchedID)")
+                    print("No place details for \(self.networkController.fetchedID)")
                 }
                 self.cameFromSearch = false
                 
@@ -389,7 +390,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                     self.endLocationMarker.appearAnimation = kGMSMarkerAnimationPop
                     self.endLocationMarker.icon = GMSMarker.markerImageWithColor(self.settings.wmGreen)
                     self.endLocationMarker.title = "Drop Off"
-                    println(self.locationDetails)
+                    print(self.locationDetails)
                     self.endLocationMarker.opacity = 0.75
                     self.endLocationMarker.map = self.mapView
                     
@@ -405,7 +406,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if (segue.identifier == "sendDetails") {
             
-            var tripInfo = segue.destinationViewController as! TripConfirmation;
+            let tripInfo = segue.destinationViewController as! TripConfirmation;
             
             tripInfo.start = self.globalStartLocation
             tripInfo.end = self.globalEndLocation
@@ -445,7 +446,7 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
                     self.globalEndName = place.description
                     self.globalEndLocation = coordinate
                 }
-                println(details)
+                print(details)
             } else {
                 let alert = UIAlertController(title: "Region Error", message: "The location you have chosen is outside of Steer Cleer's service area.", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))

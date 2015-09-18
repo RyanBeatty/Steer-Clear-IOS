@@ -16,23 +16,19 @@ class Network {
     
     func noNetwork() -> Bool {
         
-        var zeroAddress = sockaddr_in(sin_len: 0, sin_family: 0, sin_port: 0, sin_addr: in_addr(s_addr: 0), sin_zero: (0, 0, 0, 0, 0, 0, 0, 0))
+        var zeroAddress = sockaddr_in()
         zeroAddress.sin_len = UInt8(sizeofValue(zeroAddress))
         zeroAddress.sin_family = sa_family_t(AF_INET)
-        
         let defaultRouteReachability = withUnsafePointer(&zeroAddress) {
-            SCNetworkReachabilityCreateWithAddress(nil, UnsafePointer($0)).takeRetainedValue()
+            SCNetworkReachabilityCreateWithAddress(nil, UnsafePointer($0))
         }
-        
-        var flags: SCNetworkReachabilityFlags = 0
-        if SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags) == 0 {
+        var flags = SCNetworkReachabilityFlags.ConnectionAutomatic
+        if !SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) {
             return false
         }
-        
-        let isReachable = (flags & UInt32(kSCNetworkFlagsReachable)) != 0
-        let needsConnection = (flags & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
-        
-        return isReachable && !needsConnection
+        let isReachable = (flags.rawValue & UInt32(kSCNetworkFlagsReachable)) != 0
+        let needsConnection = (flags.rawValue & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
+        return (isReachable && !needsConnection)
     }
     
     var lookupAddressResults: Dictionary<NSObject, AnyObject>!
@@ -46,22 +42,23 @@ class Network {
         if yes == true {
             let baseURLGeocode = "https://maps.googleapis.com/maps/api/geocode/json?latlng=\(lat),\(long)"
             
-            var geocodeURLString = baseURLGeocode
-            geocodeURLString = geocodeURLString.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+//            var geocodeURLString = baseURLGeocode
+//            geocodeURLString = geocodeURLString.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
             
-            let geocodeURL = NSURL(string: geocodeURLString)
+            let geocodeURL = NSURL(string: baseURLGeocode)
             
             
             let geocodingResultsData = NSData(contentsOfURL: geocodeURL!)
             
             var error: NSError?
-            let dictionary: Dictionary<NSObject, AnyObject> = NSJSONSerialization.JSONObjectWithData(geocodingResultsData!, options: NSJSONReadingOptions.MutableContainers, error: &error) as! Dictionary<NSObject, AnyObject>
+//            let dictionary: Dictionary<NSObject, AnyObject> = NSJSONSerialization.JSONObjectWithData(geocodingResultsData!, options: NSJSONReadingOptions.MutableContainers, error: &error) as! Dictionary<NSObject, AnyObject>
             
-            if (error != nil) {
-                println(error)
-                //       completionHandler(status: "", success: false)
+            do {
+                let dictionary = try NSJSONSerialization.JSONObjectWithData(geocodingResultsData!, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary
+                print(dictionary)
+            } catch let error as NSError {
+                print(error)
             }
-            else {
                 // Get the response status.
                 let status = dictionary["status"] as! String
                 
@@ -73,7 +70,6 @@ class Network {
                     self.fetchedFormattedAddress = self.lookupAddressResults["place_id"]as! String
                     //print(self.fetchedFormattedAddress)
                     self.fetchedID = self.fetchedFormattedAddress
-                }
             }
         }
     }

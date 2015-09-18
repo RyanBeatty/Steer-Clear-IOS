@@ -36,7 +36,7 @@ class SCNetworkBaseTestCase: XCTestCase {
     */
     func _stub(responseStatusCode: Int32) -> OHHTTPStubsDescriptor {
         // stub out network request to server register route
-        var stub = OHHTTPStubs.stubRequestsPassingTest({
+        let stub = OHHTTPStubs.stubRequestsPassingTest({
             request in
             return request.URL!.host == "127.0.0.1"
             }, withStubResponse: {
@@ -148,7 +148,7 @@ class RegisterTestCase: SCNetworkBaseTestCase {
         waitForExpectationsWithTimeout(10, handler: {
             error in
             if (error != nil) {
-                print("Error: \(error.localizedDescription)")
+                print("Error: \(error!.localizedDescription)")
             }
         })
     }
@@ -247,7 +247,7 @@ class LoginTestCase: SCNetworkBaseTestCase {
         waitForExpectationsWithTimeout(10, handler: {
             error in
             if (error != nil) {
-                print("Error: \(error.localizedDescription)")
+                print("Error: \(error!.localizedDescription)")
             }
         })
     }
@@ -449,7 +449,7 @@ class RequestRideTestCase: SCNetworkBaseTestCase {
         waitForExpectationsWithTimeout(10, handler: {
             error in
             if (error != nil) {
-                print("Error: \(error.localizedDescription)")
+                print("Error: \(error!.localizedDescription)")
             }
         })
     }
@@ -540,7 +540,7 @@ class DeleteTestCase: SCNetworkBaseTestCase {
         waitForExpectationsWithTimeout(10, handler: {
             error in
             if (error != nil) {
-                print("Error: \(error.localizedDescription)")
+                print("Error: \(error!.localizedDescription)")
             }
         })
     }

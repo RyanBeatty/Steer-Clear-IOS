@@ -20,7 +20,16 @@ DEPENDENCIES:
   - Canvas
   - GoogleMaps
   - OHHTTPStubs
-  - SwiftyJSON (~> 2.2.1)
+  - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
+
+EXTERNAL SOURCES:
+  SwiftyJSON:
+    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
+
+CHECKOUT OPTIONS:
+  SwiftyJSON:
+    :commit: 50583adf21de1f84a4a06f6dff1b2bb09fe0b03b
+    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 SPEC CHECKSUMS:
   Canvas: eb861e3b555d032648146c8ffda1a5dea40059ca
@@ -28,4 +37,4 @@ SPEC CHECKSUMS:
   OHHTTPStubs: f639130b83fb5f4f022d38f841141b0a6fa77249
   SwiftyJSON: ae2d0a3d68025d136602a33c4ee215091ced3e33
 
-COCOAPODS: 0.38.2
+COCOAPODS: 0.39.0.beta.4

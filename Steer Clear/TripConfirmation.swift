@@ -47,7 +47,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
     
     override func viewDidLayoutSubviews() {
         self.navWidth = self.navigationBar.frame.width
-        var navBorder = CALayer()
+        let navBorder = CALayer()
         navBorder.backgroundColor = settings.spiritGold.CGColor
         navBorder.frame = CGRect(x: 0, y: 44, width: self.navWidth, height: 5)
         navigationBar.layer.addSublayer(navBorder)
@@ -65,7 +65,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         myPicker.dataSource = self
         myPicker.selectRow(1, inComponent: 0, animated: true)
         
-        var navBorder = CALayer()
+        let navBorder = CALayer()
         navBorder.backgroundColor = settings.spiritGold.CGColor
         navBorder.frame = CGRect(x: 0, y: 44, width: navWidth, height: 5)
         navigationBar.layer.addSublayer(navBorder)
@@ -81,7 +81,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         // if seguing to waitingviewcontroller
         if (segue.identifier == "waitingSegue") {
-            var svc = segue.destinationViewController as! WaitingController;
+            let svc = segue.destinationViewController as! WaitingController;
             
             // pass along ride object to waiting viewcontroller
             svc.currentRide = currentRide
@@ -89,7 +89,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         }
         else if (segue.identifier == "changeDetails") {
             
-            var changeInfo = segue.destinationViewController as! MapViewController;
+            let changeInfo = segue.destinationViewController as! MapViewController;
             changeInfo.change = true
             changeInfo.changeStart = start
             changeInfo.changeEnd = end
@@ -100,7 +100,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         }
         else if (segue.identifier == "changeDetails2") {
             
-            var changeInfo = segue.destinationViewController as! MapViewController;
+            let changeInfo = segue.destinationViewController as! MapViewController;
             changeInfo.change = true
             changeInfo.changeStart = start
             changeInfo.changeEnd = end
@@ -116,10 +116,10 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         Place ride request
     */
     @IBAction func confirmButton(sender: AnyObject) {
-        let startLatString = toString(start.latitude)
-        let startLongString = toString(start.longitude)
-        let endLatString = toString(end.latitude)
-        let endLongString = toString(end.longitude)
+        let startLatString = String(start.latitude)
+        let startLongString = String(start.longitude)
+        let endLatString = String(end.latitude)
+        let endLongString = String(end.longitude)
         let numPassengersString = numOfPassengers.text!
         requestRideOutlet.enabled = false
         
@@ -175,7 +175,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
     }
     
     //MARK: Delegates
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return pickerData[row]
     }
     
@@ -185,17 +185,16 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
     
     func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         let titleData = pickerData[row]
-        var myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "Georgia", size: 15.0)!,NSForegroundColorAttributeName:UIColor.blueColor()])
+        let myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "Georgia", size: 15.0)!,NSForegroundColorAttributeName:UIColor.blueColor()])
         return myTitle
     }
     
-    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView!) -> UIView {
+    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
         var pickerLabel = view as! UILabel!
        
         if view == nil {  //if no label there yet
             pickerLabel = UILabel()
             //color  and center the label's background
-            let hue = CGFloat(row)/CGFloat(pickerData.count)
             //pickerLabel.backgroundColor = UIColor(hue: hue, saturation: 1.0, brightness:1.0, alpha: 1.0)
             pickerLabel.textAlignment = .Center
             
@@ -231,24 +230,21 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         CLGeocoder().reverseGeocodeLocation(startLocation, completionHandler: {(placemarks, error) -> Void in
             
             if error != nil {
-                println("Reverse geocoder failed with error" + error.localizedDescription)
+                print("Reverse geocoder failed with error" + error!.localizedDescription)
                 return
             }
-            
-            if placemarks.count > 0 {
-                let pm = placemarks[0] as! CLPlacemark
-                println("Name: \(pm.name)")
-
+            if let pm = placemarks?.first {
+                print("Name: \(pm.name)")
             }
             else {
-                println("Problem with the data received from geocoder")
+                print("Problem with the data received from geocoder")
             }
         })
         
         
     }
     
-    override func animationDidStop(anim: CAAnimation!, finished flag: Bool) {
+    override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
         if self.shouldStopRotating == false {
             self.gear.rotate360Degrees(completionDelegate: self)
         } else {
