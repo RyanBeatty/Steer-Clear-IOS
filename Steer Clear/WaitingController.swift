@@ -122,11 +122,11 @@ class WaitingController: UIViewController {
                     // check if registration succeeds
                     if(!success) {
                         // if it failed, display error
-
-                        self.displayAlert("Ride Error", message: message)
-                        self.overlay.alpha = 0.0
-                        self.gear.alpha = 0.0
-                        self.shouldStopRotating = true
+//                        self.overlay.alpha = 0.0
+//                        self.gear.alpha = 0.0
+//                        self.shouldStopRotating = true
+                        self.defaults.setObject(nil, forKey: "pickupTime")
+                        self.defaults.setObject(nil, forKey: "rideID")
                         self.performSegueWithIdentifier("cancelRideSegue", sender: self)
                     } else {
                         self.defaults.setObject(nil, forKey: "pickupTime")
@@ -135,8 +135,6 @@ class WaitingController: UIViewController {
                     }
                 })
         })
-        
-        
     }
     
     func displayAlert(title: String, message: String) {

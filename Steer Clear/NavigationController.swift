@@ -59,8 +59,13 @@ class NavigationController: UIViewController {
             let date = dateFormatter.dateFromString(dateAsString)
             
             let timeInterval: Double = end.timeIntervalSinceDate(date!)
-            print(timeInterval)
-            return true
+            if timeInterval > 18000 {
+                self.defaults.setObject(nil, forKey: "pickupTime")
+                self.defaults.setObject(nil, forKey: "rideID")
+                return false
+            } else {
+                return true
+            }
         }
     }
     
