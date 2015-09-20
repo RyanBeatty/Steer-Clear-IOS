@@ -15,6 +15,8 @@ class NavigationController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         
+        
+        // pull cookies
         let data: NSData? = defaults.objectForKey("sessionCookies") as? NSData
         if let cookie = data {
             let datas: NSArray? = NSKeyedUnarchiver.unarchiveObjectWithData(cookie) as? NSArray
@@ -25,7 +27,7 @@ class NavigationController: UIViewController {
             }
         }
         
-        
+        // Main navigation depending on cookies
         if cookiesPresent() {
             if pickupPresent() {
                 // check whether ride has already been deleted
@@ -49,6 +51,15 @@ class NavigationController: UIViewController {
             return false
         }
         else {
+// TODO: check how long ago (in seconds) if greater than 5 hours (18000 sec) return false
+            let end = NSDate()
+            let dateAsString = "\(pickupTime!)"
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "E, dd MMM yyyy HH:mm:ss Z"
+            let date = dateFormatter.dateFromString(dateAsString)
+            
+            let timeInterval: Double = end.timeIntervalSinceDate(date!)
+            print(timeInterval)
             return true
         }
     }
