@@ -100,6 +100,16 @@ class WaitingController: UIViewController {
     
     @IBAction func cancelRideButton(sender: AnyObject) {
         var currentRideId = defaults.stringForKey("rideID")
+        UIView.animateWithDuration(0.5, animations: {
+            self.gear.alpha = 1.0
+            self.overlay.alpha = 1.0
+        })
+        
+        if self.isRotating == false {
+            self.gear.rotate360Degrees(completionDelegate: self)
+            // Perhaps start a process which will refresh the UI...
+
+        }
 
         SCNetwork.deleteRideWithId(currentRideId!,
             completionHandler: {
@@ -111,8 +121,12 @@ class WaitingController: UIViewController {
                     
                     // check if registration succeeds
                     if(!success) {
-                        self.defaults.setObject(nil, forKey: "pickupTime")
-                        self.defaults.setObject(nil, forKey: "rideID")
+                        // if it failed, display error
+
+                        self.displayAlert("Ride Error", message: message)
+                        self.overlay.alpha = 0.0
+                        self.gear.alpha = 0.0
+                        self.shouldStopRotating = true
                         self.performSegueWithIdentifier("cancelRideSegue", sender: self)
                     } else {
                         self.defaults.setObject(nil, forKey: "pickupTime")
