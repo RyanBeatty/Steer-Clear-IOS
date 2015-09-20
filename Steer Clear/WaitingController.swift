@@ -39,7 +39,11 @@ class WaitingController: UIViewController {
         etaLabel.hidden = true
         dropTime()
     }
-    
+
+    override func viewDidAppear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "refresh", name: UIApplicationWillEnterForegroundNotification, object: nil);
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -125,16 +129,53 @@ class WaitingController: UIViewController {
 //                        self.overlay.alpha = 0.0
 //                        self.gear.alpha = 0.0
 //                        self.shouldStopRotating = true
-                        self.defaults.setObject(nil, forKey: "pickupTime")
-                        self.defaults.setObject(nil, forKey: "rideID")
-                        self.performSegueWithIdentifier("cancelRideSegue", sender: self)
+                        self.cancelRide()
                     } else {
-                        self.defaults.setObject(nil, forKey: "pickupTime")
-                        self.defaults.setObject(nil, forKey: "rideID")
-                        self.performSegueWithIdentifier("cancelRideSegue", sender: self)
+                        self.cancelRide()
                     }
                 })
         })
+    }
+    
+    func refresh() {
+        if pickupPresent() {
+            println("pickup is good")
+        } else {
+            self.cancelRide()
+        }
+        
+    }
+    
+    func pickupPresent()->Bool{
+        let pickupTime: AnyObject? = defaults.objectForKey("pickupTime")
+        if (pickupTime == nil){
+            println("No pickup time")
+            return false
+        }
+        else {
+            // check how long ago (in seconds) if greater than 5 hours (18000 sec) return false
+            let end = NSDate()
+            let dateAsString = "\(pickupTime!)"
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "E, dd MMM yyyy HH:mm:ss Z"
+            let date = dateFormatter.dateFromString(dateAsString)
+            
+            let timeInterval: Double = end.timeIntervalSinceDate(date!)
+            if timeInterval > 18000 {
+                println(timeInterval)
+                return false
+            } else {
+                println(timeInterval)
+                return true
+            }
+        }
+    }
+    
+    func cancelRide() {
+        self.defaults.setObject(nil, forKey: "pickupTime")
+        self.defaults.setObject(nil, forKey: "rideID")
+        self.performSegueWithIdentifier("cancelRideSegue", sender: self)
+
     }
     
     func displayAlert(title: String, message: String) {

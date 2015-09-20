@@ -51,7 +51,7 @@ class NavigationController: UIViewController {
             return false
         }
         else {
-// TODO: check how long ago (in seconds) if greater than 5 hours (18000 sec) return false
+            // check how long ago (in seconds) if greater than 5 hours (18000 sec) return false
             let end = NSDate()
             let dateAsString = "\(pickupTime!)"
             let dateFormatter = NSDateFormatter()
