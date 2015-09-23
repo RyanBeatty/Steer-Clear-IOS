@@ -5,12 +5,12 @@ use_frameworks!
 
 target 'Steer Clear' do
 pod 'GoogleMaps'
-pod 'SwiftyJSON', '~> 2.2.1'
+pod 'SwiftyJSON'
 pod 'Canvas'
 end
 
 target 'Steer ClearTests' do
 pod 'OHHTTPStubs'
-pod 'SwiftyJSON', '~> 2.2.1'
+pod 'SwiftyJSON'
 end
 

@@ -47,7 +47,7 @@ class NavigationController: UIViewController {
     func pickupPresent()->Bool{
         let pickupTime: AnyObject? = defaults.objectForKey("pickupTime")
         if (pickupTime == nil){
-            println("No pickup time")
+            print("No pickup time")
             return false
         }
         else {
@@ -72,7 +72,7 @@ class NavigationController: UIViewController {
     func cookiesPresent()->Bool{
         let data: NSData? = defaults.objectForKey("sessionCookies") as? NSData
         if (data == nil){
-            println("No cookies, let user log in")
+            print("No cookies, let user log in")
             return false
         }
         else {

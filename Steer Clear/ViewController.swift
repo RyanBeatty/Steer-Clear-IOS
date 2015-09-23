@@ -74,7 +74,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidAppear(animated: Bool) {
 
-            println("no cookies")
+            print("no cookies")
             getPhoneLabelsLocation()
             movePhoneLabelsOffScreen(false)
         
@@ -182,7 +182,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                                 self.displayAlert("Registration Error", message: message)
                             } else {
                                 // if it succeeded, log user in and change screens to
-                                println("Logging in")
+                                print("Logging in")
                                 SCNetwork.login(
                                     username,
                                     password: password,
@@ -302,7 +302,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             phoneUnderlineLabel.hidden = false
             
             self.phoneTextbox.frame.origin.x = self.startXphoneTextBox
-            println("bringing back to center")
+            print("bringing back to center")
             self.phoneTextbox.frame.origin.x = self.startXphoneTextBox
             self.phoneLabel.frame.origin.x = self.startXphonelabel
             self.phoneUnderlineLabel.frame.origin.x = self.startXphoneUnderline
@@ -310,12 +310,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
             createAnAccountLabel.setAttributedTitle(self.cancelMutableString, forState: UIControlState.Normal)
             loginBtn.setTitle("REGISTER", forState: UIControlState.Normal)
             self.usernameTextbox.attributedPlaceholder = NSAttributedString(string:"W&M USERNAME (treveley)", attributes: [NSForegroundColorAttributeName: UIColor.grayColor()])
-            println("bringing back to center")
+            print("bringing back to center")
             loginBtn.backgroundColor = UIColor.whiteColor()
             loginBtn.setTitleColor(customColor , forState: UIControlState.Normal)
         }
         else {
-            println("let user log in")
+            print("let user log in")
         }
     }
     
@@ -323,7 +323,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     func pickupPresent()->Bool{
         let pickupTime: AnyObject? = defaults.objectForKey("pickupTime")
         if (pickupTime == nil){
-            println("No pickup time")
+            print("No pickup time")
             return false
         }
         else {
@@ -333,7 +333,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     func cookiesPresent()->Bool{
         let data: NSData? = defaults.objectForKey("sessionCookies") as? NSData
         if (data == nil){
-            println("No cookies, let user log in")
+            print("No cookies, let user log in")
             return false
         }
         else {
@@ -343,12 +343,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     func isAppAlreadyLaunchedOnce()->Bool{
         if let isAppAlreadyLaunchedOnce = self.defaults.stringForKey("isAppAlreadyLaunchedOnce"){
-            println("App already launched")
+            print("App already launched")
             return true
         }
         else {
             defaults.setBool(true, forKey: "isAppAlreadyLaunchedOnce")
-            println("App launched first time")
+            print("App launched first time")
             return false
         }
     }

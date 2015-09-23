@@ -203,14 +203,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 endLocationMarker.icon = GMSMarker.markerImageWithColor(settings.wmGreen)
                 endLocationMarker.title = "Drop Off"
                 // endLocationMarker.snippet = "\(locationDetails)"
-                println(locationDetails)
+                print(locationDetails)
                 endLocationMarker.opacity = 0.75
                 endLocationMarker.map = mapView
                 globalEndLocation.latitude = changeEnd.latitude
                 globalEndLocation.longitude = changeEnd.longitude
                 
             } else {
-                println("change pickup is not equal to true")
+                print("change pickup is not equal to true")
                 self.globalStartLocation = changeStart
                 self.globalEndLocation = changeEnd
                 self.globalStartName = changeStartName
@@ -232,7 +232,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 endLocationMarker.icon = GMSMarker.markerImageWithColor(settings.wmGreen)
                 endLocationMarker.title = "Drop Off"
                 endLocationMarker.snippet = "\(locationDetails)"
-                println(locationDetails)
+                print(locationDetails)
                 endLocationMarker.opacity = 0.75
                 endLocationMarker.map = mapView
                 globalEndLocation.latitude = changeEnd.latitude
@@ -272,7 +272,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 }
             didFindMyLocation = true
         } else {
-            println("could not find location")
+            print("could not find location")
         }
     }
     //This function detects a tap on the map and places a marker at the coordinates of the long press.
@@ -347,7 +347,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             
             placesClient!.lookUpPlaceID(networkController.fetchedID, callback: { (place, error) -> Void in
                 if error != nil {
-                    println("lookup place id query error: \(error!.localizedDescription)")
+                    print("lookup place id query error: \(error!.localizedDescription)")
                     return
                 }
                 
@@ -363,7 +363,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                     }
                     
                 } else {
-                    println("No place details for \(self.networkController.fetchedID)")
+                    print("No place details for \(self.networkController.fetchedID)")
                 }
                 self.cameFromSearch = false
                 
@@ -392,7 +392,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                     self.endLocationMarker.appearAnimation = kGMSMarkerAnimationPop
                     self.endLocationMarker.icon = GMSMarker.markerImageWithColor(self.settings.wmGreen)
                     self.endLocationMarker.title = "Drop Off"
-                    println(self.locationDetails)
+                    print(self.locationDetails)
                     self.endLocationMarker.opacity = 0.75
                     self.endLocationMarker.map = self.mapView
                     
@@ -448,7 +448,7 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
                     self.globalEndName = place.description
                     self.globalEndLocation = coordinate
                 }
-                println(details)
+                print(details)
             } else {
                 let alert = UIAlertController(title: "Region Error", message: "The location you have chosen is outside of Steer Cleer's service area.", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
