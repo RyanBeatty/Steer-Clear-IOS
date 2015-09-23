@@ -100,9 +100,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func login(sender: AnyObject) {
         // grab username and password fields and check if they are not null
         
-        var username = usernameTextbox.text
-        var password = passwordTextbox.text
-        var phone = phoneTextbox.text
+        let username = usernameTextbox.text
+        let password = passwordTextbox.text
+        let phone = phoneTextbox.text
+        
         if (username!.isEmpty) || (password!.isEmpty) {
             jiggleLogin()
             self.displayAlert("Form Error", message: "Please make sure you have filled all fields.")
@@ -114,8 +115,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 }
                 // else try to log the user in
                 SCNetwork.login(
-                    username,
-                    password: password,
+                    username!,
+                    password: password!,
                     completionHandler: {
                         success, message in
                         
@@ -148,7 +149,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                                 self.phoneLabel.hidden = true
                                 self.phoneUnderlineLabel.hidden = true
                                 
-                                var cookies: NSArray = NSHTTPCookieStorage.sharedHTTPCookieStorage().cookies as NSArray!
+                                let cookies: NSArray = NSHTTPCookieStorage.sharedHTTPCookieStorage().cookies as NSArray!
                                 
                                 Cookies.setCookiesWithArr(cookies)
                                 
@@ -166,9 +167,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 } else {
                 // attempt to register user
                 SCNetwork.register(
-                    username,
-                    password: password,
-                    phone: phone,
+                    username!,
+                    password: password!,
+                    phone: phone!,
                     completionHandler: {
                         success, message in
                         
@@ -184,8 +185,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
                                 // if it succeeded, log user in and change screens to
                                 print("Logging in")
                                 SCNetwork.login(
-                                    username,
-                                    password: password,
+                                    username!,
+                                    password: password!,
                                     completionHandler: {
                                         success, message in
                                         
@@ -268,7 +269,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     */
     func design() {
         // Colors
-        let customColor = UIColor(hue: 0.1056, saturation: 0.5, brightness: 0.72, alpha: 0.5) /* #b9975b */
         self.loginBtn.layer.borderWidth = 2
         self.loginBtn.layer.borderColor = UIColor.whiteColor().CGColor
 
@@ -342,7 +342,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func isAppAlreadyLaunchedOnce()->Bool{
-        if let isAppAlreadyLaunchedOnce = self.defaults.stringForKey("isAppAlreadyLaunchedOnce"){
+        //         if let isAppAlreadyLaunchedOnce = self.defaults.stringForKey("isAppAlreadyLaunchedOnce"){
+        if let _ = self.defaults.stringForKey("isAppAlreadyLaunchedOnce"){
             print("App already launched")
             return true
         }
@@ -367,7 +368,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    override func animationDidStop(anim: CAAnimation!, finished flag: Bool) {
+    override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
         if self.shouldStopRotating == false {
             self.steerClearLogo.rotate360Degrees(completionDelegate: self)
         } else {
@@ -439,8 +440,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     func keyboardWillShow(notification: NSNotification) {
-        
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+        // if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue()
+        if let _ = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
             
             UIView.animateWithDuration(0.5, animations: {
                 self.steerClearLogo.alpha = 0.0
@@ -525,7 +526,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     
     func keyboardWillHide(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+//         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue()
+        if let _ = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
             self.usernameTextbox.frame.origin.y += 100
             self.usernameIcon.frame.origin.y += 100
             self.usernameUnderlineLabel.frame.origin.y += 100
