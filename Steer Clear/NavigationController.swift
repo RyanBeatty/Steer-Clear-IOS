@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwiftyJSON
 
 class NavigationController: UIViewController {
     
@@ -40,10 +41,10 @@ class NavigationController: UIViewController {
             self.performSegueWithIdentifier("viewController", sender: self)
         }
 
-        
+
+
     }
-    
-    
+
     func pickupPresent()->Bool{
         let pickupTime: AnyObject? = defaults.objectForKey("pickupTime")
         if (pickupTime == nil){

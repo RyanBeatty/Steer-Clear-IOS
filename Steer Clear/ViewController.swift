@@ -15,11 +15,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var usernameTextbox: UITextField!
     @IBOutlet weak var passwordTextbox: UITextField!
     @IBOutlet weak var phoneTextbox: UITextField!
-
+    
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var passwordLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
-
+    
     
     @IBOutlet weak var usernameIcon: UILabel!
     @IBOutlet weak var passwordIcon: UILabel!
@@ -67,25 +67,25 @@ class ViewController: UIViewController, UITextFieldDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
     }
-
+    
     override func viewWillAppear(animated: Bool) {
         hidePhoneLabels()
     }
     
     override func viewDidAppear(animated: Bool) {
-
-            print("no cookies")
-            getPhoneLabelsLocation()
-            movePhoneLabelsOffScreen(false)
         
-            self.startX = self.loginBtn.frame.origin.x
+        print("no cookies")
+        getPhoneLabelsLocation()
+        movePhoneLabelsOffScreen(false)
         
-            checkUser()
-            
-            usernameTextbox.delegate = self
-            passwordTextbox.delegate = self
-            self.usernameTextbox.nextField = self.passwordTextbox
-
+        self.startX = self.loginBtn.frame.origin.x
+        
+        checkUser()
+        
+        usernameTextbox.delegate = self
+        passwordTextbox.delegate = self
+        self.usernameTextbox.nextField = self.passwordTextbox
+        
     }
     
     // unwind segue method so that you can cancel registration view controller
@@ -93,9 +93,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
     }
     /*
-        loginButton
-        -----------
-        Attempts to log the user into the system
+    loginButton
+    -----------
+    Attempts to log the user into the system
     */
     @IBAction func login(sender: AnyObject) {
         // grab username and password fields and check if they are not null
@@ -103,7 +103,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let username = usernameTextbox.text
         let password = passwordTextbox.text
         let phone = phoneTextbox.text
-        
         if (username!.isEmpty) || (password!.isEmpty) {
             jiggleLogin()
             self.displayAlert("Form Error", message: "Please make sure you have filled all fields.")
@@ -128,16 +127,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
                                 self.jiggleLogin()
                                 self.displayAlert("Login Error", message: message)
                                 self.shouldStopRotating = true
-//                                
-//                                var dict = [
-//                                    NSHTTPCookieExpires:[NSDate .distantFuture()],
-//                                ]
-//                                
-//                                var cookie = NSHTTPCookie(properties: dict as [NSObject : AnyObject])
-//                                var sharedHTTPCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-//                                
-//                                sharedHTTPCookieStorage.setCookie(cookie!)
-                            
+                                //
+                                //                                var dict = [
+                                //                                    NSHTTPCookieExpires:[NSDate .distantFuture()],
+                                //                                ]
+                                //
+                                //                                var cookie = NSHTTPCookie(properties: dict as [NSObject : AnyObject])
+                                //                                var sharedHTTPCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+                                //
+                                //                                sharedHTTPCookieStorage.setCookie(cookie!)
+                                
                             })
                         }
                         else {
@@ -153,7 +152,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                                 
                                 Cookies.setCookiesWithArr(cookies)
                                 
-                                self.defaults.setObject("\(username)", forKey: "lastUser")
+                                self.defaults.setObject("\(username!)", forKey: "lastUser")
                                 self.performSegueWithIdentifier("loginRider", sender: self)
                             })
                         }
@@ -165,60 +164,60 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     jiggleLogin()
                     self.displayAlert("Form Error", message: "Please make sure you have filled all fields.")
                 } else {
-                // attempt to register user
-                SCNetwork.register(
-                    username!,
-                    password: password!,
-                    phone: phone!,
-                    completionHandler: {
-                        success, message in
-                        
-                        // can't make UI updates from background thread, so we need to dispatch
-                        // them to the main thread
-                        dispatch_async(dispatch_get_main_queue(), {
+                    // attempt to register user
+                    SCNetwork.register(
+                        username!,
+                        password: password!,
+                        phone: phone!,
+                        completionHandler: {
+                            success, message in
                             
-                            // check if registration succeeds
-                            if(!success) {
-                                // if it failed, display error
-                                self.displayAlert("Registration Error", message: message)
-                            } else {
-                                // if it succeeded, log user in and change screens to
-                                print("Logging in")
-                                SCNetwork.login(
-                                    username!,
-                                    password: password!,
-                                    completionHandler: {
-                                        success, message in
-                                        
-                                        if(!success) {
-                                            //can't make UI updates from background thread, so we need to dispatch
-                                            // them to the main thread
-                                            dispatch_async(dispatch_get_main_queue(), {
-                                                // login failed, display alert
-                                                self.displayAlert("Login Error", message: message)
-                                            })
-                                        }
-                                        else {
-                                            //can't make UI updates from background thread, so we need to dispatch
-                                            // them to the main thread
-                                            dispatch_async(dispatch_get_main_queue(), {
-                                                self.defaults.setObject("\(username)", forKey: "lastUser")
-                                                self.performSegueWithIdentifier("loginRider", sender: self)
-                                            })
-                                        }
-                                })
-                            }
-                        })
-                    }
-                )
+                            // can't make UI updates from background thread, so we need to dispatch
+                            // them to the main thread
+                            dispatch_async(dispatch_get_main_queue(), {
+                                
+                                // check if registration succeeds
+                                if(!success) {
+                                    // if it failed, display error
+                                    self.displayAlert("Registration Error", message: message)
+                                } else {
+                                    // if it succeeded, log user in and change screens to
+                                    print("Logging in")
+                                    SCNetwork.login(
+                                        username!,
+                                        password: password!,
+                                        completionHandler: {
+                                            success, message in
+                                            
+                                            if(!success) {
+                                                //can't make UI updates from background thread, so we need to dispatch
+                                                // them to the main thread
+                                                dispatch_async(dispatch_get_main_queue(), {
+                                                    // login failed, display alert
+                                                    self.displayAlert("Login Error", message: message)
+                                                })
+                                            }
+                                            else {
+                                                //can't make UI updates from background thread, so we need to dispatch
+                                                // them to the main thread
+                                                dispatch_async(dispatch_get_main_queue(), {
+                                                    self.defaults.setObject("\(username)", forKey: "lastUser")
+                                                    self.performSegueWithIdentifier("loginRider", sender: self)
+                                                })
+                                            }
+                                    })
+                                }
+                            })
+                        }
+                    )
+                }
+                
             }
-            
-        }
         }
         
     }
-        
-       
+    
+    
     /*
     registerButton
     --------------
@@ -253,7 +252,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             loginBtn.backgroundColor = UIColor.clearColor()
             loginBtn.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         }
-       
+        
     }
     
     
@@ -263,15 +262,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
     ------
     Implements the following styles to the username and password textboxes in the Storyboard ViewController:
     
-        UsernameTextbox: change placeholder text white
-        PasswordTextbox: change placeholder text white
+    UsernameTextbox: change placeholder text white
+    PasswordTextbox: change placeholder text white
     
     */
     func design() {
         // Colors
         self.loginBtn.layer.borderWidth = 2
         self.loginBtn.layer.borderColor = UIColor.whiteColor().CGColor
-
+        
         // Username text box
         usernameTextbox.layer.masksToBounds = true
         self.usernameTextbox.attributedPlaceholder = NSAttributedString(string:self.usernameTextbox.placeholder!, attributes: [NSForegroundColorAttributeName: UIColor.grayColor()])
@@ -342,7 +341,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func isAppAlreadyLaunchedOnce()->Bool{
-        //         if let isAppAlreadyLaunchedOnce = self.defaults.stringForKey("isAppAlreadyLaunchedOnce"){
         if let _ = self.defaults.stringForKey("isAppAlreadyLaunchedOnce"){
             print("App already launched")
             return true
@@ -354,7 +352,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    /* 
+    /*
     displayAlert
     ------------
     Handles user alerts. For example, when Username or Password is required but not entered.
@@ -387,8 +385,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         if (textField.returnKeyType==UIReturnKeyType.Go)
         {
-        textField.resignFirstResponder() // Dismiss the keyboard
-        loginBtn.sendActionsForControlEvents(.TouchUpInside)
+            textField.resignFirstResponder() // Dismiss the keyboard
+            loginBtn.sendActionsForControlEvents(.TouchUpInside)
         }
         return true
     }
@@ -439,13 +437,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     func keyboardWillShow(notification: NSNotification) {
-        // if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue()
+        
         if let _ = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
             
             UIView.animateWithDuration(0.5, animations: {
                 self.steerClearLogo.alpha = 0.0
-
+                
             })
             
             self.usernameTextbox.frame.origin.y -= 100
@@ -459,8 +458,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             self.phoneTextbox.frame.origin.y -= 100
             self.phoneIcon.frame.origin.y -= 100
             self.phoneUnderlineLabel.frame.origin.y -= 100
-
-
+            
+            
         }
         
     }
@@ -483,7 +482,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.startXphoneTextBox = self.phoneTextbox.frame.origin.x
         self.startXphonelabel = self.phoneLabel.frame.origin.x
         self.startXphoneUnderline = self.phoneUnderlineLabel.frame.origin.x
-
+        
     }
     
     func movePhoneLabelsOffScreen(animate: Bool) {
@@ -497,7 +496,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 },
                 completion: nil
             )
-
+            
         }
         else {
             self.phoneTextbox.frame.origin.x = startXphoneTextBox - self.offset
@@ -521,12 +520,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
             },
             completion: nil
         )
-
+        
     }
     
     
     func keyboardWillHide(notification: NSNotification) {
-//         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue()
         if let _ = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
             self.usernameTextbox.frame.origin.y += 100
             self.usernameIcon.frame.origin.y += 100
@@ -549,4 +547,3 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
 }
-

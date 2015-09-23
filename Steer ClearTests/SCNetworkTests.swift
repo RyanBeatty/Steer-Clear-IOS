@@ -148,7 +148,7 @@ class RegisterTestCase: SCNetworkBaseTestCase {
         waitForExpectationsWithTimeout(10, handler: {
             error in
             if (error != nil) {
-                print("Error: \(error.localizedDescription)")
+                print("Error: \(error!.localizedDescription)")
             }
         })
     }
@@ -247,7 +247,7 @@ class LoginTestCase: SCNetworkBaseTestCase {
         waitForExpectationsWithTimeout(10, handler: {
             error in
             if (error != nil) {
-                print("Error: \(error.localizedDescription)")
+                print("Error: \(error!.localizedDescription)")
             }
         })
     }
@@ -449,7 +449,7 @@ class RequestRideTestCase: SCNetworkBaseTestCase {
         waitForExpectationsWithTimeout(10, handler: {
             error in
             if (error != nil) {
-                print("Error: \(error.localizedDescription)")
+                print("Error: \(error!.localizedDescription)")
             }
         })
     }
@@ -540,7 +540,7 @@ class DeleteTestCase: SCNetworkBaseTestCase {
         waitForExpectationsWithTimeout(10, handler: {
             error in
             if (error != nil) {
-                print("Error: \(error.localizedDescription)")
+                print("Error: \(error!.localizedDescription)")
             }
         })
     }

@@ -50,7 +50,7 @@ class SCNetwork: NSObject {
         let registerUrl = NSURL(string: REGISTER_URL_STRING)
         
         // initialize url request object
-        var request = NSMutableURLRequest(URL: registerUrl!)
+        let request = NSMutableURLRequest(URL: registerUrl!)
         
         // set http method to POST and encode form parameters
         request.HTTPMethod = "POST"
@@ -58,8 +58,8 @@ class SCNetwork: NSObject {
             "username=\(username)&password=\(password)&phone=%2B1\(phone)".dataUsingEncoding(NSUTF8StringEncoding)!)
         
         // initialize session object create http request task
-        var session = NSURLSession.sharedSession()
-        var task = session.dataTaskWithRequest(request, completionHandler: {
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request, completionHandler: {
             data, response, error -> Void in
             
             // if there was an error, request failed
@@ -84,7 +84,7 @@ class SCNetwork: NSObject {
             case 400:
                 completionHandler(success: false, message: "The username, password, or phone number were entered incorrectly")
             default:
-                println("Status Code received: \(httpResponse.statusCode)")
+                print("Status Code received: \(httpResponse.statusCode)")
                 completionHandler(success: false, message: "There was an error while registering")
             }
         })
@@ -106,20 +106,12 @@ class SCNetwork: NSObject {
         
         let data: NSData? = defaults.objectForKey("sessionCookies") as? NSData
         
-//        if let cookie = data {
-//            let datas: NSArray? = NSKeyedUnarchiver.unarchiveObjectWithData(cookie) as? NSArray
-//            if let cookies = datas {
-//                for c in cookies as! [NSHTTPCookie] {
-//                    NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookie(c)
-//                }
-//            }
-//        }
         switch(data) {
         case nil:
-            println("User not logged in, defaults empty")
+            print("User not logged in, defaults empty")
             completionHandler(success: false, message: "User not logged in, defaults empty")
         default:
-            println("Cookies found")
+            print("Cookies found")
             completionHandler(success: true, message: "Cookies found")
         }
     }
@@ -137,10 +129,9 @@ class SCNetwork: NSObject {
     class func login(username: String, password: String, completionHandler: (success: Bool, message: String) -> ()) {
         // create login url
         let loginUrl = NSURL(string: LOGIN_URL_STRING)
-        let defaults = NSUserDefaults.standardUserDefaults()
         
         // initialize url request object
-        var request = NSMutableURLRequest(URL: loginUrl!)
+        let request = NSMutableURLRequest(URL: loginUrl!)
         
         // set http method to POST and encode form parameters
         request.HTTPMethod = "POST"
@@ -148,8 +139,8 @@ class SCNetwork: NSObject {
             "username=\(username)&password=\(password)".dataUsingEncoding(NSUTF8StringEncoding)!)
         
         // initialize session object create http request task
-        var session = NSURLSession.sharedSession()
-        var task = session.dataTaskWithRequest(request, completionHandler: {
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request, completionHandler: {
             data, response, error -> Void in
             
             // if there was an error, request failed
@@ -175,7 +166,7 @@ class SCNetwork: NSObject {
             case 400:
                 completionHandler(success: false, message: "Invalid username or password")
             default:
-                println("Status Code received: \(httpResponse.statusCode)")
+                print("Status Code received: \(httpResponse.statusCode)")
                 completionHandler(success: false, message: "There was an error while logging in")
             }
         })
@@ -210,15 +201,15 @@ class SCNetwork: NSObject {
         "&num_passengers=\(numPassengers)"
         
         // initialize url request object
-        var request = NSMutableURLRequest(URL: rideRequestUrl!)
+        let request = NSMutableURLRequest(URL: rideRequestUrl!)
         
         // set http method to POST and encode form parameters
         request.HTTPMethod = "POST"
         request.HTTPBody = NSMutableData(data: formDataString.dataUsingEncoding(NSUTF8StringEncoding)!)
         
         // initialize session object create http request task
-        var session = NSURLSession.sharedSession()
-        var task = session.dataTaskWithRequest(request, completionHandler: {
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request, completionHandler: {
             data, response, error -> Void in
             
             // if there was an error, request failed
@@ -232,7 +223,7 @@ class SCNetwork: NSObject {
             switch(httpResponse.statusCode) {
             case 201:
                 // get json object
-                let json = JSON(data: data)
+                let json = JSON(data: data!)
                 
                 // get ride request data
                 let id = json["ride"]["id"].int
@@ -258,7 +249,7 @@ class SCNetwork: NSObject {
             case 401:
                 completionHandler(success: false, needLogin: true, message: "Please Login", ride: nil)
             default:
-                println("Status Code received: \(httpResponse.statusCode)")
+                print("Status Code received: \(httpResponse.statusCode)")
                 completionHandler(success: false, needLogin: false, message: "There was an error while requesting a ride", ride: nil)
             }
         })
@@ -281,17 +272,17 @@ class SCNetwork: NSObject {
     class func deleteRideWithId(rideId: String, completionHandler: (success: Bool, message: String) -> ()) {
         
         // create delete url
-        var deleteUrl = NSURL(string: DELETE_URL_STRING + "\(rideId)")
+        let deleteUrl = NSURL(string: DELETE_URL_STRING + "\(rideId)")
         
         // initialize url request object
-        var request = NSMutableURLRequest(URL: deleteUrl!)
+        let request = NSMutableURLRequest(URL: deleteUrl!)
         
         // set http method to DELETE
         request.HTTPMethod = "DELETE"
         
         // initialize session object create http request task
-        var session = NSURLSession.sharedSession()
-        var task = session.dataTaskWithRequest(request, completionHandler: {
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request, completionHandler: {
             data, response, error -> Void in
             
             // if there was an error, request failed
@@ -308,7 +299,7 @@ class SCNetwork: NSObject {
             case 404:
                 completionHandler(success: false, message: "You have no current ride requests")
             default:
-                println("Status Code received: \(httpResponse.statusCode)")
+                print("Status Code received: \(httpResponse.statusCode)")
                 completionHandler(success: false, message: "There was an error while canceling your ride request")
             }
         })
@@ -344,7 +335,7 @@ class SCNetwork: NSObject {
             case 200:
                 completionHandler(success: true, message: "Logged out!")
             default:
-                println("Status Code received: \(httpResponse.statusCode)")
+                print("Status Code received: \(httpResponse.statusCode)")
                 completionHandler(success: false, message: "There was an error while logging out")
             }
         })
@@ -353,23 +344,23 @@ class SCNetwork: NSObject {
     }
     
     
-//    
-//    func saveCookie() {
-//        let cookieJar: NSHTTPCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-//        let data: NSData = NSKeyedArchiver.archivedDataWithRootObject(cookieJar)
-//        let ud: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-//        ud.setObject(data, forKey: "cookie")
-//    }
-//    func loadCookie() {
-//
-//    }
-//    
-//    func wipeCookies() {
-//        let ud: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-//        let cookieStorage: NSHTTPCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-//        let cookies: [NSHTTPCookie] = cookieStorage.cookies as! [NSHTTPCookie]
-//        for cookie in cookies {
-//            cookieStorage.deleteCookie(cookie)
-//        }
-//    }
+    //
+    //    func saveCookie() {
+    //        let cookieJar: NSHTTPCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+    //        let data: NSData = NSKeyedArchiver.archivedDataWithRootObject(cookieJar)
+    //        let ud: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+    //        ud.setObject(data, forKey: "cookie")
+    //    }
+    //    func loadCookie() {
+    //
+    //    }
+    //
+    //    func wipeCookies() {
+    //        let ud: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+    //        let cookieStorage: NSHTTPCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+    //        let cookies: [NSHTTPCookie] = cookieStorage.cookies as! [NSHTTPCookie]
+    //        for cookie in cookies {
+    //            cookieStorage.deleteCookie(cookie)
+    //        }
+    //    }
 }

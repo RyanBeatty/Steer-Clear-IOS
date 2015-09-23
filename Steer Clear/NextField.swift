@@ -18,7 +18,7 @@ extension UITextField {
             return objc_getAssociatedObject(self,     &kAssociationKeyNextField) as? UITextField
         }
         set(newField) {
-            objc_setAssociatedObject(self, &kAssociationKeyNextField,     newField, UInt(OBJC_ASSOCIATION_RETAIN))
+            objc_setAssociatedObject(self, &kAssociationKeyNextField,     newField, .OBJC_ASSOCIATION_RETAIN)
         }
     }
 }
