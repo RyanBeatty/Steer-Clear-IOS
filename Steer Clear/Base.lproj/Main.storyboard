@@ -20,7 +20,6 @@
             <string>FontAwesome</string>
             <string>FontAwesome</string>
             <string>FontAwesome</string>
-            <string>FontAwesome</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -712,14 +711,13 @@
                                     <offsetWrapper key="textShadowOffset" horizontal="0.0" vertical="0.0"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="Steer Clear" id="gtN-fw-8BE">
+                                    <navigationItem id="gtN-fw-8BE">
                                         <barButtonItem key="leftBarButtonItem" id="HoA-Vb-z7K">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="D8C-AI-SLW">
-                                                <rect key="frame" x="-23" y="-15" width="71" height="30"/>
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="D8C-AI-SLW">
+                                                <rect key="frame" x="16" y="7" width="71" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="18"/>
-                                                <inset key="contentEdgeInsets" minX="-25" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="">
+                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="18"/>
+                                                <state key="normal" title="Logout">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -730,17 +728,14 @@
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" id="uBk-pv-3iA">
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Edh-U9-N8J">
-                                                <rect key="frame" x="233" y="7" width="71" height="34"/>
+                                                <rect key="frame" x="265" y="5" width="71" height="34"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="FontAwesome" family="FontAwesome" pointSize="22"/>
                                                 <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="-25" maxY="0.0"/>
-                                                <state key="normal" title="">
+                                                <state key="normal">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
-                                                <connections>
-                                                    <action selector="popUp:" destination="nsC-P0-xcL" eventType="touchUpInside" id="Rv2-bB-LEl"/>
-                                                </connections>
                                             </button>
                                         </barButtonItem>
                                     </navigationItem>
@@ -789,6 +784,13 @@
                                     <action selector="confirmRideButton:" destination="nsC-P0-xcL" eventType="touchUpInside" id="35X-hN-vF3"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sclogo" translatesAutoresizingMaskIntoConstraints="NO" id="Nlz-fZ-QEm">
+                                <rect key="frame" x="142" y="23" width="35" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="d7d-NY-9u5"/>
+                                    <constraint firstAttribute="height" constant="35" id="fjm-cv-0Zu"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="8OD-nO-Egh" firstAttribute="top" secondItem="ERD-fU-Ocz" secondAttribute="bottom" constant="76" id="2pe-lz-vHw"/>
@@ -817,12 +819,14 @@
                             <constraint firstItem="1e5-aP-JFJ" firstAttribute="centerX" secondItem="VY1-qt-Xx7" secondAttribute="centerX" constant="0.5" id="bWx-G5-jzp"/>
                             <constraint firstItem="Vx1-kb-Leg" firstAttribute="leading" secondItem="9Bf-8m-mF0" secondAttribute="leading" constant="-16" id="bdg-qq-b8k"/>
                             <constraint firstItem="Xt9-eA-P5A" firstAttribute="leading" secondItem="VY1-qt-Xx7" secondAttribute="trailing" constant="35" id="bsR-Ng-EU4"/>
+                            <constraint firstAttribute="centerX" secondItem="Nlz-fZ-QEm" secondAttribute="centerX" constant="1" id="c4d-KW-0c7"/>
                             <constraint firstItem="Gik-Kz-LlF" firstAttribute="top" secondItem="ERD-fU-Ocz" secondAttribute="bottom" constant="176" id="cgy-hl-TkQ"/>
                             <constraint firstAttribute="trailing" secondItem="1e5-aP-JFJ" secondAttribute="trailing" constant="-16" id="dro-U2-MJG"/>
                             <constraint firstAttribute="trailing" secondItem="ddW-dg-MWe" secondAttribute="trailing" constant="-16" id="f5D-nC-utd"/>
                             <constraint firstItem="1e5-aP-JFJ" firstAttribute="leading" secondItem="9Bf-8m-mF0" secondAttribute="leading" constant="-16" id="fdE-Ff-UCf"/>
                             <constraint firstItem="ERD-fU-Ocz" firstAttribute="centerX" secondItem="C3q-yK-pc2" secondAttribute="centerX" constant="98" id="iQB-NJ-YD1"/>
                             <constraint firstItem="cB9-Gg-lO9" firstAttribute="top" secondItem="ERD-fU-Ocz" secondAttribute="bottom" constant="276" id="jdS-ue-AdQ"/>
+                            <constraint firstItem="Nlz-fZ-QEm" firstAttribute="top" secondItem="7Ox-ol-eTQ" secondAttribute="bottom" constant="3" id="kl9-WB-4Jl"/>
                             <constraint firstItem="hRh-3Y-wfh" firstAttribute="centerX" secondItem="ERD-fU-Ocz" secondAttribute="centerX" constant="-95" id="l2T-es-4KH"/>
                             <constraint firstItem="C3q-yK-pc2" firstAttribute="top" secondItem="ERD-fU-Ocz" secondAttribute="bottom" constant="126" id="ton-ao-qPH"/>
                             <constraint firstItem="8OD-nO-Egh" firstAttribute="centerX" secondItem="ERD-fU-Ocz" secondAttribute="centerX" constant="-105" id="x6M-HL-s11"/>
@@ -839,7 +843,7 @@
                         <outlet property="myLocationButtonOutlet" destination="Xt9-eA-P5A" id="JIS-fN-QmF"/>
                         <outlet property="navigationBar" destination="ERD-fU-Ocz" id="kbW-XD-a8k"/>
                         <outlet property="pickUpButton" destination="Mec-dU-MNu" id="EDY-Ha-UzT"/>
-                        <outlet property="popOverOutlet" destination="Edh-U9-N8J" id="efz-9j-4dL"/>
+                        <outlet property="scLogo" destination="Nlz-fZ-QEm" id="ZkY-DC-Fh6"/>
                         <outlet property="segmentOutlet" destination="VY1-qt-Xx7" id="ubs-qQ-vqQ"/>
                         <segue destination="Xq3-zb-LVU" kind="presentation" identifier="sendDetails" id="wc4-Qx-ZrL"/>
                         <segue destination="vXZ-lx-hvc" kind="presentation" identifier="logoutSegue" modalTransitionStyle="flipHorizontal" id="lZw-qN-yEC"/>
@@ -1200,11 +1204,12 @@
     <resources>
         <image name="backgroundwithoutlogos" width="305" height="424"/>
         <image name="gear" width="1024" height="1024"/>
+        <image name="sclogo" width="110" height="110"/>
         <image name="steerClearLogo" width="573" height="573"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lZw-qN-yEC"/>
-        <segue reference="SY5-wn-1ZG"/>
+        <segue reference="ZmU-pM-MLV"/>
         <segue reference="F1i-gB-7Ro"/>
+        <segue reference="lZw-qN-yEC"/>
     </inferredMetricsTieBreakers>
 </document>

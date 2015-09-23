@@ -17,7 +17,7 @@ import Canvas
 class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
     
     @IBOutlet weak var confirmRideOutlet: UIButton!
-    
+    @IBOutlet weak var scLogo: UIImageView!
     @IBOutlet var segmentOutlet: UISegmentedControl!
 
     @IBOutlet weak var pickUpButton: UIButton!
@@ -177,12 +177,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     }
 
     override func viewDidLoad() {
-        popOverOutlet.enabled = false
         super.viewDidLoad()
-
         setupButtons()
-        
-//        self.popOverStartY = self.popOver.frame.origin.y
         
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -255,7 +251,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             
         }
         mapView.delegate = self
-        popOverOutlet.enabled = true
     }
     
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
@@ -307,6 +302,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     }
     
     func setupButtons() {
+        
+        var tap = UITapGestureRecognizer(target: self, action: Selector("imageTapped"))
+        tap.numberOfTapsRequired = 1
+        scLogo.userInteractionEnabled = true
+        scLogo.addGestureRecognizer(tap)
+        
+        //set the image to the gesture
+        scLogo.addGestureRecognizer(tap)
         
         segmentOutlet.tintColor = settings.spiritGold
         
@@ -458,20 +461,21 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
         self.locationDetails = place.description
         dismissViewControllerAnimated(true, completion: nil)
     }
-    @IBAction func popUp(sender: AnyObject) {
 
-        
+    
+    func imageTapped(){
+        print("hello")
         if !popOverViewable {
             UIView.animateWithDuration(
                 0.5,
                 animations: {
-
+                    
                     
                     self.mapsGroupView.frame.origin.y = self.mapgroupEndY
                     
                     self.segmentOutlet.frame.origin.y = self.segmentOutletEndY
                     self.myLocationButtonOutlet.frame.origin.y = self.locationButtonEndY
-                    self.navigationBar.topItem!.title = "Team";
+//                    self.navigationBar.topItem!.title = "Team";
                     
                 },
                 completion: nil
@@ -481,22 +485,22 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
             UIView.animateWithDuration(
                 0.5,
                 animations: {
-
+                    
                     self.mapsGroupView.frame.origin.y = self.mapgroupStartY
                     
                     self.segmentOutlet.frame.origin.y = self.segmentOutletStartY
                     self.myLocationButtonOutlet.frame.origin.y = self.locationButtonStartY
                     
-                    self.navigationBar.topItem!.title = "Steer Clear";
+              //      self.navigationBar.topItem!.title = "Steer Clear";
                 },
                 completion: nil
             )
             popOverViewable = false
             
         }
+        
 
     }
-    
     
     @IBAction func ulisesLink(sender: AnyObject) {
         UIApplication.sharedApplication().openURL(NSURL(string: "http://udiscover.me")!)
