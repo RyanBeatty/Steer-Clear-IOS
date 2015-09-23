@@ -111,9 +111,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     @IBAction func myLocationButton(sender: AnyObject) {
         let myLocation = locationManager.location
         if myLocation != nil {
-            if self.geofence.containsCoordinate(myLocation.coordinate){
-                self.setupLocationMarker(myLocation.coordinate)
-                self.mapView.animateToCameraPosition(GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 17.0, bearing: 30, viewingAngle: 45))
+            if self.geofence.containsCoordinate(myLocation!.coordinate){
+                self.setupLocationMarker(myLocation!.coordinate)
+                self.mapView.animateToCameraPosition(GMSCameraPosition.cameraWithTarget(myLocation!.coordinate, zoom: 17.0, bearing: 30, viewingAngle: 45))
             } else {
                 let alert = UIAlertController(title: "Region Error", message: "Your Current Location is outside of Steer Clear's service area. Please select a location inside of our area.", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
@@ -159,7 +159,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     
     override func viewDidLayoutSubviews() {
         self.navWidth = self.navigationBar.frame.width
-        var navBorder = CALayer()
+        let navBorder = CALayer()
         navBorder.backgroundColor = settings.spiritGold.CGColor
         navBorder.frame = CGRect(x: 0, y: 44, width: self.navWidth, height: 5)
         navigationBar.layer.addSublayer(navBorder)
@@ -253,15 +253,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         mapView.delegate = self
     }
     
-    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if status == CLAuthorizationStatus.AuthorizedWhenInUse {
             mapView.myLocationEnabled = true
         }
     }
     
-    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String:AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if !didFindMyLocation {
-            let myLocation: CLLocation = change[NSKeyValueChangeNewKey] as! CLLocation
+            let myLocation: CLLocation = change![NSKeyValueChangeNewKey] as! CLLocation
                 if self.geofence.containsCoordinate(myLocation.coordinate){
                     self.setupLocationMarker(myLocation.coordinate)
                     self.mapView.animateToCameraPosition(GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 17.0, bearing: 30, viewingAngle: 45))
@@ -278,10 +278,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     //This function detects a tap on the map and places a marker at the coordinates of the long press.
     func mapView(mapView: GMSMapView!, didTapAtCoordinate coordinate: CLLocationCoordinate2D) {
         //Set variable to latitude of didLongPressAtCoordinate
-        var lat = coordinate.latitude
+        let lat = coordinate.latitude
         
         //Set variable to longitude of didLongPressAtCoordinate
-        var long = coordinate.longitude
+        let long = coordinate.longitude
         
         //Feed position to mapMarker
         let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
@@ -303,7 +303,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     
     func setupButtons() {
         
-        var tap = UITapGestureRecognizer(target: self, action: Selector("imageTapped"))
+        let tap = UITapGestureRecognizer(target: self, action: Selector("imageTapped"))
         tap.numberOfTapsRequired = 1
         scLogo.userInteractionEnabled = true
         scLogo.addGestureRecognizer(tap)
@@ -317,13 +317,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         dropOffButton.layer.shadowOpacity = 0.2
         
         //adds left block to pickup location button (yellow)
-        var pickUpBorder = CALayer()
+        let pickUpBorder = CALayer()
         pickUpBorder.backgroundColor = settings.spiritGold.CGColor
         pickUpBorder.frame = CGRect(x: -20, y: 0, width: 20, height: 36)
         pickUpButton.layer.addSublayer(pickUpBorder)
         
         //dropoff left block (green)
-        var dropOffBorder = CALayer()
+        let dropOffBorder = CALayer()
         dropOffBorder.backgroundColor = settings.wmGreen.CGColor
         dropOffBorder.frame = CGRect(x: -20, y: 0, width: 20, height: 36)
         dropOffButton.layer.addSublayer(dropOffBorder)
@@ -408,7 +408,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if (segue.identifier == "sendDetails") {
             
-            var tripInfo = segue.destinationViewController as! TripConfirmation;
+            let tripInfo = segue.destinationViewController as! TripConfirmation;
             
             tripInfo.start = self.globalStartLocation
             tripInfo.end = self.globalEndLocation
