@@ -50,6 +50,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var endXphoneTextBox = CGFloat()
     var endXphonelabel = CGFloat()
     var endXphoneUnderline = CGFloat()
+    var keyboardUp = false
     
     var settings = Settings()
     
@@ -127,16 +128,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                                 self.jiggleLogin()
                                 self.displayAlert("Login Error", message: message)
                                 self.shouldStopRotating = true
-                                //
-                                //                                var dict = [
-                                //                                    NSHTTPCookieExpires:[NSDate .distantFuture()],
-                                //                                ]
-                                //
-                                //                                var cookie = NSHTTPCookie(properties: dict as [NSObject : AnyObject])
-                                //                                var sharedHTTPCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-                                //
-                                //                                sharedHTTPCookieStorage.setCookie(cookie!)
-                                
+                            
                             })
                         }
                         else {
@@ -393,6 +385,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     func registerForKeyboardNotifications() {
         let notificationCenter = NSNotificationCenter.defaultCenter()
+        
         notificationCenter.addObserver(self,
             selector: "keyboardWillBeShown:",
             name: UIKeyboardWillShowNotification,
@@ -439,9 +432,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func keyboardWillShow(notification: NSNotification) {
-        
-        if let _ = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+        print(self.keyboardUp)
+        if (!self.keyboardUp) {
             
+            if let _ = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
             UIView.animateWithDuration(0.5, animations: {
                 self.steerClearLogo.alpha = 0.0
                 
@@ -459,9 +453,37 @@ class ViewController: UIViewController, UITextFieldDelegate {
             self.phoneIcon.frame.origin.y -= 100
             self.phoneUnderlineLabel.frame.origin.y -= 100
             
-            
+            }
+
+            self.keyboardUp = true
         }
         
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if keyboardUp {
+            if let _ = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+                self.usernameTextbox.frame.origin.y += 100
+                self.usernameIcon.frame.origin.y += 100
+                self.usernameUnderlineLabel.frame.origin.y += 100
+                
+                self.passwordTextbox.frame.origin.y += 100
+                self.passwordIcon.frame.origin.y += 100
+                self.passwordUnderlineLabel.frame.origin.y += 100
+                
+                self.phoneTextbox.frame.origin.y += 100
+                self.phoneIcon.frame.origin.y += 100
+                self.phoneUnderlineLabel.frame.origin.y += 100
+                
+                
+                UIView.animateWithDuration(0.5, animations: {
+                    self.steerClearLogo.alpha = 1.0
+                    
+                })
+                self.keyboardUp = false
+            }
+            
+        }
     }
     
     
@@ -524,26 +546,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    func keyboardWillHide(notification: NSNotification) {
-        if let _ = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-            self.usernameTextbox.frame.origin.y += 100
-            self.usernameIcon.frame.origin.y += 100
-            self.usernameUnderlineLabel.frame.origin.y += 100
-            
-            self.passwordTextbox.frame.origin.y += 100
-            self.passwordIcon.frame.origin.y += 100
-            self.passwordUnderlineLabel.frame.origin.y += 100
-            
-            self.phoneTextbox.frame.origin.y += 100
-            self.phoneIcon.frame.origin.y += 100
-            self.phoneUnderlineLabel.frame.origin.y += 100
-            
-            
-            UIView.animateWithDuration(0.5, animations: {
-                self.steerClearLogo.alpha = 1.0
-                
-            })
-        }
-    }
+
     
 }
