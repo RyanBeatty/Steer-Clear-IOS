@@ -36,7 +36,7 @@ class SCNetworkBaseTestCase: XCTestCase {
     */
     func _stub(responseStatusCode: Int32) -> OHHTTPStubsDescriptor {
         // stub out network request to server register route
-        var stub = OHHTTPStubs.stubRequestsPassingTest({
+        let stub = OHHTTPStubs.stubRequestsPassingTest({
             request in
             return request.URL!.host == "127.0.0.1"
             }, withStubResponse: {
@@ -373,7 +373,7 @@ class RequestRideTestCase: SCNetworkBaseTestCase {
     */
     func testRequestRideSuccess() {
         // stub out network request to server register route
-        var stub = OHHTTPStubs.stubRequestsPassingTest({
+        _ = OHHTTPStubs.stubRequestsPassingTest({
             request in
             return request.URL!.host == "127.0.0.1"
             }, withStubResponse: {
