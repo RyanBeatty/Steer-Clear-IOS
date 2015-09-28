@@ -186,23 +186,28 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         self.geofence = CLCircularRegion(center: settings.geofenceCenter, radius: 3219, identifier: "serviceGeofence")
         
         if change == true {
+            self.globalStartLocation = changeStart
+            self.globalEndLocation = changeEnd
+            self.globalStartName = changeStartName
+            self.globalEndName = changeEndName
+            
             if changePickup == true {
-                self.globalStartLocation = changeStart
-                self.globalEndLocation = changeEnd
-                self.globalStartName = changeStartName
-                self.globalEndName = changeEndName
                 self.dropOffButton.setTitle("\(globalEndName)", forState: UIControlState.Normal)
-                setupLocationMarker(changeStart)
+                self.pickUpButton.setTitle("\(globalStartName)", forState: UIControlState.Normal)
                 self.mapView.animateToCameraPosition(GMSCameraPosition.cameraWithTarget(changeStart, zoom: 17.0, bearing: 30, viewingAngle: 45))
-                changePickup == false
                 
+                locationMarker = GMSMarker(position: changeStart)
+                locationMarker.appearAnimation = kGMSMarkerAnimationPop
+                locationMarker.icon = GMSMarker.markerImageWithColor(settings.spiritGold)
+                locationMarker.title = "Pick Up"
+                locationMarker.opacity = 0.75
+                locationMarker.map = mapView
                 
-                self.setupLocationMarker(changeStart)
                 endLocationMarker = GMSMarker(position: changeEnd)
                 endLocationMarker.appearAnimation = kGMSMarkerAnimationPop
                 endLocationMarker.icon = GMSMarker.markerImageWithColor(settings.wmGreen)
                 endLocationMarker.title = "Drop Off"
-                // endLocationMarker.snippet = "\(locationDetails)"
+                endLocationMarker.snippet = "\(locationDetails)"
                 print(locationDetails)
                 endLocationMarker.opacity = 0.75
                 endLocationMarker.map = mapView
@@ -210,15 +215,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 globalEndLocation.longitude = changeEnd.longitude
                 
             } else {
-                print("change pickup is not equal to true")
-                self.globalStartLocation = changeStart
-                self.globalEndLocation = changeEnd
-                self.globalStartName = changeStartName
-                self.globalEndName = changeEndName
+                print("Changing Dropoff")
+                
                 self.dropOffButton.setTitle("\(globalEndName)", forState: UIControlState.Normal)
                 self.pickUpButton.setTitle("\(globalStartName)", forState: UIControlState.Normal)
                 self.mapView.animateToCameraPosition(GMSCameraPosition.cameraWithTarget(changeEnd, zoom: 17.0, bearing: 30, viewingAngle: 45))
-                changePickup == false
                 
                 locationMarker = GMSMarker(position: changeStart)
                 locationMarker.appearAnimation = kGMSMarkerAnimationPop
@@ -336,11 +337,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     
     
     func setupLocationMarker(coordinate: CLLocationCoordinate2D) {
+        var isIndex0 = false
         if networkController.noNetwork() == false {
             let alert = UIAlertController(title: "Network Connection", message: "Unable to connect to the network.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         } else {
+            if self.segmentOutlet.selectedSegmentIndex == 0 {
+                isIndex0 = true
+            }
+            
             networkController.geocodeAddress(coordinate.latitude, long: coordinate.longitude)
             
             var placesClient: GMSPlacesClient?
@@ -353,7 +359,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 }
                 
                 if place != nil && self.cameFromSearch == false {
-                    if self.segmentOutlet.selectedSegmentIndex == 0 {
+                    if isIndex0 {
                         self.pickUpButton.setTitle("\(place!.name)", forState: UIControlState.Normal)
                         self.globalStartName = place!.name
                         self.globalStartLocation = coordinate
@@ -368,7 +374,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 }
                 self.cameFromSearch = false
                 
-                if self.segmentOutlet.selectedSegmentIndex == 0 {
+                if isIndex0 {
                     
                     if self.locationMarker != nil {
                         self.locationMarker.map = nil

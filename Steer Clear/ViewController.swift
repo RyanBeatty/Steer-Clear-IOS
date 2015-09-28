@@ -20,7 +20,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
     
-    
     @IBOutlet weak var usernameIcon: UILabel!
     @IBOutlet weak var passwordIcon: UILabel!
     @IBOutlet weak var phoneIcon: UILabel!
