@@ -55,6 +55,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
     var settings = Settings()
     
     override func viewDidLoad() {
+        
+        print("----------------------------------------------------------------------------------------")
+        print("ViewController: Initializing ViewController")
         super.viewDidLoad()
         design()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "DismissKeyboard")
@@ -74,8 +77,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewDidAppear(animated: Bool) {
-        
-        print("no cookies")
         getPhoneLabelsLocation()
         movePhoneLabelsOffScreen(false)
         
@@ -89,10 +90,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    // unwind segue method so that you can cancel registration view controller
-    @IBAction func cancelToLoginViewController(segue:UIStoryboardSegue) {
-        
-    }
     /*
     loginButton
     -----------
@@ -100,14 +97,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
     */
     @IBAction func login(sender: AnyObject) {
         // grab username and password fields and check if they are not null
-        
+        print("ViewController: Attempting to login...")
         let username = usernameTextbox.text
         let password = passwordTextbox.text
         let phone = phoneTextbox.text
         if (username!.isEmpty) || (password!.isEmpty) {
+            print("ViewController: Not all fields are filled.")
             jiggleLogin()
             self.displayAlert("Form Error", message: "Please make sure you have filled all fields.")
         } else {
+            print("ViewController: Sending LOGIN network request.")
             if loginBtn.titleLabel?.text == "LOGIN" {
                 if self.isRotating == false {
                     self.steerClearLogo.rotate360Degrees(completionDelegate: self)
@@ -124,17 +123,18 @@ class ViewController: UIViewController, UITextFieldDelegate {
                             // can't make UI updates from background thread, so we need to dispatch
                             // them to the main thread
                             dispatch_async(dispatch_get_main_queue(), {
-                                // login failed, display error
+                                print("ViewController: Login failed ~ \(message)")
                                 self.jiggleLogin()
                                 self.displayAlert("Login Error", message: message)
                                 self.shouldStopRotating = true
-                            
+                                
                             })
                         }
                         else {
                             // can't make UI updates from background thread, so we need to dispatch
                             // them to the main thread
                             dispatch_async(dispatch_get_main_queue(), {
+                                print("ViewController: Login successful, seguing towards MapViewController.")
                                 self.shouldStopRotating = true
                                 self.phoneTextbox.hidden = true
                                 self.phoneLabel.hidden = true
@@ -151,12 +151,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 })
             }
             else {
-                //lets register
+                print("ViewController: Attempting to register...")
                 if (phone!.isEmpty) {
+                    print("ViewController: Not all fields are filled.")
                     jiggleLogin()
                     self.displayAlert("Form Error", message: "Please make sure you have filled all fields.")
                 } else {
-                    // attempt to register user
+                    print("ViewController: Sending register network request.")
                     SCNetwork.register(
                         username!,
                         password: password!,
@@ -170,11 +171,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
                                 
                                 // check if registration succeeds
                                 if(!success) {
-                                    // if it failed, display error
+                                    print("ViewController: Registration Error ~ \(message)")
                                     self.displayAlert("Registration Error", message: message)
                                 } else {
                                     // if it succeeded, log user in and change screens to
-                                    print("Logging in")
+                                    print("ViewController: Sending LOGIN network request.")
                                     SCNetwork.login(
                                         username!,
                                         password: password!,
@@ -185,7 +186,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                                                 //can't make UI updates from background thread, so we need to dispatch
                                                 // them to the main thread
                                                 dispatch_async(dispatch_get_main_queue(), {
-                                                    // login failed, display alert
+                                                    print("ViewController: Login failed ~ \(message)")
                                                     self.displayAlert("Login Error", message: message)
                                                 })
                                             }
@@ -193,6 +194,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                                                 //can't make UI updates from background thread, so we need to dispatch
                                                 // them to the main thread
                                                 dispatch_async(dispatch_get_main_queue(), {
+                                                    print("ViewController: Login successful, seguing towards MapViewController.")
                                                     self.defaults.setObject("\(username)", forKey: "lastUser")
                                                     self.performSegueWithIdentifier("loginRider", sender: self)
                                                 })
@@ -217,23 +219,20 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     */
     @IBAction func registerButton(sender: AnyObject) {
-        let customColor = UIColor(hue: 0.4444, saturation: 0.8, brightness: 0.34, alpha: 1.0) /* #115740 */
         
         if createAnAccountLabel.titleLabel!.text == "Don't have an account? REGISTER" {
-            
+            print("ViewController: User pressed Registration button, updating UI to show phone label.")
             unHidePhoneLabels()
-            
             movePhoneLabelsOnScreen()
-            
             
             createAnAccountLabel.setAttributedTitle(self.cancelMutableString, forState: UIControlState.Normal)
             loginBtn.setTitle("REGISTER", forState: UIControlState.Normal)
             self.usernameTextbox.attributedPlaceholder = NSAttributedString(string:"W&M USERNAME (treveley)", attributes: [NSForegroundColorAttributeName: UIColor.grayColor()])
             loginBtn.backgroundColor = UIColor.whiteColor()
-            loginBtn.setTitleColor(customColor , forState: UIControlState.Normal)
+            loginBtn.setTitleColor(settings.wmGreen , forState: UIControlState.Normal)
         }
         else {
-            
+            print("ViewController: User pressed Registration button, updating UI to hide phone label.")
             movePhoneLabelsOffScreen(true)
             
             createAnAccountLabel.setAttributedTitle(registerMutableString, forState: UIControlState.Normal)
@@ -285,15 +284,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func checkUser() {
-        let customColor = UIColor(hue: 0.4444, saturation: 0.8, brightness: 0.34, alpha: 1.0) /* #115740 */
-        
         if isAppAlreadyLaunchedOnce() == false {
             phoneTextbox.hidden = false
             phoneLabel.hidden = false
             phoneUnderlineLabel.hidden = false
             
             self.phoneTextbox.frame.origin.x = self.startXphoneTextBox
-            print("bringing back to center")
             self.phoneTextbox.frame.origin.x = self.startXphoneTextBox
             self.phoneLabel.frame.origin.x = self.startXphonelabel
             self.phoneUnderlineLabel.frame.origin.x = self.startXphoneUnderline
@@ -303,24 +299,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
             self.usernameTextbox.attributedPlaceholder = NSAttributedString(string:"W&M USERNAME (treveley)", attributes: [NSForegroundColorAttributeName: UIColor.grayColor()])
             print("bringing back to center")
             loginBtn.backgroundColor = UIColor.whiteColor()
-            loginBtn.setTitleColor(customColor , forState: UIControlState.Normal)
-        }
-        else {
-            print("let user log in")
+            loginBtn.setTitleColor(settings.wmGreen , forState: UIControlState.Normal)
         }
     }
     
-    
-    func pickupPresent()->Bool{
-        let pickupTime: AnyObject? = defaults.objectForKey("pickupTime")
-        if (pickupTime == nil){
-            print("No pickup time")
-            return false
-        }
-        else {
-            return true
-        }
-    }
     func cookiesPresent()->Bool{
         let data: NSData? = defaults.objectForKey("sessionCookies") as? NSData
         if (data == nil){
@@ -334,12 +316,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     func isAppAlreadyLaunchedOnce()->Bool{
         if let _ = self.defaults.stringForKey("isAppAlreadyLaunchedOnce"){
-            print("App already launched")
             return true
         }
         else {
             defaults.setBool(true, forKey: "isAppAlreadyLaunchedOnce")
-            print("App launched first time")
+            print("ViewController: First time launching app, displaying registration screen.")
             return false
         }
     }
@@ -432,29 +413,28 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func keyboardWillShow(notification: NSNotification) {
-        print(self.keyboardUp)
         if (!self.keyboardUp) {
             
             if let _ = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-            UIView.animateWithDuration(0.5, animations: {
-                self.steerClearLogo.alpha = 0.0
+                UIView.animateWithDuration(0.5, animations: {
+                    self.steerClearLogo.alpha = 0.0
+                    
+                })
                 
-            })
-            
-            self.usernameTextbox.frame.origin.y -= 100
-            self.usernameIcon.frame.origin.y -= 100
-            self.usernameUnderlineLabel.frame.origin.y -= 100
-            
-            self.passwordTextbox.frame.origin.y -= 100
-            self.passwordIcon.frame.origin.y -= 100
-            self.passwordUnderlineLabel.frame.origin.y -= 100
-            
-            self.phoneTextbox.frame.origin.y -= 100
-            self.phoneIcon.frame.origin.y -= 100
-            self.phoneUnderlineLabel.frame.origin.y -= 100
-            
+                self.usernameTextbox.frame.origin.y -= 100
+                self.usernameIcon.frame.origin.y -= 100
+                self.usernameUnderlineLabel.frame.origin.y -= 100
+                
+                self.passwordTextbox.frame.origin.y -= 100
+                self.passwordIcon.frame.origin.y -= 100
+                self.passwordUnderlineLabel.frame.origin.y -= 100
+                
+                self.phoneTextbox.frame.origin.y -= 100
+                self.phoneIcon.frame.origin.y -= 100
+                self.phoneUnderlineLabel.frame.origin.y -= 100
+                
             }
-
+            
             self.keyboardUp = true
         }
         
@@ -546,6 +526,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-
+    
     
 }

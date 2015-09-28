@@ -15,8 +15,9 @@ class NavigationController: UIViewController {
     let defaults = NSUserDefaults.standardUserDefaults()
     
     override func viewDidAppear(animated: Bool) {
+        print("NavigationController: Initializing App!")
         
-        
+        print("NavigationController: Checking for Cookies...")
         // pull cookies
         let data: NSData? = defaults.objectForKey("sessionCookies") as? NSData
         if let cookie = data {
@@ -30,25 +31,27 @@ class NavigationController: UIViewController {
         
         // Main navigation depending on cookies
         if cookiesPresent() {
+            print("NavigationController: Cookies present and user is logged in, checking whether ride has been placed.")
             if pickupPresent() {
                 // check whether ride has already been deleted
                 self.performSegueWithIdentifier("waitingViewController", sender: self)
             }
             else {
+                print("NavigationController: No ride, seguing to MapViewController.")
                 self.performSegueWithIdentifier("mapViewController", sender: self)
             }
         } else {
+            print("NavigationController: Cookies not present, seguing to ViewController.")
             self.performSegueWithIdentifier("viewController", sender: self)
         }
-
-
-
+        
+        
+        
     }
-
+    
     func pickupPresent()->Bool{
         let pickupTime: AnyObject? = defaults.objectForKey("pickupTime")
         if (pickupTime == nil){
-            print("No pickup time")
             return false
         }
         else {
@@ -73,7 +76,6 @@ class NavigationController: UIViewController {
     func cookiesPresent()->Bool{
         let data: NSData? = defaults.objectForKey("sessionCookies") as? NSData
         if (data == nil){
-            print("No cookies, let user log in")
             return false
         }
         else {
