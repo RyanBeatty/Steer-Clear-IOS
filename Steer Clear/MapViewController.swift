@@ -114,6 +114,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             if self.geofence.containsCoordinate(myLocation!.coordinate){
                 self.setupLocationMarker(myLocation!.coordinate)
                 self.mapView.animateToCameraPosition(GMSCameraPosition.cameraWithTarget(myLocation!.coordinate, zoom: 17.0, bearing: 30, viewingAngle: 45))
+                
+                
             } else {
                 let alert = UIAlertController(title: "Region Error", message: "Your Current Location is outside of Steer Clear's service area. Please select a location inside of our area.", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
@@ -267,6 +269,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
                 if self.geofence.containsCoordinate(myLocation.coordinate){
                     self.setupLocationMarker(myLocation.coordinate)
                     self.mapView.animateToCameraPosition(GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 17.0, bearing: 30, viewingAngle: 45))
+                    
+                    segmentOutlet.tintColor = settings.wmGreen
+                    segmentOutlet.selectedSegmentIndex = 1
+
                 } else {
                     let alert = UIAlertController(title: "Region Error", message: "Your Current Location is outside of Steer Clear's service area. Please select a location inside of our area.", preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
