@@ -267,8 +267,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
             let myLocation: CLLocation = change![NSKeyValueChangeNewKey] as! CLLocation
             self.mapView.animateToCameraPosition(GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 17.0, bearing: 30, viewingAngle: 45))
                 if self.geofence.containsCoordinate(myLocation.coordinate){
-                    self.setupLocationMarker(myLocation.coordinate)
                     self.mapView.animateToCameraPosition(GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 17.0, bearing: 30, viewingAngle: 45))
+                    self.setupLocationMarker(myLocation.coordinate)
+
                     
                     segmentOutlet.tintColor = settings.wmGreen
                     segmentOutlet.selectedSegmentIndex = 1
