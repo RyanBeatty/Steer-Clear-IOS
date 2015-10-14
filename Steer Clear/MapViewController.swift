@@ -478,7 +478,6 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
 
     
     func imageTapped(){
-        print("hello")
         if !popOverViewable {
             UIView.animateWithDuration(
                 0.5,
