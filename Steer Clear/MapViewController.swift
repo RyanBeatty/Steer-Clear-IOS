@@ -166,6 +166,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     }
     
     func refresh() {
+        checkUpdate()
         if checkTimelock() {
             print("refresh picked up that service is up")
         } else {
@@ -198,6 +199,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         print("----------------------------------------------------------------------------------------")
         print("MapViewController: Initializing MapViewController")
         setupButtons()
+        checkUpdate()
         checkTimelock()
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -552,7 +554,7 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
                     // can't make UI updates from background thread, so we need to dispatch
                     // them to the main thread
                     dispatch_async(dispatch_get_main_queue(), {
-                        print("ViewController: Timelock checked, Steer Clear is currently running.")
+                        print("MapViewController: Timelock checked, Steer Clear is currently running.")
                         serviceOn = true
                     })
                 }
@@ -562,6 +564,35 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
         } else {
             return false
         }
+    }
+    
+    func checkUpdate() {
+        networkController.checkUpdate( {
+            success, message in
+            
+            
+            if(!success) {
+                // can't make UI updates from background thread, so we need to dispatch
+                // them to the main thread
+                dispatch_async(dispatch_get_main_queue(), {
+                    let alert = UIAlertController(title: "New Version Available", message: "There is a newer version available for download! Please update the app by visiting the Apple Store.", preferredStyle: UIAlertControllerStyle.Alert)
+                    
+                    let downloadUrl = NSURL(string: "http://itunes.apple.com/us/app/apple-store/id1036506994?mt=8")
+                    alert.addAction(UIAlertAction(title: "Update", style: UIAlertActionStyle.Default, handler: { alertAction in
+                        UIApplication.sharedApplication().openURL(downloadUrl!)
+                        alert.dismissViewControllerAnimated(true, completion: nil)
+                    }))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                })
+            }
+            else {
+                // can't make UI updates from background thread, so we need to dispatch
+                // them to the main thread
+                dispatch_async(dispatch_get_main_queue(), {
+                    print("MapViewController: Currently running latest running of app.")
+                })
+            }
+        })
     }
     
     
