@@ -122,7 +122,6 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         let endLongString = String(end.longitude)
         let numPassengersString = numOfPassengers.text!
         requestRideOutlet.enabled = false
-        
         UIView.animateWithDuration(0.5, animations: {
             self.gear.alpha = 1.0
             self.overlay.alpha = 1.0
@@ -133,38 +132,76 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
             // Perhaps start a process which will refresh the UI...
         }
         
-        
-        // request a ride
-        SCNetwork.requestRide(
-            startLatString,
-            startLong: startLongString,
-            endLat: endLatString,
-            endLong: endLongString,
-            numPassengers: numPassengersString,
-            completionHandler: {
-                success, login, message, ride in
-                
-                // if something went wrong, display error message
-                if(!success || ride == nil) {
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.displayAlert("Ride Request Error", message: message)
-                        self.overlay.alpha = 0.0
-                        self.gear.alpha = 0.0
-                        self.shouldStopRotating = true
-                        self.requestRideOutlet.enabled = true
-                    })
+        if checkTimelock() {
+            SCNetwork.requestRide(
+                startLatString,
+                startLong: startLongString,
+                endLat: endLatString,
+                endLong: endLongString,
+                numPassengers: numPassengersString,
+                completionHandler: {
+                    success, login, message, ride in
+                    
+                    // if something went wrong, display error message
+                    if(!success || ride == nil) {
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.displayAlert("Ride Request Error", message: message)
+                            self.overlay.alpha = 0.0
+                            self.gear.alpha = 0.0
+                            self.shouldStopRotating = true
+                            self.requestRideOutlet.enabled = true
+                        })
+                    }
+                    else {
+                        // else request was a success, so change screens
+                        dispatch_async(dispatch_get_main_queue(), {
+                            // make sure we save Ride object
+                            self.currentRide = ride
+                            self.requestRideOutlet.enabled = true
+                            self.performSegueWithIdentifier("waitingSegue", sender: self)
+                        })
+                    }
                 }
-                else {
-                    // else request was a success, so change screens
-                    dispatch_async(dispatch_get_main_queue(), {
-                        // make sure we save Ride object
-                        self.currentRide = ride
-                        self.requestRideOutlet.enabled = true
-                        self.performSegueWithIdentifier("waitingSegue", sender: self)
-                    })
-                }
+            )
+        } else {
+            self.overlay.alpha = 0.0
+            self.gear.alpha = 0.0
+            self.shouldStopRotating = true
+            self.requestRideOutlet.enabled = true
+            let alert = UIAlertController(title: "Service Error", message: "Steer Clear is not currently running. Please try again during hours.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+
+    }
+    
+    func checkTimelock()->Bool{
+        var serviceOn = false
+        SCNetwork.timelock( {
+            success, message in
+            
+            
+            if(!success) {
+                // can't make UI updates from background thread, so we need to dispatch
+                // them to the main thread
+                dispatch_async(dispatch_get_main_queue(), {
+                    print("TripConfirmation: Timelock checked, Steer Clear is NOT currently running.")
+                })
             }
-        )
+            else {
+                // can't make UI updates from background thread, so we need to dispatch
+                // them to the main thread
+                dispatch_async(dispatch_get_main_queue(), {
+                    print("TripConfirmation: Timelock checked, Steer Clear is currently running.")
+                    serviceOn = true
+                })
+            }
+        })
+        if serviceOn {
+            return true
+        } else {
+            return false
+        }
     }
 
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {

@@ -19,7 +19,7 @@ let LOGOUT_ROUTE = "/logout"
 let RIDE_REQUEST_ROUTE = "/api/rides"
 let CLEAR_ROUTE = "/clear"
 let DELETE_ROUTE = "/api/rides/"
-let INDEX = "/index"
+let TIMELOCK_ROUTE = "/api/timelock"
 
 // complete api route strings
 let REGISTER_URL_STRING = HOSTNAME + REGISTER_ROUTE
@@ -28,6 +28,7 @@ let LOGOUT_URL_STRING = HOSTNAME + LOGOUT_ROUTE
 let RIDE_REQUEST_URL_STRING = HOSTNAME + RIDE_REQUEST_ROUTE
 let ClEAR_URL_STRING = HOSTNAME + CLEAR_ROUTE
 let DELETE_URL_STRING = HOSTNAME + DELETE_ROUTE
+let TIMELOCK_STRING = HOSTNAME + TIMELOCK_ROUTE
 
 class SCNetwork: NSObject {
     
@@ -343,24 +344,41 @@ class SCNetwork: NSObject {
         dataTask.resume()
     }
     
+    /*
+    timelock
+    ------
+    Checks to see if Steer Clear service is running
     
-    //
-    //    func saveCookie() {
-    //        let cookieJar: NSHTTPCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-    //        let data: NSData = NSKeyedArchiver.archivedDataWithRootObject(cookieJar)
-    //        let ud: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-    //        ud.setObject(data, forKey: "cookie")
-    //    }
-    //    func loadCookie() {
-    //
-    //    }
-    //
-    //    func wipeCookies() {
-    //        let ud: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-    //        let cookieStorage: NSHTTPCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-    //        let cookies: [NSHTTPCookie] = cookieStorage.cookies as! [NSHTTPCookie]
-    //        for cookie in cookies {
-    //            cookieStorage.deleteCookie(cookie)
-    //        }
-    //    }
+    :completionHandler: callback method that takes a success flag and a string message
+    */
+    class func timelock(completionHandler: (success: Bool, message: String) -> ()) {
+        let request = NSMutableURLRequest(URL: NSURL(string: TIMELOCK_STRING)!)
+        request.HTTPMethod = "GET"
+        
+        let session = NSURLSession.sharedSession()
+        let dataTask = session.dataTaskWithRequest(request, completionHandler: {
+            data, response, error in
+            
+            // if there was an error, request failed
+            if(error != nil || response == nil || data == nil) {
+                completionHandler(success: false, message: "There was a network error while checking if Steer Clear is running.")
+                return
+            }
+            
+            // else check the request status code to see if logging out succeeded
+            let httpResponse = response as! NSHTTPURLResponse
+            switch(httpResponse.statusCode) {
+            case 200:
+                completionHandler(success: true, message: "Steer Clear in service!")
+            default:
+                print("**SCNetwork: Timelock Status Code received: \(httpResponse.statusCode)")
+                completionHandler(success: false, message: "Steer Clear not in service.")
+            }
+        })
+        
+        dataTask.resume()
+    }
+    
+    
+
 }

@@ -102,6 +102,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
         }
         else {
+            //implement timelock check here
             self.performSegueWithIdentifier("sendDetails", sender: self)
         
         }
@@ -159,6 +160,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         }
     }
     
+    override func viewDidAppear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "refresh", name: UIApplicationWillEnterForegroundNotification, object: nil);
+        
+    }
+    
+    func refresh() {
+        if checkTimelock() {
+            print("refresh picked up that service is up")
+        } else {
+            print("refresh picked up service down")
+        }
+        
+    }
+    
     override func viewDidLayoutSubviews() {
         self.navWidth = self.navigationBar.frame.width
         let navBorder = CALayer()
@@ -180,8 +195,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("----------------------------------------------------------------------------------------")
+        print("MapViewController: Initializing MapViewController")
         setupButtons()
-        
+        checkTimelock()
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         
@@ -515,6 +532,40 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
 
     }
     
+    func checkTimelock()->Bool{
+        var serviceOn = false
+        SCNetwork.timelock( {
+                success, message in
+            
+                
+                if(!success) {
+                    // can't make UI updates from background thread, so we need to dispatch
+                    // them to the main thread
+                    dispatch_async(dispatch_get_main_queue(), {
+                        print("MapController: Timelock checked, Steer Clear is NOT currently running.")
+                        let alert = UIAlertController(title: "Service Error", message: "Steer Clear is not currently running. You may build your ride, but will not be able to send request until service hours.", preferredStyle: UIAlertControllerStyle.Alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                        self.presentViewController(alert, animated: true, completion: nil)
+                    })
+                }
+                else {
+                    // can't make UI updates from background thread, so we need to dispatch
+                    // them to the main thread
+                    dispatch_async(dispatch_get_main_queue(), {
+                        print("ViewController: Timelock checked, Steer Clear is currently running.")
+                        serviceOn = true
+                    })
+                }
+        })
+        if serviceOn {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    
+    
     @IBAction func ulisesLink(sender: AnyObject) {
         UIApplication.sharedApplication().openURL(NSURL(string: "http://udiscover.me")!)
     }
@@ -538,7 +589,7 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
     }
     
     @IBAction func logoutButton(sender: AnyObject) {
-        
+        //Note, does not logout user from server.  
         self.defaults.setObject(nil, forKey: "sessionCookies")
         self.performSegueWithIdentifier("logoutSegue", sender: self)
     }
