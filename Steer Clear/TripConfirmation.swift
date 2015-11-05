@@ -44,6 +44,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
 
     var isRotating = false
     var shouldStopRotating = false
+    let networkController = Network()
     
     override func viewDidLayoutSubviews() {
         self.navWidth = self.navigationBar.frame.width
@@ -61,6 +62,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        checkUpdate()
         myPicker.delegate = self
         myPicker.dataSource = self
         myPicker.selectRow(1, inComponent: 0, animated: true)
@@ -292,5 +294,34 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
     func reset() {
         self.isRotating = false
         self.shouldStopRotating = false
+    }
+    
+    func checkUpdate() {
+        networkController.checkUpdate( {
+            success, message in
+            
+            
+            if(!success) {
+                // can't make UI updates from background thread, so we need to dispatch
+                // them to the main thread
+                dispatch_async(dispatch_get_main_queue(), {
+                    let alert = UIAlertController(title: "New Version Available", message: "There is a newer version available for download! Please update the app by visiting the Apple Store.", preferredStyle: UIAlertControllerStyle.Alert)
+                    
+                    let downloadUrl = NSURL(string: "http://itunes.apple.com/us/app/apple-store/id1036506994?mt=8")
+                    alert.addAction(UIAlertAction(title: "Update", style: UIAlertActionStyle.Default, handler: { alertAction in
+                        UIApplication.sharedApplication().openURL(downloadUrl!)
+                        alert.dismissViewControllerAnimated(true, completion: nil)
+                    }))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                })
+            }
+            else {
+                // can't make UI updates from background thread, so we need to dispatch
+                // them to the main thread
+                dispatch_async(dispatch_get_main_queue(), {
+                    print("MapViewController: Currently running latest running of app.")
+                })
+            }
+        })
     }
 }
