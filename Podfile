@@ -5,6 +5,7 @@ use_frameworks!
 
 target 'Steer Clear' do
 pod 'GoogleMaps'
+pod 'Google/Analytics'
 pod 'SwiftyJSON'
 pod 'Canvas'
 end

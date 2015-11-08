@@ -12,6 +12,8 @@
 		04FB75591B84133800422750 /* SCNetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FB75581B84133800422750 /* SCNetworkTests.swift */; };
 		04FB755A1B84140A00422750 /* SCNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FB75561B8409F700422750 /* SCNetwork.swift */; };
 		383EC5EB1B69BD2E00D78F36 /* TripConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383EC5EA1B69BD2E00D78F36 /* TripConfirmation.swift */; };
+		3846DC201BED141F00CFA988 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3846DC1F1BED141F00CFA988 /* GoogleService-Info.plist */; };
+		3846DC211BED141F00CFA988 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3846DC1F1BED141F00CFA988 /* GoogleService-Info.plist */; };
 		387126CD1B65C15600AE4CFE /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387126CC1B65C15600AE4CFE /* MapViewController.swift */; };
 		3889BE7E1B97C30F00A0930F /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3889BE7D1B97C30F00A0930F /* Settings.swift */; };
 		3889BE801B97C5B300A0930F /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3889BE7F1B97C5B300A0930F /* Network.swift */; };
@@ -47,6 +49,8 @@
 		04FB75561B8409F700422750 /* SCNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCNetwork.swift; path = "Steer Clear/SCNetwork.swift"; sourceTree = "<group>"; };
 		04FB75581B84133800422750 /* SCNetworkTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCNetworkTests.swift; sourceTree = "<group>"; };
 		383EC5EA1B69BD2E00D78F36 /* TripConfirmation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripConfirmation.swift; sourceTree = "<group>"; };
+		3846DC1F1BED141F00CFA988 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3846DC241BED152900CFA988 /* GA-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GA-Bridging-Header.h"; sourceTree = "<group>"; };
 		387126CC1B65C15600AE4CFE /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		3889BE7D1B97C30F00A0930F /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Settings.swift; path = "Steer Clear/Settings.swift"; sourceTree = "<group>"; };
 		3889BE7F1B97C5B300A0930F /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Network.swift; path = "Steer Clear/Network.swift"; sourceTree = "<group>"; };
@@ -143,6 +147,7 @@
 		388DBEAD1B064DBB009BC774 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3846DC1F1BED141F00CFA988 /* GoogleService-Info.plist */,
 				388DBEAE1B064DBB009BC774 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -168,6 +173,7 @@
 		38E1D5AB1BAF657800697FD2 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				3846DC241BED152900CFA988 /* GA-Bridging-Header.h */,
 				3889BE7D1B97C30F00A0930F /* Settings.swift */,
 				38E9B4DC1B83E2CC00903F82 /* Ride.swift */,
 				38F5AE451B9645D700CE66A1 /* NextField.swift */,
@@ -302,6 +308,7 @@
 				9004872B1B765D0D00EBF80B /* fontawesome-webfont.ttf in Resources */,
 				388DBEBA1B064DBB009BC774 /* LaunchScreen.xib in Resources */,
 				388DBEB71B064DBB009BC774 /* Images.xcassets in Resources */,
+				3846DC201BED141F00CFA988 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,6 +316,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3846DC211BED141F00CFA988 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,7 +612,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Steer-Clear";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "GA-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "Pods/**";
 			};
 			name = Debug;
 		};
@@ -623,7 +633,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Steer-Clear";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "GA-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "Pods/**";
 			};
 			name = Release;
 		};

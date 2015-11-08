@@ -69,6 +69,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     var segmentOutletEndY = CGFloat()
     var locationButtonEndY = CGFloat()
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        
+        let name = "MapViewController"
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: name)
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject : AnyObject])
+    }
+    
     @IBAction func segmentControlSwitch(sender: AnyObject) {
         switch segmentOutlet.selectedSegmentIndex
         {

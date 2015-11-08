@@ -55,6 +55,15 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
     }
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        
+        let name = "TripConfirmationController"
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: name)
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject : AnyObject])
+        
         self.gear.alpha = 0.0
         self.overlay.alpha = 0.0
     }
@@ -160,6 +169,16 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
                             // make sure we save Ride object
                             self.currentRide = ride
                             self.requestRideOutlet.enabled = true
+                            
+                            
+                            let tracker = GAI.sharedInstance().defaultTracker
+                            
+                            let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory(
+                                "ui_action",
+                                action: "ride_request_success",
+                                label: "success",
+                                value: nil).build()
+                            tracker.send(eventTracker as! [NSObject : AnyObject])
                             self.performSegueWithIdentifier("waitingSegue", sender: self)
                         })
                     }

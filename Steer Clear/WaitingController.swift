@@ -25,6 +25,7 @@ class WaitingController: UIViewController {
     
     @IBOutlet weak var gear: UIImageView!
     
+    
     override func viewDidLayoutSubviews() {
         self.navWidth = self.navigationBar.frame.width
         let navBorder = CALayer()
@@ -34,6 +35,15 @@ class WaitingController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        
+        let name = "WaitingController"
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: name)
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject : AnyObject])
+        
         self.gear.alpha = 0.0
         self.overlay.alpha = 0.0
         etaLabel.hidden = true

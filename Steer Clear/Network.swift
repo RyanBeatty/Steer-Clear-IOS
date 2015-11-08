@@ -86,14 +86,19 @@ class Network {
             case 200:
                 let json = JSON(data: data!)
                 // get ride request data
-                let fetchedAppVersion = Double((json["results"][0]["version"].string)!)
-                let currentAppVersion = Double(NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as! String)
-                print("**Network: Currently running v\(currentAppVersion!). Latest release v\(fetchedAppVersion!).")
-                if fetchedAppVersion == currentAppVersion {
-                     completionHandler(success: true, message: "You are using the latest version of the app")
+                if json["results"][0]["version"] != nil {
+                    let fetchedAppVersion = Double((json["results"][0]["version"].string)!)
+                    let currentAppVersion = Double(NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as! String)
+                    print("**Network: Currently running v\(currentAppVersion!). Latest release v\(fetchedAppVersion!).")
+                    if fetchedAppVersion == currentAppVersion {
+                        completionHandler(success: true, message: "You are using the latest version of the app")
+                    } else {
+                        completionHandler(success: false, message: "You are NOT using the latest version of the app")
+                    }
                 } else {
-                    completionHandler(success: false, message: "You are NOT using the latest version of the app")
+                    print("Could not retrieve app version")
                 }
+               
             default:
                 print("** Network: Couldn't fetch app version")
                 completionHandler(success: false, message: "Failed to find app version")

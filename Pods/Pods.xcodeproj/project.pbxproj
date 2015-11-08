@@ -7,179 +7,218 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		070B1A0CEC40D1D520B9AD14A50ACA72 /* UINavigationBar+TCCustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 383D7FC2932B740960970B70A0E9549C /* UINavigationBar+TCCustomFont.m */; };
+		02741BAD29CDF76F77BC6A3FCBCE81C6 /* Canvas-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C854A16EEC7430A49F9C73D4838819D6 /* Canvas-dummy.m */; };
+		03350250C81E331D71C8C880AE516233 /* OHHTTPStubsResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 18E83B72B449EDF635BFA7CC891C20D8 /* OHHTTPStubsResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0827054A4B80A0EFEFEC4D8DE99CB1CF /* Pods-Steer Clear-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8AD06EFBB59BBF6C7F748F9AAA16A4A7 /* Pods-Steer Clear-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0A73ACFD31846814F72380D813EB391C /* UINavigationBar+TCCustomFont.h in Headers */ = {isa = PBXBuildFile; fileRef = 24D14F31237B192A9CF2A7CA61190733 /* UINavigationBar+TCCustomFont.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		137176F3A839A4850F3FC51C412E34F4 /* SwiftyJSON-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9067BC08AF819A2A0FEAAEB445F6860C /* SwiftyJSON-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		159752069881543DB0154C2776660781 /* OHHTTPStubs-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FE56AFB7159FB0F4743CAABEB2DBCE6 /* OHHTTPStubs-dummy.m */; };
-		18C81850294357C6C4BC3203B1B59B19 /* CSAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 059AFA39379AD9D0A6CA3A6BC7DD9D46 /* CSAnimationView.m */; };
-		2349EADDA3743343A6BC9C2D3B6094EC /* OHHTTPStubsResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = CD4919FB92882412FF9CD4A8E4188081 /* OHHTTPStubsResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2363E617225BA68A16E1621E5B8FA30A /* CSNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B87F98C09663D6453151325B8229005 /* CSNavigationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3D3E6D0436667ACB6DDB38FFB8F7E557 /* OHHTTPStubs.h in Headers */ = {isa = PBXBuildFile; fileRef = 934850DC2209B336E880947E63A1E14B /* OHHTTPStubs.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1C84A896A2BA88E401CFC6CF2AD676D1 /* UIButton+TCCustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B3BF3C9570DEBC1628D4E563D73ED3B /* UIButton+TCCustomFont.m */; };
+		1E276EF2335F54ED4C2AA887678BFFE1 /* CSAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75713EE452F58404D619B007E21CA4F4 /* CSAnimationView.m */; };
+		2133A860CD81A62DA69E2BC86728B1C6 /* UITextField+PlaceholderColor.m in Sources */ = {isa = PBXBuildFile; fileRef = E535F5C8D3176E492EADC5EEF3D71568 /* UITextField+PlaceholderColor.m */; };
+		2197174C7E88DF49C394D00016EE8267 /* OHHTTPStubs.m in Sources */ = {isa = PBXBuildFile; fileRef = 108E18ED0025D74C832F218EB97135D7 /* OHHTTPStubs.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		21C7A3F6115F0FD92F2324A54822CF51 /* UIButton+TCCustomFont.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C7CB24CD79AA49BF309754711E828DE /* UIButton+TCCustomFont.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		25F8F136957231345A1BE72E026DCB5F /* CSAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = B5DD0372F888B2F3E80FE9271151E03C /* CSAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2970EB665EBBC4F5A4FBBEA90F300F2F /* Canvas.h in Headers */ = {isa = PBXBuildFile; fileRef = D06D4FF2B20F8DDAEBD0AA108075FBD4 /* Canvas.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		32A898B4096B117C45D682FAEB7715DC /* Canvas-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C76786BB7BFACAC9011A53D6473A809 /* Canvas-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		34CDDE81023115653B411739C0693497 /* UITextField+TCCustomFont.h in Headers */ = {isa = PBXBuildFile; fileRef = A26557362FA1A50BAB5F29D895CF58C4 /* UITextField+TCCustomFont.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		355A36B7761E7CADB3C030F9C77531E9 /* OHHTTPStubs+NSURLSessionConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = EBA2812C15E14AC9BB05E957378EA103 /* OHHTTPStubs+NSURLSessionConfiguration.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		3D1461372D1AE8DD7EFF2422B3A80783 /* UILabel+TCCustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE275708D4BD044705111C319753543 /* UILabel+TCCustomFont.m */; };
 		3DB61C5C2CB6979AD2540045D74ABEEA /* Pods-Steer ClearTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F9C61507822B88C77CD973815CB2C91C /* Pods-Steer ClearTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3EDC61118BDCEA6D908281492316F05E /* Canvas.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BEB435985D1DB5D19A158A054834742 /* Canvas.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		49B5AE65B0CD9E5EF63BFA8B43C01C78 /* UITextField+TCCustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = BB52D93887E0F400A4FE6EC942404AA8 /* UITextField+TCCustomFont.m */; };
-		4F74751944B404D4C0CF2040F99584AF /* OHHTTPStubsResponse+JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 264E3BD34BC6DA72EA906AAC1AEA61BE /* OHHTTPStubsResponse+JSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		517F6B5926750626C11784131148D991 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C35751B2DD263C11C75F83DFC3E8DC01 /* Foundation.framework */; };
-		538DE9CE6E8EB2554942184A0D32FA55 /* OHHTTPStubs.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B5332DEFA073BBD61F1113DB593C7ED /* OHHTTPStubs.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		55348C94793297068FAE147420F4E374 /* UITextField+PlaceholderColor.h in Headers */ = {isa = PBXBuildFile; fileRef = BA06149C0AAA594C87893F3E5B9862B0 /* UITextField+PlaceholderColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		589834F967971FA6657F14AA56DFD0D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C35751B2DD263C11C75F83DFC3E8DC01 /* Foundation.framework */; };
-		5F9589C53987F80614538C6926B641ED /* OHHTTPStubs-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5882937E2B03FD953A022E404B8A9D9B /* OHHTTPStubs-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6268DDC370C41ADE77092746C05ADFFC /* UITextField+PlaceholderColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0942AFB725E9076608FF6120C5520CB7 /* UITextField+PlaceholderColor.m */; };
-		6F6584A4BAF9FC6FF75126E42095C897 /* OHHTTPStubsResponse+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4EAF83CA2CDE212C569F64C0E8A2B6 /* OHHTTPStubsResponse+JSON.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		79991F89488F0F017B231250752B7D69 /* SwiftyJSON-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 821F8B130ACCAACBA1766F50F3EDD213 /* SwiftyJSON-dummy.m */; };
-		7A7C418259A406E3AE789EE61621FBD5 /* Compatibility.h in Headers */ = {isa = PBXBuildFile; fileRef = EDDDCBF71B5760FA2D94A3C54B2B484B /* Compatibility.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7F7E8D6B9BBD76805E3E6F41350E6AB6 /* CSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 96A03DE23AB6C0E24373815812068206 /* CSAnimation.m */; };
-		81912A427EA6C880672EB8AA58D10193 /* CSBlurView.h in Headers */ = {isa = PBXBuildFile; fileRef = 530E10A38E0765410352431B632D819F /* CSBlurView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		416AC709BCC7D4D8E4F7FA60F314602E /* CSBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C186888AF3177AFF92C1EC0F2DFA25 /* CSBlurView.m */; };
+		44262BA54D0B87A2315AE49B34F36510 /* SwiftyJSON-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C2B6143790849FC1E4FC57840EFA62F /* SwiftyJSON-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		52AD242A8E525C40D5AB1A64783DBEED /* UINavigationBar+TCCustomFont.h in Headers */ = {isa = PBXBuildFile; fileRef = D42EC8613CCE1ECAE215F9491C7B3A67 /* UINavigationBar+TCCustomFont.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		589834F967971FA6657F14AA56DFD0D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 106CBCE62E1C2B2B2973B896F26F8EAD /* Foundation.framework */; };
+		592503DF0E65E17ED3D7D6CB9629863E /* OHHTTPStubsResponse+JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A5C1AD5D42ADC7F993743FD484BC357F /* OHHTTPStubsResponse+JSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6158E2686FDA79B0905172AFCC45C558 /* CSBlurView.h in Headers */ = {isa = PBXBuildFile; fileRef = 648DDBA2DB93DB007E4701D8A47738B3 /* CSBlurView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6781119076AB9B38E737BB8E01C69ED2 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5758AFE66A857192EFFF80B48DD7A47 /* SwiftyJSON.swift */; };
+		7707EEFEBEAE1EA17842590C6CECEDE7 /* UINavigationBar+TCCustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F03963D8172461EC50BD0215072FFF7 /* UINavigationBar+TCCustomFont.m */; };
+		78055C46041DCCDFA5AD8F702F6EEB80 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 106CBCE62E1C2B2B2973B896F26F8EAD /* Foundation.framework */; };
+		7820F9230987CB8BEB92CDB7A6C95013 /* OHHTTPStubs.h in Headers */ = {isa = PBXBuildFile; fileRef = F78AD192B2FEB7A9AC3143D142347D6B /* OHHTTPStubs.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8302DEAC89F97833813A2D7CBCEE149C /* Pods-Steer Clear-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 915234E784A96BEB68F57B77E79E77D1 /* Pods-Steer Clear-dummy.m */; };
-		83221AB534ED7F1979688CCF7B38ED79 /* OHHTTPStubs+NSURLSessionConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B912119A73A537869E1A6F7B55535D9 /* OHHTTPStubs+NSURLSessionConfiguration.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		8E29B82067DC0786C64A2D88A24E0CA6 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23AB1C30D2E2DCC715BD10264DE2020C /* SwiftyJSON.swift */; };
-		9A5A73C0BF7CF59F93AE999F0CA6198C /* UITextView+TCCustomFont.h in Headers */ = {isa = PBXBuildFile; fileRef = DD8F5069FACADA1BA5C905500161D4C7 /* UITextView+TCCustomFont.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A0726DD244045294914E2E0BA0730AA9 /* CSAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 369078BB489B0219AB4D42BE177CADEC /* CSAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A43D40C688CF2698103A39F51103CDC6 /* UIButton+TCCustomFont.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FDB24F3C1246AEE8C29B5134C5132FC /* UIButton+TCCustomFont.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A459A92AF798AC217B800C235735C6FE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C35751B2DD263C11C75F83DFC3E8DC01 /* Foundation.framework */; };
-		A589F8B72393896A687D5238E9DAD6C5 /* UILabel+TCCustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 6032B3C9D6CBF37992840098CDF003DE /* UILabel+TCCustomFont.m */; };
-		AB018EF675A178757E8C4E53A98855AC /* Canvas-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 214A1B58D54B091932CBA0D8DC10A8EF /* Canvas-dummy.m */; };
-		BB82547347BED4A8D550F5C6D63CDA08 /* UITextField+TCCustomFont.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A731F762A7B1DD872216D385858C90E /* UITextField+TCCustomFont.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BC7F2EC1C149ECF1CE03D776395D3946 /* Canvas-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C88E244759A9B5E59E2ED9E7F84ECA7D /* Canvas-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BF6AC6998D3D88E4092110E842CE1636 /* CSBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1697DAEDDF2D70035A2BFA1F7F7D2464 /* CSBlurView.m */; };
+		89299DA5737A25F2D423A44C7D5C1138 /* SwiftyJSON-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA763AA17316FF2EFA7E959BCEF4F1 /* SwiftyJSON-dummy.m */; };
+		8DD8432CB906A048C07BC8FE508D655E /* Compatibility.h in Headers */ = {isa = PBXBuildFile; fileRef = BA766B6A0F6C5460519D98FD5D278872 /* Compatibility.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		936E1DE14F4C2DAC3C3E3B535B60789B /* OHHTTPStubs-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E73ECEC2588809D64DF1FB6F1D36DC4 /* OHHTTPStubs-dummy.m */; };
+		95B00DD8202C0F0F68186601DC3644E9 /* UITextView+TCCustomFont.h in Headers */ = {isa = PBXBuildFile; fileRef = ADF93174256BB1A45F6DE49010032955 /* UITextView+TCCustomFont.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		978C14A9EAB52C4C359082433D10DA03 /* CSAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7507912648188492FB2653115E4BA79F /* CSAnimation.m */; };
+		9D5E5B1F4099E11B14DFCF42A1802ACE /* OHPathHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 73DFD68612C0309C3AA11C2176AFC84B /* OHPathHelpers.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		9EB23E6FCE129EE5AA35CEF8E01E2EB3 /* UITextField+TCCustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAFE9C8C2C310AF6BB9A574962C2B66 /* UITextField+TCCustomFont.m */; };
+		A497FAA9D36BAD85556611F8A8C27825 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 106CBCE62E1C2B2B2973B896F26F8EAD /* Foundation.framework */; };
+		AAA5D70392BB9A8980EDEFEE0A7E8B1B /* UILabel+TCCustomFont.h in Headers */ = {isa = PBXBuildFile; fileRef = D223A24088230B50C1E8FF3A8CB30BFD /* UILabel+TCCustomFont.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B458A639CA63E34D516285F703402EA9 /* OHHTTPStubsResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 4599143EFB2B9D4F06AD8E563EA4F3C4 /* OHHTTPStubsResponse.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		B5E271213CE8DED996DECAAA3CA97C8E /* UITextField+PlaceholderColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 90C39145BC9EC9809B2799C821B6231F /* UITextField+PlaceholderColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C1468FEEFA74995BC4B3ED1EAA658CEC /* Pods-Steer ClearTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8819970D2C5194A1D59EB7DF4AF3F036 /* Pods-Steer ClearTests-dummy.m */; };
-		CE4A2F0FEF0B9674F9AA273A0D9619A3 /* CSNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8478D7585063A505039B19D9807A077B /* CSNavigationController.m */; };
-		E21BCE42AC7B6606403D4DCAA3CA0C0C /* CSAnimationView.h in Headers */ = {isa = PBXBuildFile; fileRef = A877D194073DDB85AA5AAF6B50A911D9 /* CSAnimationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E32F1CF26BCA7264CBC604C8556A6500 /* OHPathHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 34193F84AE75FFB8D2CF392F5E838723 /* OHPathHelpers.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		E76053E85DD12D4273CC6FED57439126 /* OHHTTPStubsResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 98DE8851BEF563E0537988E37EB58366 /* OHHTTPStubsResponse.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		EB9CE530859D4206091AA7DF2D6593B2 /* UITextView+TCCustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 8400299E2CCF49FAC121BE25C82F46A1 /* UITextView+TCCustomFont.m */; };
-		EC8417CAC732B159A01E40E47D427AE9 /* UIButton+TCCustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 23EA8AAD15A061BE14ED7C7DE65787D5 /* UIButton+TCCustomFont.m */; };
-		F15AC83B1DC1B6C3128713DFBFF5BC74 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 277DF3939825ADDD610F9C01086A7803 /* CFNetwork.framework */; };
-		F28C291783E8252BF4B9B5880891D954 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C35751B2DD263C11C75F83DFC3E8DC01 /* Foundation.framework */; };
-		F7CB19FAB30C716D9E79BF4F6AEAE61C /* OHPathHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = EEFC824EA8DB5E43A86BF30AF6A695AA /* OHPathHelpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FAD1A5DC33B169E0E206A6DAB632BEEB /* UILabel+TCCustomFont.h in Headers */ = {isa = PBXBuildFile; fileRef = 259627E9D33DB2BBA5024D08C3FB4FDE /* UILabel+TCCustomFont.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FB281C742BF06991818D918D66C7DB57 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C35751B2DD263C11C75F83DFC3E8DC01 /* Foundation.framework */; };
+		D1273B8D5015B26FAC31588B7B445F5E /* CSNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 71027C403246CF8DED90BED2FA29FFC6 /* CSNavigationController.m */; };
+		D5DD117DADC62109746FE3CD57494BBF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 106CBCE62E1C2B2B2973B896F26F8EAD /* Foundation.framework */; };
+		E76D7DB77A8AF49C83756384D2D0B741 /* CSAnimationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 43F2EEAC71B0B1F915AAF3F186B34E7D /* CSAnimationView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EA5364DB98654B1F61BCFDC878C9F7E5 /* OHHTTPStubsResponse+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = F95F754935B9909AE53D05BC818C9872 /* OHHTTPStubsResponse+JSON.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		F258B5FF1B2348D463987B21AB2483EE /* OHHTTPStubs-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CCFE660FD2FAE8B3DFBFE042B8E02A8 /* OHHTTPStubs-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F28C291783E8252BF4B9B5880891D954 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 106CBCE62E1C2B2B2973B896F26F8EAD /* Foundation.framework */; };
+		F2A5F9A9984A1CBCFFA56258DBA7026D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB9742B789CE004ECA9A4E273F01DBFD /* CFNetwork.framework */; };
+		F803459620D778E48A606BA58DDE144E /* OHPathHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = E477540041C6E555B63118963321D712 /* OHPathHelpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F8146AA92AC70C05ADE446D0B7C70945 /* UITextView+TCCustomFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 668B66DA98F61F221D27CBFBCCBE8E0F /* UITextView+TCCustomFont.m */; };
+		FFFDEC8CFA0C74D4BD03FB20036A6226 /* CSNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = CD369FB5503C83FC7A919D23FCDC31AD /* CSNavigationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		25E684CED519AA661E222E9DFA12003C /* PBXContainerItemProxy */ = {
+		340AE4DEB37E16C06530D10BD8B56481 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = ED12A1CB58ADB3241A04BC32FDE09039;
+			remoteGlobalIDString = 2B1615BD73F8761D795386416171C8AA;
 			remoteInfo = Canvas;
 		};
-		3AED0272B1B00BFB89DB0E3678CDA455 /* PBXContainerItemProxy */ = {
+		56749259E967890A278562FE34DD64DD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 95F18EF60E7CD649AA7970B9DFAB4586;
+			remoteGlobalIDString = 3D4235B264F065B2A358CCC0494ACC08;
 			remoteInfo = OHHTTPStubs;
 		};
-		4398F872305E78E6CCBCE9C326196F2D /* PBXContainerItemProxy */ = {
+		CA48F24DBA7110E3277FE7017DA6F3E5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = DB7D62B387AE41F87B2DB062B39FBFE6;
+			remoteGlobalIDString = 73B724F25137A0C482A0E9C5C5AACEDD;
 			remoteInfo = SwiftyJSON;
 		};
-		7C4F3A539CE8CF0FECED3E6407F3B639 /* PBXContainerItemProxy */ = {
+		DEE7B19C3D99D0A9120C31D5A6984B65 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = DB7D62B387AE41F87B2DB062B39FBFE6;
+			remoteGlobalIDString = 73B724F25137A0C482A0E9C5C5AACEDD;
 			remoteInfo = SwiftyJSON;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		022C6816F2FE4A0E5CA170DE42C60743 /* GoogleMaps.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = Frameworks/GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
-		059AFA39379AD9D0A6CA3A6BC7DD9D46 /* CSAnimationView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CSAnimationView.m; path = CanvasLibrary/CSAnimationView.m; sourceTree = "<group>"; };
-		0942AFB725E9076608FF6120C5520CB7 /* UITextField+PlaceholderColor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UITextField+PlaceholderColor.m"; path = "CanvasLibrary/UITextField+PlaceholderColor.m"; sourceTree = "<group>"; };
-		0A731F762A7B1DD872216D385858C90E /* UITextField+TCCustomFont.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITextField+TCCustomFont.h"; path = "CanvasLibrary/UITextField+TCCustomFont.h"; sourceTree = "<group>"; };
-		0EE64035CE6237B5A1D7E5859953063F /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		11C7EDAAD38D001EF40B0CEED64BB524 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OHHTTPStubs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1697DAEDDF2D70035A2BFA1F7F7D2464 /* CSBlurView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CSBlurView.m; path = CanvasLibrary/CSBlurView.m; sourceTree = "<group>"; };
-		1B912119A73A537869E1A6F7B55535D9 /* OHHTTPStubs+NSURLSessionConfiguration.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "OHHTTPStubs+NSURLSessionConfiguration.m"; path = "OHHTTPStubs/Sources/NSURLSession/OHHTTPStubs+NSURLSessionConfiguration.m"; sourceTree = "<group>"; };
+		0026B390EB9FBE6EAEB57B44FA9515FC /* libGSDK_Overload.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGSDK_Overload.a; path = Libraries/libGSDK_Overload.a; sourceTree = "<group>"; };
+		013134429E17A0BE171629942FDB4097 /* libGTM_Regex.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_Regex.a; path = Libraries/libGTM_Regex.a; sourceTree = "<group>"; };
+		01AB4FD7DDF3B8547FE6D3F9912FBA09 /* libGTM_NSStringHTML.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_NSStringHTML.a; path = Libraries/libGTM_NSStringHTML.a; sourceTree = "<group>"; };
+		02866CD92B07DFE501D4375D21D9F0E0 /* libGTM_AddressBook.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_AddressBook.a; path = Libraries/libGTM_AddressBook.a; sourceTree = "<group>"; };
+		045294B2EB10765D5B5F55C4EF943EE2 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		05530735210AC0925196E57368D28434 /* GAIEcommerceProductAction.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GAIEcommerceProductAction.h; path = Headers/Public/GAIEcommerceProductAction.h; sourceTree = "<group>"; };
+		06615BC43CADEEE6D3CD1E607F6B53C2 /* SwiftyJSON-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-prefix.pch"; sourceTree = "<group>"; };
+		0AAFE9C8C2C310AF6BB9A574962C2B66 /* UITextField+TCCustomFont.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UITextField+TCCustomFont.m"; path = "CanvasLibrary/UITextField+TCCustomFont.m"; sourceTree = "<group>"; };
+		0B5FB32E56D3C8C36FC215DDE3529A4C /* Canvas.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Canvas.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DC30B363B7CBCC47AB80D022C496670 /* GGLConfiguration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GGLConfiguration.h; path = Headers/GGLCore/Public/GGLConfiguration.h; sourceTree = "<group>"; };
+		0DF20F2094B0CAAE6F2817676C407BA0 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		106CBCE62E1C2B2B2973B896F26F8EAD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		108E18ED0025D74C832F218EB97135D7 /* OHHTTPStubs.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OHHTTPStubs.m; path = OHHTTPStubs/Sources/OHHTTPStubs.m; sourceTree = "<group>"; };
+		11729532690FF702C5763A0DBB7BC176 /* libGTM_iPhone.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_iPhone.a; path = Libraries/libGTM_iPhone.a; sourceTree = "<group>"; };
+		1818DA9B6673D626E754F9CE014ABE6F /* GGLContext+Analytics.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "GGLContext+Analytics.h"; path = "Headers/GGLAnalytics/Public/GGLContext+Analytics.h"; sourceTree = "<group>"; };
+		18E83B72B449EDF635BFA7CC891C20D8 /* OHHTTPStubsResponse.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OHHTTPStubsResponse.h; path = OHHTTPStubs/Sources/OHHTTPStubsResponse.h; sourceTree = "<group>"; };
+		1C11BAA87578BC4388087EE250D87B10 /* libGTM_NSDictionary+URLArguments.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = "libGTM_NSDictionary+URLArguments.a"; path = "Libraries/libGTM_NSDictionary+URLArguments.a"; sourceTree = "<group>"; };
 		1CD9546DFE7B3EB20E3A9FB1DAFBCC13 /* Pods-Steer ClearTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Steer ClearTests-frameworks.sh"; sourceTree = "<group>"; };
-		20399D3DBBB9FC298C6097D43569248F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1EE275708D4BD044705111C319753543 /* UILabel+TCCustomFont.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UILabel+TCCustomFont.m"; path = "CanvasLibrary/UILabel+TCCustomFont.m"; sourceTree = "<group>"; };
 		20733900A2581A3D87AC8EEE1ACFC47F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20D2810298B31793B71649B4B94DD8F1 /* Pods-Steer ClearTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Steer ClearTests.debug.xcconfig"; sourceTree = "<group>"; };
-		214A1B58D54B091932CBA0D8DC10A8EF /* Canvas-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Canvas-dummy.m"; sourceTree = "<group>"; };
-		23AB1C30D2E2DCC715BD10264DE2020C /* SwiftyJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = Source/SwiftyJSON.swift; sourceTree = "<group>"; };
-		23EA8AAD15A061BE14ED7C7DE65787D5 /* UIButton+TCCustomFont.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIButton+TCCustomFont.m"; path = "CanvasLibrary/UIButton+TCCustomFont.m"; sourceTree = "<group>"; };
-		24D14F31237B192A9CF2A7CA61190733 /* UINavigationBar+TCCustomFont.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UINavigationBar+TCCustomFont.h"; path = "CanvasLibrary/UINavigationBar+TCCustomFont.h"; sourceTree = "<group>"; };
-		259627E9D33DB2BBA5024D08C3FB4FDE /* UILabel+TCCustomFont.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UILabel+TCCustomFont.h"; path = "CanvasLibrary/UILabel+TCCustomFont.h"; sourceTree = "<group>"; };
-		264E3BD34BC6DA72EA906AAC1AEA61BE /* OHHTTPStubsResponse+JSON.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "OHHTTPStubsResponse+JSON.h"; path = "OHHTTPStubs/Sources/JSON/OHHTTPStubsResponse+JSON.h"; sourceTree = "<group>"; };
-		277DF3939825ADDD610F9C01086A7803 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
-		34193F84AE75FFB8D2CF392F5E838723 /* OHPathHelpers.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OHPathHelpers.m; path = OHHTTPStubs/Sources/OHPathHelpers/OHPathHelpers.m; sourceTree = "<group>"; };
-		369078BB489B0219AB4D42BE177CADEC /* CSAnimation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CSAnimation.h; path = CanvasLibrary/CSAnimation.h; sourceTree = "<group>"; };
-		383D7FC2932B740960970B70A0E9549C /* UINavigationBar+TCCustomFont.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UINavigationBar+TCCustomFont.m"; path = "CanvasLibrary/UINavigationBar+TCCustomFont.m"; sourceTree = "<group>"; };
-		3FDB24F3C1246AEE8C29B5134C5132FC /* UIButton+TCCustomFont.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIButton+TCCustomFont.h"; path = "CanvasLibrary/UIButton+TCCustomFont.h"; sourceTree = "<group>"; };
-		4AC9DE1DCA4F9DB108E15C3F86CA7EF0 /* OHHTTPStubs.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = OHHTTPStubs.modulemap; sourceTree = "<group>"; };
+		2EFADF0BB2B953FB325C46652E105CF3 /* libGGLAnalytics.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGGLAnalytics.a; path = Libraries/libGGLAnalytics.a; sourceTree = "<group>"; };
+		2F206210530CBDDCD4D501246DE6F299 /* OHHTTPStubs.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = OHHTTPStubs.xcconfig; sourceTree = "<group>"; };
+		32525D6CB72879CA80FAF03433F46412 /* libGTM_RoundedRectPath.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_RoundedRectPath.a; path = Libraries/libGTM_RoundedRectPath.a; sourceTree = "<group>"; };
+		325949CD335C930EB00AFD163406E9C5 /* libGTM_GTMURLBuilder.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_GTMURLBuilder.a; path = Libraries/libGTM_GTMURLBuilder.a; sourceTree = "<group>"; };
+		34614990519BCECC41FF3709C7F23D83 /* Canvas.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Canvas.modulemap; sourceTree = "<group>"; };
+		34A045C6CA7E331AC5B1479F0CB171FF /* libGTM_NSStringXML.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_NSStringXML.a; path = Libraries/libGTM_NSStringXML.a; sourceTree = "<group>"; };
+		3A68B1EF8C4CA63A5C42E77D61F2C7EA /* Core.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Core.h; path = Headers/GGLCore/Public/Core.h; sourceTree = "<group>"; };
+		3D2E042EB1904CE4B0DA083C8232436C /* libProtocolBuffers.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libProtocolBuffers.a; path = Libraries/libProtocolBuffers.a; sourceTree = "<group>"; };
+		43F2EEAC71B0B1F915AAF3F186B34E7D /* CSAnimationView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CSAnimationView.h; path = CanvasLibrary/CSAnimationView.h; sourceTree = "<group>"; };
+		4599143EFB2B9D4F06AD8E563EA4F3C4 /* OHHTTPStubsResponse.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OHHTTPStubsResponse.m; path = OHHTTPStubs/Sources/OHHTTPStubsResponse.m; sourceTree = "<group>"; };
+		463DF62AEB7A5FDB926333A88A2A43E9 /* Canvas-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Canvas-prefix.pch"; sourceTree = "<group>"; };
+		46AFCA6FAC9AB35322FDB72559EA8637 /* libGTM_KVO.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_KVO.a; path = Libraries/libGTM_KVO.a; sourceTree = "<group>"; };
+		4787415E7EE89E9C8CCB9617E7BBB64C /* libGTM_NSScannerJSON.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_NSScannerJSON.a; path = Libraries/libGTM_NSScannerJSON.a; sourceTree = "<group>"; };
+		4A43AE3777030FAAAB970134D3DB0470 /* GAIEcommerceProduct.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GAIEcommerceProduct.h; path = Headers/Public/GAIEcommerceProduct.h; sourceTree = "<group>"; };
 		4C070A0D2448E077A49994EC3C14CB5B /* Pods-Steer ClearTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-Steer ClearTests.modulemap"; sourceTree = "<group>"; };
-		530E10A38E0765410352431B632D819F /* CSBlurView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CSBlurView.h; path = CanvasLibrary/CSBlurView.h; sourceTree = "<group>"; };
-		5882937E2B03FD953A022E404B8A9D9B /* OHHTTPStubs-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "OHHTTPStubs-umbrella.h"; sourceTree = "<group>"; };
-		5BEB435985D1DB5D19A158A054834742 /* Canvas.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Canvas.h; path = CanvasLibrary/Canvas.h; sourceTree = "<group>"; };
-		6032B3C9D6CBF37992840098CDF003DE /* UILabel+TCCustomFont.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UILabel+TCCustomFont.m"; path = "CanvasLibrary/UILabel+TCCustomFont.m"; sourceTree = "<group>"; };
-		63915C38FFD23894FDAE4DAF90BF2334 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6B87F98C09663D6453151325B8229005 /* CSNavigationController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CSNavigationController.h; path = CanvasLibrary/CSNavigationController.h; sourceTree = "<group>"; };
-		6D6207877D251F082FFE85BF512B0735 /* Canvas.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Canvas.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7F6D7899119B79266612F3658D0A8BDE /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = Frameworks/GoogleMaps.framework; sourceTree = "<group>"; };
+		4CCFE660FD2FAE8B3DFBFE042B8E02A8 /* OHHTTPStubs-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "OHHTTPStubs-umbrella.h"; sourceTree = "<group>"; };
+		511872DA6021789F79AF58D78D4FE7C9 /* SwiftyJSON.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = SwiftyJSON.modulemap; sourceTree = "<group>"; };
+		53C186888AF3177AFF92C1EC0F2DFA25 /* CSBlurView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CSBlurView.m; path = CanvasLibrary/CSBlurView.m; sourceTree = "<group>"; };
+		5B3BF3C9570DEBC1628D4E563D73ED3B /* UIButton+TCCustomFont.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIButton+TCCustomFont.m"; path = "CanvasLibrary/UIButton+TCCustomFont.m"; sourceTree = "<group>"; };
+		5C76786BB7BFACAC9011A53D6473A809 /* Canvas-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Canvas-umbrella.h"; sourceTree = "<group>"; };
+		5D45B20C4C46833A26CC0F47A67625D8 /* libGTMSessionFetcher_full.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTMSessionFetcher_full.a; path = Libraries/libGTMSessionFetcher_full.a; sourceTree = "<group>"; };
+		648DDBA2DB93DB007E4701D8A47738B3 /* CSBlurView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CSBlurView.h; path = CanvasLibrary/CSBlurView.h; sourceTree = "<group>"; };
+		668B66DA98F61F221D27CBFBCCBE8E0F /* UITextView+TCCustomFont.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UITextView+TCCustomFont.m"; path = "CanvasLibrary/UITextView+TCCustomFont.m"; sourceTree = "<group>"; };
+		66AD80C7CF98A0050F76D29410262D30 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GAIDictionaryBuilder.h; path = Headers/Public/GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		6C22CDCCAE84C9CE3ECF38A77A4E477F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6C2B6143790849FC1E4FC57840EFA62F /* SwiftyJSON-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-umbrella.h"; sourceTree = "<group>"; };
+		6CAB6D2FABC415219F5231675748549A /* libGTMStackTrace.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTMStackTrace.a; path = Libraries/libGTMStackTrace.a; sourceTree = "<group>"; };
+		6DCA763AA17316FF2EFA7E959BCEF4F1 /* SwiftyJSON-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyJSON-dummy.m"; sourceTree = "<group>"; };
+		6F7241AA19347BF81D8F912C7F92831D /* libGGLCore.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGGLCore.a; path = Libraries/libGGLCore.a; sourceTree = "<group>"; };
+		71027C403246CF8DED90BED2FA29FFC6 /* CSNavigationController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CSNavigationController.m; path = CanvasLibrary/CSNavigationController.m; sourceTree = "<group>"; };
+		718C5D62341AECDA67AF7F86F751EE9C /* GMRConfiguration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GMRConfiguration.h; path = Headers/GGLCore/Public/GMRConfiguration.h; sourceTree = "<group>"; };
+		73DFD68612C0309C3AA11C2176AFC84B /* OHPathHelpers.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OHPathHelpers.m; path = OHHTTPStubs/Sources/OHPathHelpers/OHPathHelpers.m; sourceTree = "<group>"; };
+		74721F6CECE648CA63C38A1B1647902F /* GAITrackedViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GAITrackedViewController.h; path = Headers/Public/GAITrackedViewController.h; sourceTree = "<group>"; };
+		7507912648188492FB2653115E4BA79F /* CSAnimation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CSAnimation.m; path = CanvasLibrary/CSAnimation.m; sourceTree = "<group>"; };
+		75713EE452F58404D619B007E21CA4F4 /* CSAnimationView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CSAnimationView.m; path = CanvasLibrary/CSAnimationView.m; sourceTree = "<group>"; };
+		77DDEF5A8F0B948635E79B69112479FC /* CloudMessaging-Module.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "CloudMessaging-Module.h"; path = "Headers/ModuleHeaders/CloudMessaging-Module.h"; sourceTree = "<group>"; };
+		7C7CB24CD79AA49BF309754711E828DE /* UIButton+TCCustomFont.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIButton+TCCustomFont.h"; path = "CanvasLibrary/UIButton+TCCustomFont.h"; sourceTree = "<group>"; };
+		7F4EAA322E152768A12FDE450603C366 /* OHHTTPStubs-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "OHHTTPStubs-prefix.pch"; sourceTree = "<group>"; };
 		8158C02220E927E1D58238E435E75188 /* Pods-Steer ClearTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Steer ClearTests.release.xcconfig"; sourceTree = "<group>"; };
-		821F8B130ACCAACBA1766F50F3EDD213 /* SwiftyJSON-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyJSON-dummy.m"; sourceTree = "<group>"; };
-		8400299E2CCF49FAC121BE25C82F46A1 /* UITextView+TCCustomFont.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UITextView+TCCustomFont.m"; path = "CanvasLibrary/UITextView+TCCustomFont.m"; sourceTree = "<group>"; };
-		8478D7585063A505039B19D9807A077B /* CSNavigationController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CSNavigationController.m; path = CanvasLibrary/CSNavigationController.m; sourceTree = "<group>"; };
 		8819970D2C5194A1D59EB7DF4AF3F036 /* Pods-Steer ClearTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Steer ClearTests-dummy.m"; sourceTree = "<group>"; };
 		8A8216FDDF5D90D3D7BA7489F20A1C2A /* Pods-Steer ClearTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Steer ClearTests-resources.sh"; sourceTree = "<group>"; };
 		8AD06EFBB59BBF6C7F748F9AAA16A4A7 /* Pods-Steer Clear-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Steer Clear-umbrella.h"; sourceTree = "<group>"; };
-		8B5332DEFA073BBD61F1113DB593C7ED /* OHHTTPStubs.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OHHTTPStubs.m; path = OHHTTPStubs/Sources/OHHTTPStubs.m; sourceTree = "<group>"; };
-		8FE56AFB7159FB0F4743CAABEB2DBCE6 /* OHHTTPStubs-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "OHHTTPStubs-dummy.m"; sourceTree = "<group>"; };
-		9067BC08AF819A2A0FEAAEB445F6860C /* SwiftyJSON-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-umbrella.h"; sourceTree = "<group>"; };
+		8E89D09A0AA645112899AE4D6EE2F904 /* SwiftyJSON.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyJSON.xcconfig; sourceTree = "<group>"; };
+		8F03963D8172461EC50BD0215072FFF7 /* UINavigationBar+TCCustomFont.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UINavigationBar+TCCustomFont.m"; path = "CanvasLibrary/UINavigationBar+TCCustomFont.m"; sourceTree = "<group>"; };
+		90C39145BC9EC9809B2799C821B6231F /* UITextField+PlaceholderColor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITextField+PlaceholderColor.h"; path = "CanvasLibrary/UITextField+PlaceholderColor.h"; sourceTree = "<group>"; };
 		915234E784A96BEB68F57B77E79E77D1 /* Pods-Steer Clear-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Steer Clear-dummy.m"; sourceTree = "<group>"; };
-		92C0A29F4E8490C7E3494E3870C34F8A /* Canvas-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Canvas-prefix.pch"; sourceTree = "<group>"; };
-		934850DC2209B336E880947E63A1E14B /* OHHTTPStubs.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OHHTTPStubs.h; path = OHHTTPStubs/Sources/OHHTTPStubs.h; sourceTree = "<group>"; };
-		96A03DE23AB6C0E24373815812068206 /* CSAnimation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CSAnimation.m; path = CanvasLibrary/CSAnimation.m; sourceTree = "<group>"; };
-		98DE8851BEF563E0537988E37EB58366 /* OHHTTPStubsResponse.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OHHTTPStubsResponse.m; path = OHHTTPStubs/Sources/OHHTTPStubsResponse.m; sourceTree = "<group>"; };
-		9DCEC56D4A17D476F57210F74A24238D /* SwiftyJSON.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = SwiftyJSON.modulemap; sourceTree = "<group>"; };
-		A5570A3942AEF2DC2FEB2887CE5FB826 /* SwiftyJSON-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-prefix.pch"; sourceTree = "<group>"; };
-		A877D194073DDB85AA5AAF6B50A911D9 /* CSAnimationView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CSAnimationView.h; path = CanvasLibrary/CSAnimationView.h; sourceTree = "<group>"; };
+		9A4215BFA2B0FB117ABD90F7F9B11BCB /* Core-Module.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Core-Module.h"; path = "Headers/ModuleHeaders/Core-Module.h"; sourceTree = "<group>"; };
+		9E73ECEC2588809D64DF1FB6F1D36DC4 /* OHHTTPStubs-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "OHHTTPStubs-dummy.m"; sourceTree = "<group>"; };
+		A1814C050A3DFA11326DA16746C78357 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A25200DE0F846C4BAA8A955F43AE4EA9 /* Analytics-Module.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Analytics-Module.h"; path = "Headers/ModuleHeaders/Analytics-Module.h"; sourceTree = "<group>"; };
+		A26557362FA1A50BAB5F29D895CF58C4 /* UITextField+TCCustomFont.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITextField+TCCustomFont.h"; path = "CanvasLibrary/UITextField+TCCustomFont.h"; sourceTree = "<group>"; };
+		A5C1AD5D42ADC7F993743FD484BC357F /* OHHTTPStubsResponse+JSON.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "OHHTTPStubsResponse+JSON.h"; path = "OHHTTPStubs/Sources/JSON/OHHTTPStubsResponse+JSON.h"; sourceTree = "<group>"; };
+		A65CBAC2DF9B832C66A4057DFF50B25C /* GGLContext.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GGLContext.h; path = Headers/GGLCore/Public/GGLContext.h; sourceTree = "<group>"; };
+		A9C0164BCB549786F7F9F3DCC3608056 /* OHHTTPStubs.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = OHHTTPStubs.modulemap; sourceTree = "<group>"; };
+		AB9742B789CE004ECA9A4E273F01DBFD /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
 		AC710A9B12B327CD0D72AC99911C445B /* Pods-Steer Clear-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Steer Clear-frameworks.sh"; sourceTree = "<group>"; };
-		AE9914242E8039700362144639A22B46 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B19B05F8FC19EA6745EEC874B641DBA1 /* Canvas.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Canvas.xcconfig; sourceTree = "<group>"; };
+		ADF93174256BB1A45F6DE49010032955 /* UITextView+TCCustomFont.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITextView+TCCustomFont.h"; path = "CanvasLibrary/UITextView+TCCustomFont.h"; sourceTree = "<group>"; };
+		AE63A8BF56DAA404F01CAAB81A937497 /* libGTM_core.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_core.a; path = Libraries/libGTM_core.a; sourceTree = "<group>"; };
+		B0773FC52953B6B2D8C26E65178444EA /* libGTM_SystemVersion.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_SystemVersion.a; path = Libraries/libGTM_SystemVersion.a; sourceTree = "<group>"; };
+		B52A2D7638E468BD496D0445738DD059 /* GAILogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GAILogger.h; path = Headers/Public/GAILogger.h; sourceTree = "<group>"; };
+		B5DD0372F888B2F3E80FE9271151E03C /* CSAnimation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CSAnimation.h; path = CanvasLibrary/CSAnimation.h; sourceTree = "<group>"; };
 		B6EDD7CA8F720F6D773CCD06872058AD /* Pods-Steer Clear.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-Steer Clear.modulemap"; sourceTree = "<group>"; };
-		BA06149C0AAA594C87893F3E5B9862B0 /* UITextField+PlaceholderColor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITextField+PlaceholderColor.h"; path = "CanvasLibrary/UITextField+PlaceholderColor.h"; sourceTree = "<group>"; };
+		B722372240F4D7C33C4EC428EE65E6A8 /* SignIn-Module.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "SignIn-Module.h"; path = "Headers/ModuleHeaders/SignIn-Module.h"; sourceTree = "<group>"; };
+		B80CB7E0AA033EFB2FFE021BA66BF893 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGoogleAnalytics.a; path = Libraries/libGoogleAnalytics.a; sourceTree = "<group>"; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		BA766B6A0F6C5460519D98FD5D278872 /* Compatibility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Compatibility.h; path = OHHTTPStubs/Sources/Compatibility.h; sourceTree = "<group>"; };
+		BA8F8B35A76D2FF2272165617D54D729 /* libGTMSessionFetcher_core.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTMSessionFetcher_core.a; path = Libraries/libGTMSessionFetcher_core.a; sourceTree = "<group>"; };
 		BABF23AB77D27E14A752B5534D422A97 /* Pods-Steer ClearTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Steer ClearTests-acknowledgements.plist"; sourceTree = "<group>"; };
-		BB52D93887E0F400A4FE6EC942404AA8 /* UITextField+TCCustomFont.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UITextField+TCCustomFont.m"; path = "CanvasLibrary/UITextField+TCCustomFont.m"; sourceTree = "<group>"; };
 		BB74DFF74CFFFECA63D2C5459EDAAC6A /* Pods-Steer Clear-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Steer Clear-acknowledgements.plist"; sourceTree = "<group>"; };
+		BF390092563EC39AD764BA09BD12ACF5 /* GAITracker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GAITracker.h; path = Headers/Public/GAITracker.h; sourceTree = "<group>"; };
 		C094EA5A2B30D8D9A7B93BA63C79C4A4 /* Pods-Steer ClearTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Steer ClearTests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		C35751B2DD263C11C75F83DFC3E8DC01 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		C0DA9432F19AAC23EDDA5EC81B39511B /* libGTM_NSData+zlib.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = "libGTM_NSData+zlib.a"; path = "Libraries/libGTM_NSData+zlib.a"; sourceTree = "<group>"; };
+		C38370BD5FF5F0B9E10119E1C3FBEF89 /* GoogleMaps.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = Frameworks/GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
+		C5758AFE66A857192EFFF80B48DD7A47 /* SwiftyJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = Source/SwiftyJSON.swift; sourceTree = "<group>"; };
+		C5BDDDC2D2ACDE9B9C38E744601F9B0C /* GAIFields.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GAIFields.h; path = Headers/Public/GAIFields.h; sourceTree = "<group>"; };
 		C625A7B55F0B5EDD10DC00A233BE3C03 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C88E244759A9B5E59E2ED9E7F84ECA7D /* Canvas-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Canvas-umbrella.h"; sourceTree = "<group>"; };
-		CD4919FB92882412FF9CD4A8E4188081 /* OHHTTPStubsResponse.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OHHTTPStubsResponse.h; path = OHHTTPStubs/Sources/OHHTTPStubsResponse.h; sourceTree = "<group>"; };
+		C854A16EEC7430A49F9C73D4838819D6 /* Canvas-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Canvas-dummy.m"; sourceTree = "<group>"; };
+		CA72B84AC9FDBC248890E5E7877FB2CF /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = Frameworks/GoogleMaps.framework; sourceTree = "<group>"; };
+		CB96EB07181DAC67AD58F2A26EC75357 /* GAIEcommerceFields.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GAIEcommerceFields.h; path = Headers/Public/GAIEcommerceFields.h; sourceTree = "<group>"; };
+		CD369FB5503C83FC7A919D23FCDC31AD /* CSNavigationController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CSNavigationController.h; path = CanvasLibrary/CSNavigationController.h; sourceTree = "<group>"; };
 		CDAB358482A576004D003C296B54A014 /* Pods-Steer Clear.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Steer Clear.release.xcconfig"; sourceTree = "<group>"; };
-		CF4EAF83CA2CDE212C569F64C0E8A2B6 /* OHHTTPStubsResponse+JSON.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "OHHTTPStubsResponse+JSON.m"; path = "OHHTTPStubs/Sources/JSON/OHHTTPStubsResponse+JSON.m"; sourceTree = "<group>"; };
-		D6592D0E54159D20352B63FEA76E0864 /* SwiftyJSON.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyJSON.xcconfig; sourceTree = "<group>"; };
-		DB7B2889B393384376457F5664F9B25D /* OHHTTPStubs-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "OHHTTPStubs-prefix.pch"; sourceTree = "<group>"; };
-		DD8F5069FACADA1BA5C905500161D4C7 /* UITextView+TCCustomFont.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UITextView+TCCustomFont.h"; path = "CanvasLibrary/UITextView+TCCustomFont.h"; sourceTree = "<group>"; };
+		CFD0EBD61614CDA20AF5A4ACFDF6B739 /* OHHTTPStubs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OHHTTPStubs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D06D4FF2B20F8DDAEBD0AA108075FBD4 /* Canvas.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Canvas.h; path = CanvasLibrary/Canvas.h; sourceTree = "<group>"; };
+		D103D51D32D7C001AE46FBE34BD37A00 /* GAIEcommercePromotion.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GAIEcommercePromotion.h; path = Headers/Public/GAIEcommercePromotion.h; sourceTree = "<group>"; };
+		D223A24088230B50C1E8FF3A8CB30BFD /* UILabel+TCCustomFont.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UILabel+TCCustomFont.h"; path = "CanvasLibrary/UILabel+TCCustomFont.h"; sourceTree = "<group>"; };
+		D42EC8613CCE1ECAE215F9491C7B3A67 /* UINavigationBar+TCCustomFont.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UINavigationBar+TCCustomFont.h"; path = "CanvasLibrary/UINavigationBar+TCCustomFont.h"; sourceTree = "<group>"; };
+		D8795020200AC3EE3289D8C19CDDA733 /* GAI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GAI.h; path = Headers/Public/GAI.h; sourceTree = "<group>"; };
+		DFDF7C5310BDB57F8EE761930AFF91D0 /* GGLErrorCode.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GGLErrorCode.h; path = Headers/GGLCore/Public/GGLErrorCode.h; sourceTree = "<group>"; };
+		DFEEBDA36A6E77BCA22A50C101F59558 /* AdMob-Module.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "AdMob-Module.h"; path = "Headers/ModuleHeaders/AdMob-Module.h"; sourceTree = "<group>"; };
 		E0AA71B7B94651B76EFDA3433347B5FB /* Pods-Steer Clear-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Steer Clear-resources.sh"; sourceTree = "<group>"; };
-		E2895E7D84A832779DD32AA84BA0FEA7 /* Canvas.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = Canvas.modulemap; sourceTree = "<group>"; };
-		E936E165CF5B5E11CA155D4593CCEA15 /* OHHTTPStubs.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = OHHTTPStubs.xcconfig; sourceTree = "<group>"; };
-		EDDDCBF71B5760FA2D94A3C54B2B484B /* Compatibility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Compatibility.h; path = OHHTTPStubs/Sources/Compatibility.h; sourceTree = "<group>"; };
-		EEFC824EA8DB5E43A86BF30AF6A695AA /* OHPathHelpers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OHPathHelpers.h; path = OHHTTPStubs/Sources/OHPathHelpers/OHPathHelpers.h; sourceTree = "<group>"; };
+		E314D0FAC060BFFE606F9EA7415E09C5 /* libGTM_UIFont+LineHeight.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = "libGTM_UIFont+LineHeight.a"; path = "Libraries/libGTM_UIFont+LineHeight.a"; sourceTree = "<group>"; };
+		E477540041C6E555B63118963321D712 /* OHPathHelpers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OHPathHelpers.h; path = OHHTTPStubs/Sources/OHPathHelpers/OHPathHelpers.h; sourceTree = "<group>"; };
+		E535F5C8D3176E492EADC5EEF3D71568 /* UITextField+PlaceholderColor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UITextField+PlaceholderColor.m"; path = "CanvasLibrary/UITextField+PlaceholderColor.m"; sourceTree = "<group>"; };
+		E67DC3DAE4E37916ACEF34AA6C477E13 /* libGTM_DebugUtils.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_DebugUtils.a; path = Libraries/libGTM_DebugUtils.a; sourceTree = "<group>"; };
+		E68E3C22A507B91EC38FADD52631E8CD /* libGTM_StringEncoding.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_StringEncoding.a; path = Libraries/libGTM_StringEncoding.a; sourceTree = "<group>"; };
+		EBA2812C15E14AC9BB05E957378EA103 /* OHHTTPStubs+NSURLSessionConfiguration.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "OHHTTPStubs+NSURLSessionConfiguration.m"; path = "OHHTTPStubs/Sources/NSURLSession/OHHTTPStubs+NSURLSessionConfiguration.m"; sourceTree = "<group>"; };
 		F2E71AFDC1749CF2C9C42CAE8C850FAD /* Pods_Steer_ClearTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Steer_ClearTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F339820DD391B9163E37C8FE85288CB8 /* Canvas.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Canvas.xcconfig; sourceTree = "<group>"; };
+		F3FF04557D5A5FD561DC86C9DE751E72 /* Analytics.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Analytics.h; path = Headers/GGLAnalytics/Public/Analytics.h; sourceTree = "<group>"; };
 		F4028984871E4D4BC55FA00FF7BD0B72 /* Pods_Steer_Clear.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Steer_Clear.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F434AB0F93848D35C01E7330A0AD95F1 /* Pods-Steer Clear-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Steer Clear-acknowledgements.markdown"; sourceTree = "<group>"; };
+		F78AD192B2FEB7A9AC3143D142347D6B /* OHHTTPStubs.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OHHTTPStubs.h; path = OHHTTPStubs/Sources/OHHTTPStubs.h; sourceTree = "<group>"; };
+		F7D0ABB566B6740B66B6DFCF07F0EB96 /* AppInvite-Module.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "AppInvite-Module.h"; path = "Headers/ModuleHeaders/AppInvite-Module.h"; sourceTree = "<group>"; };
+		F95F754935B9909AE53D05BC818C9872 /* OHHTTPStubsResponse+JSON.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "OHHTTPStubsResponse+JSON.m"; path = "OHHTTPStubs/Sources/JSON/OHHTTPStubsResponse+JSON.m"; sourceTree = "<group>"; };
 		F9C61507822B88C77CD973815CB2C91C /* Pods-Steer ClearTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Steer ClearTests-umbrella.h"; sourceTree = "<group>"; };
 		F9D9ED9A496B3380BAF3CAA2CEC382D7 /* Pods-Steer Clear.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Steer Clear.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		01F13D15ACF27CEC548A71DD91E7A9F6 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A459A92AF798AC217B800C235735C6FE /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		0CCEDEF98480EF1B7B72B3EEAA007C5A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -188,20 +227,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4E9B0296A1D19529A2BBE9E41171AD60 /* Frameworks */ = {
+		C094A848F8CE9684CAB387074A025FF6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB281C742BF06991818D918D66C7DB57 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		55C25B110C6CCA9B4D853E21B33DC4FE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F15AC83B1DC1B6C3128713DFBFF5BC74 /* CFNetwork.framework in Frameworks */,
-				517F6B5926750626C11784131148D991 /* Foundation.framework in Frameworks */,
+				F2A5F9A9984A1CBCFFA56258DBA7026D /* CFNetwork.framework in Frameworks */,
+				78055C46041DCCDFA5AD8F702F6EEB80 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,21 +244,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C5892B19DEAA6E5DE43E0176E2FABE84 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A497FAA9D36BAD85556611F8A8C27825 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D1AAB73617C5F5E854D36D954C664F10 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5DD117DADC62109746FE3CD57494BBF /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0FE4F50FBDE16091DFA23BF5B03CB910 /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				EDDDCBF71B5760FA2D94A3C54B2B484B /* Compatibility.h */,
-				934850DC2209B336E880947E63A1E14B /* OHHTTPStubs.h */,
-				8B5332DEFA073BBD61F1113DB593C7ED /* OHHTTPStubs.m */,
-				CD4919FB92882412FF9CD4A8E4188081 /* OHHTTPStubsResponse.h */,
-				98DE8851BEF563E0537988E37EB58366 /* OHHTTPStubsResponse.m */,
-			);
-			name = Core;
-			sourceTree = "<group>";
-		};
 		1972CB06650776EB615189F658CB7C84 /* Pods-Steer Clear */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,49 +281,81 @@
 			path = "Target Support Files/Pods-Steer Clear";
 			sourceTree = "<group>";
 		};
-		1EDB7BAC5DEF38A08D744F46B9033A0D /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				022C6816F2FE4A0E5CA170DE42C60743 /* GoogleMaps.bundle */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
 		22E2E2A86141F61FF7F2A3CDDE86232B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6D6207877D251F082FFE85BF512B0735 /* Canvas.framework */,
-				11C7EDAAD38D001EF40B0CEED64BB524 /* OHHTTPStubs.framework */,
+				0B5FB32E56D3C8C36FC215DDE3529A4C /* Canvas.framework */,
+				CFD0EBD61614CDA20AF5A4ACFDF6B739 /* OHHTTPStubs.framework */,
 				F4028984871E4D4BC55FA00FF7BD0B72 /* Pods_Steer_Clear.framework */,
 				F2E71AFDC1749CF2C9C42CAE8C850FAD /* Pods_Steer_ClearTests.framework */,
-				0EE64035CE6237B5A1D7E5859953063F /* SwiftyJSON.framework */,
+				A1814C050A3DFA11326DA16746C78357 /* SwiftyJSON.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		24198AA3CC3AF6665220E8F26AEAADA6 /* Pods */ = {
+		26D0993ADACE4CAE8B47671CB8F0D441 /* GoogleAnalytics */ = {
 			isa = PBXGroup;
 			children = (
-				A201D01929D9D92F28C739B8560ED812 /* Canvas */,
-				A5F3B2C3AB6355E67DD6A010BA84AB6D /* GoogleMaps */,
-				5399368DBA1CE8CEFA01601C0D244B5F /* OHHTTPStubs */,
-				B6F4488EE9E748CAAB5C0D06735B2340 /* SwiftyJSON */,
+				D8795020200AC3EE3289D8C19CDDA733 /* GAI.h */,
+				66AD80C7CF98A0050F76D29410262D30 /* GAIDictionaryBuilder.h */,
+				CB96EB07181DAC67AD58F2A26EC75357 /* GAIEcommerceFields.h */,
+				4A43AE3777030FAAAB970134D3DB0470 /* GAIEcommerceProduct.h */,
+				05530735210AC0925196E57368D28434 /* GAIEcommerceProductAction.h */,
+				D103D51D32D7C001AE46FBE34BD37A00 /* GAIEcommercePromotion.h */,
+				C5BDDDC2D2ACDE9B9C38E744601F9B0C /* GAIFields.h */,
+				B52A2D7638E468BD496D0445738DD059 /* GAILogger.h */,
+				74721F6CECE648CA63C38A1B1647902F /* GAITrackedViewController.h */,
+				BF390092563EC39AD764BA09BD12ACF5 /* GAITracker.h */,
+				ACBDA337A742D5319800CEF30417AE03 /* Frameworks */,
 			);
-			name = Pods;
+			path = GoogleAnalytics;
 			sourceTree = "<group>";
 		};
-		3041431EC0658EBB903362E939DBF5F3 /* Support Files */ = {
+		2A1D69918B3DB3264496183FEF11AF4C /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				63915C38FFD23894FDAE4DAF90BF2334 /* Info.plist */,
-				4AC9DE1DCA4F9DB108E15C3F86CA7EF0 /* OHHTTPStubs.modulemap */,
-				E936E165CF5B5E11CA155D4593CCEA15 /* OHHTTPStubs.xcconfig */,
-				8FE56AFB7159FB0F4743CAABEB2DBCE6 /* OHHTTPStubs-dummy.m */,
-				DB7B2889B393384376457F5664F9B25D /* OHHTTPStubs-prefix.pch */,
-				5882937E2B03FD953A022E404B8A9D9B /* OHHTTPStubs-umbrella.h */,
+				BA766B6A0F6C5460519D98FD5D278872 /* Compatibility.h */,
+				F78AD192B2FEB7A9AC3143D142347D6B /* OHHTTPStubs.h */,
+				108E18ED0025D74C832F218EB97135D7 /* OHHTTPStubs.m */,
+				18E83B72B449EDF635BFA7CC891C20D8 /* OHHTTPStubsResponse.h */,
+				4599143EFB2B9D4F06AD8E563EA4F3C4 /* OHHTTPStubsResponse.m */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/OHHTTPStubs";
+			name = Core;
+			sourceTree = "<group>";
+		};
+		2FF868A963961C60E792D020E75EFF40 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BA8F8B35A76D2FF2272165617D54D729 /* libGTMSessionFetcher_core.a */,
+				5D45B20C4C46833A26CC0F47A67625D8 /* libGTMSessionFetcher_full.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3229B3A38686DA069D044FF2970C5529 /* Google */ = {
+			isa = PBXGroup;
+			children = (
+				EA83B8A14494727533B5F5F9A46593A4 /* Analytics */,
+				71A73D8C440821811A8178A93FD11120 /* Core */,
+			);
+			path = Google;
+			sourceTree = "<group>";
+		};
+		376D0E6BA70B1120DE9934B3ED909DEC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2EFADF0BB2B953FB325C46652E105CF3 /* libGGLAnalytics.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3D817F8907987CCA8230E0FE9FCAC5D6 /* OHPathHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				E477540041C6E555B63118963321D712 /* OHPathHelpers.h */,
+				73DFD68612C0309C3AA11C2176AFC84B /* OHPathHelpers.m */,
+			);
+			name = OHPathHelpers;
 			sourceTree = "<group>";
 		};
 		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
@@ -299,47 +366,84 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		4B08FD9C5D1BCA933A4A3EB7D14C8F7E /* Support Files */ = {
+		4425AFE8EEC71B5B84B9C9E0233BDF0C /* GoogleSymbolUtilities */ = {
 			isa = PBXGroup;
 			children = (
-				AE9914242E8039700362144639A22B46 /* Info.plist */,
-				9DCEC56D4A17D476F57210F74A24238D /* SwiftyJSON.modulemap */,
-				D6592D0E54159D20352B63FEA76E0864 /* SwiftyJSON.xcconfig */,
-				821F8B130ACCAACBA1766F50F3EDD213 /* SwiftyJSON-dummy.m */,
-				A5570A3942AEF2DC2FEB2887CE5FB826 /* SwiftyJSON-prefix.pch */,
-				9067BC08AF819A2A0FEAAEB445F6860C /* SwiftyJSON-umbrella.h */,
+				F512C397B902809D8BE3049A504EB499 /* Frameworks */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/SwiftyJSON";
+			path = GoogleSymbolUtilities;
 			sourceTree = "<group>";
 		};
-		5399368DBA1CE8CEFA01601C0D244B5F /* OHHTTPStubs */ = {
+		46EFE14DA45059F099E7D882AEDEF37B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				0FE4F50FBDE16091DFA23BF5B03CB910 /* Core */,
-				6971F5E338CB3DB6D93B5D3DE7B129FF /* JSON */,
-				D51C88D69C3964C01AD75F8BF89CDDBC /* NSURLSession */,
-				86ADFB366033C9C743345828E87054F8 /* OHPathHelpers */,
-				3041431EC0658EBB903362E939DBF5F3 /* Support Files */,
+				C38370BD5FF5F0B9E10119E1C3FBEF89 /* GoogleMaps.bundle */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		553DD6EE496FF9B9A212157B933D9C8D /* GoogleNetworkingUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				2FF868A963961C60E792D020E75EFF40 /* Frameworks */,
+			);
+			path = GoogleNetworkingUtilities;
+			sourceTree = "<group>";
+		};
+		6EB5A77451652BC693F71A29449E094E /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				A5C1AD5D42ADC7F993743FD484BC357F /* OHHTTPStubsResponse+JSON.h */,
+				F95F754935B9909AE53D05BC818C9872 /* OHHTTPStubsResponse+JSON.m */,
+			);
+			name = JSON;
+			sourceTree = "<group>";
+		};
+		71A73D8C440821811A8178A93FD11120 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				DFEEBDA36A6E77BCA22A50C101F59558 /* AdMob-Module.h */,
+				A25200DE0F846C4BAA8A955F43AE4EA9 /* Analytics-Module.h */,
+				F7D0ABB566B6740B66B6DFCF07F0EB96 /* AppInvite-Module.h */,
+				77DDEF5A8F0B948635E79B69112479FC /* CloudMessaging-Module.h */,
+				3A68B1EF8C4CA63A5C42E77D61F2C7EA /* Core.h */,
+				9A4215BFA2B0FB117ABD90F7F9B11BCB /* Core-Module.h */,
+				0DC30B363B7CBCC47AB80D022C496670 /* GGLConfiguration.h */,
+				A65CBAC2DF9B832C66A4057DFF50B25C /* GGLContext.h */,
+				DFDF7C5310BDB57F8EE761930AFF91D0 /* GGLErrorCode.h */,
+				718C5D62341AECDA67AF7F86F751EE9C /* GMRConfiguration.h */,
+				B722372240F4D7C33C4EC428EE65E6A8 /* SignIn-Module.h */,
+				F97EEFD494F23CBAAC09FEDECF78D9FD /* Frameworks */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		7434400EC12ACF28FCAE192587965A54 /* GoogleInterchangeUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				F6AADEBDDDABAD004E9F5855552920C0 /* Frameworks */,
+			);
+			path = GoogleInterchangeUtilities;
+			sourceTree = "<group>";
+		};
+		777344BE7D66C42D8ECCBAB43B7C0C8F /* OHHTTPStubs */ = {
+			isa = PBXGroup;
+			children = (
+				2A1D69918B3DB3264496183FEF11AF4C /* Core */,
+				6EB5A77451652BC693F71A29449E094E /* JSON */,
+				7BD3E61FD285787D128243CBF4F565B5 /* NSURLSession */,
+				3D817F8907987CCA8230E0FE9FCAC5D6 /* OHPathHelpers */,
+				94C98AFA5026989B7005421410374FFB /* Support Files */,
 			);
 			path = OHHTTPStubs;
 			sourceTree = "<group>";
 		};
-		66A29CEBB4B16A04A7761C210BD52070 /* Frameworks */ = {
+		7BD3E61FD285787D128243CBF4F565B5 /* NSURLSession */ = {
 			isa = PBXGroup;
 			children = (
-				7F6D7899119B79266612F3658D0A8BDE /* GoogleMaps.framework */,
+				EBA2812C15E14AC9BB05E957378EA103 /* OHHTTPStubs+NSURLSessionConfiguration.m */,
 			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		6971F5E338CB3DB6D93B5D3DE7B129FF /* JSON */ = {
-			isa = PBXGroup;
-			children = (
-				264E3BD34BC6DA72EA906AAC1AEA61BE /* OHHTTPStubsResponse+JSON.h */,
-				CF4EAF83CA2CDE212C569F64C0E8A2B6 /* OHHTTPStubsResponse+JSON.m */,
-			);
-			name = JSON;
+			name = NSURLSession;
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
@@ -347,33 +451,48 @@
 			children = (
 				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
 				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
-				24198AA3CC3AF6665220E8F26AEAADA6 /* Pods */,
+				F7DEB60B77E3CDC5B8E54D91EE5C198C /* Pods */,
 				22E2E2A86141F61FF7F2A3CDDE86232B /* Products */,
 				EC40D292034A92C9EBE8E22C0B7F4E45 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		8083400892CE9B628FC484482A0C055D /* Support Files */ = {
+		9493904EA239B1F50B826079038B3178 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E2895E7D84A832779DD32AA84BA0FEA7 /* Canvas.modulemap */,
-				B19B05F8FC19EA6745EEC874B641DBA1 /* Canvas.xcconfig */,
-				214A1B58D54B091932CBA0D8DC10A8EF /* Canvas-dummy.m */,
-				92C0A29F4E8490C7E3494E3870C34F8A /* Canvas-prefix.pch */,
-				C88E244759A9B5E59E2ED9E7F84ECA7D /* Canvas-umbrella.h */,
-				20399D3DBBB9FC298C6097D43569248F /* Info.plist */,
+				02866CD92B07DFE501D4375D21D9F0E0 /* libGTM_AddressBook.a */,
+				AE63A8BF56DAA404F01CAAB81A937497 /* libGTM_core.a */,
+				E67DC3DAE4E37916ACEF34AA6C477E13 /* libGTM_DebugUtils.a */,
+				325949CD335C930EB00AFD163406E9C5 /* libGTM_GTMURLBuilder.a */,
+				11729532690FF702C5763A0DBB7BC176 /* libGTM_iPhone.a */,
+				46AFCA6FAC9AB35322FDB72559EA8637 /* libGTM_KVO.a */,
+				C0DA9432F19AAC23EDDA5EC81B39511B /* libGTM_NSData+zlib.a */,
+				1C11BAA87578BC4388087EE250D87B10 /* libGTM_NSDictionary+URLArguments.a */,
+				4787415E7EE89E9C8CCB9617E7BBB64C /* libGTM_NSScannerJSON.a */,
+				01AB4FD7DDF3B8547FE6D3F9912FBA09 /* libGTM_NSStringHTML.a */,
+				34A045C6CA7E331AC5B1479F0CB171FF /* libGTM_NSStringXML.a */,
+				013134429E17A0BE171629942FDB4097 /* libGTM_Regex.a */,
+				32525D6CB72879CA80FAF03433F46412 /* libGTM_RoundedRectPath.a */,
+				E68E3C22A507B91EC38FADD52631E8CD /* libGTM_StringEncoding.a */,
+				B0773FC52953B6B2D8C26E65178444EA /* libGTM_SystemVersion.a */,
+				E314D0FAC060BFFE606F9EA7415E09C5 /* libGTM_UIFont+LineHeight.a */,
+				6CAB6D2FABC415219F5231675748549A /* libGTMStackTrace.a */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/Canvas";
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		86ADFB366033C9C743345828E87054F8 /* OHPathHelpers */ = {
+		94C98AFA5026989B7005421410374FFB /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				EEFC824EA8DB5E43A86BF30AF6A695AA /* OHPathHelpers.h */,
-				34193F84AE75FFB8D2CF392F5E838723 /* OHPathHelpers.m */,
+				045294B2EB10765D5B5F55C4EF943EE2 /* Info.plist */,
+				A9C0164BCB549786F7F9F3DCC3608056 /* OHHTTPStubs.modulemap */,
+				2F206210530CBDDCD4D501246DE6F299 /* OHHTTPStubs.xcconfig */,
+				9E73ECEC2588809D64DF1FB6F1D36DC4 /* OHHTTPStubs-dummy.m */,
+				7F4EAA322E152768A12FDE450603C366 /* OHHTTPStubs-prefix.pch */,
+				4CCFE660FD2FAE8B3DFBFE042B8E02A8 /* OHHTTPStubs-umbrella.h */,
 			);
-			name = OHPathHelpers;
+			name = "Support Files";
+			path = "../Target Support Files/OHHTTPStubs";
 			sourceTree = "<group>";
 		};
 		A197A00560B3EECAC2C52A2A5FEF97C6 /* Pods-Steer ClearTests */ = {
@@ -394,68 +513,122 @@
 			path = "Target Support Files/Pods-Steer ClearTests";
 			sourceTree = "<group>";
 		};
-		A201D01929D9D92F28C739B8560ED812 /* Canvas */ = {
-			isa = PBXGroup;
-			children = (
-				5BEB435985D1DB5D19A158A054834742 /* Canvas.h */,
-				369078BB489B0219AB4D42BE177CADEC /* CSAnimation.h */,
-				96A03DE23AB6C0E24373815812068206 /* CSAnimation.m */,
-				A877D194073DDB85AA5AAF6B50A911D9 /* CSAnimationView.h */,
-				059AFA39379AD9D0A6CA3A6BC7DD9D46 /* CSAnimationView.m */,
-				530E10A38E0765410352431B632D819F /* CSBlurView.h */,
-				1697DAEDDF2D70035A2BFA1F7F7D2464 /* CSBlurView.m */,
-				6B87F98C09663D6453151325B8229005 /* CSNavigationController.h */,
-				8478D7585063A505039B19D9807A077B /* CSNavigationController.m */,
-				3FDB24F3C1246AEE8C29B5134C5132FC /* UIButton+TCCustomFont.h */,
-				23EA8AAD15A061BE14ED7C7DE65787D5 /* UIButton+TCCustomFont.m */,
-				259627E9D33DB2BBA5024D08C3FB4FDE /* UILabel+TCCustomFont.h */,
-				6032B3C9D6CBF37992840098CDF003DE /* UILabel+TCCustomFont.m */,
-				24D14F31237B192A9CF2A7CA61190733 /* UINavigationBar+TCCustomFont.h */,
-				383D7FC2932B740960970B70A0E9549C /* UINavigationBar+TCCustomFont.m */,
-				BA06149C0AAA594C87893F3E5B9862B0 /* UITextField+PlaceholderColor.h */,
-				0942AFB725E9076608FF6120C5520CB7 /* UITextField+PlaceholderColor.m */,
-				0A731F762A7B1DD872216D385858C90E /* UITextField+TCCustomFont.h */,
-				BB52D93887E0F400A4FE6EC942404AA8 /* UITextField+TCCustomFont.m */,
-				DD8F5069FACADA1BA5C905500161D4C7 /* UITextView+TCCustomFont.h */,
-				8400299E2CCF49FAC121BE25C82F46A1 /* UITextView+TCCustomFont.m */,
-				8083400892CE9B628FC484482A0C055D /* Support Files */,
-			);
-			path = Canvas;
-			sourceTree = "<group>";
-		};
 		A4692D0E73946F1C6A29E627D41155D5 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				277DF3939825ADDD610F9C01086A7803 /* CFNetwork.framework */,
-				C35751B2DD263C11C75F83DFC3E8DC01 /* Foundation.framework */,
+				AB9742B789CE004ECA9A4E273F01DBFD /* CFNetwork.framework */,
+				106CBCE62E1C2B2B2973B896F26F8EAD /* Foundation.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		A5F3B2C3AB6355E67DD6A010BA84AB6D /* GoogleMaps */ = {
+		A959FE4A1D3484D5CB4D123532E207D9 /* Canvas */ = {
 			isa = PBXGroup;
 			children = (
-				66A29CEBB4B16A04A7761C210BD52070 /* Frameworks */,
-				1EDB7BAC5DEF38A08D744F46B9033A0D /* Resources */,
+				D06D4FF2B20F8DDAEBD0AA108075FBD4 /* Canvas.h */,
+				B5DD0372F888B2F3E80FE9271151E03C /* CSAnimation.h */,
+				7507912648188492FB2653115E4BA79F /* CSAnimation.m */,
+				43F2EEAC71B0B1F915AAF3F186B34E7D /* CSAnimationView.h */,
+				75713EE452F58404D619B007E21CA4F4 /* CSAnimationView.m */,
+				648DDBA2DB93DB007E4701D8A47738B3 /* CSBlurView.h */,
+				53C186888AF3177AFF92C1EC0F2DFA25 /* CSBlurView.m */,
+				CD369FB5503C83FC7A919D23FCDC31AD /* CSNavigationController.h */,
+				71027C403246CF8DED90BED2FA29FFC6 /* CSNavigationController.m */,
+				7C7CB24CD79AA49BF309754711E828DE /* UIButton+TCCustomFont.h */,
+				5B3BF3C9570DEBC1628D4E563D73ED3B /* UIButton+TCCustomFont.m */,
+				D223A24088230B50C1E8FF3A8CB30BFD /* UILabel+TCCustomFont.h */,
+				1EE275708D4BD044705111C319753543 /* UILabel+TCCustomFont.m */,
+				D42EC8613CCE1ECAE215F9491C7B3A67 /* UINavigationBar+TCCustomFont.h */,
+				8F03963D8172461EC50BD0215072FFF7 /* UINavigationBar+TCCustomFont.m */,
+				90C39145BC9EC9809B2799C821B6231F /* UITextField+PlaceholderColor.h */,
+				E535F5C8D3176E492EADC5EEF3D71568 /* UITextField+PlaceholderColor.m */,
+				A26557362FA1A50BAB5F29D895CF58C4 /* UITextField+TCCustomFont.h */,
+				0AAFE9C8C2C310AF6BB9A574962C2B66 /* UITextField+TCCustomFont.m */,
+				ADF93174256BB1A45F6DE49010032955 /* UITextView+TCCustomFont.h */,
+				668B66DA98F61F221D27CBFBCCBE8E0F /* UITextView+TCCustomFont.m */,
+				C90F2E49F27D6BCCE8C733C94210C106 /* Support Files */,
+			);
+			path = Canvas;
+			sourceTree = "<group>";
+		};
+		ACB25B384587302AE8A37517ECA87C4B /* GoogleMaps */ = {
+			isa = PBXGroup;
+			children = (
+				E91F331D9F829391CF0FD2F8093898F9 /* Frameworks */,
+				46EFE14DA45059F099E7D882AEDEF37B /* Resources */,
 			);
 			path = GoogleMaps;
 			sourceTree = "<group>";
 		};
-		B6F4488EE9E748CAAB5C0D06735B2340 /* SwiftyJSON */ = {
+		ACBDA337A742D5319800CEF30417AE03 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				23AB1C30D2E2DCC715BD10264DE2020C /* SwiftyJSON.swift */,
-				4B08FD9C5D1BCA933A4A3EB7D14C8F7E /* Support Files */,
+				B80CB7E0AA033EFB2FFE021BA66BF893 /* libGoogleAnalytics.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C31E2F4292F853D0D9E9142A1AF964F7 /* SwiftyJSON */ = {
+			isa = PBXGroup;
+			children = (
+				C5758AFE66A857192EFFF80B48DD7A47 /* SwiftyJSON.swift */,
+				DE94531F953D4FE1D847096BF6242DE8 /* Support Files */,
 			);
 			path = SwiftyJSON;
 			sourceTree = "<group>";
 		};
-		D51C88D69C3964C01AD75F8BF89CDDBC /* NSURLSession */ = {
+		C90F2E49F27D6BCCE8C733C94210C106 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				1B912119A73A537869E1A6F7B55535D9 /* OHHTTPStubs+NSURLSessionConfiguration.m */,
+				34614990519BCECC41FF3709C7F23D83 /* Canvas.modulemap */,
+				F339820DD391B9163E37C8FE85288CB8 /* Canvas.xcconfig */,
+				C854A16EEC7430A49F9C73D4838819D6 /* Canvas-dummy.m */,
+				463DF62AEB7A5FDB926333A88A2A43E9 /* Canvas-prefix.pch */,
+				5C76786BB7BFACAC9011A53D6473A809 /* Canvas-umbrella.h */,
+				0DF20F2094B0CAAE6F2817676C407BA0 /* Info.plist */,
 			);
-			name = NSURLSession;
+			name = "Support Files";
+			path = "../Target Support Files/Canvas";
+			sourceTree = "<group>";
+		};
+		D3C250084F1C50AF924A0D7CF94C9E6D /* GoogleUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				9493904EA239B1F50B826079038B3178 /* Frameworks */,
+			);
+			path = GoogleUtilities;
+			sourceTree = "<group>";
+		};
+		DE94531F953D4FE1D847096BF6242DE8 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				6C22CDCCAE84C9CE3ECF38A77A4E477F /* Info.plist */,
+				511872DA6021789F79AF58D78D4FE7C9 /* SwiftyJSON.modulemap */,
+				8E89D09A0AA645112899AE4D6EE2F904 /* SwiftyJSON.xcconfig */,
+				6DCA763AA17316FF2EFA7E959BCEF4F1 /* SwiftyJSON-dummy.m */,
+				06615BC43CADEEE6D3CD1E607F6B53C2 /* SwiftyJSON-prefix.pch */,
+				6C2B6143790849FC1E4FC57840EFA62F /* SwiftyJSON-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SwiftyJSON";
+			sourceTree = "<group>";
+		};
+		E91F331D9F829391CF0FD2F8093898F9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CA72B84AC9FDBC248890E5E7877FB2CF /* GoogleMaps.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EA83B8A14494727533B5F5F9A46593A4 /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				F3FF04557D5A5FD561DC86C9DE751E72 /* Analytics.h */,
+				1818DA9B6673D626E754F9CE014ABE6F /* GGLContext+Analytics.h */,
+				376D0E6BA70B1120DE9934B3ED909DEC /* Frameworks */,
+			);
+			name = Analytics;
 			sourceTree = "<group>";
 		};
 		EC40D292034A92C9EBE8E22C0B7F4E45 /* Targets Support Files */ = {
@@ -467,14 +640,55 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
+		F512C397B902809D8BE3049A504EB499 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0026B390EB9FBE6EAEB57B44FA9515FC /* libGSDK_Overload.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F6AADEBDDDABAD004E9F5855552920C0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3D2E042EB1904CE4B0DA083C8232436C /* libProtocolBuffers.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F7DEB60B77E3CDC5B8E54D91EE5C198C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A959FE4A1D3484D5CB4D123532E207D9 /* Canvas */,
+				3229B3A38686DA069D044FF2970C5529 /* Google */,
+				26D0993ADACE4CAE8B47671CB8F0D441 /* GoogleAnalytics */,
+				7434400EC12ACF28FCAE192587965A54 /* GoogleInterchangeUtilities */,
+				ACB25B384587302AE8A37517ECA87C4B /* GoogleMaps */,
+				553DD6EE496FF9B9A212157B933D9C8D /* GoogleNetworkingUtilities */,
+				4425AFE8EEC71B5B84B9C9E0233BDF0C /* GoogleSymbolUtilities */,
+				D3C250084F1C50AF924A0D7CF94C9E6D /* GoogleUtilities */,
+				777344BE7D66C42D8ECCBAB43B7C0C8F /* OHHTTPStubs */,
+				C31E2F4292F853D0D9E9142A1AF964F7 /* SwiftyJSON */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		F97EEFD494F23CBAAC09FEDECF78D9FD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6F7241AA19347BF81D8F912C7F92831D /* libGGLCore.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		268703A1C5DD7EC75B8042BCA8A569F9 /* Headers */ = {
+		221792ED7678AEF757C0494A65A87F0F /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				137176F3A839A4850F3FC51C412E34F4 /* SwiftyJSON-umbrella.h in Headers */,
+				44262BA54D0B87A2315AE49B34F36510 /* SwiftyJSON-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,35 +700,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		99E16FB0DA8A9710C7F48425B5245277 /* Headers */ = {
+		8A102E292E10BAAF9A27FB6409115355 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7A7C418259A406E3AE789EE61621FBD5 /* Compatibility.h in Headers */,
-				5F9589C53987F80614538C6926B641ED /* OHHTTPStubs-umbrella.h in Headers */,
-				3D3E6D0436667ACB6DDB38FFB8F7E557 /* OHHTTPStubs.h in Headers */,
-				4F74751944B404D4C0CF2040F99584AF /* OHHTTPStubsResponse+JSON.h in Headers */,
-				2349EADDA3743343A6BC9C2D3B6094EC /* OHHTTPStubsResponse.h in Headers */,
-				F7CB19FAB30C716D9E79BF4F6AEAE61C /* OHPathHelpers.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B80464017034E1319E4F2CDE5F9BBE31 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BC7F2EC1C149ECF1CE03D776395D3946 /* Canvas-umbrella.h in Headers */,
-				3EDC61118BDCEA6D908281492316F05E /* Canvas.h in Headers */,
-				A0726DD244045294914E2E0BA0730AA9 /* CSAnimation.h in Headers */,
-				E21BCE42AC7B6606403D4DCAA3CA0C0C /* CSAnimationView.h in Headers */,
-				81912A427EA6C880672EB8AA58D10193 /* CSBlurView.h in Headers */,
-				2363E617225BA68A16E1621E5B8FA30A /* CSNavigationController.h in Headers */,
-				A43D40C688CF2698103A39F51103CDC6 /* UIButton+TCCustomFont.h in Headers */,
-				FAD1A5DC33B169E0E206A6DAB632BEEB /* UILabel+TCCustomFont.h in Headers */,
-				0A73ACFD31846814F72380D813EB391C /* UINavigationBar+TCCustomFont.h in Headers */,
-				55348C94793297068FAE147420F4E374 /* UITextField+PlaceholderColor.h in Headers */,
-				BB82547347BED4A8D550F5C6D63CDA08 /* UITextField+TCCustomFont.h in Headers */,
-				9A5A73C0BF7CF59F93AE999F0CA6198C /* UITextView+TCCustomFont.h in Headers */,
+				8DD8432CB906A048C07BC8FE508D655E /* Compatibility.h in Headers */,
+				F258B5FF1B2348D463987B21AB2483EE /* OHHTTPStubs-umbrella.h in Headers */,
+				7820F9230987CB8BEB92CDB7A6C95013 /* OHHTTPStubs.h in Headers */,
+				592503DF0E65E17ED3D7D6CB9629863E /* OHHTTPStubsResponse+JSON.h in Headers */,
+				03350250C81E331D71C8C880AE516233 /* OHHTTPStubsResponse.h in Headers */,
+				F803459620D778E48A606BA58DDE144E /* OHPathHelpers.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -526,16 +721,52 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EE846AE496C6CBB2F9C9F9CEF042EE79 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32A898B4096B117C45D682FAEB7715DC /* Canvas-umbrella.h in Headers */,
+				2970EB665EBBC4F5A4FBBEA90F300F2F /* Canvas.h in Headers */,
+				25F8F136957231345A1BE72E026DCB5F /* CSAnimation.h in Headers */,
+				E76D7DB77A8AF49C83756384D2D0B741 /* CSAnimationView.h in Headers */,
+				6158E2686FDA79B0905172AFCC45C558 /* CSBlurView.h in Headers */,
+				FFFDEC8CFA0C74D4BD03FB20036A6226 /* CSNavigationController.h in Headers */,
+				21C7A3F6115F0FD92F2324A54822CF51 /* UIButton+TCCustomFont.h in Headers */,
+				AAA5D70392BB9A8980EDEFEE0A7E8B1B /* UILabel+TCCustomFont.h in Headers */,
+				52AD242A8E525C40D5AB1A64783DBEED /* UINavigationBar+TCCustomFont.h in Headers */,
+				B5E271213CE8DED996DECAAA3CA97C8E /* UITextField+PlaceholderColor.h in Headers */,
+				34CDDE81023115653B411739C0693497 /* UITextField+TCCustomFont.h in Headers */,
+				95B00DD8202C0F0F68186601DC3644E9 /* UITextView+TCCustomFont.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		95F18EF60E7CD649AA7970B9DFAB4586 /* OHHTTPStubs */ = {
+		2B1615BD73F8761D795386416171C8AA /* Canvas */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6E7A7BA249D3883D23E4F55F75773218 /* Build configuration list for PBXNativeTarget "OHHTTPStubs" */;
+			buildConfigurationList = 370FCC5EBFFEEA7CACD3985F90B87EE1 /* Build configuration list for PBXNativeTarget "Canvas" */;
 			buildPhases = (
-				A3063F343CCD6BE3B86AEC699373350B /* Sources */,
-				55C25B110C6CCA9B4D853E21B33DC4FE /* Frameworks */,
-				99E16FB0DA8A9710C7F48425B5245277 /* Headers */,
+				46175D69A5B8F84E5B20675B39A896B0 /* Sources */,
+				C5892B19DEAA6E5DE43E0176E2FABE84 /* Frameworks */,
+				EE846AE496C6CBB2F9C9F9CEF042EE79 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Canvas;
+			productName = Canvas;
+			productReference = 0B5FB32E56D3C8C36FC215DDE3529A4C /* Canvas.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		3D4235B264F065B2A358CCC0494ACC08 /* OHHTTPStubs */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 021FDE6350588A0A5A276CC8190816AF /* Build configuration list for PBXNativeTarget "OHHTTPStubs" */;
+			buildPhases = (
+				9A2A5A839CB6AE6070A138B685975D3D /* Sources */,
+				C094A848F8CE9684CAB387074A025FF6 /* Frameworks */,
+				8A102E292E10BAAF9A27FB6409115355 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -543,7 +774,24 @@
 			);
 			name = OHHTTPStubs;
 			productName = OHHTTPStubs;
-			productReference = 11C7EDAAD38D001EF40B0CEED64BB524 /* OHHTTPStubs.framework */;
+			productReference = CFD0EBD61614CDA20AF5A4ACFDF6B739 /* OHHTTPStubs.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		73B724F25137A0C482A0E9C5C5AACEDD /* SwiftyJSON */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8263D392F86F755A82820892D99E4602 /* Build configuration list for PBXNativeTarget "SwiftyJSON" */;
+			buildPhases = (
+				E56A95D7F122601534156C8A3257FDB8 /* Sources */,
+				D1AAB73617C5F5E854D36D954C664F10 /* Frameworks */,
+				221792ED7678AEF757C0494A65A87F0F /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SwiftyJSON;
+			productName = SwiftyJSON;
+			productReference = A1814C050A3DFA11326DA16746C78357 /* SwiftyJSON.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		9AABCC3CE6AE30EFEA64C7AD3BDF949D /* Pods-Steer ClearTests */ = {
@@ -557,8 +805,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				5E4D2C7CC269ED939160AE2F422EEE21 /* PBXTargetDependency */,
-				B884612BCB70EAFA3A03C15CD08E343F /* PBXTargetDependency */,
+				EF6E68EBDE072CE7D3E565E8A02EE96B /* PBXTargetDependency */,
+				41C90056A0AE8CF0A77D5A1B908A99DA /* PBXTargetDependency */,
 			);
 			name = "Pods-Steer ClearTests";
 			productName = "Pods-Steer ClearTests";
@@ -576,46 +824,12 @@
 			buildRules = (
 			);
 			dependencies = (
-				5716FB03A36CE211A80A9B223CC27B90 /* PBXTargetDependency */,
-				8FFDC0C93BCC0D61CD54E19C7C20EEB9 /* PBXTargetDependency */,
+				BA0F656705F6961A1495B09726575EB1 /* PBXTargetDependency */,
+				F54B8CF80A59C6F9D7A14513A1C63F06 /* PBXTargetDependency */,
 			);
 			name = "Pods-Steer Clear";
 			productName = "Pods-Steer Clear";
 			productReference = F4028984871E4D4BC55FA00FF7BD0B72 /* Pods_Steer_Clear.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		DB7D62B387AE41F87B2DB062B39FBFE6 /* SwiftyJSON */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3978C8A19D280E6F86E07D16D071A5B5 /* Build configuration list for PBXNativeTarget "SwiftyJSON" */;
-			buildPhases = (
-				87F134A28E8CF68E1C2424449BCE93A9 /* Sources */,
-				01F13D15ACF27CEC548A71DD91E7A9F6 /* Frameworks */,
-				268703A1C5DD7EC75B8042BCA8A569F9 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SwiftyJSON;
-			productName = SwiftyJSON;
-			productReference = 0EE64035CE6237B5A1D7E5859953063F /* SwiftyJSON.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		ED12A1CB58ADB3241A04BC32FDE09039 /* Canvas */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 99084D0F2C5EE889B6832674ECA1B948 /* Build configuration list for PBXNativeTarget "Canvas" */;
-			buildPhases = (
-				E58EE8F5AA715A847B8D6301904EB669 /* Sources */,
-				4E9B0296A1D19529A2BBE9E41171AD60 /* Frameworks */,
-				B80464017034E1319E4F2CDE5F9BBE31 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Canvas;
-			productName = Canvas;
-			productReference = 6D6207877D251F082FFE85BF512B0735 /* Canvas.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -639,16 +853,34 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				ED12A1CB58ADB3241A04BC32FDE09039 /* Canvas */,
-				95F18EF60E7CD649AA7970B9DFAB4586 /* OHHTTPStubs */,
+				2B1615BD73F8761D795386416171C8AA /* Canvas */,
+				3D4235B264F065B2A358CCC0494ACC08 /* OHHTTPStubs */,
 				CEE528341B03EBF63088AE2432E08486 /* Pods-Steer Clear */,
 				9AABCC3CE6AE30EFEA64C7AD3BDF949D /* Pods-Steer ClearTests */,
-				DB7D62B387AE41F87B2DB062B39FBFE6 /* SwiftyJSON */,
+				73B724F25137A0C482A0E9C5C5AACEDD /* SwiftyJSON */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		46175D69A5B8F84E5B20675B39A896B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				02741BAD29CDF76F77BC6A3FCBCE81C6 /* Canvas-dummy.m in Sources */,
+				978C14A9EAB52C4C359082433D10DA03 /* CSAnimation.m in Sources */,
+				1E276EF2335F54ED4C2AA887678BFFE1 /* CSAnimationView.m in Sources */,
+				416AC709BCC7D4D8E4F7FA60F314602E /* CSBlurView.m in Sources */,
+				D1273B8D5015B26FAC31588B7B445F5E /* CSNavigationController.m in Sources */,
+				1C84A896A2BA88E401CFC6CF2AD676D1 /* UIButton+TCCustomFont.m in Sources */,
+				3D1461372D1AE8DD7EFF2422B3A80783 /* UILabel+TCCustomFont.m in Sources */,
+				7707EEFEBEAE1EA17842590C6CECEDE7 /* UINavigationBar+TCCustomFont.m in Sources */,
+				2133A860CD81A62DA69E2BC86728B1C6 /* UITextField+PlaceholderColor.m in Sources */,
+				9EB23E6FCE129EE5AA35CEF8E01E2EB3 /* UITextField+TCCustomFont.m in Sources */,
+				F8146AA92AC70C05ADE446D0B7C70945 /* UITextView+TCCustomFont.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		81C7FAD965D6F7BF4252F2FEF8FC0302 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -657,25 +889,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		87F134A28E8CF68E1C2424449BCE93A9 /* Sources */ = {
+		9A2A5A839CB6AE6070A138B685975D3D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79991F89488F0F017B231250752B7D69 /* SwiftyJSON-dummy.m in Sources */,
-				8E29B82067DC0786C64A2D88A24E0CA6 /* SwiftyJSON.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A3063F343CCD6BE3B86AEC699373350B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				83221AB534ED7F1979688CCF7B38ED79 /* OHHTTPStubs+NSURLSessionConfiguration.m in Sources */,
-				159752069881543DB0154C2776660781 /* OHHTTPStubs-dummy.m in Sources */,
-				538DE9CE6E8EB2554942184A0D32FA55 /* OHHTTPStubs.m in Sources */,
-				6F6584A4BAF9FC6FF75126E42095C897 /* OHHTTPStubsResponse+JSON.m in Sources */,
-				E76053E85DD12D4273CC6FED57439126 /* OHHTTPStubsResponse.m in Sources */,
-				E32F1CF26BCA7264CBC604C8556A6500 /* OHPathHelpers.m in Sources */,
+				355A36B7761E7CADB3C030F9C77531E9 /* OHHTTPStubs+NSURLSessionConfiguration.m in Sources */,
+				936E1DE14F4C2DAC3C3E3B535B60789B /* OHHTTPStubs-dummy.m in Sources */,
+				2197174C7E88DF49C394D00016EE8267 /* OHHTTPStubs.m in Sources */,
+				EA5364DB98654B1F61BCFDC878C9F7E5 /* OHHTTPStubsResponse+JSON.m in Sources */,
+				B458A639CA63E34D516285F703402EA9 /* OHHTTPStubsResponse.m in Sources */,
+				9D5E5B1F4099E11B14DFCF42A1802ACE /* OHPathHelpers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -687,80 +910,71 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E58EE8F5AA715A847B8D6301904EB669 /* Sources */ = {
+		E56A95D7F122601534156C8A3257FDB8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB018EF675A178757E8C4E53A98855AC /* Canvas-dummy.m in Sources */,
-				7F7E8D6B9BBD76805E3E6F41350E6AB6 /* CSAnimation.m in Sources */,
-				18C81850294357C6C4BC3203B1B59B19 /* CSAnimationView.m in Sources */,
-				BF6AC6998D3D88E4092110E842CE1636 /* CSBlurView.m in Sources */,
-				CE4A2F0FEF0B9674F9AA273A0D9619A3 /* CSNavigationController.m in Sources */,
-				EC8417CAC732B159A01E40E47D427AE9 /* UIButton+TCCustomFont.m in Sources */,
-				A589F8B72393896A687D5238E9DAD6C5 /* UILabel+TCCustomFont.m in Sources */,
-				070B1A0CEC40D1D520B9AD14A50ACA72 /* UINavigationBar+TCCustomFont.m in Sources */,
-				6268DDC370C41ADE77092746C05ADFFC /* UITextField+PlaceholderColor.m in Sources */,
-				49B5AE65B0CD9E5EF63BFA8B43C01C78 /* UITextField+TCCustomFont.m in Sources */,
-				EB9CE530859D4206091AA7DF2D6593B2 /* UITextView+TCCustomFont.m in Sources */,
+				89299DA5737A25F2D423A44C7D5C1138 /* SwiftyJSON-dummy.m in Sources */,
+				6781119076AB9B38E737BB8E01C69ED2 /* SwiftyJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		5716FB03A36CE211A80A9B223CC27B90 /* PBXTargetDependency */ = {
+		41C90056A0AE8CF0A77D5A1B908A99DA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftyJSON;
+			target = 73B724F25137A0C482A0E9C5C5AACEDD /* SwiftyJSON */;
+			targetProxy = CA48F24DBA7110E3277FE7017DA6F3E5 /* PBXContainerItemProxy */;
+		};
+		BA0F656705F6961A1495B09726575EB1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Canvas;
-			target = ED12A1CB58ADB3241A04BC32FDE09039 /* Canvas */;
-			targetProxy = 25E684CED519AA661E222E9DFA12003C /* PBXContainerItemProxy */;
+			target = 2B1615BD73F8761D795386416171C8AA /* Canvas */;
+			targetProxy = 340AE4DEB37E16C06530D10BD8B56481 /* PBXContainerItemProxy */;
 		};
-		5E4D2C7CC269ED939160AE2F422EEE21 /* PBXTargetDependency */ = {
+		EF6E68EBDE072CE7D3E565E8A02EE96B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = OHHTTPStubs;
-			target = 95F18EF60E7CD649AA7970B9DFAB4586 /* OHHTTPStubs */;
-			targetProxy = 3AED0272B1B00BFB89DB0E3678CDA455 /* PBXContainerItemProxy */;
+			target = 3D4235B264F065B2A358CCC0494ACC08 /* OHHTTPStubs */;
+			targetProxy = 56749259E967890A278562FE34DD64DD /* PBXContainerItemProxy */;
 		};
-		8FFDC0C93BCC0D61CD54E19C7C20EEB9 /* PBXTargetDependency */ = {
+		F54B8CF80A59C6F9D7A14513A1C63F06 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SwiftyJSON;
-			target = DB7D62B387AE41F87B2DB062B39FBFE6 /* SwiftyJSON */;
-			targetProxy = 7C4F3A539CE8CF0FECED3E6407F3B639 /* PBXContainerItemProxy */;
-		};
-		B884612BCB70EAFA3A03C15CD08E343F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SwiftyJSON;
-			target = DB7D62B387AE41F87B2DB062B39FBFE6 /* SwiftyJSON */;
-			targetProxy = 4398F872305E78E6CCBCE9C326196F2D /* PBXContainerItemProxy */;
+			target = 73B724F25137A0C482A0E9C5C5AACEDD /* SwiftyJSON */;
+			targetProxy = DEE7B19C3D99D0A9120C31D5A6984B65 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		0A42C7902D3D7BE7F709FA72E0D2C854 /* Debug */ = {
+		2F66A1F0202D374454205766605C010F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E936E165CF5B5E11CA155D4593CCEA15 /* OHHTTPStubs.xcconfig */;
+			baseConfigurationReference = F339820DD391B9163E37C8FE85288CB8 /* Canvas.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 4.5.0;
+				CURRENT_PROJECT_VERSION = 0.1.2;
 				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 4;
+				DYLIB_COMPATIBILITY_VERSION = 0.1.2;
 				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/OHHTTPStubs/OHHTTPStubs-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/OHHTTPStubs/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/Canvas/Canvas-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Canvas/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/OHHTTPStubs/OHHTTPStubs.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = OHHTTPStubs;
+				MODULEMAP_FILE = "Target Support Files/Canvas/Canvas.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = Canvas;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
 		362DEA7339C71D30779726714357D3BA /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -792,9 +1006,36 @@
 			};
 			name = Debug;
 		};
-		4F91006A2D061CE306DFCA26E4DA1370 /* Debug */ = {
+		3AEAC2781F6F235DEB32AD98CC8683A0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B19B05F8FC19EA6745EEC874B641DBA1 /* Canvas.xcconfig */;
+			baseConfigurationReference = 8E89D09A0AA645112899AE4D6EE2F904 /* SwiftyJSON.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 2.3.1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 2;
+				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = SwiftyJSON;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		3E6ADCF547A120FFEE7C285D283004E6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F339820DD391B9163E37C8FE85288CB8 /* Canvas.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 0.1.2;
@@ -848,9 +1089,9 @@
 			};
 			name = Release;
 		};
-		9279D737F0EE7F358EAF063563597B15 /* Release */ = {
+		93F184F136E1FA7996AD432C49BD8370 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E936E165CF5B5E11CA155D4593CCEA15 /* OHHTTPStubs.xcconfig */;
+			baseConfigurationReference = 2F206210530CBDDCD4D501246DE6F299 /* OHHTTPStubs.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 4.5.0;
@@ -865,7 +1106,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/OHHTTPStubs/OHHTTPStubs.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = OHHTTPStubs;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -873,7 +1114,7 @@
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 		96D12DBB43172842271DC2712000AE98 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -923,7 +1164,6 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -945,36 +1185,9 @@
 			};
 			name = Debug;
 		};
-		C64F793675565C4FD0CAC60B1F77BD7A /* Release */ = {
+		C8D94C80E62856661EB521DC6F12056D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B19B05F8FC19EA6745EEC874B641DBA1 /* Canvas.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 0.1.2;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 0.1.2;
-				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Canvas/Canvas-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Canvas/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Canvas/Canvas.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = Canvas;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		CD15F4FC74DF8272CDE95B584BF2ACB2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D6592D0E54159D20352B63FEA76E0864 /* SwiftyJSON.xcconfig */;
+			baseConfigurationReference = 8E89D09A0AA645112899AE4D6EE2F904 /* SwiftyJSON.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 2.3.1;
@@ -999,6 +1212,33 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
+		};
+		D128F8A0B42902D8F6B2E49BC225CBD4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2F206210530CBDDCD4D501246DE6F299 /* OHHTTPStubs.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 4.5.0;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 4;
+				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/OHHTTPStubs/OHHTTPStubs-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/OHHTTPStubs/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/OHHTTPStubs/OHHTTPStubs.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = OHHTTPStubs;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
 		};
 		DCCE25510009B3A64720098832A41A69 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -1029,33 +1269,6 @@
 			};
 			name = Release;
 		};
-		E5B2176893F3A8D9240110A83F59699F /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = D6592D0E54159D20352B63FEA76E0864 /* SwiftyJSON.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 2.3.1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 2;
-				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = SwiftyJSON;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		FB45FFD90572718D82AB9092B750F0CA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1074,7 +1287,6 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
-				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
@@ -1094,6 +1306,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		021FDE6350588A0A5A276CC8190816AF /* Build configuration list for PBXNativeTarget "OHHTTPStubs" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				93F184F136E1FA7996AD432C49BD8370 /* Debug */,
+				D128F8A0B42902D8F6B2E49BC225CBD4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		14A4409177F12AEB3C1E242823A64F1D /* Build configuration list for PBXNativeTarget "Pods-Steer ClearTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1121,29 +1342,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3978C8A19D280E6F86E07D16D071A5B5 /* Build configuration list for PBXNativeTarget "SwiftyJSON" */ = {
+		370FCC5EBFFEEA7CACD3985F90B87EE1 /* Build configuration list for PBXNativeTarget "Canvas" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CD15F4FC74DF8272CDE95B584BF2ACB2 /* Debug */,
-				E5B2176893F3A8D9240110A83F59699F /* Release */,
+				3E6ADCF547A120FFEE7C285D283004E6 /* Debug */,
+				2F66A1F0202D374454205766605C010F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6E7A7BA249D3883D23E4F55F75773218 /* Build configuration list for PBXNativeTarget "OHHTTPStubs" */ = {
+		8263D392F86F755A82820892D99E4602 /* Build configuration list for PBXNativeTarget "SwiftyJSON" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0A42C7902D3D7BE7F709FA72E0D2C854 /* Debug */,
-				9279D737F0EE7F358EAF063563597B15 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		99084D0F2C5EE889B6832674ECA1B948 /* Build configuration list for PBXNativeTarget "Canvas" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4F91006A2D061CE306DFCA26E4DA1370 /* Debug */,
-				C64F793675565C4FD0CAC60B1F77BD7A /* Release */,
+				C8D94C80E62856661EB521DC6F12056D /* Debug */,
+				3AEAC2781F6F235DEB32AD98CC8683A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
