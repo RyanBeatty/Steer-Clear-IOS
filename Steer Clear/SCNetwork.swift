@@ -10,8 +10,8 @@ import Foundation
 import SwiftyJSON
 
 // hostname of server
-//let HOSTNAME = "https://steerclear.wm.edu/"
-let HOSTNAME = "http://localhost:5000/"
+let HOSTNAME = "https://steerclear.wm.edu/"
+//let HOSTNAME = "http://localhost:5000/"
 
 // api url routes
 let REGISTER_ROUTE = "/register"
