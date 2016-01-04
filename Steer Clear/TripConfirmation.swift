@@ -197,7 +197,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
             self.gear.alpha = 0.0
             self.shouldStopRotating = true
             self.requestRideOutlet.enabled = true
-            let alert = UIAlertController(title: "Service Error", message: "Steer Clear is not currently running. Please try again during hours.", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "Service Error", message: "Steer Clear is not currently running. Please try again during hours. \n Thursday: 9:30 PM - 1:30 AM \n Friday: 9:30 PM - 2:30 AM \n Saturday: 9:30 PM - 2:30 AM", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         }
