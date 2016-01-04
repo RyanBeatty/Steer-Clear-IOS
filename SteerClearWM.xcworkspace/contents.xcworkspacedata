@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/Ulises/Documents/Projects/Steer-Clear-IOS/SteerClearWM.xcodeproj">
+      location = "group:SteerClearWM.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

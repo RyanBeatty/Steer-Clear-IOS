@@ -12,7 +12,6 @@ import MapKit
 import CoreLocation
 import GoogleMaps
 import QuartzCore
-import Canvas
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
     

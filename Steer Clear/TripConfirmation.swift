@@ -197,7 +197,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
             self.gear.alpha = 0.0
             self.shouldStopRotating = true
             self.requestRideOutlet.enabled = true
-            let alert = UIAlertController(title: "Service Error", message: "Steer Clear is not currently running. Please try again during hours. \n Thursday: 9:30 PM - 1:30 AM \n Friday: 9:30 PM - 2:30 AM \n Saturday: 9:30 PM - 2:30 AM", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "Service Error", message: "Steer Clear is not currently operating. Please try again during hours. \n Thursday: 9:30 PM - 1:30 AM \n Friday: 9:30 PM - 2:30 AM \n Saturday: 9:30 PM - 2:30 AM", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         }
@@ -216,6 +216,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         let date = NSDate()
         let cal_formatter  = NSDateFormatter()
         cal_formatter.dateFormat = "yyyy-MM-dd-HH-mm"
+        cal_formatter.timeZone = NSTimeZone(name: "America/Detroit")
         let calender_date = cal_formatter.stringFromDate(date)
         
         
