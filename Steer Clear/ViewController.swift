@@ -203,6 +203,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
                                                 // them to the main thread
                                                 dispatch_async(dispatch_get_main_queue(), {
                                                     print("ViewController: Login successful, seguing towards MapViewController.")
+                                                    let cookies: NSArray = NSHTTPCookieStorage.sharedHTTPCookieStorage().cookies as NSArray!
+                                                    
+                                                    Cookies.setCookiesWithArr(cookies)
+                                                    
                                                     self.defaults.setObject("\(username!)", forKey: "lastUser")
                                                     self.performSegueWithIdentifier("loginRider", sender: self)
                                                 })

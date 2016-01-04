@@ -14,13 +14,13 @@ let HOSTNAME = "https://steerclear.wm.edu/"
 //let HOSTNAME = "http://localhost:5000/"
 
 // api url routes
-let REGISTER_ROUTE = "/register"
-let LOGIN_ROUTE = "/login"
-let LOGOUT_ROUTE = "/logout"
-let RIDE_REQUEST_ROUTE = "/api/rides"
-let CLEAR_ROUTE = "/clear"
-let DELETE_ROUTE = "/api/rides/"
-let TIMELOCK_ROUTE = "/api/timelock"
+let REGISTER_ROUTE = "register"
+let LOGIN_ROUTE = "login"
+let LOGOUT_ROUTE = "logout"
+let RIDE_REQUEST_ROUTE = "api/rides"
+let CLEAR_ROUTE = "clear"
+let DELETE_ROUTE = "api/rides/"
+let TIMELOCK_ROUTE = "api/timelock"
 
 // complete api route strings
 let REGISTER_URL_STRING = HOSTNAME + REGISTER_ROUTE
@@ -72,7 +72,7 @@ class SCNetwork: NSObject {
             
             // if there is no response, request failed
             if(response == nil) {
-                completionHandler(success: false, message: "There was an error while registering")
+                completionHandler(success: false, message: "No response from server. Please try again later.")
                 return
             }
             
@@ -99,8 +99,7 @@ class SCNetwork: NSObject {
     /*
     checkCookie
     ----------
-    Checks to see whether user is logged in by checking the index page, if user is logged in, page will
-    return a 200 status code. If not, it will return a 401.
+    Checks whether a cookie has been saved. A cookie is saved when registering and when logging in. It is cleared on logout.
     
     */
     class func checkCookie(completionHandler: (success: Bool, message: String) -> ()) {
@@ -153,7 +152,7 @@ class SCNetwork: NSObject {
             
             // if there is no response, request failed
             if(response == nil) {
-                completionHandler(success: false, message: "There was an error while logging in")
+                completionHandler(success: false, message: "No response from server.")
                 return
             }
             
@@ -166,10 +165,10 @@ class SCNetwork: NSObject {
                 
                 completionHandler(success: true, message: "Logged in!")
             case 400:
-                completionHandler(success: false, message: "Invalid username or password")
+                completionHandler(success: false, message: "Invalid username or password.")
             default:
                 print("Status Code received: \(httpResponse.statusCode)")
-                completionHandler(success: false, message: "There was an error while logging in")
+                completionHandler(success: false, message: "There was an error while logging in.")
             }
         })
         
@@ -216,7 +215,7 @@ class SCNetwork: NSObject {
             
             // if there was an error, request failed
             if(error != nil || response == nil || data == nil) {
-                completionHandler(success: false, needLogin: false, message: "There was a network error while requesting a ride", ride:nil)
+                completionHandler(success: false, needLogin: false, message: "There was a network error while requesting a ride \(error)", ride:nil)
                 return
             }
             
@@ -236,7 +235,7 @@ class SCNetwork: NSObject {
                 
                 // check for error in json response
                 if id == nil || numPassengers == nil || pickupAddress == nil || dropoffAddress == nil || pickupTime == nil {
-                    completionHandler(success:false, needLogin:true, message: "There was an error while requesting a ride", ride: nil)
+                    completionHandler(success:false, needLogin:true, message: "There was an error while requesting a ride \(httpResponse.statusCode)", ride: nil)
                 }
                 
                 // create ride object
@@ -250,9 +249,10 @@ class SCNetwork: NSObject {
                 completionHandler(success: false, needLogin: false, message: "You've entered some ride information incorrectly", ride: nil)
             case 401:
                 completionHandler(success: false, needLogin: true, message: "Please Login", ride: nil)
+            case 503:
+                completionHandler(success: false, needLogin: true, message: "Steer Clear is currently not operating. Please try again during operating hours.", ride: nil)
             default:
-                print("Status Code received: \(httpResponse.statusCode)")
-                completionHandler(success: false, needLogin: false, message: "There was an error while requesting a ride", ride: nil)
+                completionHandler(success: false, needLogin: false, message: "There was an error while requesting a ride. \(httpResponse.statusCode)", ride: nil)
             }
         })
         
@@ -350,34 +350,50 @@ class SCNetwork: NSObject {
     ------
     Checks to see if Steer Clear service is running
     
-    :completionHandler: callback method that takes a success flag and a string message
+    
     */
-    class func timelock(completionHandler: (success: Bool, message: String) -> ()) {
-        let request = NSMutableURLRequest(URL: NSURL(string: TIMELOCK_STRING)!)
-        request.HTTPMethod = "GET"
+    class func timelock()->Bool{
         
-        let session = NSURLSession.sharedSession()
-        let dataTask = session.dataTaskWithRequest(request, completionHandler: {
-            data, response, error in
-            
-            // if there was an error, request failed
-            if(error != nil || response == nil || data == nil) {
-                completionHandler(success: false, message: "There was a network error while checking if Steer Clear is running.")
-                return
-            }
-            
-            // else check the request status code to see if logging out succeeded
-            let httpResponse = response as! NSHTTPURLResponse
-            switch(httpResponse.statusCode) {
-            case 200:
-                completionHandler(success: true, message: "Steer Clear in service!")
-            default:
-                print("**SCNetwork: Timelock Status Code received: \(httpResponse.statusCode)")
-                completionHandler(success: false, message: "Steer Clear not in service.")
-            }
-        })
+        // Get today's date
+        let date = NSDate()
+        let cal_formatter  = NSDateFormatter()
+        cal_formatter.dateFormat = "yyyy-MM-dd-HH"
+        let calender_date = cal_formatter.stringFromDate(date)
         
-        dataTask.resume()
+        
+        // Days are Monday = 1, Tuesday = 2, etc...
+        let days = [1,5,6]
+        let thurs_hours = [20,21,22,23]
+        let weekend_hours = [20,21,22,23,24,1]
+        
+        if let dateInfo:[Int]? = getDateInfo(calender_date) {
+            //If Thursday
+            if dateInfo![0] == 4 && thurs_hours.contains(dateInfo![1]){
+                print("We in thurs business")
+                return true
+                
+            }
+            //If Friday or Saturday
+            if (days.contains(dateInfo![0])) && (weekend_hours.contains(dateInfo![1])){
+                print("We in weekend business")
+                return true
+            }
+            return false
+        }
+    }
+    
+    class func getDateInfo(today:String)->[Int]? {
+        
+        let formatter  = NSDateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd-HH"
+        if let todayDate = formatter.dateFromString(today) {
+            let myCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+            let myComponents = myCalendar.components([.Weekday, .Hour], fromDate: todayDate)
+            let dateInfo = [myComponents.weekday, myComponents.hour]
+            return dateInfo
+        } else {
+            return nil
+        }
     }
     
     

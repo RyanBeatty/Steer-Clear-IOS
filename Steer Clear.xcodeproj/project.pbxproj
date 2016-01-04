@@ -49,7 +49,7 @@
 		04FB75561B8409F700422750 /* SCNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCNetwork.swift; path = "Steer Clear/SCNetwork.swift"; sourceTree = "<group>"; };
 		04FB75581B84133800422750 /* SCNetworkTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCNetworkTests.swift; sourceTree = "<group>"; };
 		383EC5EA1B69BD2E00D78F36 /* TripConfirmation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripConfirmation.swift; sourceTree = "<group>"; };
-		3846DC1F1BED141F00CFA988 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3846DC1F1BED141F00CFA988 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Steer Clear/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		3846DC241BED152900CFA988 /* GA-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GA-Bridging-Header.h"; sourceTree = "<group>"; };
 		387126CC1B65C15600AE4CFE /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		3889BE7D1B97C30F00A0930F /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Settings.swift; path = "Steer Clear/Settings.swift"; sourceTree = "<group>"; };

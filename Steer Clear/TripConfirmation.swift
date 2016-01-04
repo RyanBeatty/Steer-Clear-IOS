@@ -142,7 +142,6 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
             self.gear.rotate360Degrees(completionDelegate: self)
             // Perhaps start a process which will refresh the UI...
         }
-        
         if checkTimelock() {
             SCNetwork.requestRide(
                 startLatString,
@@ -161,6 +160,14 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
                             self.gear.alpha = 0.0
                             self.shouldStopRotating = true
                             self.requestRideOutlet.enabled = true
+                            let tracker = GAI.sharedInstance().defaultTracker
+                            
+                            let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory(
+                                "ui_action",
+                                action: "ride_request_error",
+                                label: "\(message)",
+                                value: nil).build()
+                            tracker.send(eventTracker as! [NSObject : AnyObject])
                         })
                     }
                     else {
@@ -184,7 +191,8 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
                     }
                 }
             )
-        } else {
+
+        }  else {
             self.overlay.alpha = 0.0
             self.gear.alpha = 0.0
             self.shouldStopRotating = true
@@ -193,37 +201,79 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         }
-
     }
     
+    /*
+    timelock
+    ------
+    Checks to see if Steer Clear service is running
+    
+    
+    */
     func checkTimelock()->Bool{
-        var serviceOn = false
-        SCNetwork.timelock( {
-            success, message in
-            
-            
-            if(!success) {
-                // can't make UI updates from background thread, so we need to dispatch
-                // them to the main thread
-                dispatch_async(dispatch_get_main_queue(), {
-                    print("TripConfirmation: Timelock checked, Steer Clear is NOT currently running.")
-                })
+        
+        // Get today's date
+        let date = NSDate()
+        let cal_formatter  = NSDateFormatter()
+        cal_formatter.dateFormat = "yyyy-MM-dd-HH-mm"
+        let calender_date = cal_formatter.stringFromDate(date)
+        
+        
+        // Days are Monday = 1, Tuesday = 2, etc...
+        let working_days = [2,5,6]
+        let thurs_hours = [22,23,0]
+        let weekend_hours = [22,23,0,1]
+        
+        if let dateInfo:[Int]? = getDateInfo(calender_date) {
+            let day = dateInfo![0]
+            let HH = dateInfo![1]
+            let mm = dateInfo![2]
+            // If Thursday
+            if day == 4 {
+                if HH == 21 && mm >= 30 {
+                    return true
+                }
+                if HH == 1 && mm <= 30 {
+                    return true
+                }
+                if thurs_hours.contains(HH) {
+                    return true
+                } else {
+                    return false
+                }
+                
             }
-            else {
-                // can't make UI updates from background thread, so we need to dispatch
-                // them to the main thread
-                dispatch_async(dispatch_get_main_queue(), {
-                    print("TripConfirmation: Timelock checked, Steer Clear is currently running.")
-                    serviceOn = true
-                })
+            // If Friday or Saturday
+            if working_days.contains(day){
+                if HH == 21 && mm >= 30 {
+                    return true
+                }
+                if HH == 2 && mm <= 30 {
+                    return true
+                }
+                if weekend_hours.contains(HH) {
+                    return true
+                } else {
+                    return false
+                }
             }
-        })
-        if serviceOn {
-            return true
-        } else {
             return false
         }
     }
+    
+        func getDateInfo(today:String)->[Int]? {
+            
+            let formatter  = NSDateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd-HH-mm"
+            if let todayDate = formatter.dateFromString(today) {
+                let myCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+                let myComponents = myCalendar.components([.Weekday, .Hour, .Minute], fromDate: todayDate)
+                let dateInfo = [myComponents.weekday, myComponents.hour, myComponents.minute]
+                return dateInfo
+            } else {
+                return nil
+            }
+        }
 
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
