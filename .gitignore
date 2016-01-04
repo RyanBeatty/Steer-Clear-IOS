@@ -31,6 +31,3 @@ Pods/
 # Carthage/Checkouts
 
 Carthage/Build
-
-# Settings file containg API key
-Steer Clear/Settings.swift
