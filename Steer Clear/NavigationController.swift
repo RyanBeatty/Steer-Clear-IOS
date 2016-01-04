@@ -14,6 +14,18 @@ class NavigationController: UIViewController {
     
     let defaults = NSUserDefaults.standardUserDefaults()
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        
+        let name = "NavigationController"
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: name)
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject : AnyObject])
+    }
+    
+    
     override func viewDidAppear(animated: Bool) {
         print("NavigationController: Initializing App!")
         

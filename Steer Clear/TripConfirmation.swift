@@ -44,6 +44,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
 
     var isRotating = false
     var shouldStopRotating = false
+    let networkController = Network()
     
     override func viewDidLayoutSubviews() {
         self.navWidth = self.navigationBar.frame.width
@@ -54,6 +55,15 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
     }
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        
+        let name = "TripConfirmationController"
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: name)
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject : AnyObject])
+        
         self.gear.alpha = 0.0
         self.overlay.alpha = 0.0
     }
@@ -61,6 +71,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        checkUpdate()
         myPicker.delegate = self
         myPicker.dataSource = self
         myPicker.selectRow(1, inComponent: 0, animated: true)
@@ -122,7 +133,6 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         let endLongString = String(end.longitude)
         let numPassengersString = numOfPassengers.text!
         requestRideOutlet.enabled = false
-        
         UIView.animateWithDuration(0.5, animations: {
             self.gear.alpha = 1.0
             self.overlay.alpha = 1.0
@@ -132,40 +142,139 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
             self.gear.rotate360Degrees(completionDelegate: self)
             // Perhaps start a process which will refresh the UI...
         }
-        
-        
-        // request a ride
-        SCNetwork.requestRide(
-            startLatString,
-            startLong: startLongString,
-            endLat: endLatString,
-            endLong: endLongString,
-            numPassengers: numPassengersString,
-            completionHandler: {
-                success, login, message, ride in
-                
-                // if something went wrong, display error message
-                if(!success || ride == nil) {
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.displayAlert("Ride Request Error", message: message)
-                        self.overlay.alpha = 0.0
-                        self.gear.alpha = 0.0
-                        self.shouldStopRotating = true
-                        self.requestRideOutlet.enabled = true
-                    })
+        if checkTimelock() {
+            SCNetwork.requestRide(
+                startLatString,
+                startLong: startLongString,
+                endLat: endLatString,
+                endLong: endLongString,
+                numPassengers: numPassengersString,
+                completionHandler: {
+                    success, login, message, ride in
+                    
+                    // if something went wrong, display error message
+                    if(!success || ride == nil) {
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.displayAlert("Ride Request Error", message: message)
+                            self.overlay.alpha = 0.0
+                            self.gear.alpha = 0.0
+                            self.shouldStopRotating = true
+                            self.requestRideOutlet.enabled = true
+                            let tracker = GAI.sharedInstance().defaultTracker
+                            
+                            let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory(
+                                "ui_action",
+                                action: "ride_request_error",
+                                label: "\(message)",
+                                value: nil).build()
+                            tracker.send(eventTracker as! [NSObject : AnyObject])
+                        })
+                    }
+                    else {
+                        // else request was a success, so change screens
+                        dispatch_async(dispatch_get_main_queue(), {
+                            // make sure we save Ride object
+                            self.currentRide = ride
+                            self.requestRideOutlet.enabled = true
+                            
+                            
+                            let tracker = GAI.sharedInstance().defaultTracker
+                            
+                            let eventTracker: NSObject = GAIDictionaryBuilder.createEventWithCategory(
+                                "ui_action",
+                                action: "ride_request_success",
+                                label: "success",
+                                value: nil).build()
+                            tracker.send(eventTracker as! [NSObject : AnyObject])
+                            self.performSegueWithIdentifier("waitingSegue", sender: self)
+                        })
+                    }
                 }
-                else {
-                    // else request was a success, so change screens
-                    dispatch_async(dispatch_get_main_queue(), {
-                        // make sure we save Ride object
-                        self.currentRide = ride
-                        self.requestRideOutlet.enabled = true
-                        self.performSegueWithIdentifier("waitingSegue", sender: self)
-                    })
+            )
+
+        }  else {
+            self.overlay.alpha = 0.0
+            self.gear.alpha = 0.0
+            self.shouldStopRotating = true
+            self.requestRideOutlet.enabled = true
+            let alert = UIAlertController(title: "Service Error", message: "Steer Clear is not currently operating. Please try again during hours. \n Thursday: 9:30 PM - 1:30 AM \n Friday: 9:30 PM - 2:30 AM \n Saturday: 9:30 PM - 2:30 AM", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+    
+    /*
+    timelock
+    ------
+    Checks to see if Steer Clear service is running
+    
+    
+    */
+    func checkTimelock()->Bool{
+        
+        // Get today's date
+        let date = NSDate()
+        let cal_formatter  = NSDateFormatter()
+        cal_formatter.dateFormat = "yyyy-MM-dd-HH-mm"
+        cal_formatter.timeZone = NSTimeZone(name: "America/Detroit")
+        let calender_date = cal_formatter.stringFromDate(date)
+        
+        
+        // Days are Monday = 1, Tuesday = 2, etc...
+        let working_days = [4,5,6]
+        let thurs_hours = [22,23,0]
+        let weekend_hours = [22,23,0,1]
+        
+        if let dateInfo:[Int]? = getDateInfo(calender_date) {
+            let day = dateInfo![0]
+            let HH = dateInfo![1]
+            let mm = dateInfo![2]
+            // If Thursday
+            if day == 4 {
+                if HH == 21 && mm >= 30 {
+                    return true
+                }
+                if HH == 1 && mm <= 30 {
+                    return true
+                }
+                if thurs_hours.contains(HH) {
+                    return true
+                } else {
+                    return false
+                }
+                
+            }
+            // If Friday or Saturday
+            if working_days.contains(day){
+                if HH == 21 && mm >= 30 {
+                    return true
+                }
+                if HH == 2 && mm <= 30 {
+                    return true
+                }
+                if weekend_hours.contains(HH) {
+                    return true
+                } else {
+                    return false
                 }
             }
-        )
+            return false
+        }
     }
+    
+        func getDateInfo(today:String)->[Int]? {
+            
+            let formatter  = NSDateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd-HH-mm"
+            if let todayDate = formatter.dateFromString(today) {
+                let myCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+                let myComponents = myCalendar.components([.Weekday, .Hour, .Minute], fromDate: todayDate)
+                let dateInfo = [myComponents.weekday, myComponents.hour, myComponents.minute]
+                return dateInfo
+            } else {
+                return nil
+            }
+        }
 
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
@@ -255,5 +364,34 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
     func reset() {
         self.isRotating = false
         self.shouldStopRotating = false
+    }
+    
+    func checkUpdate() {
+        networkController.checkUpdate( {
+            success, message in
+            
+            
+            if(!success) {
+                // can't make UI updates from background thread, so we need to dispatch
+                // them to the main thread
+                dispatch_async(dispatch_get_main_queue(), {
+                    let alert = UIAlertController(title: "New Version Available", message: "There is a newer version available for download! Please update the app by visiting the Apple Store.", preferredStyle: UIAlertControllerStyle.Alert)
+                    
+                    let downloadUrl = NSURL(string: "http://itunes.apple.com/us/app/apple-store/id1036506994?mt=8")
+                    alert.addAction(UIAlertAction(title: "Update", style: UIAlertActionStyle.Default, handler: { alertAction in
+                        UIApplication.sharedApplication().openURL(downloadUrl!)
+                        alert.dismissViewControllerAnimated(true, completion: nil)
+                    }))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                })
+            }
+            else {
+                // can't make UI updates from background thread, so we need to dispatch
+                // them to the main thread
+                dispatch_async(dispatch_get_main_queue(), {
+                    print("MapViewController: Currently running latest running of app.")
+                })
+            }
+        })
     }
 }

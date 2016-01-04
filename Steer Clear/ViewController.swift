@@ -64,7 +64,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.usernameTextbox.delegate = self;
         self.passwordTextbox.delegate = self;
         if self.defaults.stringForKey("lastUser") != nil {
-            self.usernameTextbox.text = self.defaults.stringForKey("lastUser")
+            self.usernameTextbox.text = self.defaults.stringForKey("lastUser")!
         }
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil);
@@ -72,6 +72,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        
+        let name = "ViewController"
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: name)
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject : AnyObject])
+        
         hidePhoneLabels()
     }
     
@@ -194,7 +203,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
                                                 // them to the main thread
                                                 dispatch_async(dispatch_get_main_queue(), {
                                                     print("ViewController: Login successful, seguing towards MapViewController.")
-                                                    self.defaults.setObject("\(username)", forKey: "lastUser")
+                                                    let cookies: NSArray = NSHTTPCookieStorage.sharedHTTPCookieStorage().cookies as NSArray!
+                                                    
+                                                    Cookies.setCookiesWithArr(cookies)
+                                                    
+                                                    self.defaults.setObject("\(username!)", forKey: "lastUser")
                                                     self.performSegueWithIdentifier("loginRider", sender: self)
                                                 })
                                             }

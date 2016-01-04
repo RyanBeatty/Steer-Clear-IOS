@@ -3,13 +3,13 @@
 platform :ios, "8.0"
 use_frameworks!
 
-target 'Steer Clear' do
+target 'SteerClearWM' do
 pod 'GoogleMaps'
+pod 'Google/Analytics'
 pod 'SwiftyJSON'
-pod 'Canvas'
 end
 
-target 'Steer ClearTests' do
+target 'SteerClearWMTests' do
 pod 'OHHTTPStubs'
 pod 'SwiftyJSON'
 end

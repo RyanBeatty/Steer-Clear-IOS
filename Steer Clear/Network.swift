@@ -58,4 +58,53 @@ class Network {
             }
         }
     }
+    
+    /*
+    checkUpdate
+    ------
+    Checks to see if Steer Clear service is running
+    
+    :completionHandler: callback method that takes a success flag and a string message
+    */
+    func checkUpdate(completionHandler: (success: Bool, message: String) -> ()) {
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://itunes.apple.com/lookup?id=1036506994")!)
+        request.HTTPMethod = "GET"
+        
+        let session = NSURLSession.sharedSession()
+        let dataTask = session.dataTaskWithRequest(request, completionHandler: {
+            data, response, error in
+            
+            // if there was an error, request failed
+            if(error != nil || response == nil || data == nil) {
+                completionHandler(success: false, message: "There was a network error while checking app version.")
+                return
+            }
+            
+            // else check the request status code to see if logging out succeeded
+            let httpResponse = response as! NSHTTPURLResponse
+            switch(httpResponse.statusCode) {
+            case 200:
+                let json = JSON(data: data!)
+                // get ride request data
+                if json["results"][0]["version"] != nil {
+                    let fetchedAppVersion = Double((json["results"][0]["version"].string)!)
+                    let currentAppVersion = Double(NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as! String)
+                    print("**Network: Currently running v\(currentAppVersion!). Latest release v\(fetchedAppVersion!).")
+                    if fetchedAppVersion == currentAppVersion {
+                        completionHandler(success: true, message: "You are using the latest version of the app")
+                    } else {
+                        completionHandler(success: false, message: "You are NOT using the latest version of the app")
+                    }
+                } else {
+                    print("Could not retrieve app version")
+                }
+               
+            default:
+                print("** Network: Couldn't fetch app version")
+                completionHandler(success: false, message: "Failed to find app version")
+            }
+        })
+        
+        dataTask.resume()
+    }
 }

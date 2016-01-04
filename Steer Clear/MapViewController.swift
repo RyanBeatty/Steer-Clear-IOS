@@ -12,7 +12,6 @@ import MapKit
 import CoreLocation
 import GoogleMaps
 import QuartzCore
-import Canvas
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapViewDelegate {
     
@@ -68,6 +67,17 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
     var mapgroupEndY = CGFloat()
     var segmentOutletEndY = CGFloat()
     var locationButtonEndY = CGFloat()
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        
+        let name = "MapViewController"
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: name)
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject : AnyObject])
+    }
     
     @IBAction func segmentControlSwitch(sender: AnyObject) {
         switch segmentOutlet.selectedSegmentIndex
@@ -159,6 +169,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
         }
     }
     
+    override func viewDidAppear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "refresh", name: UIApplicationWillEnterForegroundNotification, object: nil);
+        
+    }
+    
+    func refresh() {
+        checkUpdate()
+        
+    }
+    
     override func viewDidLayoutSubviews() {
         self.navWidth = self.navigationBar.frame.width
         let navBorder = CALayer()
@@ -180,8 +200,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, GMSMapView
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("----------------------------------------------------------------------------------------")
+        print("MapViewController: Initializing MapViewController")
         setupButtons()
-        
+        checkUpdate()
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         
@@ -488,7 +510,6 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
                     
                     self.segmentOutlet.frame.origin.y = self.segmentOutletEndY
                     self.myLocationButtonOutlet.frame.origin.y = self.locationButtonEndY
-//                    self.navigationBar.topItem!.title = "Team";
                     
                 },
                 completion: nil
@@ -504,7 +525,6 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
                     self.segmentOutlet.frame.origin.y = self.segmentOutletStartY
                     self.myLocationButtonOutlet.frame.origin.y = self.locationButtonStartY
                     
-              //      self.navigationBar.topItem!.title = "Steer Clear";
                 },
                 completion: nil
             )
@@ -515,6 +535,52 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
 
     }
     
+    func checkUpdate() {
+        networkController.checkUpdate( {
+            success, message in
+            
+            
+            if(!success) {
+                // can't make UI updates from background thread, so we need to dispatch
+                // them to the main thread
+                dispatch_async(dispatch_get_main_queue(), {
+                    let alert = UIAlertController(title: "New Version Available", message: "There is a newer version available for download! Please update the app by visiting the Apple Store.", preferredStyle: UIAlertControllerStyle.Alert)
+                    
+                    let downloadUrl = NSURL(string: "http://itunes.apple.com/us/app/apple-store/id1036506994?mt=8")
+                    alert.addAction(UIAlertAction(title: "Update", style: UIAlertActionStyle.Default, handler: { alertAction in
+                        UIApplication.sharedApplication().openURL(downloadUrl!)
+                        alert.dismissViewControllerAnimated(true, completion: nil)
+                    }))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                })
+            }
+            else {
+                // can't make UI updates from background thread, so we need to dispatch
+                // them to the main thread
+                dispatch_async(dispatch_get_main_queue(), {
+                    print("MapViewController: Currently running latest running of app.")
+                })
+            }
+        })
+    }
+    
+    @IBAction func contactButton(sender: AnyObject) {
+        
+        let alert = UIAlertController(title: "Contact Us", message: "Feel free to contact us at our email.", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+        
+        let downloadUrl = NSURL(string: "mailto:steerclear@email.wm.edu?subject=Hello%20Steer%20Clear!&body=Hey%20guys!")
+        alert.addAction(UIAlertAction(title: "Email Us", style: UIAlertActionStyle.Default, handler: { alertAction in
+            UIApplication.sharedApplication().openURL(downloadUrl!)
+            alert.dismissViewControllerAnimated(true, completion: nil)
+        }))
+
+        
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+    }
+
     @IBAction func ulisesLink(sender: AnyObject) {
         UIApplication.sharedApplication().openURL(NSURL(string: "http://udiscover.me")!)
     }
@@ -538,7 +604,7 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
     }
     
     @IBAction func logoutButton(sender: AnyObject) {
-        
+        //Note, does not logout user from server.  
         self.defaults.setObject(nil, forKey: "sessionCookies")
         self.performSegueWithIdentifier("logoutSegue", sender: self)
     }
