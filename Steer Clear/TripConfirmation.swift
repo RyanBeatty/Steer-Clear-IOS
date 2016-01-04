@@ -220,7 +220,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         
         
         // Days are Monday = 1, Tuesday = 2, etc...
-        let working_days = [2,5,6]
+        let working_days = [4,5,6]
         let thurs_hours = [22,23,0]
         let weekend_hours = [22,23,0,1]
         

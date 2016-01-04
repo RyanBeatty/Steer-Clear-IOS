@@ -511,7 +511,6 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
                     
                     self.segmentOutlet.frame.origin.y = self.segmentOutletEndY
                     self.myLocationButtonOutlet.frame.origin.y = self.locationButtonEndY
-//                    self.navigationBar.topItem!.title = "Team";
                     
                 },
                 completion: nil
@@ -527,7 +526,6 @@ extension MapViewController: GooglePlacesAutocompleteDelegate {
                     self.segmentOutlet.frame.origin.y = self.segmentOutletStartY
                     self.myLocationButtonOutlet.frame.origin.y = self.locationButtonStartY
                     
-              //      self.navigationBar.topItem!.title = "Steer Clear";
                 },
                 completion: nil
             )
