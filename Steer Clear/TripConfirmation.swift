@@ -220,8 +220,8 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         let calender_date = cal_formatter.stringFromDate(date)
         
         
-        // Days are Monday = 1, Tuesday = 2, etc...
-        let working_days = [4,5,6]
+        // Gregorian Calendar: Sunday = 1, Monday = 2, Tuesday = 3, etc...
+        let working_days = [5,6,7]
         let thurs_hours = [22,23,0]
         let weekend_hours = [22,23,0,1]
         
@@ -230,7 +230,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
             let HH = dateInfo![1]
             let mm = dateInfo![2]
             // If Thursday
-            if day == 4 {
+            if day == 5 {
                 if HH == 21 && mm >= 30 {
                     return true
                 }
