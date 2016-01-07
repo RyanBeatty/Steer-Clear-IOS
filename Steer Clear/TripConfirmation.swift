@@ -218,10 +218,9 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         cal_formatter.timeZone = NSTimeZone(name: "America/Detroit")
         let calender_date = cal_formatter.stringFromDate(date)
         
-        
         // Gregorian Calendar: Sunday = 1, Monday = 2, Tuesday = 3, etc...
-        let thurs_hours = [22,23,0]
-        let weekend_hours = [22,23,0,1]
+        let thurs_hours = [22,23]
+        let weekend_hours = [22,23,0]
         
         if let dateInfo:[Int]? = getDateInfo(calender_date) {
             let day = dateInfo![0]
@@ -242,8 +241,8 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
                 if day == 6 && HH == 1 && mm <= 30 {
                     return true
                 }
-                // Since Friday operates until Saturday at 2:30AM
-                else if day == 7 && HH == 2 && mm <= 30 {
+                    // Since Friday operates until Saturday at 2:30AM (added special case of 1AM on saturday)
+                else if (day == 7 && HH == 2 && mm <= 30) || (day == 7 && HH == 1){
                     return true
                 }
                 else if (HH == 21 && mm >= 30) || weekend_hours.contains(HH){
@@ -253,16 +252,17 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
                     return false
                 }
             }
-            // Since Saturday operates until Sunday at 2:30AM
+                // Since Saturday operates until Sunday at 2:30AM
             else if day == 1 {
-                if (HH == 2 && mm <= 30) || (HH == 1){
+                if (HH == 2 && mm <= 30) || (HH == 1) || (HH == 0) {
                     return true
+                } else {
+                    return false
                 }
             }
             return false
         }
     }
-    
         func getDateInfo(today:String)->[Int]? {
             
             let formatter  = NSDateFormatter()
