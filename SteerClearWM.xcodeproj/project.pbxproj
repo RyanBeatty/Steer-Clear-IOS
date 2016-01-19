@@ -32,7 +32,6 @@
 		7BD4B471C878D22151236AF2 /* Pods_SteerClearWMTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6EBCA908DA8AD23858DE980 /* Pods_SteerClearWMTests.framework */; };
 		9004872B1B765D0D00EBF80B /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9004872A1B765D0D00EBF80B /* fontawesome-webfont.ttf */; };
 		9050414D1B71A2CA00F2AE51 /* WaitingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9050414C1B71A2CA00F2AE51 /* WaitingController.swift */; };
-		9FBB9B69EBFF92C5F3936366 /* Pods_Steer_Clear.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B92C63846602880E01A1AD92 /* Pods_Steer_Clear.framework */; };
 		DDAEC65F091D3CBFE90F39D0 /* Pods_Steer_ClearTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C07E24634D3DAAB8BD8E0C46 /* Pods_Steer_ClearTests.framework */; };
 		FD71B39E15CB5CF1F7EDF226 /* Pods_SteerClearWM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D010588B76396A76518F1376 /* Pods_SteerClearWM.framework */; };
 /* End PBXBuildFile section */
@@ -99,7 +98,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9FBB9B69EBFF92C5F3936366 /* Pods_Steer_Clear.framework in Frameworks */,
 				FD71B39E15CB5CF1F7EDF226 /* Pods_SteerClearWM.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

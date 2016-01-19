@@ -208,7 +208,6 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
     ------
     Checks to see if Steer Clear service is running
     
-    
     */
     func checkTimelock()->Bool{
         
@@ -219,40 +218,43 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         cal_formatter.timeZone = NSTimeZone(name: "America/Detroit")
         let calender_date = cal_formatter.stringFromDate(date)
         
-        
-        // Days are Monday = 1, Tuesday = 2, etc...
-        let working_days = [4,5,6]
-        let thurs_hours = [22,23,0]
-        let weekend_hours = [22,23,0,1]
+        // Gregorian Calendar: Sunday = 1, Monday = 2, Tuesday = 3, etc...
+        let thurs_hours = [22,23]
+        let weekend_hours = [22,23,0]
         
         if let dateInfo:[Int]? = getDateInfo(calender_date) {
             let day = dateInfo![0]
             let HH = dateInfo![1]
             let mm = dateInfo![2]
             // If Thursday
-            if day == 4 {
-                if HH == 21 && mm >= 30 {
+            if day == 5 {
+                // if 9:30PM or 10PM, 11PM, 12AM return true
+                if (HH == 21 && mm >= 30) || thurs_hours.contains(HH){
                     return true
                 }
-                if HH == 1 && mm <= 30 {
-                    return true
-                }
-                if thurs_hours.contains(HH) {
-                    return true
-                } else {
+                else {
                     return false
                 }
-                
             }
-            // If Friday or Saturday
-            if working_days.contains(day){
-                if HH == 21 && mm >= 30 {
+            else if (day == 6) || (day == 7) {
+                // Since Thursday operates until Friday at 1:30AM
+                if day == 6 && HH == 1 && mm <= 30 {
                     return true
                 }
-                if HH == 2 && mm <= 30 {
+                    // Since Friday operates until Saturday at 2:30AM (added special case of 1AM on saturday)
+                else if (day == 7 && HH == 2 && mm <= 30) || (day == 7 && HH == 1){
                     return true
                 }
-                if weekend_hours.contains(HH) {
+                else if (HH == 21 && mm >= 30) || weekend_hours.contains(HH){
+                    return true
+                }
+                else {
+                    return false
+                }
+            }
+                // Since Saturday operates until Sunday at 2:30AM
+            else if day == 1 {
+                if (HH == 2 && mm <= 30) || (HH == 1) || (HH == 0) {
                     return true
                 } else {
                     return false
@@ -261,7 +263,6 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
             return false
         }
     }
-    
         func getDateInfo(today:String)->[Int]? {
             
             let formatter  = NSDateFormatter()
