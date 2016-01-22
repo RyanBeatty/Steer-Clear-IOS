@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CL5-z6-kSR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Xq3-zb-LVU">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -28,7 +28,7 @@
         <!--Navigation Controller-->
         <scene sceneID="iMB-XK-ETD">
             <objects>
-                <viewController id="CL5-z6-kSR" customClass="NavigationController" customModule="Steer_Clear" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="CL5-z6-kSR" customClass="NavigationController" customModule="SteerClearWM" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="MlQ-gP-SGM"/>
                         <viewControllerLayoutGuide type="bottom" id="8GB-Z7-7LJ"/>
@@ -83,7 +83,7 @@
         <!--LoginScreen-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController title="LoginScreen" id="vXZ-lx-hvc" customClass="ViewController" customModule="Steer_Clear" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="LoginScreen" id="vXZ-lx-hvc" customClass="ViewController" customModule="SteerClearWM" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -375,7 +375,7 @@
         <!--Map View Controller-->
         <scene sceneID="Afp-S1-Nch">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="nsC-P0-xcL" customClass="MapViewController" customModule="Steer_Clear" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="nsC-P0-xcL" customClass="MapViewController" customModule="SteerClearWM" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7Ox-ol-eTQ"/>
                         <viewControllerLayoutGuide type="bottom" id="ULf-gl-SJ4"/>
@@ -873,7 +873,7 @@
         <!--Trip Confirmation-->
         <scene sceneID="KKQ-Wo-SHx">
             <objects>
-                <viewController id="Xq3-zb-LVU" customClass="TripConfirmation" customModule="Steer_Clear" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Xq3-zb-LVU" customClass="TripConfirmation" customModule="SteerClearWM" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="V5L-bh-NRR"/>
                         <viewControllerLayoutGuide type="bottom" id="WiM-I8-QaS"/>
@@ -995,8 +995,19 @@
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wur-Av-f7c">
-                                <rect key="frame" x="0.0" y="64" width="320" height="445"/>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dyz-C0-KkH">
+                                <rect key="frame" x="-16" y="20" width="352" height="44"/>
+                                <color key="barTintColor" red="0.066666666669999999" green="0.27450980390000002" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="22"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Ride Confirmation" id="Vwz-L5-Tdd"/>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wur-Av-f7c">
+                                <rect key="frame" x="500" y="64" width="320" height="445"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gear" translatesAutoresizingMaskIntoConstraints="NO" id="PQs-4l-swg">
                                         <rect key="frame" x="93" y="152" width="135" height="135"/>
@@ -1012,17 +1023,6 @@
                                     <constraint firstAttribute="centerX" secondItem="PQs-4l-swg" secondAttribute="centerX" constant="-0.5" id="xxQ-8h-3E3"/>
                                 </constraints>
                             </view>
-                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dyz-C0-KkH">
-                                <rect key="frame" x="-16" y="20" width="352" height="44"/>
-                                <color key="barTintColor" red="0.066666666669999999" green="0.27450980390000002" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="22"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="Ride Confirmation" id="Vwz-L5-Tdd"/>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1098,7 +1098,7 @@
         <!--Waiting Controller-->
         <scene sceneID="FqG-Z1-6QQ">
             <objects>
-                <viewController id="0s6-dg-VbN" customClass="WaitingController" customModule="Steer_Clear" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="0s6-dg-VbN" customClass="WaitingController" customModule="SteerClearWM" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Xfa-dx-pTx"/>
                         <viewControllerLayoutGuide type="bottom" id="Lg5-8U-ruB"/>
@@ -1238,8 +1238,8 @@
         <image name="steerClearLogo" width="573" height="573"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="wsX-g9-NaP"/>
+        <segue reference="drq-Yc-FCO"/>
         <segue reference="XI0-cn-d9T"/>
-        <segue reference="SY5-wn-1ZG"/>
-        <segue reference="F1i-gB-7Ro"/>
     </inferredMetricsTieBreakers>
 </document>

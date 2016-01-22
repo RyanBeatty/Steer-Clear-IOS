@@ -76,7 +76,7 @@ class Network {
             
             // if there was an error, request failed
             if(error != nil || response == nil || data == nil) {
-                completionHandler(success: false, message: "There was a network error while checking app version.")
+                completionHandler(success: true, message: "There was a network error while checking app version.")
                 return
             }
             
@@ -89,6 +89,10 @@ class Network {
                 if json["results"][0]["version"] != nil {
                     let fetchedAppVersion = Double((json["results"][0]["version"].string)!)
                     let currentAppVersion = Double(NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString") as! String)
+                    print("-----")
+                    print("-----")
+                    print(fetchedAppVersion)
+                    print(currentAppVersion)
                     print("**Network: Currently running v\(currentAppVersion!). Latest release v\(fetchedAppVersion!).")
                     if fetchedAppVersion == currentAppVersion {
                         completionHandler(success: true, message: "You are using the latest version of the app")
@@ -96,12 +100,11 @@ class Network {
                         completionHandler(success: false, message: "You are NOT using the latest version of the app")
                     }
                 } else {
-                    print("Could not retrieve app version")
+                    completionHandler(success: true, message: "Failed to find app version")
                 }
                
             default:
-                print("** Network: Couldn't fetch app version")
-                completionHandler(success: false, message: "Failed to find app version")
+                completionHandler(success: true, message: "Failed to find app version")
             }
         })
         

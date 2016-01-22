@@ -390,7 +390,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
                 // can't make UI updates from background thread, so we need to dispatch
                 // them to the main thread
                 dispatch_async(dispatch_get_main_queue(), {
-                    print("MapViewController: Currently running latest running of app.")
+                    print("MapViewController: \(message)")
                 })
             }
         })
