@@ -15,7 +15,7 @@ class Settings: UIViewController {
     // Google Maps SDK for iOS version API Key
     // Full functionality of app requires API key, please generate.
     
-    let GMSAPIKEY = "AIzaSyACaI8OFFdRgQ0gf0jRTAR2WJ5cDx7miac"
+    let GMSAPIKEY = "AIzaSyDaI7qJo2LEW6n5KVbErUvE1VESiXvUurs"
     
     // Custom UIColors
     
