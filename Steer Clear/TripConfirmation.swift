@@ -140,7 +140,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
         
         if self.isRotating == false {
             self.gear.rotate360Degrees(completionDelegate: self)
-            // Perhaps start a process which will refresh the UI...
+            // Perhaps start a process which will refresh the UI
         }
         if checkTimelock() {
             SCNetwork.requestRide(
