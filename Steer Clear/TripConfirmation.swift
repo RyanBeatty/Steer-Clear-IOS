@@ -152,7 +152,7 @@ class TripConfirmation: UIViewController,UIPickerViewDataSource,UIPickerViewDele
                 completionHandler: {
                     success, login, message, ride in
                     
-                    // if something went wrong, display error message
+                    // if something went wrong, display error message 
                     if(!success || ride == nil) {
                         dispatch_async(dispatch_get_main_queue(), {
                             self.displayAlert("Ride Request Error", message: message)
